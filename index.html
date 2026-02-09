@@ -1,12 +1,90 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Hana Sushi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hana Sushi</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* Top Menu */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 10;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  background: url('https://images.unsplash.com/photo-1553621042-f6e147245754') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.hero button {
+  padding: 12px 28px;
+  border: none;
+  background: #cfa349;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hero button:hover {
+  background: white;
+}
+</style>
 </head>
 <body>
-    <h1>Hana Sushi</h1>
-    <p>맛있는 스시를 만나보세요!</p>
-    <p>영업시간: 매일 11:00 - 21:00</p>
+
+<nav>
+  <div><b>HANA SUSHI</b></div>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Menu</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <h1>HANA SUSHI</h1>
+    <p>Fresh • Authentic • Japanese Cuisine</p>
+    <button>View Menu</button>
+  </div>
+</section>
+
 </body>
 </html>
