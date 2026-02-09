@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HANA SUSHI</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f5f1;
+      color: #3a3a3a;
+    }
+
+    header {
+      background-color: #fff5f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+
+    header .logo img {
+      height: 88px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    header .logo img:hover {
+      transform: scale(1.05);
+    }
+
+    .phone-number {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #d45d4a;
+      background: linear-gradient(to right, #ffe0e0, #ffffff);
+      padding: 6px 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(212, 93, 74, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .phone-number:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(212, 93, 74, 0.3);
+      cursor: pointer;
+    }
+
+    nav {
+      margin-top: 15px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      animation: fadeSlideIn 1s ease forwards;
+      width: 100%;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #d45d4a;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: navLinkFade 0.6s ease forwards;
+      position: relative;
+      font-size: 1.1em;
+    }
+
+    nav a:nth-child(1) { animation-delay: 0.2s; }
+    nav a:nth-child(2) { animation-delay: 0.4s; }
+    nav a:nth-child(3) { animation-delay: 0.6s; }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background-color: #d45d4a;
+      transition: width 0.3s;
+    }
+
+    nav a:hover {
+      color: #a63f34;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    @keyframes navLinkFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .banner {
+      background: url('banner.jpg') center/cover no-repeat;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 36px;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+
+    .menu-section {
+      padding: 40px 20px;
+      max-width: 100%;
+      margin: auto;
+    }
+
+    .menu-section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #d45d4a;
+    }
+
+    .menu-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding-bottom: 10px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: calc(25% - 20px);
+      background: #fff;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+
+    .menu-text {
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    .menu-text h3 {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .menu-image img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 1023px) {
+      .menu-item {
+        width: calc(50% - 20px);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .menu-item {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    footer {
+      background-color: #fff5f0;
+      text-align: center;
+      padding: 20px;
+      color: #7a7a7a;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="hanasushilogoPNG.png" alt="HANA SUSHI restaurant logo" />
+    </div>
+    <div class="phone-number">📞 (805) 520-1333 / (805) 520-1313</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+<!-- menuboard.jpgl 메뉴 이미지 (중앙 정렬)끝 -->
+<!-- menuboard.jpg 메뉴 이미지 (중앙 정렬)시작 -->
+<div style="display: flex; justify-content: center; margin: 20px 0;">
+  <img src="menuboard.jpg"
+       alt="menuboard"
+       style="max-width: 90%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+</div>
+  <!-- special sashimi.jpg 메뉴 이미지 (중앙 정렬)시작 -->
+<div style="display: flex; justify-content: center; margin: 20px 0;">
+  <img src="special sashimi.jpg"
+       alt="special sashimi"
+       style="max-width: 90%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+</div>
+<!-- Chef Special 메뉴 이미지 (중앙 정렬)끝 -->
+<!-- Chef Special 메뉴 이미지 (중앙 정렬)시작 -->
+<div style="display: flex; justify-content: center; margin: 20px 0;">
+  <img src="white board.jpg"
+       alt="Chef Special Menu"
+       style="max-width: 90%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+</div>
+
+<!-- menu 메뉴 이미지 시작 -->
+<div style="display: flex; justify-content: center; margin: 20px 0;">
+  <img src="menu.jpg"
+       alt="Chef Special Menu"
+       style="max-width: 90%; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+</div>
+<!-- menu 메뉴 이미지끝 -->   
+
+ <!-- Click Here 버튼 -->
+ <div style="text-align: center; margin-top: 20px;">
+  <a href="index.html" style="display: inline-block;">
+    <img src="BACKTO HOME BUTTON copy1.png"
+         alt="Back to Home"
+         style="width: 900px; cursor: pointer;" />
+  </a>
+</div>
+  
+  <!-- About Section -->
+  <section class="menu-section" id="about">
+    <h2>About Us</h2>
+    <p style="max-width: 600px; margin: auto; text-align: center;">
+      HANA SUSHI is dedicated to serving fresh and delicious sushi in a cozy atmosphere located at 575 Country Club Drive STE D, Simi Valley, CA 93065.
+    </p>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="menu-section" id="contact">
+    <h2>Contact</h2>
+    <p style="text-align: center;">
+      Phone: 805-520-1333 / 805-520-1313<br />
+      Hours:<br />
+      Monday-Thursday: 5:00PM - 9:30PM<br />
+      Friday-Saturday: 11:30AM - 2:30PM, 5:00PM - 10:00PM
+    </p>
+  </section>
+
+ 
+  
+  </--  버튼 시작 -->
+  
+  <!-- ✅ 여기에 버튼 추가 -->
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="index.html" style="display: inline-block;">
+      <img src="BACKTO HOME BUTTON copy1.png"
+           alt="Back to Home"
+           style="width: 900px; cursor: pointer;" />
+    </a>
+  </div>
+   </--  버튼 끝 -->
+  
+  
+  
+  <footer>
+    &copy; 2025 HANA SUSHI. All rights reserved.
+  </footer>
+
+</body>
+</html>
