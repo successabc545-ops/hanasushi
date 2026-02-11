@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HANA Catering</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-
 <style>
 * {margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif;}
 body {background:#0c0c0c; color:#fff;}
@@ -117,16 +116,18 @@ footer {text-align:center; padding:40px; color:#777;}
 <!-- CONTACT (지도 + 폼 오버레이) -->
 <section class="contact" id="contact">
   <!-- 지도 -->
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086260907776!2d-122.4194154846818!3d37.77492927975908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064c51f7b77%3A0x6b1d6b67813c5b2b!2sSan%20Francisco!5e0!3m2!1sen!2sus!4v1587049185485!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086260907776!2d-122.4194154846818!3d37.77492927975908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064c51f7b77%3A0x6b1d6b67813c5b2b!2sSan%20Francisco!5e0!3m2!1sen!2sus!4v1587049185485!5m2!1sen!2sus"
+          allowfullscreen="" loading="lazy"></iframe>
 
   <!-- 폼: 지도 위 오버레이 -->
-  <form>
-    <h3>Book Your Event</h3>
-    <input type="text" placeholder="Full Name" required>
-    <input type="email" placeholder="Email" required>
-    <input type="text" placeholder="Event Type" required>
-    <textarea rows="3" placeholder="Message"></textarea>
+  <form action="https://formsubmit.co/successabc545@gmail.com" method="POST">
+    <h3 style="font-family:Playfair Display, serif;">Book Your Event</h3>
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="event" placeholder="Event Type" required>
+    <textarea name="message" rows="3" placeholder="Message"></textarea>
     <button type="submit">Send Request</button>
+    <input type="hidden" name="_captcha" value="false">
   </form>
 </section>
 
