@@ -3,77 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HANA Catering</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-<style>
-* {margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif;}
-body {background:#0c0c0c; color:#fff;}
+<title>HANA Food Truck</title>
 
-/* NAVBAR */
-nav {position:fixed; top:0; width:100%; padding:18px 70px; display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.7); backdrop-filter:blur(12px); z-index:1000;}
-nav h2 {font-family:"Playfair Display",serif; font-size:26px; letter-spacing:2px; color:#fff;}
-nav a {margin-left:28px; text-decoration:none; color:#eee; font-size:14px; transition:0.3s;}
-nav a:hover {color:#d4af37;}
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
+body{background:#0b0b0b;color:#fff;}
+
+/* NAV */
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:15px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(10px);
+z-index:1000;
+}
+nav h2{
+font-family:"Playfair Display",serif;
+font-size:24px;
+letter-spacing:2px;
+}
+nav a{
+color:#fff;
+text-decoration:none;
+margin-left:25px;
+font-size:14px;
+transition:.3s;
+}
+nav a:hover{color:#d4af37;}
 
 /* HERO */
-.hero {height:100vh; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; text-align:center; color:#fff;}
-.hero video {position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; opacity:0.6;}
-.hero-content {z-index:2;}
-.hero h1 {font-family:"Playfair Display", serif; font-size:60px; line-height:1.1;}
-.hero p {margin:20px 0 35px; font-size:20px; color:#ddd;}
-.hero button {padding:14px 36px; border:none; border-radius:30px; background:#d4af37; color:#000; font-size:16px; cursor:pointer; transition:0.3s;}
-.hero button:hover {transform:scale(1.06); background:#f5d76e;}
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:url("https://images.unsplash.com/photo-1551218808-94e220e084d2") center/cover no-repeat;
+position:relative;
+}
+.hero::after{
+content:"";
+position:absolute;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.6);
+}
+.hero-content{
+position:relative;
+z-index:2;
+}
+.hero h1{
+font-family:"Playfair Display",serif;
+font-size:60px;
+}
+.hero p{
+margin:15px 0 30px;
+font-size:20px;
+color:#ddd;
+}
+.hero button{
+padding:12px 32px;
+border:none;
+border-radius:30px;
+background:#d4af37;
+color:#000;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+.hero button:hover{
+transform:scale(1.05);
+background:#f5d76e;
+}
 
 /* SECTION */
-.section {padding:100px 90px;}
-.section-title {text-align:center; margin-bottom:60px;}
-.section-title h2 {font-family:"Playfair Display",serif; font-size:42px;}
-.section-title p {color:#aaa; margin-top:10px;}
-
-/* SERVICES */
-.services {display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px;}
-.service-box {background:#141414; border-radius:20px; padding:35px; transition:0.3s; border:1px solid rgba(255,255,255,0.05);}
-.service-box:hover {transform:translateY(-12px); border-color:#d4af37;}
-.service-box h3 {font-size:22px; margin-bottom:10px;}
-.service-box p {color:#aaa; font-size:14px;}
+.section{
+padding:100px 80px;
+}
+.section h2{
+font-family:"Playfair Display",serif;
+font-size:40px;
+margin-bottom:15px;
+}
+.section p{
+color:#aaa;
+}
 
 /* ABOUT */
-.about {display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; margin-bottom:80px;}
-.about img {width:100%; border-radius:20px;}
-
-/* CONTACT (지도 + 폼 오버레이) */
-.contact {position:relative; height:500px; margin-bottom:80px;}
-.contact iframe {width:100%; height:100%; border:0;}
-.contact form {
-  position:absolute;
-  top:20px;
-  right:20px;
-  background:rgba(0,0,0,0.7);
-  padding:20px;
-  border-radius:15px;
-  color:#fff;
-  width:300px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+.about-box{
+max-width:700px;
 }
-.contact form h3 {margin-bottom:10px; font-family:"Playfair Display",serif;}
-.contact form input, .contact form textarea {padding:10px; border:none; border-radius:8px; width:100%;}
-.contact form button {padding:10px; border:none; border-radius:10px; background:#d4af37; color:#000; cursor:pointer; font-weight:600; transition:0.3s;}
-.contact form button:hover {background:#f5d76e;}
+
+/* CONTACT MAP + FORM */
+.contact{
+position:relative;
+height:480px;
+margin-bottom:60px;
+}
+.contact iframe{
+width:100%;
+height:100%;
+border:0;
+}
+.contact form{
+position:absolute;
+top:20px;
+right:20px;
+width:300px;
+background:rgba(0,0,0,0.75);
+padding:20px;
+border-radius:15px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+.contact form h3{
+font-family:"Playfair Display",serif;
+margin-bottom:5px;
+}
+.contact input,
+.contact textarea{
+padding:10px;
+border:none;
+border-radius:8px;
+font-size:14px;
+}
+.contact button{
+padding:10px;
+border:none;
+border-radius:10px;
+background:#d4af37;
+color:#000;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+.contact button:hover{
+background:#f5d76e;
+}
 
 /* FOOTER */
-footer {text-align:center; padding:40px; color:#777;}
+footer{
+text-align:center;
+padding:30px;
+color:#777;
+font-size:13px;
+}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav>
-  <h2>HANA Catering</h2>
+  <h2>HANA Food Truck</h2>
   <div>
     <a href="#">Home</a>
-    <a href="#services">Services</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </div>
@@ -81,59 +172,42 @@ footer {text-align:center; padding:40px; color:#777;}
 
 <!-- HERO -->
 <section class="hero">
-  <video autoplay muted loop>
-    <source src="https://cdn.pixabay.com/vimeo/617654096/pexels-artem-podrez-5752729.mp4" type="video/mp4">
-  </video>
   <div class="hero-content">
-    <h1>Luxury Catering For Every Event</h1>
-    <p>Premium food, elegant style, unforgettable moments.</p>
-    <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Your Event</button>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="section" id="services">
-  <div class="section-title">
-    <h2>Our Catering Services</h2>
-    <p>We create extraordinary dining experiences.</p>
-  </div>
-  <div class="services">
-    <div class="service-box"><h3>Corporate Events</h3><p>Professional catering for business meetings and conferences.</p></div>
-    <div class="service-box"><h3>Weddings & Parties</h3><p>Luxury dining for weddings and private celebrations.</p></div>
-    <div class="service-box"><h3>Private Dining</h3><p>Exclusive chef service for private events.</p></div>
+    <h1>Premium Food Truck</h1>
+    <p>Fresh • Modern • Delicious</p>
+    <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Event</button>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section class="section about" id="about">
-  <img src="https://images.unsplash.com/photo-1555992336-03a23c8f1f3c" alt="catering">
-  <div>
-    <h2 style="font-family:Playfair Display;font-size:38px;">About HANA Catering</h2>
-    <p style="margin-top:15px;color:#aaa;">We deliver premium catering with authentic flavors and modern presentation. Every event becomes a masterpiece.</p>
+<section class="section" id="about">
+  <div class="about-box">
+    <h2>About HANA</h2>
+    <p>
+      HANA Food Truck provides premium catering and food truck service for events, parties, and corporate occasions.
+      We combine authentic flavors with modern style to create unforgettable experiences.
+    </p>
   </div>
 </section>
 
-<!-- CONTACT (지도 + 폼 오버레이) -->
+<!-- CONTACT -->
 <section class="contact" id="contact">
-  <!-- 지도 -->
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086260907776!2d-122.4194154846818!3d37.77492927975908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064c51f7b77%3A0x6b1d6b67813c5b2b!2sSan%20Francisco!5e0!3m2!1sen!2sus!4v1587049185485!5m2!1sen!2sus"
-          allowfullscreen="" loading="lazy"></iframe>
+  <!-- MAP -->
+  <iframe src="https://www.google.com/maps?q=Los+Angeles&output=embed"></iframe>
 
-  <!-- 폼: 지도 위 오버레이 -->
+  <!-- FORM -->
   <form action="https://formsubmit.co/successabc545@gmail.com" method="POST">
-    <h3 style="font-family:Playfair Display, serif;">Book Your Event</h3>
-    <input type="text" name="name" placeholder="Full Name" required>
+    <h3>Contact Us</h3>
+    <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Email" required>
-    <input type="text" name="event" placeholder="Event Type" required>
     <textarea name="message" rows="3" placeholder="Message"></textarea>
-    <button type="submit">Send Request</button>
+    <button type="submit">Send</button>
     <input type="hidden" name="_captcha" value="false">
   </form>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  © 2026 HANA Catering • All Rights Reserved
+  © 2026 HANA Food Truck
 </footer>
 
 </body>
