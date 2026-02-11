@@ -4,25 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HANA Food Truck</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-
 <style>
 * {margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif;}
-body {background:#0b0b0b; color:#fff;}
+body {background:#0b0b0b; color:#fff; line-height:1.6;}
 
 /* NAV */
 nav {
   position:fixed; top:0; width:100%;
-  padding:15px 60px;
-  display:flex; justify-content:space-between; align-items:center;
-  background:rgba(0,0,0,0.7); backdrop-filter:blur(10px);
-  z-index:1000;
+  padding:15px 60px; display:flex; justify-content:space-between; align-items:center;
+  background:rgba(0,0,0,0.7); backdrop-filter:blur(10px); z-index:1000;
 }
 nav h2 {font-family:"Playfair Display",serif; font-size:24px; letter-spacing:2px;}
-nav a {
-  color:#fff; text-decoration:none; margin-left:25px; font-size:14px; transition:.3s;
-}
+nav a {color:#fff; text-decoration:none; margin-left:25px; font-size:14px; transition:.3s;}
 nav a:hover {color:#d4af37;}
 
 /* HERO */
@@ -35,9 +29,9 @@ nav a:hover {color:#d4af37;}
   content:""; position:absolute; top:0; left:0; width:100%; height:100%;
   background:rgba(0,0,0,0.6);
 }
-.hero-content {position:relative; z-index:2;}
-.hero h1 {font-family:"Playfair Display",serif; font-size:60px;}
-.hero p {margin:15px 0 30px; font-size:20px; color:#ddd;}
+.hero-content {position:relative; z-index:2; max-width:90%;}
+.hero h1 {font-family:"Playfair Display",serif; font-size:60px; margin-bottom:15px;}
+.hero p {font-size:20px; color:#ddd; margin-bottom:30px;}
 .hero button {
   padding:12px 32px; border:none; border-radius:30px;
   background:#d4af37; color:#000; font-size:16px; cursor:pointer; transition:.3s;
@@ -46,32 +40,34 @@ nav a:hover {color:#d4af37;}
 
 /* SECTION */
 .section {padding:100px 80px;}
-.section h2 {font-family:"Playfair Display",serif; font-size:40px; margin-bottom:15px;}
-.section p {color:#aaa;}
+.section h2 {font-family:"Playfair Display",serif; font-size:40px; margin-bottom:20px;}
+.section p {color:#aaa; font-size:16px;}
 
 /* ABOUT */
-.about-box {max-width:700px;}
+.about-box {max-width:700px; background:rgba(255,255,255,0.05); padding:20px; border-radius:15px;}
 
 /* CONTACT MAP + FORM */
-.contact {position:relative; height:480px; margin-bottom:60px;}
-.contact iframe {width:100%; height:100%; border:0;}
+.contact {position:relative; height:500px; margin-bottom:60px;}
+.contact iframe {width:100%; height:100%; border:0; border-radius:15px;}
 .contact form {
-  position:absolute; top:20px; right:20px; width:300px;
-  background:rgba(0,0,0,0.75); padding:20px; border-radius:15px;
-  display:flex; flex-direction:column; gap:10px;
+  position:absolute; top:20px; right:20px; width:320px;
+  background:rgba(0,0,0,0.85); padding:25px; border-radius:15px;
+  display:flex; flex-direction:column; gap:12px; box-shadow:0 0 15px rgba(0,0,0,0.5);
 }
-.contact form h3 {font-family:"Playfair Display",serif; margin-bottom:5px;}
+.contact form h3 {font-family:"Playfair Display",serif; margin-bottom:10px; text-align:center; color:#d4af37;}
 .contact input, .contact textarea {
-  padding:10px; border:none; border-radius:8px; font-size:14px;
+  padding:12px; border:none; border-radius:10px; font-size:14px;
+  background:#111; color:#fff;
 }
+.contact input::placeholder, .contact textarea::placeholder {color:#888;}
 .contact button {
-  padding:10px; border:none; border-radius:10px;
-  background:#d4af37; color:#000; font-weight:600; cursor:pointer; transition:.3s;
+  padding:12px; border:none; border-radius:12px;
+  background:#d4af37; color:#000; font-weight:600; cursor:pointer; font-size:15px; transition:.3s;
 }
-.contact button:hover {background:#f5d76e;}
+.contact button:hover {background:#f5d76e; transform:scale(1.05);}
 
 /* FOOTER */
-footer {text-align:center; padding:30px; color:#777; font-size:13px;}
+footer {text-align:center; padding:30px; color:#777; font-size:13px; background:#0a0a0a;}
 
 /* RESPONSIVE */
 @media (max-width:768px){
@@ -117,20 +113,18 @@ footer {text-align:center; padding:30px; color:#777; font-size:13px;}
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <!-- MAP -->
   <iframe src="https://www.google.com/maps?q=Los+Angeles&output=embed"></iframe>
-
-  <!-- FORM -->
   <form action="https://formsubmit.co/koseouk@gmail.com" method="POST">
     <h3>Contact Us</h3>
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Email" required>
-    <textarea name="message" rows="3" placeholder="Message" required></textarea>
+    <textarea name="message" rows="4" placeholder="Message" required></textarea>
     <input type="hidden" name="_captcha" value="false">
     <button type="submit">Send</button>
   </form>
 </section>
 
+<!-- FOOTER -->
 <footer>
   © 2026 HANA Food Truck
 </footer>
