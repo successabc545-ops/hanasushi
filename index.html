@@ -7,245 +7,130 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  background: #0c0c0c;
-  color: #fff;
-}
+* {margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif;}
+body {background:#0c0c0c; color:#fff;}
 
 /* NAVBAR */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 18px 70px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(12px);
-  z-index: 1000;
-}
-
-nav h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 26px;
-  letter-spacing: 2px;
-}
-
-nav a {
-  margin-left: 28px;
-  text-decoration: none;
-  color: #eee;
-  font-size: 14px;
-  transition: 0.3s;
-}
-
-nav a:hover {
-  color: #d4af37;
-}
+nav {position:fixed; top:0; width:100%; padding:18px 70px; display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.7); backdrop-filter:blur(12px); z-index:1000;}
+nav h2 {font-family:"Playfair Display",serif; font-size:26px; letter-spacing:2px; color:#fff;}
+nav a {margin-left:28px; text-decoration:none; color:#eee; font-size:14px; transition:0.3s;}
+nav a:hover {color:#d4af37;}
 
 /* HERO */
-.hero {
-  height: 100vh;
-  background: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.2)),
-              url("https://images.unsplash.com/photo-1529692236671-f1c6f9a1f2d1") center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  padding-left: 90px;
-}
-
-.hero h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 70px;
-  line-height: 1.1;
-}
-
-.hero p {
-  margin: 20px 0 35px;
-  font-size: 20px;
-  color: #ddd;
-}
-
-.hero button {
-  padding: 14px 36px;
-  border: none;
-  border-radius: 30px;
-  background: #d4af37;
-  color: #000;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.hero button:hover {
-  transform: scale(1.06);
-  background: #f5d76e;
-}
+.hero {height:100vh; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; text-align:center; color:#fff;}
+.hero video {position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; opacity:0.6;}
+.hero-content {z-index:2;}
+.hero h1 {font-family:"Playfair Display", serif; font-size:60px; line-height:1.1;}
+.hero p {margin:20px 0 35px; font-size:20px; color:#ddd;}
+.hero button {padding:14px 36px; border:none; border-radius:30px; background:#d4af37; color:#000; font-size:16px; cursor:pointer; transition:0.3s;}
+.hero button:hover {transform:scale(1.06); background:#f5d76e;}
 
 /* SECTION */
-.section {
-  padding: 120px 90px;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-title h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 42px;
-}
-
-.section-title p {
-  color: #aaa;
-  margin-top: 10px;
-}
+.section {padding:100px 90px;}
+.section-title {text-align:center; margin-bottom:60px;}
+.section-title h2 {font-family:"Playfair Display",serif; font-size:42px;}
+.section-title p {color:#aaa; margin-top:10px;}
 
 /* SERVICES */
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-}
-
-.service-box {
-  background: #141414;
-  border-radius: 20px;
-  padding: 35px;
-  transition: 0.3s;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.service-box:hover {
-  transform: translateY(-12px);
-  border-color: #d4af37;
-}
-
-.service-box h3 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-.service-box p {
-  color: #aaa;
-  font-size: 14px;
-}
+.services {display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px;}
+.service-box {background:#141414; border-radius:20px; padding:35px; transition:0.3s; border:1px solid rgba(255,255,255,0.05);}
+.service-box:hover {transform:translateY(-12px); border-color:#d4af37;}
+.service-box h3 {font-size:22px; margin-bottom:10px;}
+.service-box p {color:#aaa; font-size:14px;}
 
 /* ABOUT */
-.about {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  align-items: center;
-}
+.about {display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; margin-bottom:80px;}
+.about img {width:100%; border-radius:20px;}
 
-.about img {
-  width: 100%;
-  border-radius: 20px;
+/* CONTACT (지도 + 폼 오버레이) */
+.contact {position:relative; height:500px; margin-bottom:80px;}
+.contact iframe {width:100%; height:100%; border:0;}
+.contact form {
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:rgba(0,0,0,0.7);
+  padding:20px;
+  border-radius:15px;
+  color:#fff;
+  width:300px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
-
-/* CONTACT */
-.contact {
-  background: linear-gradient(135deg, #111, #000);
-  padding: 80px;
-  border-radius: 25px;
-  text-align: center;
-}
-
-.contact h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 36px;
-}
-
-.contact button {
-  margin-top: 25px;
-  padding: 14px 34px;
-  border: none;
-  border-radius: 30px;
-  background: #d4af37;
-  color: #000;
-  font-size: 16px;
-  cursor: pointer;
-}
+.contact form h3 {margin-bottom:10px; font-family:"Playfair Display",serif;}
+.contact form input, .contact form textarea {padding:10px; border:none; border-radius:8px; width:100%;}
+.contact form button {padding:10px; border:none; border-radius:10px; background:#d4af37; color:#000; cursor:pointer; font-weight:600; transition:0.3s;}
+.contact form button:hover {background:#f5d76e;}
 
 /* FOOTER */
-footer {
-  text-align: center;
-  padding: 40px;
-  color: #777;
-}
+footer {text-align:center; padding:40px; color:#777;}
 </style>
 </head>
-
 <body>
 
+<!-- NAVBAR -->
 <nav>
   <h2>HANA Catering</h2>
   <div>
     <a href="#">Home</a>
-    <a href="#">Services</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div>
-    <h1>Luxury Catering<br>For Every Event</h1>
+  <video autoplay muted loop>
+    <source src="https://cdn.pixabay.com/vimeo/617654096/pexels-artem-podrez-5752729.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <h1>Luxury Catering For Every Event</h1>
     <p>Premium food, elegant style, unforgettable moments.</p>
-    <button>Book Your Event</button>
+    <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Your Event</button>
   </div>
 </section>
 
-<section class="section">
+<!-- SERVICES -->
+<section class="section" id="services">
   <div class="section-title">
     <h2>Our Catering Services</h2>
     <p>We create extraordinary dining experiences.</p>
   </div>
-
   <div class="services">
-    <div class="service-box">
-      <h3>Corporate Events</h3>
-      <p>Professional catering for business meetings and conferences.</p>
-    </div>
-    <div class="service-box">
-      <h3>Wedding & Party</h3>
-      <p>Luxury dining for weddings and private celebrations.</p>
-    </div>
-    <div class="service-box">
-      <h3>Private Dining</h3>
-      <p>Exclusive chef service for private events.</p>
-    </div>
+    <div class="service-box"><h3>Corporate Events</h3><p>Professional catering for business meetings and conferences.</p></div>
+    <div class="service-box"><h3>Weddings & Parties</h3><p>Luxury dining for weddings and private celebrations.</p></div>
+    <div class="service-box"><h3>Private Dining</h3><p>Exclusive chef service for private events.</p></div>
   </div>
 </section>
 
-<section class="section about">
+<!-- ABOUT -->
+<section class="section about" id="about">
   <img src="https://images.unsplash.com/photo-1555992336-03a23c8f1f3c" alt="catering">
   <div>
     <h2 style="font-family:Playfair Display;font-size:38px;">About HANA Catering</h2>
-    <p style="margin-top:15px;color:#aaa;">
-      We deliver premium catering with authentic flavors and modern presentation.
-      Every event becomes a masterpiece.
-    </p>
+    <p style="margin-top:15px;color:#aaa;">We deliver premium catering with authentic flavors and modern presentation. Every event becomes a masterpiece.</p>
   </div>
 </section>
 
-<section class="section">
-  <div class="contact">
-    <h2>Ready to Plan Your Event?</h2>
-    <p style="margin-top:10px;color:#aaa;">Contact us today and make your event unforgettable.</p>
-    <button>Contact Us</button>
-  </div>
+<!-- CONTACT (지도 + 폼 오버레이) -->
+<section class="contact" id="contact">
+  <!-- 지도 -->
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086260907776!2d-122.4194154846818!3d37.77492927975908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064c51f7b77%3A0x6b1d6b67813c5b2b!2sSan%20Francisco!5e0!3m2!1sen!2sus!4v1587049185485!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+
+  <!-- 폼: 지도 위 오버레이 -->
+  <form>
+    <h3>Book Your Event</h3>
+    <input type="text" placeholder="Full Name" required>
+    <input type="email" placeholder="Email" required>
+    <input type="text" placeholder="Event Type" required>
+    <textarea rows="3" placeholder="Message"></textarea>
+    <button type="submit">Send Request</button>
+  </form>
 </section>
 
+<!-- FOOTER -->
 <footer>
   © 2026 HANA Catering • All Rights Reserved
 </footer>
