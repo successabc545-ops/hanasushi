@@ -3,74 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hana Sushi</title>
+<title>HANA SUSHI</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: white;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-  /* Top Menu */
-  nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 15px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0,0,0,0.6);
-    z-index: 10;
-  }
+body {
+  background: #000;
+  color: #fff;
+}
 
-  nav a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
-    font-weight: bold;
-  }
+/* NAVBAR */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
 
-  /* Hero Section */
-  .hero {
-    height: 100vh;
-    background: url('https://images.unsplash.com/photo-1553621042-f6e147245754') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
+nav h2 {
+  font-size: 22px;
+  letter-spacing: 2px;
+}
 
-  .hero h1 {
-    font-size: 60px;
-    margin-bottom: 10px;
-  }
+nav a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  transition: 0.3s;
+}
 
-  .hero p {
-    font-size: 20px;
-    margin-bottom: 30px;
-  }
+nav a:hover {
+  color: #ffb703;
+}
 
-  .hero button {
-    padding: 12px 28px;
-    border: none;
-    background: #cfa349;
-    color: black;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+/* HERO SECTION */
+.hero {
+  height: 100vh;
+  background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.2)),
+              url("https://images.unsplash.com/photo-1553621042-f6e147245754") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  padding-left: 80px;
+}
 
-  .hero button:hover {
-    background: white;
-  }
+.hero h1 {
+  font-size: 64px;
+  font-weight: 700;
+}
+
+.hero p {
+  margin: 15px 0 30px;
+  font-size: 20px;
+  color: #ddd;
+}
+
+.hero button {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 30px;
+  background: #ffb703;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero button:hover {
+  transform: scale(1.05);
+  background: #ffd166;
+}
+
+/* SECTION */
+.section {
+  padding: 100px 80px;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.section p {
+  color: #aaa;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 50px;
+}
+
+.card {
+  background: #111;
+  border-radius: 20px;
+  padding: 30px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  background: #1a1a1a;
+}
+
+/* FOOTER */
+footer {
+  padding: 40px;
+  text-align: center;
+  background: #000;
+  color: #777;
+}
 </style>
 </head>
+
 <body>
 
-<!-- Navigation -->
 <nav>
-  <div><b>HANA SUSHI</b></div>
+  <h2>HANA SUSHI</h2>
   <div>
     <a href="#">Home</a>
     <a href="#">Menu</a>
@@ -81,13 +148,35 @@
 
 <section class="hero">
   <div>
-    <h1>HANA SUSHI</h1>
-    <p>Fresh • Authentic • Japanese Cuisine</p>
-    <a href="index2.html">
-      <button>View Menu</button>
-    </a>
+    <h1>Premium Sushi Experience</h1>
+    <p>Fresh • Authentic • Modern Japanese Cuisine</p>
+    <button onclick="location.href='menu.html'">View Menu</button>
   </div>
 </section>
+
+<section class="section">
+  <h2>Why Choose Us</h2>
+  <p>We serve the finest sushi with premium ingredients and modern design.</p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Fresh Ingredients</h3>
+      <p>Daily fresh seafood and premium quality.</p>
+    </div>
+    <div class="card">
+      <h3>Modern Style</h3>
+      <p>Luxury atmosphere and clean design.</p>
+    </div>
+    <div class="card">
+      <h3>Best Service</h3>
+      <p>Friendly staff and fast service.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 HANA SUSHI • All Rights Reserved
+</footer>
 
 </body>
 </html>
