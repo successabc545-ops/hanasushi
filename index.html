@@ -152,12 +152,27 @@ section{
   margin-bottom:50px;
 }
 
-/* QR */
-#qr img{
+/* QR CODE SECTION */
+.qr-section{
+  background:#111;
+  text-align:center;
+  padding:60px 20px;
+}
+.qr-section h2{
+  font-size:32px;
+  color:#ff2e2e;
+  margin-bottom:15px;
+}
+.qr-section p{
+  font-size:16px;
+  color:#fff;
+  margin-bottom:20px;
+}
+.qr-section img{
   width:250px;
   height:250px;
-  display:block;
-  margin:20px auto;
+  border:5px solid #ff2e2e;
+  border-radius:15px;
 }
 
 /* FOOTER */
@@ -248,12 +263,11 @@ footer{
   </p>
 </section>
 
-<section id="qr">
-  <h2 class="section-title">Scan & Visit Our Site</h2>
-  <p>📱 Scan the QR code or click it to visit HANA SUSHI FOOD TRUCK online!</p>
-  <a href="https://successabc545-ops.github.io/hanasushi/?v=9999" target="_blank">
-    <img src="A_QR_code_designed_for_HANA_SUSHI_FOOD_TRUCK_is_fe.png" 
-         alt="HANA SUSHI QR Code">
+<section id="qr" class="qr-section">
+  <h2>Scan & Visit Our Site</h2>
+  <p>📱 Scan the QR code to visit HANA SUSHI FOOD TRUCK online!</p>
+  <a href="https://successabc545-ops.github.io/hanasushi/" target="_blank">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://successabc545-ops.github.io/hanasushi/" alt="HANA SUSHI QR Code">
   </a>
 </section>
 
