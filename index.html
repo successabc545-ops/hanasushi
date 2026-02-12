@@ -1,284 +1,243 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HANA Food Truck</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<title>HANA SUSHI FOOD TRUCK</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-* {margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif;}
-body {background:#0b0b0b; color:#fff; line-height:1.6;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Poppins',sans-serif;
+  background:#000;
+  color:#fff;
+}
 
 /* NAV */
-nav {
+nav{
   position:fixed;
   top:0;
   width:100%;
-  padding:15px 40px;
+  background:rgba(0,0,0,0.85);
   display:flex;
   justify-content:space-between;
   align-items:center;
-  background:rgba(0,0,0,0.7);
-  backdrop-filter:blur(10px);
+  padding:15px 40px;
   z-index:1000;
 }
-
-
-
-/* 🍣 스시 아이콘 */
-.sushi-icon {
-  cursor:pointer;
-  display:flex;
-  align-items:right;
+nav .logo{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:2px;
 }
-.sushi-icon img {
-  width:38px;
-  transition:0.2s;
-}
-.sushi-icon img:hover {
-  transform:scale(1.1);
-  filter:drop-shadow(0 0 6px gold);
-}
-
-/* PC 메뉴 */
-.menu-links {
-  display:flex;
-  gap:25px;
-}
-.menu-links a {
+nav a{
   color:#fff;
   text-decoration:none;
-  font-size:14px;
-  transition:.3s;
+  margin-left:20px;
+  font-weight:500;
 }
-.menu-links a:hover {color:#d4af37;}
-
-/* 모바일 메뉴 */
-.mobile-menu {
-  position:absolute;
-  top:70px;
-  left:0;
-  width:100%;
-  background:rgba(0,0,0,0.95);
-  display:none;
-  flex-direction:column;
-  text-align:center;
-  padding:20px 0;
-}
-.mobile-menu a {
-  color:#fff;
-  text-decoration:none;
-  padding:12px 0;
-  font-size:16px;
-  transition:.3s;
-}
-.mobile-menu a:hover {color:#d4af37;}
+nav a:hover{color:#ff2e2e;}
 
 /* HERO */
-.hero {
+.hero{
   height:100vh;
+  background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)),
+             url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=1600&q=80');
+  background-size:cover;
+  background-position:center;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   text-align:center;
-  background:url("https://images.unsplash.com/photo-1553621042-f6e147245754") center/cover no-repeat;
-  position:relative;
 }
-.hero::after {
-  content:"";
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.6);
+.hero h1{
+  font-size:70px;
+  letter-spacing:5px;
 }
-.hero-content {
-  position:relative;
-  z-index:2;
+.hero h2{
+  color:#ffb703;
+  font-size:28px;
+  margin-top:10px;
 }
-.hero h1 {
-  font-family:"Playfair Display",serif;
-  font-size:60px;
-  margin-bottom:15px;
-}
-.hero p {
+.hero p{
   font-size:20px;
-  color:#ddd;
-  margin-bottom:30px;
+  margin:20px 0 35px;
 }
-.hero button {
-  padding:12px 32px;
+.hero button{
+  padding:14px 35px;
   border:none;
-  border-radius:30px;
-  background:#d4af37;
-  color:#000;
+  background:#ff2e2e;
+  color:#fff;
   font-size:16px;
+  border-radius:8px;
   cursor:pointer;
-  transition:.3s;
 }
-.hero button:hover {
-  transform:scale(1.05);
-  background:#f5d76e;
-}
+.hero button:hover{background:#ffb703;color:#000;}
 
 /* SECTION */
-.section {padding:100px 80px;}
-.section h2 {
-  font-family:"Playfair Display",serif;
-  font-size:40px;
+section{
+  padding:100px 10%;
+}
+.section-title{
+  font-size:38px;
+  color:#ff2e2e;
   margin-bottom:20px;
 }
-.section p {color:#aaa; font-size:16px;}
 
 /* ABOUT */
-.about-box {
-  max-width:700px;
-  background:rgba(255,255,255,0.05);
-  padding:20px;
+.about{
+  max-width:800px;
+  line-height:1.8;
+  font-size:18px;
+}
+
+/* MENU PREVIEW */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+.menu-item{
+  background:#111;
   border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+.menu-item img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+.menu-item div{
+  padding:15px;
+}
+.menu-item h3{
+  color:#ffb703;
+  margin-bottom:8px;
 }
 
 /* CONTACT */
-.contact {position:relative; height:500px; margin-bottom:60px;}
-.contact iframe {width:100%; height:100%; border:0; border-radius:15px;}
-.contact form {
-  position:absolute;
-  top:20px;
-  right:20px;
-  width:320px;
-  background:rgba(0,0,0,0.85);
-  padding:25px;
-  border-radius:15px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  box-shadow:0 0 15px rgba(0,0,0,0.5);
+.contact-box{
+  max-width:500px;
 }
-.contact form h3 {
-  font-family:"Playfair Display",serif;
-  text-align:center;
-  color:#d4af37;
-}
-.contact input, .contact textarea {
+.contact-box input,
+.contact-box textarea{
+  width:100%;
   padding:12px;
+  margin:10px 0;
   border:none;
-  border-radius:10px;
-  font-size:14px;
-  background:#111;
-  color:#fff;
+  border-radius:6px;
 }
-.contact button {
-  padding:12px;
-  border:none;
-  border-radius:12px;
-  background:#d4af37;
-  color:#000;
+.contact-box input[readonly]{
+  background:#222;
+  color:#ffb703;
   font-weight:600;
-  cursor:pointer;
-  transition:.3s;
 }
-.contact button:hover {
-  background:#f5d76e;
-  transform:scale(1.05);
+.contact-box button{
+  padding:12px 28px;
+  border:none;
+  background:#ff2e2e;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+}
+.contact-box button:hover{background:#ffb703;color:#000;}
+
+/* LOCATION */
+.location{
+  font-size:18px;
+  line-height:1.6;
 }
 
 /* FOOTER */
-footer {
+footer{
   text-align:center;
   padding:30px;
+  background:#111;
   color:#777;
-  font-size:13px;
-  background:#0a0a0a;
-}
-
-/* RESPONSIVE */
-@media (max-width:768px){
-  nav {padding:15px 20px;}
-  .menu-links {display:none;} /* PC 메뉴 숨김 */
-  .section {padding:80px 20px;}
-  .hero h1 {font-size:40px;}
-  .hero p {font-size:16px;}
-  .contact form {
-    width:90%;
-    right:50%;
-    transform:translateX(50%);
-  }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="logo">HANA Food Truck</div>
-
-  <div class="menu-links">
-    <a href="#">Home</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </div>
-
-  <div class="sushi-icon" onclick="toggleMenu()">
-    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Sushi Menu">
-  </div>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#">Home</a>
-    <a href="#about">About</a>
+  <div class="logo">HANA SUSHI 🚚</div>
+  <div>
+    <a href="#home">Home</a>
+    <a href="#about">Story</a>
+    <a href="#menu">Menu</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Premium Food Truck</h1>
-    <p>Fresh • Modern • Delicious</p>
-    <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-      Book Event
-    </button>
+<section class="hero" id="home">
+  <div>
+    <h1>HANA SUSHI</h1>
+    <h2>FOOD TRUCK</h2>
+    <p>🔥 Japanese Street Sushi • Bold Flavors on Wheels</p>
+    <button onclick="location.href='index2.html'">View Full Menu</button>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="about-box">
-    <h2>About HANA</h2>
-    <p>
-      HANA Food Truck provides premium catering and food truck service for events, parties, and corporate occasions.
-      We combine authentic flavors with modern style to create unforgettable experiences.
-    </p>
+<section id="about">
+  <h2 class="section-title">Our Story</h2>
+  <p class="about">
+    HANA SUSHI Food Truck brings bold Japanese flavors to the streets.
+    Fresh sushi, spicy sauces, and fusion rolls made for street food lovers.
+    We mix Japanese tradition with American and Mexican street vibes.
+  </p>
+</section>
+
+<section id="menu">
+  <h2 class="section-title">Popular Items</h2>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=1200&q=80">
+      <div>
+        <h3>🔥 Spicy Tuna Roll</h3>
+        <p>Bold, spicy, and crunchy flavor.</p>
+      </div>
+    </div>
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?auto=format&fit=crop&w=1200&q=80">
+      <div>
+        <h3>🥑 Avocado Crunch Roll</h3>
+        <p>Fresh avocado with crispy texture.</p>
+      </div>
+    </div>
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1617196034796-73c8e7c1b8b6?auto=format&fit=crop&w=1200&q=80">
+      <div>
+        <h3>🌮 Sushi Taco</h3>
+        <p>Japanese sushi meets Mexican taco.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <iframe src="https://www.google.com/maps?q=Los+Angeles&output=embed"></iframe>
-  <form action="https://formsubmit.co/koseouk@gmail.com" method="POST">
-    <h3>Contact Us</h3>
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" value="koseouk@gmail.com" readonly>
-    <textarea name="message" rows="4" placeholder="Message" required></textarea>
-    <input type="tel" name="phone" placeholder="Your Phone Number" required>
-    <input type="hidden" name="_captcha" value="false">
-    <button type="submit">Send</button>
-  </form>
+<section id="contact">
+  <h2 class="section-title">Contact Us</h2>
+  <div class="contact-box">
+    <input type="text" placeholder="Your Name">
+    <input type="email" value="koseouk@gmail.com" readonly>
+    <textarea rows="4" placeholder="Message"></textarea>
+    <button>Send Message</button>
+  </div>
+</section>
+
+<section id="location">
+  <h2 class="section-title">Truck Location</h2>
+  <p class="location">
+    📍 Serving Simi Valley & Los Angeles Area<br>
+    🕒 Schedule updated on Instagram
+  </p>
 </section>
 
 <footer>
-  © 2026 HANA Food Truck
+  © 2026 HANA SUSHI FOOD TRUCK. All Rights Reserved.
 </footer>
-
-<script>
-function toggleMenu() {
-  const menu = document.getElementById("mobileMenu");
-  if (menu.style.display === "flex") {
-    menu.style.display = "none";
-  } else {
-    menu.style.display = "flex";
-  }
-}
-</script>
 
 </body>
 </html>
