@@ -250,7 +250,8 @@ form.addEventListener('submit', function(e) {
   e.preventDefault(); // 페이지 리로드 방지
   const formData = new FormData(form);
 
-  fetch('https://formspree.io/f/YOUR_FORM_ID', { // <-- 여기 YOUR_FORM_ID 교체
+  // ✅ Formspree 테스트용 ID
+  fetch('https://formspree.io/f/mgebprqa', { 
     method: 'POST',
     body: formData,
     headers: { 'Accept': 'application/json' }
