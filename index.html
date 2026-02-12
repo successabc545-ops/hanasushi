@@ -130,11 +130,6 @@ section{
   border:none;
   border-radius:6px;
 }
-.contact-box input[readonly]{
-  background:#222;
-  color:#ffb703;
-  font-weight:600;
-}
 .contact-box button{
   padding:12px 28px;
   border:none;
@@ -249,7 +244,8 @@ footer{
     <form id="contactForm">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="tel" name="phone" placeholder="Your Phone Number" required>
-      <input type="email" name="email" value="koseouk@gmail.com" readonly>
+      <!-- 이메일 화면에서 숨김 -->
+      <input type="hidden" name="email" value="koseouk@gmail.com">
       <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
       <button type="submit">Send Message</button>
     </form>
