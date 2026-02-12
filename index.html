@@ -220,10 +220,13 @@ footer{
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
-    <input type="text" placeholder="Your Name">
-    <input type="email" value="koseouk@gmail.com" readonly>
-    <textarea rows="4" placeholder="Message"></textarea>
-    <button>Send Message</button>
+    <form id="contactForm">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" value="koseouk@gmail.com" readonly>
+      <textarea name="message" rows="4" placeholder="Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="formMessage" style="margin-top:10px;color:#ffb703;display:none;">Message sent! ✅</p>
   </div>
 </section>
 
@@ -238,6 +241,36 @@ footer{
 <footer>
   © 2026 HANA SUSHI FOOD TRUCK. All Rights Reserved.
 </footer>
+
+<script>
+const form = document.getElementById('contactForm');
+const formMessage = document.getElementById('formMessage');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault(); // 페이지 리로드 방지
+  const formData = new FormData(form);
+
+  fetch('https://formspree.io/f/YOUR_FORM_ID', { // <-- 여기 YOUR_FORM_ID 교체
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(response => {
+    if (response.ok) {
+      formMessage.style.display = 'block';
+      formMessage.textContent = 'Message sent! ✅';
+      form.reset();
+    } else {
+      response.json().then(data => {
+        formMessage.style.display = 'block';
+        formMessage.textContent = data.error || 'Oops! Something went wrong.';
+      });
+    }
+  }).catch(error => {
+    formMessage.style.display = 'block';
+    formMessage.textContent = 'Oops! Something went wrong.';
+  });
+});
+</script>
 
 </body>
 </html>
