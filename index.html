@@ -237,15 +237,14 @@ footer{
   </div>
 </section>
 
-<!-- Contact Us 섹션 -->
+<!-- Contact Us 섹션: 손님 이메일 입력 가능 -->
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
     <form id="contactForm">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="tel" name="phone" placeholder="Your Phone Number" required>
-      <!-- 이메일 화면에서 숨김 -->
-      <input type="hidden" name="email" value="koseouk@gmail.com">
+      <input type="email" name="email" placeholder="Your Email" required>
       <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
       <button type="submit">Send Message</button>
     </form>
@@ -288,7 +287,7 @@ form.addEventListener('submit', function(e) {
   }).then(response => {
     if (response.ok) {
       formMessage.style.display = 'block';
-      formMessage.textContent = 'How can we help you?';
+      formMessage.textContent = 'Message sent successfully!';
       form.reset();
     } else {
       response.json().then(data => {
