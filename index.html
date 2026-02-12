@@ -16,18 +16,8 @@ nav {
   background:rgba(0,0,0,0.7); backdrop-filter:blur(10px); z-index:1000;
 }
 nav h2 {font-family:"Playfair Display",serif; font-size:24px; letter-spacing:2px;}
-nav a {color:#fff; text-decoration:none; margin-left:25px; font-size:14px; transition:.3s;}
-nav a:hover {color:#d4af37;}
-
-/* 모바일 메뉴 스시 아이콘 */
-.mobile-menu {
-  display:none;
-  cursor:pointer;
-  z-index:1001;
-}
-.mobile-menu img {
-  width:35px;
-}
+nav div.menu-links a {color:#fff; text-decoration:none; margin-left:25px; font-size:14px; transition:.3s;}
+nav div.menu-links a:hover {color:#d4af37;}
 
 /* HERO */
 .hero {
@@ -48,16 +38,39 @@ nav a:hover {color:#d4af37;}
 }
 .hero button:hover {transform:scale(1.05); background:#f5d76e;}
 
-/* ✅ 스시 그림 추가 (왼쪽) */
+/* ✅ 스시 그림 추가 (메뉴 토글) */
 .sushi-icon {
   position:absolute;
   left:20px;
   top:50%;
   transform:translateY(-50%);
-  z-index:2;
+  z-index:1001;
+  cursor:pointer;
+  display:none;
 }
-.sushi-icon img {
-  width:130px;
+.sushi-icon img {width:50px;}
+
+/* 메뉴 애니메이션 */
+nav div.menu-links {
+  display:flex;
+  gap:25px;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+nav div.menu-links.show {
+  flex-direction:column;
+  position:absolute;
+  top:60px;
+  left:0;
+  width:100%;
+  background:rgba(0,0,0,0.9);
+  padding:15px;
+  max-height:500px;
+  opacity:1;
+}
+nav div.menu-links.hidden {
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
 }
 
 /* SECTION */
@@ -94,40 +107,34 @@ footer {text-align:center; padding:30px; color:#777; font-size:13px; background:
 /* RESPONSIVE */
 @media (max-width:768px){
   nav {padding:15px 20px;}
+  nav div.menu-links {display:none;}
   .section {padding:80px 20px;}
   .hero h1 {font-size:40px;}
   .hero p {font-size:16px;}
-  
-  /* 메뉴 링크 숨기고 모바일 스시 아이콘 표시 */
-  nav div a {display:none;}
-  .mobile-menu {display:block;}
+  .contact form {width:90%; top:10px; right:50%; transform:translateX(50%);}
+  .sushi-icon {display:block;}
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
+<nav id="navbar">
   <h2>HANA Food Truck</h2>
-  <div>
+  <div class="menu-links hidden">
     <a href="#">Home</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </div>
-  <!-- ✅ 모바일 메뉴용 스시 아이콘 -->
-  <div class="mobile-menu">
-    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Sushi Icon">
+
+  <!-- ✅ 모바일 메뉴 토글 스시 -->
+  <div class="sushi-icon" onclick="toggleMenu()">
+    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Sushi Menu">
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-
-  <!-- ✅ 왼쪽 스시 그림 -->
-  <div class="sushi-icon">
-    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
-  </div>
-
   <div class="hero-content">
     <h1>Premium Food Truck</h1>
     <p>Fresh • Modern • Delicious</p>
@@ -164,6 +171,19 @@ footer {text-align:center; padding:30px; color:#777; font-size:13px; background:
 <footer>
   © 2026 HANA Food Truck
 </footer>
+
+<script>
+function toggleMenu() {
+  const menu = document.querySelector('nav .menu-links');
+  if(menu.classList.contains('hidden')){
+    menu.classList.remove('hidden');
+    menu.classList.add('show');
+  } else {
+    menu.classList.remove('show');
+    menu.classList.add('hidden');
+  }
+}
+</script>
 
 </body>
 </html>
