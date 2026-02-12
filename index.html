@@ -242,7 +242,7 @@ footer{
   </div>
 </section>
 
-<!-- Contact Us 섹션 업데이트 -->
+<!-- Contact Us 섹션 -->
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
@@ -253,7 +253,7 @@ footer{
       <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
       <button type="submit">Send Message</button>
     </form>
-    <p id="formMessage" style="margin-top:10px;color:#ffb703;display:none;">Message sent! ✅</p>
+    <p id="formMessage" style="margin-top:10px;color:#ffb703;display:none;">How can we help you?</p>
   </div>
 </section>
 
@@ -292,7 +292,7 @@ form.addEventListener('submit', function(e) {
   }).then(response => {
     if (response.ok) {
       formMessage.style.display = 'block';
-      formMessage.textContent = 'Message sent! ✅';
+      formMessage.textContent = 'How can we help you?';
       form.reset();
     } else {
       response.json().then(data => {
