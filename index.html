@@ -19,6 +19,16 @@ nav h2 {font-family:"Playfair Display",serif; font-size:24px; letter-spacing:2px
 nav a {color:#fff; text-decoration:none; margin-left:25px; font-size:14px; transition:.3s;}
 nav a:hover {color:#d4af37;}
 
+/* 모바일 메뉴 스시 아이콘 */
+.mobile-menu {
+  display:none;
+  cursor:pointer;
+  z-index:1001;
+}
+.mobile-menu img {
+  width:35px;
+}
+
 /* HERO */
 .hero {
   height:100vh; display:flex; align-items:center; justify-content:center; text-align:center;
@@ -38,7 +48,7 @@ nav a:hover {color:#d4af37;}
 }
 .hero button:hover {transform:scale(1.05); background:#f5d76e;}
 
-/* ✅ 스시 그림 추가 (이것만 새로 추가됨) */
+/* ✅ 스시 그림 추가 (왼쪽) */
 .sushi-icon {
   position:absolute;
   left:20px;
@@ -87,7 +97,10 @@ footer {text-align:center; padding:30px; color:#777; font-size:13px; background:
   .section {padding:80px 20px;}
   .hero h1 {font-size:40px;}
   .hero p {font-size:16px;}
-  .contact form {width:90%; top:10px; right:50%; transform:translateX(50%);}
+  
+  /* 메뉴 링크 숨기고 모바일 스시 아이콘 표시 */
+  nav div a {display:none;}
+  .mobile-menu {display:block;}
 }
 </style>
 </head>
@@ -101,12 +114,16 @@ footer {text-align:center; padding:30px; color:#777; font-size:13px; background:
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </div>
+  <!-- ✅ 모바일 메뉴용 스시 아이콘 -->
+  <div class="mobile-menu">
+    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Sushi Icon">
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
 
-  <!-- ✅ 스시 그림 (이것만 추가됨) -->
+  <!-- ✅ 왼쪽 스시 그림 -->
   <div class="sushi-icon">
     <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
   </div>
