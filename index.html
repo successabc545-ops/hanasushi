@@ -149,6 +149,15 @@ section{
 .location{
   font-size:18px;
   line-height:1.6;
+  margin-bottom:50px;
+}
+
+/* QR */
+#qr img{
+  width:250px;
+  height:250px;
+  display:block;
+  margin:20px auto;
 }
 
 /* FOOTER */
@@ -241,11 +250,10 @@ footer{
 
 <section id="qr">
   <h2 class="section-title">Scan & Visit Our Site</h2>
-  <p>Scan the QR code or click it to visit HANA SUSHI FOOD TRUCK online!</p>
+  <p>📱 Scan the QR code or click it to visit HANA SUSHI FOOD TRUCK online!</p>
   <a href="https://successabc545-ops.github.io/hanasushi/?v=9999" target="_blank">
     <img src="A_QR_code_designed_for_HANA_SUSHI_FOOD_TRUCK_is_fe.png" 
-         alt="HANA SUSHI QR Code" 
-         style="width:250px;height:250px;display:block;margin:20px auto;">
+         alt="HANA SUSHI QR Code">
   </a>
 </section>
 
@@ -258,10 +266,9 @@ const form = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 
 form.addEventListener('submit', function(e) {
-  e.preventDefault(); // 페이지 리로드 방지
+  e.preventDefault();
   const formData = new FormData(form);
 
-  // ✅ Formspree 실제 ID 사용
   fetch('https://formspree.io/f/mgebprqa', { 
     method: 'POST',
     body: formData,
@@ -285,4 +292,4 @@ form.addEventListener('submit', function(e) {
 </script>
 
 </body>
-</html
+</html>
