@@ -38,6 +38,18 @@ nav a:hover {color:#d4af37;}
 }
 .hero button:hover {transform:scale(1.05); background:#f5d76e;}
 
+/* ✅ 스시 그림 추가 (이것만 새로 추가됨) */
+.sushi-icon {
+  position:absolute;
+  left:20px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:2;
+}
+.sushi-icon img {
+  width:130px;
+}
+
 /* SECTION */
 .section {padding:100px 80px;}
 .section h2 {font-family:"Playfair Display",serif; font-size:40px; margin-bottom:20px;}
@@ -93,6 +105,12 @@ footer {text-align:center; padding:30px; color:#777; font-size:13px; background:
 
 <!-- HERO -->
 <section class="hero">
+
+  <!-- ✅ 스시 그림 (이것만 추가됨) -->
+  <div class="sushi-icon">
+    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
+  </div>
+
   <div class="hero-content">
     <h1>Premium Food Truck</h1>
     <p>Fresh • Modern • Delicious</p>
@@ -117,9 +135,9 @@ footer {text-align:center; padding:30px; color:#777; font-size:13px; background:
   <form action="https://formsubmit.co/koseouk@gmail.com" method="POST">
     <h3>Contact Us</h3>
     <input type="text" name="name" placeholder="Your Name" required>
-   <input type="email" name="email" value="koseouk@gmail.com" readonly>
+    <input type="email" name="email" value="koseouk@gmail.com" readonly>
     <textarea name="message" rows="4" placeholder="Message" required></textarea>
-<input type="tel" name="phone" placeholder="Your Phone Number" required>
+    <input type="tel" name="phone" placeholder="Your Phone Number" required>
     <input type="hidden" name="_captcha" value="false">
     <button type="submit">Send</button>
   </form>
