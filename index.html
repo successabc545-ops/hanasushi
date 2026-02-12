@@ -183,6 +183,14 @@ function toggleMenu() {
     menu.classList.add('hidden');
   }
 }
+
+// 🔄 페이지 로드 시 스시 아이콘 최신 이미지로 강제
+window.addEventListener('load', () => {
+  const sushiImg = document.querySelector('.sushi-icon img');
+  if(sushiImg){
+    sushiImg.src = sushiImg.src + '?v=' + new Date().getTime();
+  }
+});
 </script>
 
 </body>
