@@ -23,16 +23,14 @@ nav {
   backdrop-filter:blur(10px);
   z-index:1000;
 }
-nav h2 {
+
+.logo {
   font-family:"Playfair Display",serif;
   font-size:24px;
   letter-spacing:2px;
-  display:flex;
-  align-items:center;
-  gap:10px;
 }
 
-/* 🍣 스시 아이콘 (햄버거 대신) */
+/* 🍣 스시 아이콘 */
 .sushi-icon {
   cursor:pointer;
   display:flex;
@@ -47,7 +45,7 @@ nav h2 {
   filter:drop-shadow(0 0 6px gold);
 }
 
-/* 메뉴 */
+/* PC 메뉴 */
 .menu-links {
   display:flex;
   gap:25px;
@@ -61,21 +59,25 @@ nav h2 {
 .menu-links a:hover {color:#d4af37;}
 
 /* 모바일 메뉴 */
-.menu-links.mobile {
+.mobile-menu {
   position:absolute;
-  top:65px;
+  top:70px;
   left:0;
   width:100%;
   background:rgba(0,0,0,0.95);
+  display:none;
   flex-direction:column;
   text-align:center;
   padding:20px 0;
-  display:none;
 }
-.menu-links.mobile a {
-  padding:10px 0;
+.mobile-menu a {
+  color:#fff;
+  text-decoration:none;
+  padding:12px 0;
   font-size:16px;
+  transition:.3s;
 }
+.mobile-menu a:hover {color:#d4af37;}
 
 /* HERO */
 .hero {
@@ -196,8 +198,7 @@ footer {
 /* RESPONSIVE */
 @media (max-width:768px){
   nav {padding:15px 20px;}
-  .menu-links {display:none;}
-  .menu-links.mobile {display:flex;}
+  .menu-links {display:none;} /* PC 메뉴 숨김 */
   .section {padding:80px 20px;}
   .hero h1 {font-size:40px;}
   .hero p {font-size:16px;}
@@ -213,12 +214,7 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <h2>
-    HANA Food Truck
-    <div class="sushi-icon" onclick="toggleMenu()">
-      <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Sushi Menu">
-    </div>
-  </h2>
+  <div class="logo">HANA Food Truck</div>
 
   <div class="menu-links">
     <a href="#">Home</a>
@@ -226,7 +222,11 @@ footer {
     <a href="#contact">Contact</a>
   </div>
 
-  <div class="menu-links mobile" id="mobileMenu">
+  <div class="sushi-icon" onclick="toggleMenu()">
+    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Sushi Menu">
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
     <a href="#">Home</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
@@ -276,7 +276,11 @@ footer {
 <script>
 function toggleMenu() {
   const menu = document.getElementById("mobileMenu");
-  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+  if (menu.style.display === "flex") {
+    menu.style.display = "none";
+  } else {
+    menu.style.display = "flex";
+  }
 }
 </script>
 
