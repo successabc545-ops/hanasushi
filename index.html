@@ -1,16 +1,3 @@
-좋아 Jake 😎
-네가 보내준 HTML 코드를 기반으로 Contact 섹션을 수정해서
-
-괄호 안은 항상 Area Code 전용
-
-숫자만 입력 가능
-
-나머지 번호는 별도로 입력
-
-이렇게 바꿔서 전체 통합한 코드 만들어줬어.
-
-아래 그대로 복사해서 GitHub에 붙이면 돼.
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -260,7 +247,6 @@ footer{
   </div>
 </section>
 
-<!-- Contact Us 섹션: Area Code 괄호 유지 -->
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
@@ -302,7 +288,7 @@ footer{
 </footer>
 
 <script>
-// 숫자만 입력 가능
+// 숫자만 입력 가능 + 자동 하이픈 추가
 const areaInput = document.getElementById('areaCode');
 const numberInput = document.getElementById('phoneNumber');
 
@@ -311,15 +297,23 @@ areaInput.addEventListener('input', e => {
 });
 
 numberInput.addEventListener('input', e => {
-  e.target.value = e.target.value.replace(/\D/g,'').slice(0,7);
+  let val = e.target.value.replace(/\D/g,'').slice(0,7);
+  if(val.length > 3){
+    val = val.slice(0,3) + '-' + val.slice(3);
+  }
+  e.target.value = val;
 });
 
-// 기존 Formspree 전송
+// Formspree 전송 시 전화번호 합치기
 const form = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
+  const areaCode = areaInput.value;
+  const number = numberInput.value;
+  form.elements['phoneNumber'].value = `(${areaCode})${number}`;
+
   const formData = new FormData(form);
 
   fetch('https://formspree.io/f/mgebprqa', { 
