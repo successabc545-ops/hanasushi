@@ -140,16 +140,6 @@ section{
 }
 .contact-box button:hover{background:#ffb703;color:#000;}
 
-/* Phone inline 스타일 */
-.phone-inline input {
-  width: auto;
-  display: inline-block;
-  padding: 8px;
-  margin-right: 4px;
-  border-radius: 6px;
-  border: none;
-}
-
 /* LOCATION */
 .location{
   font-size:18px;
@@ -247,17 +237,15 @@ footer{
   </div>
 </section>
 
+<!-- Contact Us 섹션: 하나의 입력칸에서 전화번호 포맷 -->
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
     <form id="contactForm">
       <input type="text" name="name" placeholder="Your Name" required>
 
-      <!-- Phone 입력: Area Code + 번호 -->
-      <div class="phone-inline">
-        (<input type="text" id="areaCode" name="areaCode" maxlength="3" placeholder="123" required>) 
-        <input type="text" id="phoneNumber" name="phoneNumber" maxlength="7" placeholder="456-7890" required>
-      </div>
+      <!-- 하나의 전화번호 입력칸 -->
+      <input type="tel" id="phoneFull" name="phoneFull" placeholder="(123)456-7890" required>
 
       <input type="email" name="email" placeholder="Your Email" required>
       <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
@@ -288,32 +276,30 @@ footer{
 </footer>
 
 <script>
-// 숫자만 입력 가능 + 자동 하이픈 추가
-const areaInput = document.getElementById('areaCode');
-const numberInput = document.getElementById('phoneNumber');
+// 전화번호 자동 포맷: (XXX)XXX-XXXX
+const phoneInput = document.getElementById('phoneFull');
 
-areaInput.addEventListener('input', e => {
-  e.target.value = e.target.value.replace(/\D/g,'').slice(0,3);
-});
+phoneInput.addEventListener('input', e => {
+  let val = e.target.value.replace(/\D/g,''); // 숫자만 추출
+  if(val.length > 10) val = val.slice(0,10);  // 최대 10자리
 
-numberInput.addEventListener('input', e => {
-  let val = e.target.value.replace(/\D/g,'').slice(0,7);
-  if(val.length > 3){
-    val = val.slice(0,3) + '-' + val.slice(3);
+  if(val.length > 6){
+    val = `(${val.slice(0,3)})${val.slice(3,6)}-${val.slice(6)}`;
+  } else if(val.length > 3){
+    val = `(${val.slice(0,3)})${val.slice(3)}`;
+  } else if(val.length > 0){
+    val = `(${val}`;
   }
+
   e.target.value = val;
 });
 
-// Formspree 전송 시 전화번호 합치기
+// 기존 Formspree 전송
 const form = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
-  const areaCode = areaInput.value;
-  const number = numberInput.value;
-  form.elements['phoneNumber'].value = `(${areaCode})${number}`;
-
   const formData = new FormData(form);
 
   fetch('https://formspree.io/f/mgebprqa', { 
