@@ -1,3 +1,16 @@
+좋아 Jake 😎
+네가 보내준 HTML 코드를 기반으로 Contact 섹션을 수정해서
+
+괄호 안은 항상 Area Code 전용
+
+숫자만 입력 가능
+
+나머지 번호는 별도로 입력
+
+이렇게 바꿔서 전체 통합한 코드 만들어줬어.
+
+아래 그대로 복사해서 GitHub에 붙이면 돼.
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,6 +153,16 @@ section{
 }
 .contact-box button:hover{background:#ffb703;color:#000;}
 
+/* Phone inline 스타일 */
+.phone-inline input {
+  width: auto;
+  display: inline-block;
+  padding: 8px;
+  margin-right: 4px;
+  border-radius: 6px;
+  border: none;
+}
+
 /* LOCATION */
 .location{
   font-size:18px;
@@ -237,13 +260,19 @@ footer{
   </div>
 </section>
 
-<!-- Contact Us 섹션: 손님 이메일 입력 가능 -->
+<!-- Contact Us 섹션: Area Code 괄호 유지 -->
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
     <form id="contactForm">
       <input type="text" name="name" placeholder="Your Name" required>
-     <input type="tel" name="phone" placeholder="(   )   -    " required>
+
+      <!-- Phone 입력: Area Code + 번호 -->
+      <div class="phone-inline">
+        (<input type="text" id="areaCode" name="areaCode" maxlength="3" placeholder="123" required>) 
+        <input type="text" id="phoneNumber" name="phoneNumber" maxlength="7" placeholder="456-7890" required>
+      </div>
+
       <input type="email" name="email" placeholder="Your Email" required>
       <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
       <button type="submit">Send Message</button>
@@ -273,6 +302,19 @@ footer{
 </footer>
 
 <script>
+// 숫자만 입력 가능
+const areaInput = document.getElementById('areaCode');
+const numberInput = document.getElementById('phoneNumber');
+
+areaInput.addEventListener('input', e => {
+  e.target.value = e.target.value.replace(/\D/g,'').slice(0,3);
+});
+
+numberInput.addEventListener('input', e => {
+  e.target.value = e.target.value.replace(/\D/g,'').slice(0,7);
+});
+
+// 기존 Formspree 전송
 const form = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 
