@@ -237,21 +237,21 @@ footer{
   </div>
 </section>
 
-<!-- Contact Us 섹션: 하나의 입력칸에서 전화번호 포맷 -->
+<!-- Contact Us 섹션 -->
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
-    <form id="contactForm">
+    <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
 
       <!-- 하나의 전화번호 입력칸 -->
-      <input type="tel" id="phoneFull" name="phoneFull" placeholder="(123)456-7890" required>
+      <input type="tel" name="phone" id="phoneFull" placeholder="(123)456-7890" required>
 
       <input type="email" name="email" placeholder="Your Email" required>
       <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
       <button type="submit">Send Message</button>
     </form>
-    <p id="formMessage" style="margin-top:10px;color:#ffb703;display:none;">How can we help you?</p>
+    <p id="formMessage" style="margin-top:10px;color:#ffb703;display:none;"></p>
   </div>
 </section>
 
@@ -280,8 +280,8 @@ footer{
 const phoneInput = document.getElementById('phoneFull');
 
 phoneInput.addEventListener('input', e => {
-  let val = e.target.value.replace(/\D/g,''); // 숫자만 추출
-  if(val.length > 10) val = val.slice(0,10);  // 최대 10자리
+  let val = e.target.value.replace(/\D/g,''); // 숫자만
+  if(val.length > 10) val = val.slice(0,10);
 
   if(val.length > 6){
     val = `(${val.slice(0,3)})${val.slice(3,6)}-${val.slice(6)}`;
@@ -292,35 +292,6 @@ phoneInput.addEventListener('input', e => {
   }
 
   e.target.value = val;
-});
-
-// 기존 Formspree 전송
-const form = document.getElementById('contactForm');
-const formMessage = document.getElementById('formMessage');
-
-form.addEventListener('submit', function(e) {
-  e.preventDefault();
-  const formData = new FormData(form);
-
-  fetch('https://formspree.io/f/mgebprqa', { 
-    method: 'POST',
-    body: formData,
-    headers: { 'Accept': 'application/json' }
-  }).then(response => {
-    if (response.ok) {
-      formMessage.style.display = 'block';
-      formMessage.textContent = 'Message sent successfully!';
-      form.reset();
-    } else {
-      response.json().then(data => {
-        formMessage.style.display = 'block';
-        formMessage.textContent = data.error || 'Oops! Something went wrong.';
-      });
-    }
-  }).catch(error => {
-    formMessage.style.display = 'block';
-    formMessage.textContent = 'Oops! Something went wrong.';
-  });
 });
 </script>
 
