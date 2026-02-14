@@ -241,16 +241,19 @@ footer{
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
-    <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required>
 
-      <!-- 하나의 전화번호 입력칸 -->
-      <input type="tel" name="phone" id="phoneFull" placeholder="(123)456-7890" required>
+    <form action="mailto:koseouk@gmail.com" method="POST" enctype="text/plain">
+      <input type="text" name="Name" placeholder="Your Name" required>
 
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
+      <input type="tel" name="Phone" placeholder="(123)456-7890" required>
+
+      <input type="email" name="Email" placeholder="Your Email" required>
+
+      <textarea name="Message" rows="4" placeholder="How can we help you?" required></textarea>
+
       <button type="submit">Send Message</button>
     </form>
+
     <p id="formMessage" style="margin-top:10px;color:#ffb703;display:none;"></p>
   </div>
 </section>
