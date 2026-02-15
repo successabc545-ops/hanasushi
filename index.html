@@ -8,18 +8,55 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
-nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;justify-content:space-between;align-items:center;padding:15px 40px;z-index:1000;}
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+  z-index:1000;
+  flex-wrap: wrap;
+}
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
-nav .nav-links{display:flex;align-items:center;gap:20px;}
-nav .nav-links a{color:#fff;text-decoration:none;font-weight:500;}
+nav .nav-links{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+nav .nav-links a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:500;
+}
 nav .nav-links a:hover{color:#ff2e2e;}
-.nav-toggle{display:none;cursor:pointer;font-size:24px;color:#fff;}
-.hero{height:100vh;background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center;}
+
+/* 햄버거 버튼 */
+.nav-toggle{
+  display:none;
+  font-size:28px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.hero{
+  height:100vh;
+  background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 .hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
 .hero p{font-size:20px;margin:20px 0 35px;}
 .hero button{padding:14px 35px;border:none;background:#ff2e2e;color:#fff;font-size:16px;border-radius:8px;cursor:pointer;}
 .hero button:hover{background:#ffb703;color:#000;}
+
 section{padding:100px 10%;}
 .section-title{font-size:38px;color:#ff2e2e;margin-bottom:20px;}
 .about{max-width:800px;line-height:1.8;font-size:18px;}
@@ -38,36 +75,33 @@ section{padding:100px 10%;}
 .qr-section img{width:250px;height:250px;border:5px solid #ff2e2e;border-radius:15px;}
 footer{text-align:center;padding:30px;background:#111;color:#777;}
 
-/* === 모바일 최적화 & 햄버거 메뉴 === */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    padding: 10px 20px;
+/* 모바일 대응 */
+@media (max-width:768px){
+  nav{
+    flex-direction:row;
+    justify-content:space-between;
+    padding:10px 20px;
   }
-  .nav-links {
-    flex-direction: column;
-    display: none;
-    width: 100%;
-    gap: 10px;
-    margin-top: 10px;
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;
+    gap:10px;
+    margin-top:10px;
+    background:rgba(0,0,0,0.95);
+    border-radius:10px;
+    padding:10px 0;
   }
-  .nav-links.active {
-    display: flex;
+  .nav-links a{
+    padding:10px 20px;
+    width:100%;
   }
-  .nav-toggle {
-    display: block;
+  .nav-links.active{
+    display:flex;
   }
-  .hero h1 {font-size:42px;}
-  .hero h2 {font-size:20px;}
-  .hero p {font-size:16px;margin-bottom:25px;}
-  .hero button {padding:12px 25px;font-size:14px;}
-  section {padding:60px 5%;}
-  .section-title {font-size:28px;}
-  .about {font-size:16px;}
-  .menu-item img {height:180px;}
-  .contact-box input,.contact-box textarea {padding:10px;}
-  .contact-box button {padding:10px 22px;font-size:14px;}
-  .qr-section img {width:200px;height:200px;}
+  .nav-toggle{
+    display:block;
+  }
 }
 </style>
 </head>
@@ -94,7 +128,10 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 <section id="about">
   <h2 class="section-title">Our Story</h2>
-  <p class="about">HANA SUSHI Food Truck brings bold Japanese flavors to the streets. Fresh sushi, spicy sauces, and fusion rolls made for street food lovers.</p>
+  <p class="about">
+    HANA SUSHI Food Truck brings bold Japanese flavors to the streets.
+    Fresh sushi, spicy sauces, and fusion rolls made for street food lovers.
+  </p>
 </section>
 
 <section id="menu">
@@ -132,7 +169,10 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 <section id="location">
   <h2 class="section-title">Truck Location</h2>
-  <p class="location">📍 Serving Simi Valley & Los Angeles Area<br>🕒 Schedule updated on Instagram</p>
+  <p class="location">
+    📍 Serving Simi Valley & Los Angeles Area<br>
+    🕒 Schedule updated on Instagram
+  </p>
 </section>
 
 <section id="qr" class="qr-section">
@@ -142,26 +182,30 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   </a>
 </section>
 
-<footer>© 2026 HANA SUSHI FOOD TRUCK</footer>
+<footer>
+  © 2026 HANA SUSHI FOOD TRUCK
+</footer>
 
 <script>
-// 전화번호 자동 포맷
+// 전화번호 자동 포맷: (XXX)XXX-XXXX
 const phoneInput = document.getElementById('phoneFull');
 phoneInput.addEventListener('input', e => {
   let val = e.target.value.replace(/\D/g,''); 
   if(val.length > 10) val = val.slice(0,10);
-  if(val.length > 6){ val = `(${val.slice(0,3)})${val.slice(3,6)}-${val.slice(6)}`;}
-  else if(val.length > 3){ val = `(${val.slice(0,3)})${val.slice(3)}`;}
-  else if(val.length > 0){ val = `(${val}`;}
+  if(val.length > 6){
+    val = `(${val.slice(0,3)})${val.slice(3,6)}-${val.slice(6)}`;
+  } else if(val.length > 3){
+    val = `(${val.slice(0,3)})${val.slice(3)}`;
+  } else if(val.length > 0){
+    val = `(${val}`;
+  }
   e.target.value = val;
 });
 
-// 햄버거 메뉴 토글
+// 모바일 햄버거 메뉴
 const toggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-toggle.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
-});
+const links = document.querySelector('.nav-links');
+toggle.addEventListener('click', ()=>{ links.classList.toggle('active'); });
 </script>
 </body>
 </html>
