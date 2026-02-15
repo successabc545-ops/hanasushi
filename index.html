@@ -8,55 +8,16 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:rgba(0,0,0,0.85);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 40px;
-  z-index:1000;
-  flex-wrap: wrap;
-}
+nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;justify-content:space-between;align-items:center;padding:15px 40px;z-index:1000;}
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
-nav .nav-links{
-  display:flex;
-  align-items:center;
-  gap:20px;
-}
-nav .nav-links a{
-  color:#fff;
-  text-decoration:none;
-  font-weight:500;
-}
-nav .nav-links a:hover{color:#ff2e2e;}
-
-/* 햄버거 버튼 */
-.nav-toggle{
-  display:none;
-  font-size:28px;
-  color:#fff;
-  cursor:pointer;
-}
-
-.hero{
-  height:100vh;
-  background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
+nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;}
+nav a:hover{color:#ff2e2e;}
+.hero{height:100vh;background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center;}
 .hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
 .hero p{font-size:20px;margin:20px 0 35px;}
 .hero button{padding:14px 35px;border:none;background:#ff2e2e;color:#fff;font-size:16px;border-radius:8px;cursor:pointer;}
 .hero button:hover{background:#ffb703;color:#000;}
-
 section{padding:100px 10%;}
 .section-title{font-size:38px;color:#ff2e2e;margin-bottom:20px;}
 .about{max-width:800px;line-height:1.8;font-size:18px;}
@@ -74,42 +35,12 @@ section{padding:100px 10%;}
 .qr-section h2{font-size:32px;color:#ff2e2e;margin-bottom:15px;}
 .qr-section img{width:250px;height:250px;border:5px solid #ff2e2e;border-radius:15px;}
 footer{text-align:center;padding:30px;background:#111;color:#777;}
-
-/* 모바일 대응 */
-@media (max-width:768px){
-  nav{
-    flex-direction:row;
-    justify-content:space-between;
-    padding:10px 20px;
-  }
-  .nav-links{
-    display:none;
-    flex-direction:column;
-    width:100%;
-    gap:10px;
-    margin-top:10px;
-    background:rgba(0,0,0,0.95);
-    border-radius:10px;
-    padding:10px 0;
-  }
-  .nav-links a{
-    padding:10px 20px;
-    width:100%;
-  }
-  .nav-links.active{
-    display:flex;
-  }
-  .nav-toggle{
-    display:block;
-  }
-}
 </style>
 </head>
 <body>
 <nav>
   <div class="logo">HANA SUSHI 🚚</div>
-  <div class="nav-toggle">&#9776;</div>
-  <div class="nav-links">
+  <div>
     <a href="#home">Home</a>
     <a href="#about">Story</a>
     <a href="#menu">Menu</a>
@@ -201,11 +132,6 @@ phoneInput.addEventListener('input', e => {
   }
   e.target.value = val;
 });
-
-// 모바일 햄버거 메뉴
-const toggle = document.querySelector('.nav-toggle');
-const links = document.querySelector('.nav-links');
-toggle.addEventListener('click', ()=>{ links.classList.toggle('active'); });
 </script>
 </body>
 </html>
