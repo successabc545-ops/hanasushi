@@ -225,11 +225,11 @@ footer{
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
 
-    <!-- FormSubmit 방식 + 전화번호 자동 입력 및 readonly -->
     <form action="https://formsubmit.co/koseouk@gmail.com" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
 
-      <input type="tel" name="phone" value="(213)793-9978" readonly>
+      <!-- 전화번호 placeholder (213)793-9978 + 자동 포맷 -->
+      <input type="tel" id="phoneFull" name="phone" placeholder="(213)793-9978" required>
 
       <input type="email" name="email" placeholder="Your Email" required>
 
@@ -262,6 +262,26 @@ footer{
 <footer>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
+
+<script>
+// 전화번호 자동 포맷: (XXX)XXX-XXXX
+const phoneInput = document.getElementById('phoneFull');
+
+phoneInput.addEventListener('input', e => {
+  let val = e.target.value.replace(/\D/g,''); // 숫자만
+  if(val.length > 10) val = val.slice(0,10);
+
+  if(val.length > 6){
+    val = `(${val.slice(0,3)})${val.slice(3,6)}-${val.slice(6)}`;
+  } else if(val.length > 3){
+    val = `(${val.slice(0,3)})${val.slice(3)}`;
+  } else if(val.length > 0){
+    val = `(${val}`;
+  }
+
+  e.target.value = val;
+});
+</script>
 
 </body>
 </html>
