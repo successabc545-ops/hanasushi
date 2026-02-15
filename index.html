@@ -93,7 +93,7 @@ section{
   font-size:18px;
 }
 
-/* MENU PREVIEW */
+/* MENU */
 .menu-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -103,7 +103,6 @@ section{
   background:#111;
   border-radius:15px;
   overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }
 .menu-item img{
   width:100%;
@@ -147,7 +146,7 @@ section{
   margin-bottom:50px;
 }
 
-/* QR CODE SECTION */
+/* QR */
 .qr-section{
   background:#111;
   text-align:center;
@@ -157,11 +156,6 @@ section{
   font-size:32px;
   color:#ff2e2e;
   margin-bottom:15px;
-}
-.qr-section p{
-  font-size:16px;
-  color:#fff;
-  margin-bottom:20px;
 }
 .qr-section img{
   width:250px;
@@ -179,6 +173,7 @@ footer{
 }
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -188,7 +183,7 @@ footer{
     <a href="#about">Story</a>
     <a href="#menu">Menu</a>
     <a href="#contact">Contact</a>
-    <a href="#qr">QR Code</a>
+    <a href="#qr">QR</a>
   </div>
 </nav>
 
@@ -197,7 +192,6 @@ footer{
     <h1>HANA SUSHI</h1>
     <h2>FOOD TRUCK</h2>
     <p>🔥 Japanese Street Sushi • Bold Flavors on Wheels</p>
-    <button onclick="location.href='index2.html'">View Full Menu</button>
   </div>
 </section>
 
@@ -206,7 +200,6 @@ footer{
   <p class="about">
     HANA SUSHI Food Truck brings bold Japanese flavors to the streets.
     Fresh sushi, spicy sauces, and fusion rolls made for street food lovers.
-    We mix Japanese tradition with American and Mexican street vibes.
   </p>
 </section>
 
@@ -215,46 +208,36 @@ footer{
   <div class="menu-grid">
     <div class="menu-item">
       <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=1200&q=80">
-      <div>
-        <h3>🔥 Spicy Tuna Roll</h3>
-        <p>Bold, spicy, and crunchy flavor.</p>
-      </div>
+      <div><h3>🔥 Spicy Tuna Roll</h3></div>
     </div>
     <div class="menu-item">
       <img src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?auto=format&fit=crop&w=1200&q=80">
-      <div>
-        <h3>🥑 Avocado Crunch Roll</h3>
-        <p>Fresh avocado with crispy texture.</p>
-      </div>
+      <div><h3>🥑 Avocado Crunch Roll</h3></div>
     </div>
     <div class="menu-item">
       <img src="https://images.unsplash.com/photo-1617196034796-73c8e7c1b8b6?auto=format&fit=crop&w=1200&q=80">
-      <div>
-        <h3>🌮 Sushi Taco</h3>
-        <p>Japanese sushi meets Mexican taco.</p>
-      </div>
+      <div><h3>🌮 Sushi Taco</h3></div>
     </div>
   </div>
 </section>
 
-<!-- Contact Us 섹션 -->
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
 
-    <form action="mailto:koseouk@gmail.com" method="POST" enctype="text/plain">
-      <input type="text" name="Name" placeholder="Your Name" required>
+    <!-- ✅ WORKING CONTACT FORM -->
+    <form action="https://formspree.io/f/xayrzzqg" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="tel" name="phone" placeholder="(123)456-7890" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
 
-      <input type="tel" id="phoneFull" name="Phone" placeholder="(123)456-7890" required>
-
-      <input type="email" name="Email" placeholder="Your Email" required>
-
-      <textarea name="Message" rows="4" placeholder="How can we help you?" required></textarea>
+      <input type="hidden" name="_subject" value="New HANA SUSHI Inquiry">
+      <input type="hidden" name="_captcha" value="false">
 
       <button type="submit">Send Message</button>
     </form>
 
-    <p id="formMessage" style="margin-top:10px;color:#ffb703;display:none;"></p>
   </div>
 </section>
 
@@ -268,35 +251,14 @@ footer{
 
 <section id="qr" class="qr-section">
   <h2>Scan & Visit Our Site</h2>
-  <p>📱 Scan the QR code to visit HANA SUSHI FOOD TRUCK online!</p>
   <a href="https://successabc545-ops.github.io/hanasushi/" target="_blank">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://successabc545-ops.github.io/hanasushi/" alt="HANA SUSHI QR Code">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://successabc545-ops.github.io/hanasushi/">
   </a>
 </section>
 
 <footer>
-  © 2026 HANA SUSHI FOOD TRUCK. All Rights Reserved.
+  © 2026 HANA SUSHI FOOD TRUCK
 </footer>
-
-<script>
-// 전화번호 자동 포맷: (XXX)XXX-XXXX
-const phoneInput = document.getElementById('phoneFull');
-
-phoneInput.addEventListener('input', e => {
-  let val = e.target.value.replace(/\D/g,''); // 숫자만
-  if(val.length > 10) val = val.slice(0,10);
-
-  if(val.length > 6){
-    val = `(${val.slice(0,3)})${val.slice(3,6)}-${val.slice(6)}`;
-  } else if(val.length > 3){
-    val = `(${val.slice(0,3)})${val.slice(3)}`;
-  } else if(val.length > 0){
-    val = `(${val}`;
-  }
-
-  e.target.value = val;
-});
-</script>
 
 </body>
 </html>
