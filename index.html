@@ -97,7 +97,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       
       <!-- Number of Guests (required) -->
       <label for="guests">Number of Guests (required)</label>
-      <input type="number" id="guests" name="number_of_guests" placeholder="e.g. 2" min="1" required>
+      <input type="number" id="guests" name="number_of_guests" min="1" required>
 
       <!-- Preferred Communication Method (required) -->
       <label for="commMethod">Preferred Communication Method (required)</label>
@@ -168,7 +168,8 @@ phoneInput.addEventListener('input', e => {
   } else if(val.length > 3){
     val = `(${val.slice(0,3)})${val.slice(3)}`;
   } else if(val.length > 0){
-    val = `(${val}`;
+    e.target.value = `(${val}`;
+    return;
   }
   e.target.value = val;
 });
