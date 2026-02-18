@@ -27,7 +27,7 @@ section{padding:100px 10%;}
 .menu-item div{padding:15px;}
 .menu-item h3{color:#ffb703;margin-bottom:8px;}
 .contact-box{max-width:500px;}
-.contact-box input,.contact-box textarea{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
+.contact-box input,.contact-box textarea,.contact-box select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
 .contact-box button{padding:12px 28px;border:none;background:#ff2e2e;color:#fff;border-radius:8px;cursor:pointer;}
 .contact-box button:hover{background:#ffb703;color:#000;}
 .location{font-size:18px;line-height:1.6;margin-bottom:50px;}
@@ -91,13 +91,21 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
       <input type="email" name="email" placeholder="Your Email" required>
       
-      <!-- Date of Event (required) -->
+      <!-- Date of Event (required) with min/max -->
       <label for="eventDate">Date of Event (required)</label>
-      <input type="date" id="eventDate" name="event_date" required>
-
+      <input type="date" id="eventDate" name="event_date" required min="" max="">
+      
       <!-- Number of Guests (required) -->
       <label for="guests">Number of Guests (required)</label>
       <input type="number" id="guests" name="number_of_guests" placeholder="e.g. 2" min="1" required>
+
+      <!-- Preferred Communication Method (required) -->
+      <label for="commMethod">Preferred Communication Method (required)</label>
+      <select id="commMethod" name="preferred_communication" required>
+        <option value="" disabled selected>Choose One</option>
+        <option value="Phone Call">Phone Call</option>
+        <option value="Email">Email</option>
+      </select>
 
       <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
       
@@ -121,6 +129,22 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 </footer>
 
 <script>
+// 오늘 날짜 기준으로 min/max 설정
+const eventDate = document.getElementById('eventDate');
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, '0');
+const dd = String(today.getDate()).padStart(2, '0');
+eventDate.min = `${yyyy}-${mm}-${dd}`;
+
+// 최대 날짜: 1년 후
+const nextYear = new Date(today);
+nextYear.setFullYear(nextYear.getFullYear() + 1);
+const yyyyMax = nextYear.getFullYear();
+const mmMax = String(nextYear.getMonth() + 1).padStart(2, '0');
+const ddMax = String(nextYear.getDate()).padStart(2, '0');
+eventDate.max = `${yyyyMax}-${mmMax}-${ddMax}`;
+
 // 전화번호 자동 포맷: (XXX)XXX-XXXX
 const phoneInput = document.getElementById('phoneFull');
 phoneInput.addEventListener('input', e => {
