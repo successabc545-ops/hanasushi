@@ -98,6 +98,17 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <label for="serviceTime">Time of Service (required)</label>
       <input type="datetime-local" id="serviceTime" name="service_time" required>
 
+      <!-- Number of Guests (required) -->
+      <label for="guests">Number of Guests (required)</label>
+      <input 
+        type="number" 
+        id="guests" 
+        name="number_of_guests" 
+        placeholder="e.g. 2" 
+        min="1" 
+        required
+      >
+
       <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
       
       <input type="hidden" name="_subject" value="New HANA SUSHI Inquiry">
