@@ -91,7 +91,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
       <input type="email" name="email" placeholder="Your Email" required>
       
-      <!-- Date of Event (required) with min/max -->
+      <!-- Date of Event (required) -->
       <label for="eventDate">Date of Event (required)</label>
       <input type="date" id="eventDate" name="event_date" required min="" max="">
       
@@ -105,6 +105,19 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
         <option value="" disabled selected>Choose One</option>
         <option value="Phone Call">Phone Call</option>
         <option value="Email">Email</option>
+      </select>
+
+      <!-- How Did You Hear About Us? -->
+      <label for="heardAbout">How Did You Hear About Us? Select an option</label>
+      <select id="heardAbout" name="heard_about" required>
+        <option value="" disabled selected>Choose One</option>
+        <option value="Google Search">Google Search</option>
+        <option value="Ate at the Truck">Ate at the Truck</option>
+        <option value="Facebook">Facebook</option>
+        <option value="Twitter">Twitter</option>
+        <option value="Instagram">Instagram</option>
+        <option value="LinkedIn">LinkedIn</option>
+        <option value="Other">Other</option>
       </select>
 
       <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
