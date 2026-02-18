@@ -87,23 +87,25 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box">
     <form action="https://formsubmit.co/koseouk@gmail.com" method="POST">
+      
       <input type="text" name="name" placeholder="Your Name" required>
+      
       <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
+      
       <input type="email" name="email" placeholder="Your Email" required>
+
+      <!-- Time of Service (required) -->
+      <label for="serviceTime">Time of Service (required)</label>
+      <input type="datetime-local" id="serviceTime" name="service_time" required>
+
       <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
+      
       <input type="hidden" name="_subject" value="New HANA SUSHI Inquiry">
       <input type="hidden" name="_captcha" value="false">
+      
       <button type="submit">Send Message</button>
     </form>
   </div>
-</section>
-
-<section id="location">
-  <h2 class="section-title">Truck Location</h2>
-  <p class="location">
-    📍 Serving Simi Valley & Los Angeles Area<br>
-    🕒 Schedule updated on Instagram
-  </p>
 </section>
 
 <section id="qr" class="qr-section">
