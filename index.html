@@ -16,7 +16,7 @@ nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;jus
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
 nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
 nav a:hover{color:#ff2e2e;}
-.hero{height:100vh;background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center;}
+.hero{height:100vh;background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('borito.webp');background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center;}
 .hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
 .hero p{font-size:20px;margin:20px 0 35px;}
@@ -27,9 +27,9 @@ section{padding:100px 10%;}
 .about{max-width:800px;line-height:1.8;font-size:18px;}
 .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
 .menu-item{background:#111;border-radius:15px;overflow:hidden;text-align:center;}
-.menu-item img{width:100%;height:200px;object-fit:cover;border-radius:15px 15px 0 0;}
+.menu-item img{width:100%;height:200px;object-fit:cover;}
 .menu-item div{padding:15px;}
-.menu-item h3{color:#ffb703;margin-bottom:8px;}
+.menu-item h3{color:#ffb703;margin-top:10px;}
 .contact-box{max-width:500px;}
 .contact-box input,.contact-box textarea,.contact-box select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
 .contact-box button{padding:12px 28px;border:none;background:#ff2e2e;color:#fff;border-radius:8px;cursor:pointer;}
@@ -39,17 +39,6 @@ section{padding:100px 10%;}
 .qr-section h2{font-size:32px;color:#ff2e2e;margin-bottom:15px;}
 .qr-section img{width:250px;height:250px;border:5px solid #ff2e2e;border-radius:15px;}
 footer{text-align:center;padding:30px;background:#111;color:#777;}
-
-/* Sushi Burito 가을 배경 */
-.menu-item.sushi-burito {
-  background: url('https://images.unsplash.com/photo-1501973801540-537f08ccae7e?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
-}
-.menu-item.sushi-burito img {
-  background: transparent;
-}
-.menu-item.sushi-burito h3 {
-  margin-top: 10px;
-}
 </style>
 </head>
 <body>
@@ -84,7 +73,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <section id="menu">
   <h2 class="section-title">Popular Items</h2>
   <div class="menu-grid">
-    <div class="menu-item sushi-burito">
+    <div class="menu-item">
       <img src="borito.webp" loading="lazy" alt="Sushi Burito">
       <div><h3>🌯 Sushi Burito</h3></div>
     </div>
@@ -102,7 +91,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
-    <!-- Contact Form -->
     <form action="https://formsubmit.co/koseouk@gmail.com" method="POST" style="flex:1; min-width:300px;">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
@@ -134,7 +122,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <button type="submit">Send Message</button>
     </form>
 
-    <!-- Map -->
     <div id="map"></div>
   </div>
 </section>
@@ -150,9 +137,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
 
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 <script>
 // Date min/max
 const eventDate = document.getElementById('eventDate');
@@ -180,17 +165,12 @@ phoneInput.addEventListener('input', e => {
 });
 
 // Leaflet Map
-const truckLatLng = [34.0195, -118.4912]; // Santa Monica
+const truckLatLng = [34.0195, -118.4912]; 
 const map = L.map('map').setView(truckLatLng, 12);
-
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
   attribution:'&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
 }).addTo(map);
-
-// Truck Marker
 L.marker(truckLatLng).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK").openPopup();
-
-// Visitor Location
 if(navigator.geolocation){
   navigator.geolocation.getCurrentPosition(pos=>{
     const userLatLng = [pos.coords.latitude, pos.coords.longitude];
@@ -200,7 +180,7 @@ if(navigator.geolocation){
   });
 }
 
-// Scroll to map when menu clicked
+// Scroll to map
 document.getElementById('scroll-map').addEventListener('click', ()=>{
   document.getElementById('map').scrollIntoView({behavior:'smooth'});
 });
