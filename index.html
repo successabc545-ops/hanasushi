@@ -139,65 +139,22 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-// Date min/max
-const eventDate = document.getElementById('eventDate');
-const today = new Date();
-eventDate.min = today.toISOString().split('T')[0];
-const nextYear = new Date(today);
-nextYear.setFullYear(nextYear.getFullYear() + 1);
-eventDate.max = nextYear.toISOString().split('T')[0];
+// Leaflet Map
+const truckLatLng = [34.0840, -118.0410]; // 시미벨리 좌표
+const map = L.map('map').setView(truckLatLng, 14);
 
-// Phone auto-format
-const phoneInput = document.getElementById('phoneFull');
-phoneInput.addEventListener('input', e => {
-  let val = e.target.value.replace(/\D/g,''); 
-  if(val.length > 10) val = val.slice(0,10);
-  if(val.length > 6){
-    val = `(${val.slice(0,3)})${val.slice(3,6)}-${val.slice(6)}`;
-  } else if(val.length > 3){
-    val = `(${val.slice(0,3)})${val.slice(3)}`;
-    return;
-  } else if(val.length > 0){
-    e.target.value = `(${val}`;
-    return;
-  }
-  e.target.value = val;
-});
-
-// Leaflet Map - 현재 위치로 핀 찍기
-const defaultLatLng = [34.0195, -118.4912]; // 기본 좌표 (LA 예시)
-const map = L.map('map').setView(defaultLatLng, 12);
-
+// OpenStreetMap 타일
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+  attribution:'&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// 기본 핀 표시
-let truckMarker = L.marker(defaultLatLng)
-  .addTo(map)
-  .bindPopup("📍 Hana Sushi Food Truck – Current Location")
-  .openPopup();
-
-// GPS 허용되면 현재 위치 가져오기
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(
-    pos => {
-      const userLatLng = [pos.coords.latitude, pos.coords.longitude];
-
-      // 핀 위치를 현재 위치로 변경
-      truckMarker.setLatLng(userLatLng)
-                  .setPopupContent("📍 Hana Sushi Food Truck – Current Location")
-                  .openPopup();
-
-      // 지도 중심 이동
-      map.setView(userLatLng, 14);
-    },
-    err => {
-      console.warn(`GPS 가져오기 실패: ${err.message}`);
-    },
-    { enableHighAccuracy: true }
-  );
-}
+// 현재 위치 핀 (초록색)
+L.marker(truckLatLng, {
+  icon: L.icon({
+    iconUrl:'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    iconSize:[32,32]
+  })
+}).addTo(map).bindPopup("📍 Hana Sushi Food Truck – Current Location").openPopup();
 
 // Scroll to map
 document.getElementById('scroll-map').addEventListener('click', ()=>{
