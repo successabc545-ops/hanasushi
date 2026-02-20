@@ -140,21 +140,30 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
 // Leaflet Map
-const truckLatLng = [34.0840, -118.0410]; // 시미벨리 좌표
-const map = L.map('map').setView(truckLatLng, 14);
-
-// OpenStreetMap 타일
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+const truckLatLng = [34.0195, -118.4912]; // 트럭 기본 좌표
+const map = L.map('map').setView(truckLatLng, 12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
   attribution:'&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// 현재 위치 핀 (초록색)
-L.marker(truckLatLng, {
-  icon: L.icon({
-    iconUrl:'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
-    iconSize:[32,32]
-  })
-}).addTo(map).bindPopup("📍 Hana Sushi Food Truck – Current Location").openPopup();
+// 트럭 마커
+L.marker(truckLatLng).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
+
+// 현재 위치 마커
+if(navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const userLatLng = [pos.coords.latitude, pos.coords.longitude];
+    L.marker(userLatLng,{
+      icon: L.icon({
+        iconUrl:'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+        iconSize:[32,32]
+      })
+    }).addTo(map).bindPopup("📍 Hana Sushi Food Truck – Current Location").openPopup();
+    map.fitBounds([truckLatLng,userLatLng]);
+  }, err => {
+    console.error("현재 위치를 가져올 수 없습니다:", err);
+  });
+}
 
 // Scroll to map
 document.getElementById('scroll-map').addEventListener('click', ()=>{
