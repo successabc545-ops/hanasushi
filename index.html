@@ -16,7 +16,7 @@ nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;jus
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
 nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
 nav a:hover{color:#ff2e2e;}
-.hero{height:100vh;background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center;}
+.hero{height:100vh;background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('borito.webp');background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center;}
 .hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
 .hero p{font-size:20px;margin:20px 0 35px;}
@@ -26,10 +26,10 @@ section{padding:100px 10%;}
 .section-title{font-size:38px;color:#ff2e2e;margin-bottom:20px;}
 .about{max-width:800px;line-height:1.8;font-size:18px;}
 .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
-.menu-item{background:#111;border-radius:15px;overflow:hidden;}
+.menu-item{background:#111;border-radius:15px;overflow:hidden;text-align:center;}
 .menu-item img{width:100%;height:200px;object-fit:cover;}
 .menu-item div{padding:15px;}
-.menu-item h3{color:#ffb703;margin-bottom:8px;}
+.menu-item h3{color:#ffb703;margin-top:10px;}
 .contact-box{max-width:500px;}
 .contact-box input,.contact-box textarea,.contact-box select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
 .contact-box button{padding:12px 28px;border:none;background:#ff2e2e;color:#fff;border-radius:8px;cursor:pointer;}
@@ -74,6 +74,10 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   <h2 class="section-title">Popular Items</h2>
   <div class="menu-grid">
     <div class="menu-item">
+      <img src="borito.webp" loading="lazy" alt="Sushi Burito">
+      <div><h3>🌯 Sushi Burito</h3></div>
+    </div>
+    <div class="menu-item">
       <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Spicy Tuna Roll">
       <div><h3>🔥 Spicy Tuna Roll</h3></div>
     </div>
@@ -81,17 +85,12 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <img src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Avocado Crunch Roll">
       <div><h3>🥑 Avocado Crunch Roll</h3></div>
     </div>
-    <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1617196034796-73c8e7c1b8b6?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Sushi Taco">
-      <div><h3>🌮 Sushi Taco</h3></div>
-    </div>
   </div>
 </section>
 
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
-    <!-- Contact Form -->
     <form action="https://formsubmit.co/koseouk@gmail.com" method="POST" style="flex:1; min-width:300px;">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
@@ -123,7 +122,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <button type="submit">Send Message</button>
     </form>
 
-    <!-- Map -->
     <div id="map"></div>
   </div>
 </section>
@@ -139,9 +137,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
 
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 <script>
 // Date min/max
 const eventDate = document.getElementById('eventDate');
@@ -168,29 +164,30 @@ phoneInput.addEventListener('input', e => {
   e.target.value = val;
 });
 
-// Leaflet Map
-const truckLatLng = [34.0195, -118.4912]; // Santa Monica
-const map = L.map('map').setView(truckLatLng, 12);
-
-// Map Tiles
+// ================================
+// 📍 Hana Sushi Food Truck 핀 = 현재 위치
+// ================================
+const map = L.map('map').setView([0,0], 14);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-  attribution:'&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+  attribution:'&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-// Truck Marker
-L.marker(truckLatLng).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK").openPopup();
-
-// Visitor Location
 if(navigator.geolocation){
   navigator.geolocation.getCurrentPosition(pos=>{
-    const userLatLng = [pos.coords.latitude, pos.coords.longitude];
-    L.marker(userLatLng,{icon:L.icon({iconUrl:'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',iconSize:[32,32]})})
-      .addTo(map).bindPopup("You are here");
-    map.fitBounds([truckLatLng,userLatLng]);
+    const truckLatLng = [pos.coords.latitude, pos.coords.longitude];
+    L.marker(truckLatLng)
+      .addTo(map)
+      .bindPopup("📍 Hana Sushi Food Truck – Current Location")
+      .openPopup();
+    map.setView(truckLatLng, 14);
+  }, err=>{
+    console.error("위치 정보를 가져올 수 없습니다.", err);
   });
+} else {
+  alert("GPS를 지원하지 않는 브라우저입니다.");
 }
 
-// Scroll to map when menu clicked
+// Scroll to map
 document.getElementById('scroll-map').addEventListener('click', ()=>{
   document.getElementById('map').scrollIntoView({behavior:'smooth'});
 });
