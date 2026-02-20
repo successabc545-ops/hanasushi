@@ -39,6 +39,16 @@ section{padding:100px 10%;}
 .qr-section h2{font-size:32px;color:#ff2e2e;margin-bottom:15px;}
 .qr-section img{width:250px;height:250px;border:5px solid #ff2e2e;border-radius:15px;}
 footer{text-align:center;padding:30px;background:#111;color:#777;}
+
+/* Sushi Burito 배경 이미지 */
+.popular-item.popular-burito {
+  width: 100%;
+  height: 200px;
+  background-image: url('BURITO.WPB'); /* BURITO.WPB 그대로 사용 */
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+}
 </style>
 </head>
 <body>
@@ -74,8 +84,8 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   <h2 class="section-title">Popular Items</h2>
   <div class="menu-grid">
     <div class="menu-item">
-      <!-- Sushi Burito 이미지 밝기 통일 -->
-      <img src="borito.webp" loading="lazy" alt="Sushi Burito" style="filter: brightness(0.8);">
+      <!-- Sushi Burito 이미지 -> 배경 div로 변경 -->
+      <div class="popular-item popular-burito"></div>
       <div><h3>🌯 Sushi Burito</h3></div>
     </div>
     <div class="menu-item">
