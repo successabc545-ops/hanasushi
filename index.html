@@ -164,20 +164,39 @@ phoneInput.addEventListener('input', e => {
   e.target.value = val;
 });
 
-// Leaflet Map
-const truckLatLng = [34.0195, -118.4912]; 
-const map = L.map('map').setView(truckLatLng, 12);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-  attribution:'&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+// Leaflet Map - 현재 위치로 핀 찍기
+const defaultLatLng = [34.0195, -118.4912]; // 기본 좌표 (LA 예시)
+const map = L.map('map').setView(defaultLatLng, 12);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
 }).addTo(map);
-L.marker(truckLatLng).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK").openPopup();
-if(navigator.geolocation){
-  navigator.geolocation.getCurrentPosition(pos=>{
-    const userLatLng = [pos.coords.latitude, pos.coords.longitude];
-    L.marker(userLatLng,{icon:L.icon({iconUrl:'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',iconSize:[32,32]})})
-      .addTo(map).bindPopup("You are here");
-    map.fitBounds([truckLatLng,userLatLng]);
-  });
+
+// 기본 핀 표시
+let truckMarker = L.marker(defaultLatLng)
+  .addTo(map)
+  .bindPopup("📍 Hana Sushi Food Truck – Current Location")
+  .openPopup();
+
+// GPS 허용되면 현재 위치 가져오기
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const userLatLng = [pos.coords.latitude, pos.coords.longitude];
+
+      // 핀 위치를 현재 위치로 변경
+      truckMarker.setLatLng(userLatLng)
+                  .setPopupContent("📍 Hana Sushi Food Truck – Current Location")
+                  .openPopup();
+
+      // 지도 중심 이동
+      map.setView(userLatLng, 14);
+    },
+    err => {
+      console.warn(`GPS 가져오기 실패: ${err.message}`);
+    },
+    { enableHighAccuracy: true }
+  );
 }
 
 // Scroll to map
