@@ -137,7 +137,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
 // Date min/max
 const eventDate = document.getElementById('eventDate');
@@ -164,21 +163,24 @@ phoneInput.addEventListener('input', e => {
   e.target.value = val;
 });
 
-// Leaflet Map
-const truckLatLng = [34.0195, -118.4912]; 
-const map = L.map('map').setView(truckLatLng, 12);
+// ================================
+// 📍 HANA SUSHI FOOD TRUCK LOCATION
+// ================================
+
+// 오늘 트럭 위치 (바뀌면 여기만 수정)
+const truckLatLng = [34.0195, -118.4912];
+
+const map = L.map('map').setView(truckLatLng, 14);
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-  attribution:'&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+  attribution:'&copy; OpenStreetMap contributors'
 }).addTo(map);
-L.marker(truckLatLng).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK").openPopup();
-if(navigator.geolocation){
-  navigator.geolocation.getCurrentPosition(pos=>{
-    const userLatLng = [pos.coords.latitude, pos.coords.longitude];
-    L.marker(userLatLng,{icon:L.icon({iconUrl:'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',iconSize:[32,32]})})
-      .addTo(map).bindPopup("You are here");
-    map.fitBounds([truckLatLng,userLatLng]);
-  });
-}
+
+// 🔴 트럭 위치만 표시
+L.marker(truckLatLng)
+  .addTo(map)
+  .bindPopup("📍 Hana Sushi Food Truck – Current Location")
+  .openPopup();
 
 // Scroll to map
 document.getElementById('scroll-map').addEventListener('click', ()=>{
