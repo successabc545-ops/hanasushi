@@ -103,7 +103,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <label for="guests">Number of Guests (required)</label>
       <input type="number" id="guests" name="number_of_guests" min="1" required>
 
-      <!-- ✅ 추가된 부분 -->
       <label for="budget">Budget per person ($)</label>
       <input type="number" id="budget" name="budget_per_person" placeholder="e.g. 20" min="1" required>
 
@@ -130,6 +129,8 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
       <input type="hidden" name="_subject" value="New HANA SUSHI Inquiry">
       <input type="hidden" name="_captcha" value="false">
+      <!-- ✅ 추가된 부분: 제출 후 홈페이지로 이동 -->
+      <input type="hidden" name="_next" value="https://successabc545-ops.github.io/">
       <button type="submit">Send Message</button>
     </form>
 
