@@ -4,132 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HANA SUSHI FOOD TRUCK</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
-
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:rgba(0,0,0,0.85);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 40px;
-  z-index:1000;
-}
+nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;justify-content:space-between;align-items:center;padding:15px 40px;z-index:1000;}
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
-nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;}
+nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
 nav a:hover{color:#ff2e2e;}
-
-/* ✅ HERO 배경 크기 조절 완료 */
-.hero{
-  height:70vh;              /* ← 핵심 */
-  min-height:520px;         /* 너무 작아지지 않게 */
-  background:
-    linear-gradient(120deg,
-      rgba(0,0,0,0.75),
-      rgba(255,0,0,0.35)
-    ),
-    url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-.hero h1{font-size:56px;letter-spacing:4px;}
+.hero{height:100vh;background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center;}
+.hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
 .hero p{font-size:20px;margin:20px 0 35px;}
-
+.hero button{padding:14px 35px;border:none;background:#ff2e2e;color:#fff;font-size:16px;border-radius:8px;cursor:pointer;}
+.hero button:hover{background:#ffb703;color:#000;}
 section{padding:100px 10%;}
 .section-title{font-size:38px;color:#ff2e2e;margin-bottom:20px;}
 .about{max-width:800px;line-height:1.8;font-size:18px;}
-
-.menu-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px;
-}
-.menu-item{
-  background:#111;
-  border-radius:15px;
-  overflow:hidden;
-}
-.menu-item img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+.menu-item{background:#111;border-radius:15px;overflow:hidden;}
+.menu-item img{width:100%;height:200px;object-fit:cover;}
 .menu-item div{padding:15px;}
-.menu-item h3{color:#ffb703;}
-
-.menu-tight{margin-top:20px;}
-#menu{padding:60px 10%;}
-
+.menu-item h3{color:#ffb703;margin-bottom:8px;}
 .contact-box{max-width:500px;}
-.contact-box input,
-.contact-box textarea,
-.contact-box select{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border:none;
-  border-radius:6px;
-}
-.contact-box button{
-  padding:12px 28px;
-  border:none;
-  background:#ff2e2e;
-  color:#fff;
-  border-radius:8px;
-  cursor:pointer;
-}
-.contact-box button:hover{
-  background:#ffb703;
-  color:#000;
-}
-
-#map{
-  width:100%;
-  height:400px;
-  border-radius:10px;
-  margin-top:20px;
-}
-
-.qr-section{
-  background:#111;
-  text-align:center;
-  padding:60px 20px;
-}
-.qr-section h2{
-  font-size:32px;
-  color:#ff2e2e;
-  margin-bottom:15px;
-}
-.qr-section img{
-  width:250px;
-  height:250px;
-  border:5px solid #ff2e2e;
-  border-radius:15px;
-}
-
-footer{
-  text-align:center;
-  padding:30px;
-  background:#111;
-  color:#777;
-}
+.contact-box input,.contact-box textarea,.contact-box select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
+.contact-box button{padding:12px 28px;border:none;background:#ff2e2e;color:#fff;border-radius:8px;cursor:pointer;}
+.contact-box button:hover{background:#ffb703;color:#000;}
+#map{width:100%;height:400px;border-radius:10px;margin-top:20px;}
+.qr-section{background:#111;text-align:center;padding:60px 20px;}
+.qr-section h2{font-size:32px;color:#ff2e2e;margin-bottom:15px;}
+.qr-section img{width:250px;height:250px;border:5px solid #ff2e2e;border-radius:15px;}
+footer{text-align:center;padding:30px;background:#111;color:#777;}
 </style>
 </head>
-
 <body>
 
 <nav>
@@ -139,6 +49,7 @@ footer{
     <a href="#about">Story</a>
     <a href="#menu">Menu</a>
     <a href="#contact">Contact</a>
+    <a id="scroll-map">Current Food Truck Location</a>
     <a href="#qr">QR</a>
   </div>
 </nav>
@@ -146,7 +57,7 @@ footer{
 <section class="hero" id="home">
   <div>
     <h1>HANA SUSHI</h1>
-    <h2>FOOD TRUCK (213) 793-9978</h2>
+    <h2>FOOD TRUCK(213)793-9978</h2>
     <p>🔥 Japanese Street Sushi • Bold Flavors on Wheels</p>
   </div>
 </section>
@@ -161,33 +72,80 @@ footer{
 
 <section id="menu">
   <h2 class="section-title">Popular Food</h2>
-
   <div class="menu-grid">
     <div class="menu-item">
-      <img src="1.Burito.webp">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
+
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80" loading="lazy">
       <div><h3>🌯 Burito</h3></div>
     </div>
     <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80">
-      <div><h3>🌯 Burito</h3></div>
-    </div>
-    <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?auto=format&fit=crop&w=800&q=80">
+      <img src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?auto=format&fit=crop&w=800&q=80" loading="lazy">
       <div><h3>🥑 Avocado Crunch Roll</h3></div>
     </div>
   </div>
+</section>
+<section id="menu">
+  <h2 class="section-title">Popular Food</h2>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
 
-  <div class="menu-grid menu-tight">
     <div class="menu-item">
-      <img src="1.Burito.webp">
+      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80" loading="lazy">
       <div><h3>🌯 Burito</h3></div>
     </div>
     <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80">
+      <img src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?auto=format&fit=crop&w=800&q=80" loading="lazy">
+      <div><h3>🥑 Avocado Crunch Roll</h3></div>
+    </div>
+  </div>
+</section>
+<section id="menu">
+  <h2 class="section-title">Popular Food</h2>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
+
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80" loading="lazy">
       <div><h3>🌯 Burito</h3></div>
     </div>
     <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?auto=format&fit=crop&w=800&q=80">
+      <img src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?auto=format&fit=crop&w=800&q=80" loading="lazy">
+      <div><h3>🥑 Avocado Crunch Roll</h3></div>
+    </div>
+  </div>
+</section>
+<section id="menu">
+  <h2 class="section-title">Popular Food</h2>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
+
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80" loading="lazy">
+      <div><h3>🌯 Burito</h3></div>
+    </div>
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?auto=format&fit=crop&w=800&q=80" loading="lazy">
+      <div><h3>🥑 Avocado Crunch Roll</h3></div>
+    </div>
+  </div>
+</section>
+<section id="menu">
+  <h2 class="section-title">Popular Food</h2>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
+
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80" loading="lazy">
+      <div><h3>🌯 Burito</h3></div>
+    </div>
+    <div class="menu-item">
+      <img src="https://images.unsplash.com/photo-1607305387299-a3d9611cd469?auto=format&fit=crop&w=800&q=80" loading="lazy">
       <div><h3>🥑 Avocado Crunch Roll</h3></div>
     </div>
   </div>
@@ -195,14 +153,58 @@ footer{
 
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
-  <div class="contact-box">
+  <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
+
+    <form action="https://formsubmit.co/koseouk@gmail.com" method="POST" style="flex:1; min-width:300px;">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+
+      <label for="eventDate">Date of Event (required)</label>
+      <input type="date" id="eventDate" name="event_date" required>
+
+      <label for="guests">Number of Guests (required)</label>
+      <input type="number" id="guests" name="number_of_guests" min="1" required>
+
+      <!-- ✅ 추가된 부분 -->
+      <label for="budget">Budget per person ($)</label>
+      <input type="number" id="budget" name="budget_per_person" placeholder="e.g. 20" min="1" required>
+
+      <label for="commMethod">Preferred Communication Method (required)</label>
+      <select id="commMethod" name="preferred_communication" required>
+        <option value="" disabled selected>Choose One</option>
+        <option value="Phone Call">Phone Call</option>
+        <option value="Email">Email</option>
+      </select>
+
+      <label for="heardAbout">How Did You Hear About Us? Select an option</label>
+      <select id="heardAbout" name="heard_about" required>
+        <option value="" disabled selected>Choose One</option>
+        <option value="Google Search">Google Search</option>
+        <option value="Ate at the Truck">Ate at the Truck</option>
+        <option value="Facebook">Facebook</option>
+        <option value="Twitter">Twitter</option>
+        <option value="Instagram">Instagram</option>
+        <option value="LinkedIn">LinkedIn</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
+
+      <input type="hidden" name="_subject" value="New HANA SUSHI Inquiry">
+      <input type="hidden" name="_captcha" value="false">
+      <button type="submit">Send Message</button>
+    </form>
+
     <div id="map"></div>
   </div>
 </section>
 
 <section id="qr" class="qr-section">
   <h2>Scan & Visit Our Site</h2>
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://successabc545-ops.github.io/hanasushi/">
+  <a href="https://successabc545-ops.github.io/hanasushi/" target="_blank">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://successabc545-ops.github.io/hanasushi/" loading="lazy">
+  </a>
 </section>
 
 <footer>
@@ -210,7 +212,21 @@ footer{
 </footer>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 <script>
+const eventDate=document.getElementById('eventDate');
+eventDate.min=new Date().toISOString().split('T')[0];
+
+const phoneInput=document.getElementById('phoneFull');
+phoneInput.addEventListener('input',e=>{
+let v=e.target.value.replace(/\D/g,'');
+if(v.length>10)v=v.slice(0,10);
+if(v.length>6)v=`(${v.slice(0,3)})${v.slice(3,6)}-${v.slice(6)}`;
+else if(v.length>3)v=`(${v.slice(0,3)})${v.slice(3)}`;
+else if(v.length>0)v=`(${v}`;
+e.target.value=v;
+});
+
 const map=L.map('map').setView([34.0195,-118.4912],12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 L.marker([34.0195,-118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
