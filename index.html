@@ -192,7 +192,7 @@ scrollMapBtn.addEventListener('click', () => {
             geoAlertDiv.style.display = 'none';
             const latlng = [pos.coords.latitude, pos.coords.longitude];
             map.flyTo(latlng, 16);
-            L.marker(latlng).addTo(map).bindPopup("You are here").openPopup();
+            L.marker(latlng).addTo(map).bindPopup("We are here").openPopup();
             L.circle(latlng, pos.coords.accuracy / 2).addTo(map);
         }, err => {
             geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
