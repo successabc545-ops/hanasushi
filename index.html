@@ -87,7 +87,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <img src="Smoked_Burito.webp" loading="lazy"> <div><h3>🌯 Smoked Burito</h3></div> </div> 
     <div class="menu-item">
       <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
-    <!-- 나머지 메뉴 그대로 유지 -->
+    <!-- 메뉴 계속 동일 -->
   </div>
 </section>
 
@@ -142,7 +142,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 </footer>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 <script>
 // 날짜 제한
 const eventDate = document.getElementById('eventDate');
@@ -162,7 +161,9 @@ phoneInput.addEventListener('input', e => {
 // 지도 초기화
 const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
+
+// 기존 푸드트럭 마커
+let foodTruckMarker = L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
 
 // 안내 박스
 let geoAlertDiv = document.createElement('div');
@@ -180,20 +181,24 @@ geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
-// 버튼 클릭 시 현재 위치로 이동 + 스크롤
+// 버튼 클릭 시 푸드트럭 위치 업데이트 + 스크롤
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
-    // 화면 스크롤
     document.getElementById('map').scrollIntoView({behavior: 'smooth'});
-    
-    // 위치 가져오기
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(pos => {
             geoAlertDiv.style.display = 'none';
             const latlng = [pos.coords.latitude, pos.coords.longitude];
+
+            // 푸드트럭 마커 이동
+            foodTruckMarker.setLatLng(latlng).bindPopup("Food Truck are here").openPopup();
+
             map.flyTo(latlng, 16);
-            L.marker(latlng).addTo(map).bindPopup("Foodtruck are here").openPopup();
+
+            // 정확도 원
             L.circle(latlng, pos.coords.accuracy / 2).addTo(map);
+
         }, err => {
             geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
             geoAlertDiv.style.display = 'block';
@@ -204,6 +209,5 @@ scrollMapBtn.addEventListener('click', () => {
     }
 });
 </script>
-
 </body>
 </html>
