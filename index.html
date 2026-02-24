@@ -34,17 +34,65 @@ section{padding:100px 10%;}
 .about{max-width:800px;line-height:1.8;font-size:18px;}
 .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
 .menu-item{background:#111;border-radius:15px;overflow:hidden;}
-.menu-item img{width:100%;height:200px;object-fit:cover;}
-.menu-item div{padding:15px;}
-.menu-item h3{color:#ffb703;margin-bottom:8px;}
+.menu-item img{width:100%;height:200px;object-fit:cover;transition: transform 0.3s ease, box-shadow 0.3s ease;border-radius:12px;}
+.menu-item img:hover{transform:scale(1.15);z-index:5;position:relative;box-shadow:0 0 20px rgba(255,46,46,0.6),0 0 40px rgba(255,193,7,0.4);}
+@media (max-width:768px){.menu-item img:active{transform:scale(1.1);box-shadow:0 0 15px rgba(255,46,46,0.5),0 0 25px rgba(255,193,7,0.3);}}
 .contact-box{max-width:500px;}
 .contact-box input,.contact-box textarea,.contact-box select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
 .contact-box button{padding:12px 28px;border:none;background:#ff2e2e;color:#fff;border-radius:8px;cursor:pointer;}
 .contact-box button:hover{background:#ffb703;color:#000;}
 #map{width:100%;height:400px;border-radius:10px;margin-top:20px;}
+@media (max-width:768px){#map{height:350px;}}
 .qr-section{background:#111;text-align:center;padding:60px 20px;}
 .qr-section h2{font-size:32px;color:#ff2e2e;margin-bottom:15px;}
-.qr-section img{width:250px;height:250px;border:5px solid #ff2e2e;border-radius:15px;}
+.qr-card{
+  background:linear-gradient(145deg,#111,#1c1c1c);
+  padding:28px;
+  border-radius:22px;
+  box-shadow:0 0 15px rgba(255,46,46,0.4),0 0 30px rgba(255,46,46,0.2);
+  border:1px solid rgba(255,255,255,0.1);
+  position:relative;
+  overflow:hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display:inline-block;
+}
+.qr-card:hover{transform:scale(1.05);box-shadow:0 0 25px rgba(255,46,46,0.6),0 0 50px rgba(255,46,46,0.4);}
+.neon-bg-soft::before{
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background: radial-gradient(circle at 25% 25%, rgba(255,46,46,0.15), rgba(255,193,7,0.1), rgba(255,140,0,0.05), transparent);
+  animation: neonSoftBlink 3.5s infinite alternate;
+  z-index:0;
+}
+@keyframes neonSoftBlink{0%{opacity:0.2;transform:scale(1);}50%{opacity:0.35;transform:scale(1.02);}100%{opacity:0.2;transform:scale(1);}}
+.qr-main{
+  position:relative;
+  z-index:2;
+  background:#fff;
+  padding:14px;
+  border-radius:18px;
+  width:260px;
+  height:260px;
+  border:5px solid #ff2e2e;
+  display:block;
+  margin:0 auto;
+}
+.qr-logo{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:50px;
+  height:50px;
+  border-radius:12px;
+  border:2px solid #ff2e2e;
+  box-shadow:0 0 12px #ff2e2e,0 0 20px rgba(255,46,46,0.5);
+  z-index:3;
+}
 footer{text-align:center;padding:30px;background:#111;color:#777;}
 </style>
 </head>
@@ -81,28 +129,9 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <section id="menu">
   <h2 class="section-title">Popular Food</h2>
   <div class="menu-grid">
-    <div class="menu-item">
-      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito 12.95</h3></div> </div> 
-    <div class="menu-item">
-      <img src="Smoked_Burito.webp" loading="lazy"> <div><h3>🌯 Smoked Burito</h3></div> </div> 
-    <div class="menu-item">
-      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
-    <div class="menu-item">
-      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
-    <div class="menu-item">
-      <img src="Smoked_Burito.webp" loading="lazy"> <div><h3>🌯 Smoked Burito</h3></div> </div> 
-    <div class="menu-item">
-      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
-     <div class="menu-item">
-      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
-    <div class="menu-item">
-      <img src="Smoked_Burito.webp" loading="lazy"> <div><h3>🌯 Smoked Burito</h3></div> </div> 
-    <div class="menu-item">
-      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
-    
-    
-    
-    <!-- 메뉴 계속 동일 -->
+    <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
+    <div class="menu-item"><img src="Smoked_Burito.webp" loading="lazy"><div><h3>🌯 Smoked Burito</h3></div></div>
+    <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
   </div>
 </section>
 
@@ -141,133 +170,24 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <input type="hidden" name="_captcha" value="false">
       <button type="submit">Send Message</button>
     </form>
+
+    <!-- ✅ 지도 div 반드시 존재 -->
     <div id="map"></div>
+
   </div>
 </section>
 
-<!-- ===== QR SECTION ONLY (겹침 해결, 다른 건 건드리지 않음) ===== -->
-<!-- ===== QR SECTION ONLY (은은한 네온 깜빡임 적용, 다른 건 그대로) ===== -->
 <section id="qr" class="qr-section">
   <h2>Scan & Visit Our Site</h2>
-  <div class="qr-card neon-bg-soft" style="position:relative; display:inline-block;">
+  <div class="qr-card neon-bg-soft">
     <a href="https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" target="_blank">
-      <!-- QR 코드 -->
-      <img class="qr-main" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" 
-           loading="lazy" alt="HANA SUSHI QR Code">
-      <!-- 중앙 로고 -->
-     
+      <img class="qr-main" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" loading="lazy" alt="HANA SUSHI QR Code">
+      <img class="qr-logo" src="https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=80&q=80" alt="HANA SUSHI Logo">
     </a>
-    <p>HANA SUSHI FOOD TRUCK</p>
   </div>
 </section>
 
-<style>
-===================================================================================================================================================================
-/* 메뉴 이미지 확대 + 네온 효과 */
-.menu-item img{
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 부드러운 확대 + 그림자 */
-  border-radius:12px; /* 약간 둥글게 */
-}
-
-.menu-item img:hover{
-  transform: scale(1.15); /* 15% 확대 */
-  z-index:5;
-  position: relative;
-  box-shadow: 0 0 20px rgba(255,46,46,0.6), 0 0 40px rgba(255,193,7,0.4); /* 붉은/노란 네온 느낌 */
-}
-
-/* 모바일 터치 시 살짝 확대 */
-@media (max-width:768px){
-  .menu-item img:active{
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(255,46,46,0.5), 0 0 25px rgba(255,193,7,0.3);
-  }
-}
-====================================================================================================================================================================
-  /* QR 카드 */
-.qr-card{
-  background:linear-gradient(145deg,#111,#1c1c1c);
-  padding:28px;
-  border-radius:22px;
-  box-shadow:0 0 15px rgba(255,46,46,0.4),0 0 30px rgba(255,46,46,0.2);
-  border:1px solid rgba(255,255,255,0.1);
-  position:relative;
-  overflow:hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.qr-card:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 25px rgba(255,46,46,0.6),0 0 50px rgba(255,46,46,0.4);
-}
-
-/* 은은한 깜빡이는 네온 배경 */
-.neon-bg-soft::before{
-  content:'';
-  position:absolute;
-  top:-50%;
-  left:-50%;
-  width:200%;
-  height:200%;
-  background: radial-gradient(circle at 25% 25%, rgba(255,46,46,0.15), rgba(255,193,7,0.1), rgba(255,140,0,0.05), transparent);
-  animation: neonSoftBlink 3.5s infinite alternate;
-  z-index:0;
-}
-
-@keyframes neonSoftBlink{
-  0%{opacity:0.2; transform:scale(1);}
-  50%{opacity:0.35; transform:scale(1.02);}
-  100%{opacity:0.2; transform:scale(1);}
-}
-
-/* QR 메인 이미지 */
-.qr-main{
-  position:relative;
-  z-index:2;
-  background:#fff;
-  padding:14px;
-  border-radius:18px;
-  width:260px;
-  height:260px;
-  border:5px solid #ff2e2e;
-  display:block;
-  margin:0 auto;
-}
-
-/* QR 중앙 로고 */
-.qr-logo{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:50px;
-  height:50px;
-  border-radius:12px;
-  border:2px solid #ff2e2e;
-  box-shadow:0 0 12px #ff2e2e,0 0 20px rgba(255,46,46,0.5);
-  z-index:3;
-}
-
-/* 텍스트 */
-.qr-card p{
-  position:relative;
-  z-index:2;
-  margin-top:20px;
-  font-size:13px;
-  letter-spacing:2px;
-  color:#bbb;
-  text-align:center;
-}
-
-/* 모바일 대응 */
-@media (max-width:768px){
-  .qr-section h2{font-size:26px;}
-  .qr-main{width:300px;height:300px;}
-  .qr-logo{width:60px;height:60px;}
-}
-</style>
-<!-- ===== QR SECTION 끝 (겹침 해결, 다른 건 건드리지 않음) ===== -->  
-  <footer>
+<footer>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
 
@@ -292,10 +212,10 @@ phoneInput.addEventListener('input', e => {
 const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-// 기존 푸드트럭 마커
+// 푸드트럭 마커
 let foodTruckMarker = L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
 
-// 안내 박스
+// 위치 안내 박스
 let geoAlertDiv = document.createElement('div');
 geoAlertDiv.style.position = 'absolute';
 geoAlertDiv.style.top = '10px';
@@ -310,35 +230,34 @@ geoAlertDiv.style.display = 'none';
 geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
-============================================================================================================================================================
-// 버튼 클릭 시 푸드트럭 위치 업데이트 + 스크롤
+
+// Current Food Truck Location 버튼 클릭
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
     document.getElementById('map').scrollIntoView({behavior: 'smooth'});
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(pos => {
-            geoAlertDiv.style.display = 'none';
-            const latlng = [pos.coords.latitude, pos.coords.longitude];
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(pos=>{
+            geoAlertDiv.style.display='none';
+            const latlng=[pos.coords.latitude,pos.coords.longitude];
 
-            // 푸드트럭 마커 이동
+            // 마커 위치 이동
             foodTruckMarker.setLatLng(latlng).bindPopup("Food Truck are here").openPopup();
 
-            map.flyTo(latlng, 16);
+            map.flyTo(latlng,16);
 
             // ⚠ 정확도 원 제거
-            // L.circle(latlng, pos.coords.accuracy / 2).addTo(map); 이것 지워짐 그럼면 원영이 없어짐
+            // L.circle(latlng, pos.coords.accuracy / 2).addTo(map);
 
-        }, err => {
-            geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
-            geoAlertDiv.style.display = 'block';
+        },err=>{
+            geoAlertDiv.innerText="⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
+            geoAlertDiv.style.display='block';
         });
-    } else {
-        geoAlertDiv.innerText = "⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
-        geoAlertDiv.style.display = 'block';
+    } else{
+        geoAlertDiv.innerText="⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
+        geoAlertDiv.style.display='block';
     }
 });
-=======================================================================================================================================================================
 </script>
 </body>
 </html>
