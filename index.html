@@ -162,7 +162,26 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 </section>
 
 <style>
-/* QR 카드 */
+===================================================================================================================================================================
+ /* 메뉴 이미지 확대 효과 */
+.menu-item img{
+  transition: transform 0.3s ease; /* 부드러운 확대 */
+}
+
+.menu-item img:hover{
+  transform: scale(1.15); /* 15% 확대 */
+  z-index:5; /* 겹침 문제 방지 */
+  position: relative;
+}
+
+/* 모바일에서 터치 시 살짝 확대 */
+@media (max-width:768px){
+  .menu-item img:active{
+    transform: scale(1.1);
+  }
+} 
+====================================================================================================================================================================
+  /* QR 카드 */
 .qr-card{
   background:linear-gradient(145deg,#111,#1c1c1c);
   padding:28px;
