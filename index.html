@@ -310,7 +310,7 @@ geoAlertDiv.style.display = 'none';
 geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
-
+============================================================================================================================================================
 // 버튼 클릭 시 푸드트럭 위치 업데이트 + 스크롤
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
@@ -327,7 +327,7 @@ scrollMapBtn.addEventListener('click', () => {
             map.flyTo(latlng, 16);
 
             // ⚠ 정확도 원 제거
-            // L.circle(latlng, pos.coords.accuracy / 2).addTo(map);
+            // L.circle(latlng, pos.coords.accuracy / 2).addTo(map); 이것 지워짐 그럼면 원영이 없어짐
 
         }, err => {
             geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
@@ -338,6 +338,7 @@ scrollMapBtn.addEventListener('click', () => {
         geoAlertDiv.style.display = 'block';
     }
 });
+=======================================================================================================================================================================
 </script>
 </body>
 </html>
