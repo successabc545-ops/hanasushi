@@ -326,8 +326,8 @@ scrollMapBtn.addEventListener('click', () => {
 
             map.flyTo(latlng, 16);
 
-            // 정확도 원
-            L.circle(latlng, pos.coords.accuracy / 2).addTo(map);
+            // ⚠ 정확도 원 제거
+            // L.circle(latlng, pos.coords.accuracy / 2).addTo(map);
 
         }, err => {
             geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
