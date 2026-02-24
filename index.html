@@ -146,6 +146,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 </section>
 
 <!-- ===== QR SECTION ONLY (겹침 해결, 다른 건 건드리지 않음) ===== -->
+<!-- ===== QR SECTION ONLY (겹침 완전 해결, 비율 자연스럽게) ===== -->
 <section id="qr" class="qr-section">
   <h2>Scan & Visit Our Site</h2>
   <div class="qr-card neon-bg-multi" style="position:relative; display:inline-block;">
@@ -179,23 +180,25 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 /* QR 중앙 로고 */
 .qr-logo{
   position:absolute;
-  top:50%;
+  top:48%; /* 살짝 위로 이동 */
   left:50%;
   transform:translate(-50%,-50%);
-  width:50px; /* QR 대비 작게 */
-  height:50px;
+  width:45px; /* QR 대비 약간 더 작게 */
+  height:45px;
   border-radius:12px;
   border:2px solid #ff2e2e;
   box-shadow:0 0 12px #ff2e2e,0 0 20px rgba(255,46,46,0.5);
   z-index:3;
 }
 
-/* 카드 패딩 조금 늘려 겹침 방지 */
+/* 카드 패딩 유지 */
 .qr-card{
-  padding:30px;
+  padding:28px;
 }
 </style>
-<footer>
+
+<!-- ===== QR SECTION 끝 (겹침 해결, 다른 건 건드리지 않음) ===== -->  
+  <footer>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
 
