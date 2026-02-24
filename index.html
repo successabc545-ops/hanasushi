@@ -149,11 +149,17 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <!-- ===== QR SECTION ONLY (은은한 네온 깜빡임 적용, 다른 건 그대로) ===== -->
 <section id="qr" class="qr-section">
   <h2>Scan & Visit Our Site</h2>
-  <a href="https://successabc545-ops.github.io/hanasushi/" target="_blank">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://successabc545-ops.github.io/hanasushi/" loading="lazy">
-  </a>
+  <div class="qr-card neon-bg-soft" style="position:relative; display:inline-block;">
+    <a href="https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" target="_blank">
+      <!-- QR 코드 -->
+      <img class="qr-main" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" 
+           loading="lazy" alt="HANA SUSHI QR Code">
+      <!-- 중앙 로고 -->
+     
+    </a>
+    <p>HANA SUSHI FOOD TRUCK</p>
+  </div>
 </section>
-
 
 <style>
 /* QR 카드 */
@@ -239,7 +245,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 }
 </style>
 <!-- ===== QR SECTION 끝 (겹침 해결, 다른 건 건드리지 않음) ===== -->  
-<!-- ===== QR SECTION 끝 (겹침 해결, 다른 건 건드리지 않음) ===== -->  
   <footer>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
@@ -283,7 +288,7 @@ geoAlertDiv.style.display = 'none';
 geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
-===============================================================================================================
+
 // 버튼 클릭 시 푸드트럭 위치 업데이트 + 스크롤
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
@@ -299,8 +304,8 @@ scrollMapBtn.addEventListener('click', () => {
 
             map.flyTo(latlng, 16);
 
-            // ⚠ 정확도 원 제거 → Circle 표시하지 않음
-            // L.circle(latlng, pos.coords.accuracy / 2).addTo(map);
+            // 정확도 원
+            L.circle(latlng, pos.coords.accuracy / 2).addTo(map);
 
         }, err => {
             geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
@@ -311,7 +316,6 @@ scrollMapBtn.addEventListener('click', () => {
         geoAlertDiv.style.display = 'block';
     }
 });
-============================================================================================================
 </script>
 </body>
 </html>
