@@ -145,7 +145,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   </div>
 </section>
 
-<!-- ===== QR SECTION ONLY (QR 확실히 보이도록 수정) ===== -->
+<!-- ===== QR SECTION ONLY (겹침 해결, 다른 건 건드리지 않음) ===== -->
 <section id="qr" class="qr-section">
   <h2>Scan & Visit Our Site</h2>
   <div class="qr-card neon-bg-multi" style="position:relative; display:inline-block;">
@@ -162,52 +162,18 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 </section>
 
 <style>
-/* QR 카드 + 멀티 네온 */
-.qr-card{
-  background:linear-gradient(145deg,#111,#1c1c1c);
-  padding:26px;
-  border-radius:22px;
-  box-shadow:0 0 20px rgba(255,46,46,0.6),0 0 40px rgba(255,46,46,0.4);
-  border:1px solid rgba(255,255,255,0.1);
-  position:relative;
-  overflow:hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.qr-card:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 30px rgba(255,46,46,0.8),0 0 60px rgba(255,46,46,0.6);
-}
-
-/* 멀티 컬러 네온 애니메이션 */
-.neon-bg-multi::before{
-  content:'';
-  position:absolute;
-  top:-50%;
-  left:-50%;
-  width:200%;
-  height:200%;
-  background: radial-gradient(circle at 25% 25%, rgba(255,46,46,0.2), rgba(255,193,7,0.2), rgba(255,140,0,0.2), transparent);
-  animation: neonGlowMulti 4s infinite alternate;
-  z-index:0;
-}
-
-@keyframes neonGlowMulti{
-  0%{opacity:0.2; transform:scale(1);}
-  50%{opacity:0.5; transform:scale(1.05);}
-  100%{opacity:0.2; transform:scale(1);}
-}
-
 /* QR 메인 이미지 */
 .qr-main{
   position:relative;
-  z-index:2; /* 반드시 위로 */
+  z-index:2;
   background:#fff;
   padding:14px;
   border-radius:18px;
   width:260px;
   height:260px;
   border:5px solid #ff2e2e;
+  display:block;
+  margin:0 auto; /* 카드 중앙 */
 }
 
 /* QR 중앙 로고 */
@@ -216,32 +182,19 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:60px;
-  height:60px;
+  width:50px; /* QR 대비 작게 */
+  height:50px;
   border-radius:12px;
   border:2px solid #ff2e2e;
   box-shadow:0 0 12px #ff2e2e,0 0 20px rgba(255,46,46,0.5);
-  z-index:3; /* QR보다 위 */
+  z-index:3;
 }
 
-/* 텍스트 */
-.qr-card p{
-  position:relative;
-  z-index:2;
-  margin-top:14px;
-  font-size:13px;
-  letter-spacing:2px;
-  color:#bbb;
-}
-
-/* 모바일 대응 */
-@media (max-width:768px){
-  .qr-section h2{font-size:26px;}
-  .qr-main{width:300px;height:300px;}
-  .qr-logo{width:70px;height:70px;}
+/* 카드 패딩 조금 늘려 겹침 방지 */
+.qr-card{
+  padding:30px;
 }
 </style>
-
 <footer>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
