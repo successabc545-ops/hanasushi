@@ -81,18 +81,6 @@ section{padding:100px 10%;}
   display:block;
   margin:0 auto;
 }
-.qr-logo{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:50px;
-  height:50px;
-  border-radius:12px;
-  border:2px solid #ff2e2e;
-  box-shadow:0 0 12px #ff2e2e,0 0 20px rgba(255,46,46,0.5);
-  z-index:3;
-}
 footer{text-align:center;padding:30px;background:#111;color:#777;}
 </style>
 </head>
@@ -126,6 +114,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   </p>
 </section>
 
+<!-- ========================= MENU SECTION ========================= -->
 <section id="menu">
   <h2 class="section-title">Popular Food</h2>
   <div class="menu-grid">
@@ -133,6 +122,136 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
     <div class="menu-item"><img src="Smoked_Burito.webp" loading="lazy"><div><h3>🌯 Smoked Burito</h3></div></div>
     <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
   </div>
+
+  <!-- ✅ 주문 + 수량 + 세금 + 이메일 전송 기능 -->
+  <div id="order-summary" style="margin:30px 0;padding:20px;background:#111;border-radius:15px;color:#fff;">
+    <h2 style="color:#ff2e2e;">Your Order</h2>
+    <div id="selected-items"></div>
+    <p>Subtotal: $<span id="subtotal">0.00</span></p>
+    <p>Tax (9.5%): $<span id="tax">0.00</span></p>
+    <p style="font-weight:700;">Total: $<span id="total">0.00</span></p>
+    <button id="send-order" style="padding:12px 28px;background:#ff2e2e;color:#fff;border:none;border-radius:8px;cursor:pointer;margin-top:10px;">Send Order via Email</button>
+  </div>
+
+  <style>
+    #selected-items button {
+      padding: 3px 10px;
+      border: none;
+      border-radius: 5px;
+      font-weight: 700;
+      color: #fff;
+      background: #ff2e2e;
+      transition: 0.2s;
+    }
+    #selected-items button:hover,
+    #send-order:hover {
+      background: #ffb703;
+      color: #000;
+    }
+  </style>
+
+  <script>
+    const menuPrices = {
+      "🌯 Burito": 12.00,
+      "🌯 Smoked Burito": 14.00
+    };
+
+    const selectedItems = {};
+
+    document.querySelectorAll('.menu-item').forEach(item=>{
+      const name = item.querySelector('h3').innerText;
+      item.style.cursor = 'pointer';
+      item.addEventListener('click', ()=>{
+        if(selectedItems[name]){
+          selectedItems[name]++;
+        } else {
+          selectedItems[name] = 1;
+        }
+        updateOrderSummary();
+      });
+    });
+
+    function updateOrderSummary(){
+      const selectedDiv = document.getElementById('selected-items');
+      selectedDiv.innerHTML = '';
+      let subtotal = 0;
+
+      for(const [name, qty] of Object.entries(selectedItems)){
+        const price = menuPrices[name] || 0;
+        subtotal += price * qty;
+
+        const itemLine = document.createElement('div');
+        itemLine.style.display = 'flex';
+        itemLine.style.justifyContent = 'space-between';
+        itemLine.style.alignItems = 'center';
+        itemLine.style.marginBottom = '8px';
+
+        const itemText = document.createElement('span');
+        itemText.innerText = `${name} x${qty} - $${(price*qty).toFixed(2)}`;
+
+        const btnContainer = document.createElement('span');
+        const minusBtn = document.createElement('button');
+        minusBtn.innerText = '−';
+        minusBtn.style.marginRight = '5px';
+        minusBtn.addEventListener('click', ()=>{
+          selectedItems[name]--;
+          if(selectedItems[name]<=0) delete selectedItems[name];
+          updateOrderSummary();
+        });
+
+        const plusBtn = document.createElement('button');
+        plusBtn.innerText = '+';
+        plusBtn.style.marginLeft = '5px';
+        plusBtn.addEventListener('click', ()=>{
+          selectedItems[name]++;
+          updateOrderSummary();
+        });
+
+        btnContainer.appendChild(minusBtn);
+        btnContainer.appendChild(plusBtn);
+
+        itemLine.appendChild(itemText);
+        itemLine.appendChild(btnContainer);
+
+        selectedDiv.appendChild(itemLine);
+      }
+
+      const tax = subtotal * 0.095;
+      const total = subtotal + tax;
+
+      document.getElementById('subtotal').innerText = subtotal.toFixed(2);
+      document.getElementById('tax').innerText = tax.toFixed(2);
+      document.getElementById('total').innerText = total.toFixed(2);
+    }
+
+    document.getElementById('send-order').addEventListener('click', ()=>{
+      if(Object.keys(selectedItems).length === 0){
+        alert("Please select at least one menu item before sending the order.");
+        return;
+      }
+
+      let emailBody = "HANA SUSHI Order:\n\n";
+      let subtotal = 0;
+      for(const [name, qty] of Object.entries(selectedItems)){
+        const price = menuPrices[name] || 0;
+        subtotal += price * qty;
+        emailBody += `${name} x${qty} - $${(price*qty).toFixed(2)}\n`;
+      }
+
+      const tax = subtotal * 0.095;
+      const total = subtotal + tax;
+
+      emailBody += `\nSubtotal: $${subtotal.toFixed(2)}\n`;
+      emailBody += `Tax (9.5%): $${tax.toFixed(2)}\n`;
+      emailBody += `Total: $${total.toFixed(2)}\n`;
+
+      const email = "koseouk@gmail.com";
+      const subject = encodeURIComponent("New HANA SUSHI Order");
+      const body = encodeURIComponent(emailBody);
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    });
+  </script>
+
 </section>
 
 <section id="contact">
@@ -182,7 +301,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   <div class="qr-card neon-bg-soft">
     <a href="https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" target="_blank">
       <img class="qr-main" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" loading="lazy" alt="HANA SUSHI QR Code">
-      <img class="qr-logo" src="https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=80&q=80" alt="HANA SUSHI Logo">
     </a>
   </div>
 </section>
@@ -246,9 +364,6 @@ scrollMapBtn.addEventListener('click', () => {
 
             map.flyTo(latlng,16);
 
-            // ⚠ 정확도 원 제거
-            // L.circle(latlng, pos.coords.accuracy / 2).addTo(map);
-
         },err=>{
             geoAlertDiv.innerText="⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
             geoAlertDiv.style.display='block';
@@ -259,5 +374,6 @@ scrollMapBtn.addEventListener('click', () => {
     }
 });
 </script>
+
 </body>
 </html>
