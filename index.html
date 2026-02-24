@@ -163,23 +163,26 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 <style>
 ===================================================================================================================================================================
- /* 메뉴 이미지 확대 효과 */
+/* 메뉴 이미지 확대 + 네온 효과 */
 .menu-item img{
-  transition: transform 0.3s ease; /* 부드러운 확대 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 부드러운 확대 + 그림자 */
+  border-radius:12px; /* 약간 둥글게 */
 }
 
 .menu-item img:hover{
   transform: scale(1.15); /* 15% 확대 */
-  z-index:5; /* 겹침 문제 방지 */
+  z-index:5;
   position: relative;
+  box-shadow: 0 0 20px rgba(255,46,46,0.6), 0 0 40px rgba(255,193,7,0.4); /* 붉은/노란 네온 느낌 */
 }
 
-/* 모바일에서 터치 시 살짝 확대 */
+/* 모바일 터치 시 살짝 확대 */
 @media (max-width:768px){
   .menu-item img:active{
     transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,46,46,0.5), 0 0 25px rgba(255,193,7,0.3);
   }
-} 
+}
 ====================================================================================================================================================================
   /* QR 카드 */
 .qr-card{
