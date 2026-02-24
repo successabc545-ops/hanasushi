@@ -44,41 +44,8 @@ section{padding:100px 10%;}
 #map{width:100%;height:400px;border-radius:10px;margin-top:20px;}
 .qr-section{background:#111;text-align:center;padding:60px 20px;}
 .qr-section h2{font-size:32px;color:#ff2e2e;margin-bottom:15px;}
+.qr-section img{width:250px;height:250px;border:5px solid #ff2e2e;border-radius:15px;}
 footer{text-align:center;padding:30px;background:#111;color:#777;}
-
-/* ===== QR 코드 관련 CSS (수정 + 빨간 테두리 적용) ===== */
-.qr-card{
-  display:inline-block;
-  background:linear-gradient(145deg,#111,#1c1c1c);
-  padding:26px;
-  border-radius:22px;
-  box-shadow:0 18px 40px rgba(0,0,0,0.6);
-  border:1px solid rgba(255,255,255,0.1);
-}
-
-.qr-card img{
-  background:#fff;
-  padding:14px;
-  border-radius:18px;
-  width:260px;
-  height:260px;
-  border:5px solid #ff2e2e; /* 빨간 테두리 적용 */
-}
-
-.qr-card p{
-  margin-top:14px;
-  font-size:13px;
-  letter-spacing:2px;
-  color:#bbb;
-}
-
-@media (max-width:768px){
-  .qr-section h2{font-size:26px;}
-  .qr-card img{
-    width:300px;
-    height:300px;
-  }
-}
 </style>
 </head>
 <body>
@@ -114,15 +81,28 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <section id="menu">
   <h2 class="section-title">Popular Food</h2>
   <div class="menu-grid">
-    <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
-    <div class="menu-item"><img src="Smoked_Burito.webp" loading="lazy"><div><h3>🌯 Smoked Burito</h3></div></div>
-    <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
-    <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
-    <div class="menu-item"><img src="Smoked_Burito.webp" loading="lazy"><div><h3>🌯 Smoked Burito</h3></div></div>
-    <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
-    <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
-    <div class="menu-item"><img src="Smoked_Burito.webp" loading="lazy"><div><h3>🌯 Smoked Burito</h3></div></div>
-    <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
+    <div class="menu-item">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
+    <div class="menu-item">
+      <img src="Smoked_Burito.webp" loading="lazy"> <div><h3>🌯 Smoked Burito</h3></div> </div> 
+    <div class="menu-item">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
+    <div class="menu-item">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
+    <div class="menu-item">
+      <img src="Smoked_Burito.webp" loading="lazy"> <div><h3>🌯 Smoked Burito</h3></div> </div> 
+    <div class="menu-item">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
+     <div class="menu-item">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
+    <div class="menu-item">
+      <img src="Smoked_Burito.webp" loading="lazy"> <div><h3>🌯 Smoked Burito</h3></div> </div> 
+    <div class="menu-item">
+      <img src="1.Burito.webp" loading="lazy"> <div><h3>🌯 Burito</h3></div> </div> 
+    
+    
+    
+    <!-- 메뉴 계속 동일 -->
   </div>
 </section>
 
@@ -165,15 +145,11 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   </div>
 </section>
 
-<!-- ===== QR SECTION ONLY (수정 + 빨간 테두리 적용) ===== -->
 <section id="qr" class="qr-section">
   <h2>Scan & Visit Our Site</h2>
-  <div class="qr-card">
-    <a href="https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" target="_blank">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" loading="lazy" alt="HANA SUSHI QR Code">
-    </a>
-    <p>HANA SUSHI FOOD TRUCK</p>
-  </div>
+  <a href="https://successabc545-ops.github.io/hanasushi/" target="_blank">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://successabc545-ops.github.io/hanasushi/" loading="lazy">
+  </a>
 </section>
 
 <footer>
@@ -182,7 +158,71 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-// (JS 부분은 네가 준 그대로, 단 1글자도 수정 안 함)
+// 날짜 제한
+const eventDate = document.getElementById('eventDate');
+eventDate.min = new Date().toISOString().split('T')[0];
+
+// 전화번호 자동 포맷
+const phoneInput = document.getElementById('phoneFull');
+phoneInput.addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g,'');
+    if(v.length>10) v = v.slice(0,10);
+    if(v.length>6) v = `(${v.slice(0,3)})${v.slice(3,6)}-${v.slice(6)}`;
+    else if(v.length>3) v = `(${v.slice(0,3)})${v.slice(3)}`;
+    else if(v.length>0) v = `(${v}`;
+    e.target.value = v;
+});
+
+// 지도 초기화
+const map = L.map('map').setView([34.0195, -118.4912], 12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+// 기존 푸드트럭 마커
+let foodTruckMarker = L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
+
+// 안내 박스
+let geoAlertDiv = document.createElement('div');
+geoAlertDiv.style.position = 'absolute';
+geoAlertDiv.style.top = '10px';
+geoAlertDiv.style.left = '50%';
+geoAlertDiv.style.transform = 'translateX(-50%)';
+geoAlertDiv.style.background = 'rgba(255,46,46,0.9)';
+geoAlertDiv.style.color = '#fff';
+geoAlertDiv.style.padding = '12px 20px';
+geoAlertDiv.style.borderRadius = '8px';
+geoAlertDiv.style.zIndex = '1001';
+geoAlertDiv.style.display = 'none';
+geoAlertDiv.style.fontWeight = '700';
+geoAlertDiv.innerText = '';
+document.body.appendChild(geoAlertDiv);
+
+// 버튼 클릭 시 푸드트럭 위치 업데이트 + 스크롤
+const scrollMapBtn = document.getElementById('scroll-map');
+scrollMapBtn.addEventListener('click', () => {
+    document.getElementById('map').scrollIntoView({behavior: 'smooth'});
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+            geoAlertDiv.style.display = 'none';
+            const latlng = [pos.coords.latitude, pos.coords.longitude];
+
+            // 푸드트럭 마커 이동
+            foodTruckMarker.setLatLng(latlng).bindPopup("Food Truck are here").openPopup();
+
+            map.flyTo(latlng, 16);
+
+            // 정확도 원
+            L.circle(latlng, pos.coords.accuracy / 2).addTo(map);
+
+        }, err => {
+            geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
+            geoAlertDiv.style.display = 'block';
+        });
+    } else {
+        geoAlertDiv.innerText = "⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
+        geoAlertDiv.style.display = 'block';
+    }
+});
 </script>
 </body>
 </html>
