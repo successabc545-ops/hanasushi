@@ -5,219 +5,100 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HANA SUSHI FOOD TRUCK</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
-nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;justify-content:space-between;align-items:center;padding:15px 40px;z-index:1000;}
-nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
-nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
-nav a:hover{color:#ff2e2e;}
-.hero{
-  height:60vh;
-  background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-.hero h1{font-size:70px;letter-spacing:5px;}
-.hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
-.hero p{font-size:20px;margin:20px 0 35px;}
-.hero button{padding:14px 35px;border:none;background:#ff2e2e;color:#fff;font-size:16px;border-radius:8px;cursor:pointer;}
-.hero button:hover{background:#ffb703;color:#000;}
-section{padding:100px 10%;}
-.section-title{font-size:38px;color:#ff2e2e;margin-bottom:20px;}
-.about{max-width:800px;line-height:1.8;font-size:18px;}
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
-.menu-item{background:#111;border-radius:15px;overflow:hidden;cursor:pointer;}
-.menu-item img{width:100%;height:200px;object-fit:cover;transition: transform 0.3s ease, box-shadow 0.3s ease;border-radius:12px;}
-.menu-item img:hover{transform:scale(1.15);z-index:5;position:relative;box-shadow:0 0 20px rgba(255,46,46,0.6),0 0 40px rgba(255,193,7,0.4);}
-@media (max-width:768px){.menu-item img:active{transform:scale(1.1);box-shadow:0 0 15px rgba(255,46,46,0.5),0 0 25px rgba(255,193,7,0.3);}}
-.contact-box{max-width:500px;}
-.contact-box input,.contact-box textarea,.contact-box select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
-.contact-box button{padding:12px 28px;border:none;background:#ff2e2e;color:#fff;border-radius:8px;cursor:pointer;}
-.contact-box button:hover{background:#ffb703;color:#000;}
-#map{width:100%;height:400px;border-radius:10px;margin-top:20px;}
-@media (max-width:768px){#map{height:350px;}}
-.qr-section{background:#111;text-align:center;padding:60px 20px;}
-.qr-section h2{font-size:32px;color:#ff2e2e;margin-bottom:15px;}
-.qr-card{
-  background:linear-gradient(145deg,#111,#1c1c1c);
-  padding:28px;
-  border-radius:22px;
-  box-shadow:0 0 15px rgba(255,46,46,0.4),0 0 30px rgba(255,46,46,0.2);
-  border:1px solid rgba(255,255,255,0.1);
-  position:relative;
-  overflow:hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display:inline-block;
-}
-.qr-card:hover{transform:scale(1.05);box-shadow:0 0 25px rgba(255,46,46,0.6),0 0 50px rgba(255,46,46,0.4);}
-.neon-bg-soft::before{
-  content:'';
-  position:absolute;
-  top:-50%;
-  left:-50%;
-  width:200%;
-  height:200%;
-  background: radial-gradient(circle at 25% 25%, rgba(255,46,46,0.15), rgba(255,193,7,0.1), rgba(255,140,0,0.05), transparent);
-  animation: neonSoftBlink 3.5s infinite alternate;
-  z-index:0;
-}
-@keyframes neonSoftBlink{0%{opacity:0.2;transform:scale(1);}50%{opacity:0.35;transform:scale(1.02);}100%{opacity:0.2;transform:scale(1);}}
-.qr-main{
-  position:relative;
-  z-index:2;
-  background:#fff;
-  padding:14px;
-  border-radius:18px;
-  width:260px;
-  height:260px;
-  border:5px solid #ff2e2e;
-  display:block;
-  margin:0 auto;
-}
-footer{text-align:center;padding:30px;background:#111;color:#777;}
-/* 주문 섹션 스타일 */
-#order-summary{
-  margin:30px 10%;
-  padding:20px;
-  background:#111;
-  border-radius:15px;
-  color:#fff;
-}
-#order-summary h2{
-  color:#ff2e2e;
-  font-size:48px;
-  text-align:center;
-  margin-bottom:20px;
-}
-#selected-items button{
-  padding:3px 10px;
-  border:none;
-  border-radius:5px;
-  font-weight:700;
-  color:#fff;
-  background:#ff2e2e;
-  transition:0.2s;
-}
-#selected-items button:hover,
-#send-order:hover{
-  background:#ffb703;
-  color:#000;
-}
-
-/* === 자동 툴팁 CSS === */
-.tooltip-wrap {position: relative; display: inline-block;}
-.tooltip-text {visibility: hidden; opacity: 0; position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: #fff; padding:6px 10px; border-radius:6px; font-size:13px; white-space:nowrap; transition: opacity 0.25s ease; z-index:10;}
-.tooltip-wrap:hover .tooltip-text {visibility: visible; opacity:1;}
+  body { font-family: 'Poppins', sans-serif; margin:0; padding:0; background:#fff; }
+  header { background:#f44336; color:#fff; padding:20px; text-align:center; }
+  h1 { margin:0; }
+  .menu { display:flex; flex-wrap:wrap; justify-content:center; padding:20px; gap:20px; }
+  .menu-item { border:1px solid #ddd; border-radius:10px; padding:15px; width:200px; text-align:center; }
+  .menu-item img { width:100%; border-radius:10px; cursor:zoom-in; transition: transform 0.3s; }
+  .menu-item img:hover { transform: scale(1.5); z-index:2; position:relative; }
+  .menu-item h3 { margin:10px 0 5px 0; }
+  .menu-item p { margin:5px 0; }
+  .menu-item input { width:50px; }
+  #total { text-align:center; font-size:1.2em; margin:20px 0; }
+  #order-form { max-width:400px; margin:0 auto 50px auto; padding:20px; border:1px solid #ddd; border-radius:10px; }
+  #order-form input, #order-form button { width:100%; padding:10px; margin:5px 0; }
+  button { background:#f44336; color:#fff; border:none; cursor:pointer; font-size:1em; border-radius:5px; }
 </style>
+</head>
 <body>
 
-<nav>
-  <div class="logo">HANA SUSHI 🚚</div>
-  <div>
-    <a href="#home">Home</a>
-    <a href="#about">Story</a>
-    <a href="#menu">Menu</a>
-    <a href="#contact">Contact</a>
-    <a id="scroll-map">Current Food Truck Location</a>
-    <a href="#qr">QR</a>
+<header>
+  <h1>HANA SUSHI FOOD TRUCK</h1>
+</header>
+
+<section class="menu">
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80" alt="Burito">
+    <h3>🌯 Burito</h3>
+    <p>Price: $12.00</p>
+    <input type="number" min="0" value="0" class="qty" data-price="12">
   </div>
-</nav>
-
-<section class="hero" id="home">
-  <div>
-    <h1>HANA SUSHI</h1>
-    <h2>FOOD TRUCK(213)793-9978</h2>
-    <p>🔥 Japanese Street Sushi • Bold Flavors on Wheels</p>
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb26?auto=format&fit=crop&w=800&q=80" alt="Sushi Combo">
+    <h3>🍣 Sushi Combo</h3>
+    <p>Price: $15.00</p>
+    <input type="number" min="0" value="0" class="qty" data-price="15">
   </div>
-</section>
-
-<section id="about">
-  <h2 class="section-title">Our Story</h2>
-  <p class="about">
-    HANA SUSHI Food Truck brings bold Japanese flavors to the streets.
-    Fresh sushi, spicy sauces, and fusion rolls made for street food lovers.
-  </p>
-</section>
-
-<section id="menu">
-  <h2 class="section-title">Popular Food</h2>
-  <div class="menu-grid">
-    <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
-    <div class="menu-item"><img src="Smoked_Burito.webp" loading="lazy"><div><h3>🌯 Smoked Burito</h3></div></div>
-    <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
-  </div>
-
-  <div id="order-summary">
-    <h2>Your Order</h2>
-    <div id="selected-items"></div>
-    <p>Subtotal: $<span id="subtotal">0.00</span></p>
-    <p>Tax (7.25%): $<span id="tax">0.00</span></p>
-    <p style="font-weight:700;">Total: $<span id="total">0.00</span></p>
-    <button id="send-order">Send Order via Email</button>
+  <div class="menu-item">
+    <img src="https://images.unsplash.com/photo-1617196035740-9b84e1b5c217?auto=format&fit=crop&w=800&q=80" alt="Drink">
+    <h3>🥤 Drink</h3>
+    <p>Price: $3.50</p>
+    <input type="number" min="0" value="0" class="qty" data-price="3.5">
   </div>
 </section>
 
-<section id="contact">
-  <h2 class="section-title">Contact Us</h2>
-  <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
-    <form action="https://formsubmit.co/koseouk@gmail.com" method="POST" style="flex:1; min-width:300px;">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <label for="eventDate">Date of Event (required)</label>
-      <input type="date" id="eventDate" name="event_date" required>
-      <label for="guests">Number of Guests (required)</label>
-      <input type="number" id="guests" name="number_of_guests" min="1" required>
-      <label for="budget">Budget per person ($)</label>
-      <input type="number" id="budget" name="budget_per_person" placeholder="e.g. 20" min="1" required>
-      <label for="commMethod">Preferred Communication Method (required)</label>
-      <select id="commMethod" name="preferred_communication" required>
-        <option value="" disabled selected>Choose One</option>
-        <option value="Phone Call">Phone Call</option>
-        <option value="Email">Email</option>
-      </select>
-      <label for="heardAbout">How Did You Hear About Us? Select an option</label>
-      <select id="heardAbout" name="heard_about" required>
-        <option value="" disabled selected>Choose One</option>
-        <option value="Google Search">Google Search</option>
-        <option value="Ate at the Truck">Ate at the Truck</option>
-        <option value="Facebook">Facebook</option>
-        <option value="Twitter">Twitter</option>
-        <option value="Instagram">Instagram</option>
-        <option value="LinkedIn">LinkedIn</option>
-        <option value="Other">Other</option>
-      </select>
-      <textarea name="message" rows="4" placeholder="How can we help you?" required></textarea>
-      <input type="hidden" name="_subject" value="New HANA SUSHI Inquiry">
-      <input type="hidden" name="_captcha" value="false">
-      <button type="submit">Send Message</button>
-    </form>
-    <div id="map"></div>
-  </div>
+<div id="total">Total: $0.00</div>
+
+<section id="order-form">
+  <h2>Order Now</h2>
+  <input type="text" id="name" placeholder="Your Name" required>
+  <input type="email" id="email" placeholder="Your Email" required>
+  <button id="submit-order">Place Order</button>
 </section>
 
-<section id="qr" class="qr-section">
-  <h2>Scan & Visit Our Site</h2>
-  <div class="qr-card neon-bg-soft">
-    <a href="https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" target="_blank">
-      <img class="qr-main" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://successabc545-ops.github.io/hanasushi/?id=27f0b79b-27d9-4388-a679-266499bca393" loading="lazy" alt="HANA SUSHI QR Code">
-    </a>
-  </div>
-</section>
-
-<footer>© 2026 HANA SUSHI FOOD TRUCK</footer>
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-// JS는 여기서부터 시작
-// ... (이전 답변에 있는 모든 JS 그대로 붙이면 됨)
+const qtyInputs = document.querySelectorAll('.qty');
+const totalDiv = document.getElementById('total');
+
+function calculateTotal() {
+  let subtotal = 0;
+  qtyInputs.forEach(input => {
+    const price = parseFloat(input.dataset.price);
+    const qty = parseInt(input.value) || 0;
+    subtotal += price * qty;
+  });
+  const tax = subtotal * 0.0725; // 7.25% tax
+  const total = subtotal + tax;
+  totalDiv.textContent = `Total: $${total.toFixed(2)} (Tax included)`;
+}
+
+qtyInputs.forEach(input => {
+  input.addEventListener('input', calculateTotal);
+});
+
+document.getElementById('submit-order').addEventListener('click', () => {
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  if (!name || !email) { alert('Please fill your name and email.'); return; }
+
+  let orderDetails = '';
+  qtyInputs.forEach(input => {
+    const qty = parseInt(input.value) || 0;
+    if (qty > 0) {
+      const item = input.closest('.menu-item').querySelector('h3').textContent;
+      orderDetails += `${item} x${qty}\n`;
+    }
+  });
+  orderDetails += `\n${totalDiv.textContent}`;
+
+  // 이메일 전송 (mailto 사용)
+  const mailtoLink = `mailto:${email}?subject=HANA SUSHI Order&body=Hello ${name},%0D%0A%0D%0AHere is your order:%0D%0A${encodeURIComponent(orderDetails)}`;
+  window.location.href = mailtoLink;
+  alert('Order prepared! Check your email.');
+});
 </script>
+
 </body>
 </html>
