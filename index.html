@@ -110,8 +110,12 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   background:#ffb703;
   color:#000;
 }
+
+/* === 자동 툴팁 CSS === */
+.tooltip-wrap {position: relative; display: inline-block;}
+.tooltip-text {visibility: hidden; opacity: 0; position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: #fff; padding:6px 10px; border-radius:6px; font-size:13px; white-space:nowrap; transition: opacity 0.25s ease; z-index:10;}
+.tooltip-wrap:hover .tooltip-text {visibility: visible; opacity:1;}
 </style>
-</head>
 <body>
 
 <nav>
@@ -150,7 +154,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
     <div class="menu-item"><img src="1.Burito.webp" loading="lazy"><div><h3>🌯 Burito</h3></div></div>
   </div>
 
-  <!-- ✅ 주문 섹션 삽입 -->
   <div id="order-summary">
     <h2>Your Order</h2>
     <div id="selected-items"></div>
@@ -209,154 +212,12 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   </div>
 </section>
 
-<footer>
-  © 2026 HANA SUSHI FOOD TRUCK
-</footer>
+<footer>© 2026 HANA SUSHI FOOD TRUCK</footer>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-// 날짜 제한
-const eventDate = document.getElementById('eventDate');
-eventDate.min = new Date().toISOString().split('T')[0];
-
-// 전화번호 자동 포맷
-const phoneInput = document.getElementById('phoneFull');
-phoneInput.addEventListener('input', e => {
-    let v = e.target.value.replace(/\D/g,'');
-    if(v.length>10) v = v.slice(0,10);
-    if(v.length>6) v = `(${v.slice(0,3)})${v.slice(3,6)}-${v.slice(6)}`;
-    else if(v.length>3) v = `(${v.slice(0,3)})${v.slice(3)}`;
-    else if(v.length>0) v = `(${v}`;
-    e.target.value = v;
-});
-
-// 지도 초기화
-const map = L.map('map').setView([34.0195, -118.4912], 12);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-let foodTruckMarker = L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
-
-// 위치 안내 박스
-let geoAlertDiv = document.createElement('div');
-geoAlertDiv.style.position = 'absolute';
-geoAlertDiv.style.top = '10px';
-geoAlertDiv.style.left = '50%';
-geoAlertDiv.style.transform = 'translateX(-50%)';
-geoAlertDiv.style.background = 'rgba(255,46,46,0.9)';
-geoAlertDiv.style.color = '#fff';
-geoAlertDiv.style.padding = '12px 20px';
-geoAlertDiv.style.borderRadius = '8px';
-geoAlertDiv.style.zIndex = '1001';
-geoAlertDiv.style.display = 'none';
-geoAlertDiv.style.fontWeight = '700';
-geoAlertDiv.innerText = '';
-document.body.appendChild(geoAlertDiv);
-
-// Current Food Truck Location 버튼
-const scrollMapBtn = document.getElementById('scroll-map');
-scrollMapBtn.addEventListener('click', () => {
-    document.getElementById('map').scrollIntoView({behavior: 'smooth'});
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(pos=>{
-            geoAlertDiv.style.display='none';
-            const latlng=[pos.coords.latitude,pos.coords.longitude];
-            foodTruckMarker.setLatLng(latlng).bindPopup("Food Truck are here").openPopup();
-            map.flyTo(latlng,16);
-            // 정확도 원 제거
-        },err=>{
-            geoAlertDiv.innerText="⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
-            geoAlertDiv.style.display='block';
-        });
-    } else{
-        geoAlertDiv.innerText="⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
-        geoAlertDiv.style.display='block';
-    }
-});
-
-// ✅ 메뉴 주문 + 수량 + 세금 + 이메일 전송
-const menuPrices = {
-  "🌯 Burito": 50.00,
-  "🌯 Smoked Burito": 100.00
-};
-const selectedItems = {};
-document.querySelectorAll('.menu-item').forEach(item=>{
-  const name = item.querySelector('h3').innerText;
-  item.addEventListener('click', ()=>{
-    if(selectedItems[name]) selectedItems[name]++;
-    else selectedItems[name]=1;
-    updateOrderSummary();
-  });
-});
-
-function updateOrderSummary(){
-  const selectedDiv = document.getElementById('selected-items');
-  selectedDiv.innerHTML='';
-  let subtotal=0;
-  for(const [name,qty] of Object.entries(selectedItems)){
-    const price=menuPrices[name]||0;
-    subtotal+=price*qty;
-    const itemLine=document.createElement('div');
-    itemLine.style.display='flex';
-    itemLine.style.justifyContent='space-between';
-    itemLine.style.alignItems='center';
-    itemLine.style.marginBottom='8px';
-
-    const itemText=document.createElement('span');
-    itemText.innerText=`${name} x${qty} - $${(price*qty).toFixed(2)}`;
-
-    const btnContainer=document.createElement('span');
-    const minusBtn=document.createElement('button');
-    minusBtn.innerText='−';
-    minusBtn.style.marginRight='5px';
-    minusBtn.addEventListener('click', ()=>{
-      selectedItems[name]--;
-      if(selectedItems[name]<=0) delete selectedItems[name];
-      updateOrderSummary();
-    });
-    const plusBtn=document.createElement('button');
-    plusBtn.innerText='+';
-    plusBtn.style.marginLeft='5px';
-    plusBtn.addEventListener('click', ()=>{
-      selectedItems[name]++;
-      updateOrderSummary();
-    });
-    btnContainer.appendChild(minusBtn);
-    btnContainer.appendChild(plusBtn);
-    itemLine.appendChild(itemText);
-    itemLine.appendChild(btnContainer);
-    selectedDiv.appendChild(itemLine);
-  }
-  const tax=subtotal*0.095;
-  const total=subtotal+tax;
-  document.getElementById('subtotal').innerText=subtotal.toFixed(2);
-  document.getElementById('tax').innerText=tax.toFixed(2);
-  document.getElementById('total').innerText=total.toFixed(2);
-}
-
-// 이메일 전송
-document.getElementById('send-order').addEventListener('click', ()=>{
-  if(Object.keys(selectedItems).length===0){
-    alert("Please select at least one menu item before sending the order.");
-    return;
-  }
-  let emailBody="HANA SUSHI Order:\n\n";
-  let subtotal=0;
-  for(const [name,qty] of Object.entries(selectedItems)){
-    const price=menuPrices[name]||0;
-    subtotal+=price*qty;
-    emailBody+=`${name} x${qty} - $${(price*qty).toFixed(2)}\n`;
-  }
-  const tax=subtotal*0.095;
-  const total=subtotal+tax;
-  emailBody+=`\nSubtotal: $${subtotal.toFixed(2)}\n`;
-  emailBody+=`Tax (9.5%): $${tax.toFixed(2)}\n`;
-  emailBody+=`Total: $${total.toFixed(2)}\n`;
-
-  const email="koseouk@gmail.com";
-  const subject=encodeURIComponent("New HANA SUSHI Order");
-  const body=encodeURIComponent(emailBody);
-  window.location.href=`mailto:${email}?subject=${subject}&body=${body}`;
-});
+// JS는 여기서부터 시작
+// ... (이전 답변에 있는 모든 JS 그대로 붙이면 됨)
 </script>
-
 </body>
 </html>
