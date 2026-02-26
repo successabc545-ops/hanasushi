@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 <style>
+/* 기존 스타일 전부 유지 */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
 nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;justify-content:space-between;align-items:center;padding:15px 40px;z-index:1000;}
@@ -82,7 +83,6 @@ section{padding:100px 10%;}
   margin:0 auto;
 }
 footer{text-align:center;padding:30px;background:#111;color:#777;}
-/* 주문 섹션 스타일 */
 #order-summary{
   margin:30px 10%;
   padding:20px;
@@ -152,7 +152,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
         <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Spicy imitation crab, avocado, tuna, salmon</p>
       </div>
     </div>
-
     <div class="menu-item">
       <img src="Smoked_Burito.webp" loading="lazy">
       <div>
@@ -160,36 +159,15 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
         <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Smoked salmon, cream cheese, cucumber, avocado</p>
       </div>
     </div>
-
-    <!-- Special Sashimi 메뉴 추가 -->
     <div class="menu-item">
-      <img src="https://raw.githubusercontent.com/successabc545-ops/hanasushi/main/special%20sashimi.webp" loading="lazy" alt="Special Sashimi">
+      <img src="special_sashimi.webp" loading="lazy">
       <div>
         <h3>🍣 Special Sashimi</h3>
-        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Chef’s special sashimi selection</p>
-      </div>d
-    </div>
-
-  </div>
- <!-- 8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888 -->
-<section id="menu">
-  <h2 class="section-title">Sashimi</h2>
-  <div class="menu-grid">
-    <div class="menu-item">
-      
-
-    <!-- Special Sashimi 메뉴 추가 -->
-    <div class="menu-item">
-      <img src="https://raw.githubusercontent.com/successabc545-ops/hanasushi/main/special%20sashimi.webp" loading="lazy" alt="Special Sashimi">
-      <div>
-        <h3>🍣 Special Sashimi</h3>
-        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Chef’s special sashimi selection</p>
+        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Assorted premium fish slices</p>
       </div>
     </div>
-
   </div>
 
-  <!-- 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 -->
   <div id="order-summary">
     <h2>Your Order</h2>
     <div id="selected-items"></div>
@@ -274,7 +252,7 @@ const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 let foodTruckMarker = L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
 
-// 위치 안내 박스
+// Current Food Truck Location 버튼
 let geoAlertDiv = document.createElement('div');
 geoAlertDiv.style.position = 'absolute';
 geoAlertDiv.style.top = '10px';
@@ -290,7 +268,6 @@ geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
-// Current Food Truck Location 버튼
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
     document.getElementById('map').scrollIntoView({behavior: 'smooth'});
@@ -310,19 +287,22 @@ scrollMapBtn.addEventListener('click', () => {
     }
 });
 
-// 메뉴 주문 + 수량 + 세금 + 이메일 전송
+// 메뉴 클릭 → Your Order 계산 + Contact Us textarea 자동 반영
 const menuPrices = {
   "🌯 Burito": 50.00,
   "🌯 Smoked Burito": 100.00,
-  "🍣 Special Sashimi": 120.00
+  "🍣 Special Sashimi": 150.00
 };
 const selectedItems = {};
+const messageTextarea = document.querySelector('textarea[name="message"]');
+
 document.querySelectorAll('.menu-item').forEach(item=>{
   const name = item.querySelector('h3').innerText;
   item.addEventListener('click', ()=>{
     if(selectedItems[name]) selectedItems[name]++;
     else selectedItems[name]=1;
     updateOrderSummary();
+    updateContactTextarea();
   });
 });
 
@@ -350,6 +330,7 @@ function updateOrderSummary(){
       selectedItems[name]--;
       if(selectedItems[name]<=0) delete selectedItems[name];
       updateOrderSummary();
+      updateContactTextarea();
     });
     const plusBtn=document.createElement('button');
     plusBtn.innerText='+';
@@ -357,6 +338,7 @@ function updateOrderSummary(){
     plusBtn.addEventListener('click', ()=>{
       selectedItems[name]++;
       updateOrderSummary();
+      updateContactTextarea();
     });
     btnContainer.appendChild(minusBtn);
     btnContainer.appendChild(plusBtn);
@@ -371,31 +353,20 @@ function updateOrderSummary(){
   document.getElementById('total').innerText=total.toFixed(2);
 }
 
-// 이메일 전송
-document.getElementById('send-order').addEventListener('click', ()=>{
-  if(Object.keys(selectedItems).length===0){
-    alert("Please select at least one menu item before sending the order.");
-    return;
-  }
-  let emailBody="HANA SUSHI Order:\n\n";
-  let subtotal=0;
+function updateContactTextarea(){
+  let lines = [];
   for(const [name,qty] of Object.entries(selectedItems)){
     const price=menuPrices[name]||0;
-    subtotal+=price*qty;
-    emailBody+=`${name} x${qty} - $${(price*qty).toFixed(2)}\n`;
+    lines.push(`${name} x${qty} - $${(price*qty).toFixed(2)}`);
   }
-  const tax=subtotal*0.095;
-  const total=subtotal+tax;
-  emailBody+=`\nSubtotal: $${subtotal.toFixed(2)}\n`;
-  emailBody+=`Tax (9.5%): $${tax.toFixed(2)}\n`;
-  emailBody+=`Total: $${total.toFixed(2)}\n`;
-
-  const email="koseouk@gmail.com";
-  const subject=encodeURIComponent("New HANA SUSHI Order");
-  const body=encodeURIComponent(emailBody);
-  window.location.href=`mailto:${email}?subject=${subject}&body=${body}`;
-});
+  const subtotal = Object.entries(selectedItems).reduce((acc,[name,qty])=>acc + (menuPrices[name]||0)*qty,0);
+  const tax = subtotal*0.095;
+  const total = subtotal + tax;
+  lines.push(`Subtotal: $${subtotal.toFixed(2)}`);
+  lines.push(`Tax (9.5%): $${tax.toFixed(2)}`);
+  lines.push(`Total: $${total.toFixed(2)}`);
+  messageTextarea.value = lines.join('\n');
+}
 </script>
-
 </body>
 </html>
