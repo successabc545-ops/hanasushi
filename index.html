@@ -90,11 +90,16 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   border-radius:15px;
   color:#fff;
 }
+/* Order Summary 글자 확대 */
 #order-summary h2{
   color:#ff2e2e;
   font-size:48px;
   text-align:center;
   margin-bottom:20px;
+}
+#order-summary p,
+#order-summary span{
+  font-size:22px; /* Subtotal, Tax, Total 확대 */
 }
 #selected-items button{
   padding:3px 10px;
@@ -109,6 +114,14 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 #send-order:hover{
   background:#ffb703;
   color:#000;
+}
+/* Send Order 버튼 크게 */
+#send-order{
+  font-size:26px;
+  font-weight:700;
+  padding:16px 40px;
+  border-radius:12px;
+  margin-top:10px;
 }
 </style>
 </head>
@@ -236,7 +249,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 </footer>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 <script>
 // 날짜 제한
 const eventDate = document.getElementById('eventDate');
@@ -359,49 +371,43 @@ function updateOrderSummary(){
 const sendOrderBtn = document.getElementById("send-order");
 const orderMsg = document.getElementById("order-message");
 
-if (sendOrderBtn && orderMsg) {
-  sendOrderBtn.addEventListener("click", () => {
+sendOrderBtn.addEventListener("click", () => {
 
-    // 1️⃣ 선택된 메뉴 없으면 경고
-    if(Object.keys(selectedItems).length === 0){
-      alert("Please select at least one menu item before sending the order.");
-      return;
-    }
+  if(Object.keys(selectedItems).length === 0){
+    alert("Please select at least one menu item before sending the order.");
+    return;
+  }
 
-    // 2️⃣ 이메일 메시지에 주문 내용 자동 입력
-    const contactForm = document.querySelector('#contact form');
-    const messageTextarea = contactForm.querySelector('textarea[name="message"]');
-    let lines = [];
-    for(const [name,qty] of Object.entries(selectedItems)){
-      const price = menuPrices[name] || 0;
-      lines.push(`${name} x${qty} - $${(price*qty).toFixed(2)}`);
-    }
-    const subtotal = Object.entries(selectedItems).reduce((acc,[name,qty])=>acc + (menuPrices[name]||0)*qty,0);
-    const tax = subtotal*0.095;
-    const total = subtotal + tax;
-    lines.push(`Subtotal: $${subtotal.toFixed(2)}`);
-    lines.push(`Tax (9.5%): $${tax.toFixed(2)}`);
-    lines.push(`Total: $${total.toFixed(2)}`);
-    messageTextarea.value = lines.join('\n');
+  const contactForm = document.querySelector('#contact form');
+  const messageTextarea = contactForm.querySelector('textarea[name="message"]');
+  let lines = [];
+  for(const [name,qty] of Object.entries(selectedItems)){
+    const price = menuPrices[name] || 0;
+    lines.push(`${name} x${qty} - $${(price*qty).toFixed(2)}`);
+  }
+  const subtotal = Object.entries(selectedItems).reduce((acc,[name,qty])=>acc + (menuPrices[name]||0)*qty,0);
+  const tax = subtotal*0.095;
+  const total = subtotal + tax;
+  lines.push(`Subtotal: $${subtotal.toFixed(2)}`);
+  lines.push(`Tax (9.5%): $${tax.toFixed(2)}`);
+  lines.push(`Total: $${total.toFixed(2)}`);
+  messageTextarea.value = lines.join('\n');
 
-    // 3️⃣ Order Sent 메시지 표시
-    orderMsg.style.display = "block";
-    setTimeout(()=>{ orderMsg.style.display="none"; },4000);
+  // Order Sent 메시지 표시
+  orderMsg.style.display = "block";
+  setTimeout(()=>{ orderMsg.style.display="none"; },4000);
 
-    // 4️⃣ 이메일 전송
-    contactForm.submit();
+  contactForm.submit();
 
-    // 5️⃣ 0.5초 후 주문 초기화
-    setTimeout(() => {
-      for (const key in selectedItems) delete selectedItems[key];
-      document.getElementById("selected-items").innerHTML = "";
-      document.getElementById("subtotal").innerText = "0.00";
-      document.getElementById("tax").innerText = "0.00";
-      document.getElementById("total").innerText = "0.00";
-    }, 500);
-
-  });
-}
+  // 주문 초기화
+  setTimeout(() => {
+    for (const key in selectedItems) delete selectedItems[key];
+    document.getElementById("selected-items").innerHTML = "";
+    document.getElementById("subtotal").innerText = "0.00";
+    document.getElementById("tax").innerText = "0.00";
+    document.getElementById("total").innerText = "0.00";
+  }, 500);
+});
 </script>
 
 </body>
