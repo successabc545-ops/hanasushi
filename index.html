@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 <style>
-/* 기존 스타일 전부 유지 */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
 nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;justify-content:space-between;align-items:center;padding:15px 40px;z-index:1000;}
@@ -152,6 +151,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
         <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Spicy imitation crab, avocado, tuna, salmon</p>
       </div>
     </div>
+
     <div class="menu-item">
       <img src="Smoked_Burito.webp" loading="lazy">
       <div>
@@ -159,11 +159,12 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
         <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Smoked salmon, cream cheese, cucumber, avocado</p>
       </div>
     </div>
+
     <div class="menu-item">
       <img src="special_sashimi.webp" loading="lazy">
       <div>
         <h3>🍣 Special Sashimi</h3>
-        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Assorted premium fish slices</p>
+        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Fresh seasonal sashimi selection</p>
       </div>
     </div>
   </div>
@@ -252,7 +253,7 @@ const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 let foodTruckMarker = L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
 
-// Current Food Truck Location 버튼
+// 위치 안내 박스
 let geoAlertDiv = document.createElement('div');
 geoAlertDiv.style.position = 'absolute';
 geoAlertDiv.style.top = '10px';
@@ -268,6 +269,7 @@ geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
+// Current Food Truck Location 버튼
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
     document.getElementById('map').scrollIntoView({behavior: 'smooth'});
@@ -287,22 +289,19 @@ scrollMapBtn.addEventListener('click', () => {
     }
 });
 
-// 메뉴 클릭 → Your Order 계산 + Contact Us textarea 자동 반영
+// ✅ 메뉴 주문 + 수량 + 세금 + 이메일 전송
 const menuPrices = {
   "🌯 Burito": 50.00,
   "🌯 Smoked Burito": 100.00,
   "🍣 Special Sashimi": 150.00
 };
 const selectedItems = {};
-const messageTextarea = document.querySelector('textarea[name="message"]');
-
 document.querySelectorAll('.menu-item').forEach(item=>{
   const name = item.querySelector('h3').innerText;
   item.addEventListener('click', ()=>{
     if(selectedItems[name]) selectedItems[name]++;
     else selectedItems[name]=1;
     updateOrderSummary();
-    updateContactTextarea();
   });
 });
 
@@ -330,7 +329,6 @@ function updateOrderSummary(){
       selectedItems[name]--;
       if(selectedItems[name]<=0) delete selectedItems[name];
       updateOrderSummary();
-      updateContactTextarea();
     });
     const plusBtn=document.createElement('button');
     plusBtn.innerText='+';
@@ -338,7 +336,6 @@ function updateOrderSummary(){
     plusBtn.addEventListener('click', ()=>{
       selectedItems[name]++;
       updateOrderSummary();
-      updateContactTextarea();
     });
     btnContainer.appendChild(minusBtn);
     btnContainer.appendChild(plusBtn);
@@ -353,10 +350,20 @@ function updateOrderSummary(){
   document.getElementById('total').innerText=total.toFixed(2);
 }
 
-function updateContactTextarea(){
+// ✅ Send Order 버튼 클릭 시 Contact Us 폼으로 자동 전송
+document.getElementById('send-order').addEventListener('click', ()=>{
+  const contactForm = document.querySelector('#contact form');
+  const messageTextarea = contactForm.querySelector('textarea[name="message"]');
+
+  if(Object.keys(selectedItems).length === 0){
+    alert("Please select at least one menu item before sending the order.");
+    return;
+  }
+
+  // Your Order 내용 textarea로 복사
   let lines = [];
   for(const [name,qty] of Object.entries(selectedItems)){
-    const price=menuPrices[name]||0;
+    const price = menuPrices[name] || 0;
     lines.push(`${name} x${qty} - $${(price*qty).toFixed(2)}`);
   }
   const subtotal = Object.entries(selectedItems).reduce((acc,[name,qty])=>acc + (menuPrices[name]||0)*qty,0);
@@ -365,8 +372,13 @@ function updateContactTextarea(){
   lines.push(`Subtotal: $${subtotal.toFixed(2)}`);
   lines.push(`Tax (9.5%): $${tax.toFixed(2)}`);
   lines.push(`Total: $${total.toFixed(2)}`);
+
   messageTextarea.value = lines.join('\n');
-}
+
+  // Contact Us 폼 submit
+  contactForm.submit();
+});
 </script>
+
 </body>
 </html>
