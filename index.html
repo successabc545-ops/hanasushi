@@ -130,6 +130,9 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   font-size:28px;
   font-weight:1700;
 }
+.sashimi-buttons{margin-top:10px;}
+.sashimi-buttons button{padding:8px 12px;margin-right:8px;border:none;border-radius:6px;background:#ff2e2e;color:#fff;font-weight:700;cursor:pointer;}
+.sashimi-buttons button:hover{background:#ffb703;color:#000;}
 </style>
 </head>
 <body>
@@ -182,24 +185,16 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
     <div class="menu-item">
       <img src="special sashimi.webp" loading="lazy">
       <div>
-        <h3>🍣 Hana Speccial</h3>
+        <h3>🍣 Hana Special</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh sashimi, chef’s special</p>
+        <div class="sashimi-buttons">
+          <button class="sashimi-select" data-name="TUNA TATAKI SASHIMI" data-price="21.95">TUNA TATAKI SASHIMI - $21.95</button>
+        </div>
       </div>
     </div>
   </div>
 </section>
-<!-- ======================    사시미   ====================== -->
 
-  <h2 class="section-title">Sashimi</h2>
-
-      <img src="special sashimi.webp" loading="lazy">
-      <div>
-        
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
-      </div>
-    </div>
-  </section>  
-<!-- ======================    사시미    ====================== -->  
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
@@ -285,49 +280,31 @@ const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 let foodTruckMarker = L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
 
-// 위치 안내 박스
-let geoAlertDiv = document.createElement('div');
-geoAlertDiv.style.position = 'absolute';
-geoAlertDiv.style.top = '10px';
-geoAlertDiv.style.left = '50%';
-geoAlertDiv.style.transform = 'translateX(-50%)';
-geoAlertDiv.style.background = 'rgba(255,46,46,0.9)';
-geoAlertDiv.style.color = '#fff';
-geoAlertDiv.style.padding = '12px 20px';
-geoAlertDiv.style.borderRadius = '8px';
-geoAlertDiv.style.zIndex = '1001';
-geoAlertDiv.style.display = 'none';
-geoAlertDiv.style.fontWeight = '700';
-geoAlertDiv.innerText = '';
-document.body.appendChild(geoAlertDiv);
-
 // Current Food Truck Location 버튼
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
     document.getElementById('map').scrollIntoView({behavior: 'smooth'});
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(pos=>{
-            geoAlertDiv.style.display='none';
             const latlng=[pos.coords.latitude,pos.coords.longitude];
             foodTruckMarker.setLatLng(latlng).bindPopup("Food Truck are here").openPopup();
             map.flyTo(latlng,16);
         },err=>{
-            geoAlertDiv.innerText="⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
-            geoAlertDiv.style.display='block';
+            alert("⚠ 위치 정보 접근이 거부되었습니다.");
         });
     } else{
-        geoAlertDiv.innerText="⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
-        geoAlertDiv.style.display='block';
+        alert("⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.");
     }
 });
 
-// 메뉴 주문 + 수량 + 세금
+// ====================== 메뉴 주문 + Your Order ======================
 const menuPrices = {
   "🌯 Burito": 50.00,
-  "🌯 Smoked Burito": 100.00,
-  "🍣 Special Sashimi": 150.00
+  "🌯 Smoked Burito": 100.00
 };
 const selectedItems = {};
+
+// 메뉴 기본 클릭 (Popular Food)
 document.querySelectorAll('.menu-item').forEach(item=>{
   const name = item.querySelector('h3').innerText;
   item.addEventListener('click', ()=>{
@@ -337,6 +314,19 @@ document.querySelectorAll('.menu-item').forEach(item=>{
   });
 });
 
+// Special Sashimi 버튼 클릭
+document.querySelectorAll('.sashimi-select').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const name = btn.dataset.name;
+    const price = parseFloat(btn.dataset.price);
+    if(selectedItems[name]) selectedItems[name]++;
+    else selectedItems[name]=1;
+    menuPrices[name]=price;
+    updateOrderSummary();
+  });
+});
+
+// Your Order 업데이트
 function updateOrderSummary(){
   const selectedDiv = document.getElementById('selected-items');
   selectedDiv.innerHTML='';
@@ -383,9 +373,7 @@ function updateOrderSummary(){
 }
 
 // Send Order 버튼
-const sendOrderBtn = document.getElementById('send-order');
-const orderMessage = document.getElementById('order-message');
-sendOrderBtn.addEventListener('click', ()=>{
+document.getElementById('send-order').addEventListener('click', ()=>{
   const contactForm = document.querySelector('#contact form');
   const messageTextarea = contactForm.querySelector('textarea[name="message"]');
 
@@ -409,11 +397,9 @@ sendOrderBtn.addEventListener('click', ()=>{
   messageTextarea.value = lines.join('\n');
   contactForm.submit();
 
-  // ✅ Order Sent! 표시
-  orderMessage.style.display='block';
-  setTimeout(()=>{ orderMessage.style.display='none'; }, 3000);
+  document.getElementById('order-message').style.display='block';
+  setTimeout(()=>{ document.getElementById('order-message').style.display='none'; }, 3000);
 
-  // 주문 초기화
   for(const key in selectedItems) delete selectedItems[key];
   updateOrderSummary();
 });
