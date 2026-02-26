@@ -189,7 +189,11 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   </div>
 </section>
 <!-- ======================    사시미   ====================== -->
-
+.menu-item img[src*="special sashimi"] {
+    height: auto;        /* 기존 200px 대신 이미지 비율 유지 */
+    object-fit: contain; /* cover → contain으로 이미지 전체 보이게 */
+    background: #000;    /* 작은 이미지 검은 배경 유지 */
+}
 <section id="menu">
   <h2 class="section-title">Special Sashimi</h2>
   <div class="menu-grid">
