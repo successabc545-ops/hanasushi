@@ -14,16 +14,7 @@ nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;jus
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
 nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
 nav a:hover{color:#ff2e2e;}
-.hero{
-  height:60vh;
-  background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
+.hero{height:60vh;background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center;}
 .hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
 .hero p{font-size:20px;margin:20px 0 35px;}
@@ -45,71 +36,16 @@ section{padding:100px 10%;}
 @media (max-width:768px){#map{height:350px;}}
 .qr-section{background:#111;text-align:center;padding:60px 20px;}
 .qr-section h2{font-size:32px;color:#ff2e2e;margin-bottom:15px;}
-.qr-card{
-  background:linear-gradient(145deg,#111,#1c1c1c);
-  padding:28px;
-  border-radius:22px;
-  box-shadow:0 0 15px rgba(255,46,46,0.4),0 0 30px rgba(255,46,46,0.2);
-  border:1px solid rgba(255,255,255,0.1);
-  position:relative;
-  overflow:hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display:inline-block;
-}
+.qr-card{background:linear-gradient(145deg,#111,#1c1c1c);padding:28px;border-radius:22px;box-shadow:0 0 15px rgba(255,46,46,0.4),0 0 30px rgba(255,46,46,0.2);border:1px solid rgba(255,255,255,0.1);position:relative;overflow:hidden;transition: transform 0.3s ease, box-shadow 0.3s ease;display:inline-block;}
 .qr-card:hover{transform:scale(1.05);box-shadow:0 0 25px rgba(255,46,46,0.6),0 0 50px rgba(255,46,46,0.4);}
-.neon-bg-soft::before{
-  content:'';
-  position:absolute;
-  top:-50%;
-  left:-50%;
-  width:200%;
-  height:200%;
-  background: radial-gradient(circle at 25% 25%, rgba(255,46,46,0.15), rgba(255,193,7,0.1), rgba(255,140,0,0.05), transparent);
-  animation: neonSoftBlink 3.5s infinite alternate;
-  z-index:0;
-}
+.neon-bg-soft::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background: radial-gradient(circle at 25% 25%, rgba(255,46,46,0.15), rgba(255,193,7,0.1), rgba(255,140,0,0.05), transparent);animation: neonSoftBlink 3.5s infinite alternate;z-index:0;}
 @keyframes neonSoftBlink{0%{opacity:0.2;transform:scale(1);}50%{opacity:0.35;transform:scale(1.02);}100%{opacity:0.2;transform:scale(1);}}
-.qr-main{
-  position:relative;
-  z-index:2;
-  background:#fff;
-  padding:14px;
-  border-radius:18px;
-  width:260px;
-  height:260px;
-  border:5px solid #ff2e2e;
-  display:block;
-  margin:0 auto;
-}
+.qr-main{position:relative;z-index:2;background:#fff;padding:14px;border-radius:18px;width:260px;height:260px;border:5px solid #ff2e2e;display:block;margin:0 auto;}
 footer{text-align:center;padding:30px;background:#111;color:#777;}
-/* 주문 섹션 스타일 */
-#order-summary{
-  margin:30px 10%;
-  padding:20px;
-  background:#111;
-  border-radius:15px;
-  color:#fff;
-}
-#order-summary h2{
-  color:#ff2e2e;
-  font-size:48px;
-  text-align:center;
-  margin-bottom:20px;
-}
-#selected-items button{
-  padding:3px 10px;
-  border:none;
-  border-radius:5px;
-  font-weight:700;
-  color:#fff;
-  background:#ff2e2e;
-  transition:0.2s;
-}
-#selected-items button:hover,
-#send-order:hover{
-  background:#ffb703;
-  color:#000;
-}
+#order-summary{margin:30px 10%;padding:20px;background:#111;border-radius:15px;color:#fff;}
+#order-summary h2{color:#ff2e2e;font-size:48px;text-align:center;margin-bottom:20px;}
+#selected-items button{padding:3px 10px;border:none;border-radius:5px;font-weight:700;color:#fff;background:#ff2e2e;transition:0.2s;}
+#selected-items button:hover,#send-order:hover{background:#ffb703;color:#000;}
 </style>
 </head>
 <body>
@@ -152,49 +88,31 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
         <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Spicy imitation crab, avocado, tuna, salmon</p>
       </div>
     </div>
-
     <div class="menu-item">
       <img src="Smoked_Burito.webp" loading="lazy">
       <div>
         <h3>🌯 Smoked Burito</h3>
         <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Smoked salmon, cream cheese, cucumber, avocado</p>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="1.Burito.webp" loading="lazy">
-      <div>
-        <h3>🌯 Burito</h3>
-        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Spicy imitation crab, avocado, tuna, salmon</p>
-      </div>
-    </div>
-<div class="menu-item">
-      <img src="1.Burito.webp" loading="lazy">
-      <div>
-        <h3>🌯 Burito</h3>
-        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Spicy imitation crab, avocado, tuna, salmon</p>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="Smoked_Burito.webp" loading="lazy">
-      <div>
-        <h3>🌯 Smoked Burito</h3>
-        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Smoked salmon, cream cheese, cucumber, avocado</p>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="1.Burito.webp" loading="lazy">
-      <div>
-        <h3>🌯 Burito</h3>
-        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Spicy imitation crab, avocado, tuna, salmon</p>
       </div>
     </div>
   </div>
 
+  <h2 class="section-title">Sashimi</h2>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <img src="Salmon_Sashimi.webp" loading="lazy" alt="Salmon Sashimi">
+      <div><h3>🍣 Salmon Sashimi</h3><p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Fresh salmon slices</p></div>
+    </div>
+    <div class="menu-item">
+      <img src="Tuna_Sashimi.webp" loading="lazy" alt="Tuna Sashimi">
+      <div><h3>🍣 Tuna Sashimi</h3><p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Fresh tuna slices</p></div>
+    </div>
+    <div class="menu-item">
+      <img src="Sea_Bass_Sashimi.webp" loading="lazy" alt="Sea Bass Sashimi">
+      <div><h3>🍣 Sea Bass Sashimi</h3><p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Fresh sea bass slices</p></div>
+    </div>
+  </div>
 
-  <!-- ✅ 주문 섹션 삽입 -->
   <div id="order-summary">
     <h2>Your Order</h2>
     <div id="selected-items"></div>
@@ -279,60 +197,37 @@ const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 let foodTruckMarker = L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
 
-// 위치 안내 박스
-let geoAlertDiv = document.createElement('div');
-geoAlertDiv.style.position = 'absolute';
-geoAlertDiv.style.top = '10px';
-geoAlertDiv.style.left = '50%';
-geoAlertDiv.style.transform = 'translateX(-50%)';
-geoAlertDiv.style.background = 'rgba(255,46,46,0.9)';
-geoAlertDiv.style.color = '#fff';
-geoAlertDiv.style.padding = '12px 20px';
-geoAlertDiv.style.borderRadius = '8px';
-geoAlertDiv.style.zIndex = '1001';
-geoAlertDiv.style.display = 'none';
-geoAlertDiv.style.fontWeight = '700';
-geoAlertDiv.innerText = '';
-document.body.appendChild(geoAlertDiv);
-
-// Current Food Truck Location 버튼
-const scrollMapBtn = document.getElementById('scroll-map');
-scrollMapBtn.addEventListener('click', () => {
-    document.getElementById('map').scrollIntoView({behavior: 'smooth'});
+// Current Food Truck Location
+document.getElementById('scroll-map').addEventListener('click',()=>{
+    document.getElementById('map').scrollIntoView({behavior:'smooth'});
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(pos=>{
-            geoAlertDiv.style.display='none';
             const latlng=[pos.coords.latitude,pos.coords.longitude];
             foodTruckMarker.setLatLng(latlng).bindPopup("Food Truck are here").openPopup();
             map.flyTo(latlng,16);
-            // 정확도 원 제거
-        },err=>{
-            geoAlertDiv.innerText="⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
-            geoAlertDiv.style.display='block';
-        });
-    } else{
-        geoAlertDiv.innerText="⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
-        geoAlertDiv.style.display='block';
-    }
+        },err=>{alert("⚠ 위치 정보 접근 거부됨");});
+    } else{alert("⚠ 이 브라우저에서는 위치 기능 지원 안됨");}
 });
 
-// ✅ 메뉴 주문 + 수량 + 세금 + 이메일 전송
+// 메뉴 주문 기능
 const menuPrices = {
   "🌯 Burito": 50.00,
-  "🌯 Smoked Burito": 100.00
+  "🌯 Smoked Burito": 100.00,
+  "🍣 Salmon Sashimi": 18.00,
+  "🍣 Tuna Sashimi": 20.00,
+  "🍣 Sea Bass Sashimi": 22.00
 };
 const selectedItems = {};
 document.querySelectorAll('.menu-item').forEach(item=>{
-  const name = item.querySelector('h3').innerText;
-  item.addEventListener('click', ()=>{
+  const name=item.querySelector('h3').innerText;
+  item.addEventListener('click',()=>{
     if(selectedItems[name]) selectedItems[name]++;
     else selectedItems[name]=1;
     updateOrderSummary();
   });
 });
-
 function updateOrderSummary(){
-  const selectedDiv = document.getElementById('selected-items');
+  const selectedDiv=document.getElementById('selected-items');
   selectedDiv.innerHTML='';
   let subtotal=0;
   for(const [name,qty] of Object.entries(selectedItems)){
@@ -341,64 +236,26 @@ function updateOrderSummary(){
     const itemLine=document.createElement('div');
     itemLine.style.display='flex';
     itemLine.style.justifyContent='space-between';
-    itemLine.style.alignItems='center';
-    itemLine.style.marginBottom='8px';
-
-    const itemText=document.createElement('span');
-    itemText.innerText=`${name} x${qty} - $${(price*qty).toFixed(2)}`;
-
-    const btnContainer=document.createElement('span');
-    const minusBtn=document.createElement('button');
-    minusBtn.innerText='−';
-    minusBtn.style.marginRight='5px';
-    minusBtn.addEventListener('click', ()=>{
-      selectedItems[name]--;
-      if(selectedItems[name]<=0) delete selectedItems[name];
-      updateOrderSummary();
-    });
-    const plusBtn=document.createElement('button');
-    plusBtn.innerText='+';
-    plusBtn.style.marginLeft='5px';
-    plusBtn.addEventListener('click', ()=>{
-      selectedItems[name]++;
-      updateOrderSummary();
-    });
-    btnContainer.appendChild(minusBtn);
-    btnContainer.appendChild(plusBtn);
-    itemLine.appendChild(itemText);
-    itemLine.appendChild(btnContainer);
+    itemLine.style.marginBottom='5px';
+    itemLine.innerHTML=`<span>${name} x${qty}</span><span>$${(price*qty).toFixed(2)}</span>`;
     selectedDiv.appendChild(itemLine);
   }
-  const tax=subtotal*0.095;
+  const tax=subtotal*0.0725;
   const total=subtotal+tax;
   document.getElementById('subtotal').innerText=subtotal.toFixed(2);
   document.getElementById('tax').innerText=tax.toFixed(2);
   document.getElementById('total').innerText=total.toFixed(2);
 }
-
-// 이메일 전송
-document.getElementById('send-order').addEventListener('click', ()=>{
-  if(Object.keys(selectedItems).length===0){
-    alert("Please select at least one menu item before sending the order.");
-    return;
-  }
-  let emailBody="HANA SUSHI Order:\n\n";
-  let subtotal=0;
+document.getElementById('send-order').addEventListener('click',()=>{
+  let body='My Order:\n';
   for(const [name,qty] of Object.entries(selectedItems)){
-    const price=menuPrices[name]||0;
-    subtotal+=price*qty;
-    emailBody+=`${name} x${qty} - $${(price*qty).toFixed(2)}\n`;
+    body+=`${name} x${qty} = $${(menuPrices[name]*qty).toFixed(2)}\n`;
   }
-  const tax=subtotal*0.095;
+  const subtotal=selectedItems?Object.entries(selectedItems).reduce((a,[k,v])=>a+menuPrices[k]*v,0):0;
+  const tax=subtotal*0.0725;
   const total=subtotal+tax;
-  emailBody+=`\nSubtotal: $${subtotal.toFixed(2)}\n`;
-  emailBody+=`Tax (9.5%): $${tax.toFixed(2)}\n`;
-  emailBody+=`Total: $${total.toFixed(2)}\n`;
-
-  const email="koseouk@gmail.com";
-  const subject=encodeURIComponent("New HANA SUSHI Order");
-  const body=encodeURIComponent(emailBody);
-  window.location.href=`mailto:${email}?subject=${subject}&body=${body}`;
+  body+=`\nSubtotal: $${subtotal.toFixed(2)}\nTax: $${tax.toFixed(2)}\nTotal: $${total.toFixed(2)}`;
+  window.location.href=`mailto:koseouk@gmail.com?subject=HANA SUSHI Order&body=${encodeURIComponent(body)}`;
 });
 </script>
 
