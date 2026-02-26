@@ -13,7 +13,16 @@ nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;jus
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
 nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
 nav a:hover{color:#ff2e2e;}
-.hero{height:60vh;background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center;}
+.hero{
+  height:60vh;
+  background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 .hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
 .hero p{font-size:20px;margin:20px 0 35px;}
@@ -35,33 +44,64 @@ section{padding:100px 10%;}
 @media (max-width:768px){#map{height:350px;}}
 .qr-section{background:#111;text-align:center;padding:60px 20px;}
 .qr-section h2{font-size:32px;color:#ff2e2e;margin-bottom:15px;}
-.qr-card{background:linear-gradient(145deg,#111,#1c1c1c);padding:28px;border-radius:22px;box-shadow:0 0 15px rgba(255,46,46,0.4),0 0 30px rgba(255,46,46,0.2);border:1px solid rgba(255,255,255,0.1);position:relative;overflow:hidden;transition: transform 0.3s ease, box-shadow 0.3s ease;display:inline-block;}
+.qr-card{
+  background:linear-gradient(145deg,#111,#1c1c1c);
+  padding:28px;
+  border-radius:22px;
+  box-shadow:0 0 15px rgba(255,46,46,0.4),0 0 30px rgba(255,46,46,0.2);
+  border:1px solid rgba(255,255,255,0.1);
+  position:relative;
+  overflow:hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display:inline-block;
+}
 .qr-card:hover{transform:scale(1.05);box-shadow:0 0 25px rgba(255,46,46,0.6),0 0 50px rgba(255,46,46,0.4);}
-.neon-bg-soft::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background: radial-gradient(circle at 25% 25%, rgba(255,46,46,0.15), rgba(255,193,7,0.1), rgba(255,140,0,0.05), transparent);animation: neonSoftBlink 3.5s infinite alternate;z-index:0;}
+.neon-bg-soft::before{
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background: radial-gradient(circle at 25% 25%, rgba(255,46,46,0.15), rgba(255,193,7,0.1), rgba(255,140,0,0.05), transparent);
+  animation: neonSoftBlink 3.5s infinite alternate;
+  z-index:0;
+}
 @keyframes neonSoftBlink{0%{opacity:0.2;transform:scale(1);}50%{opacity:0.35;transform:scale(1.02);}100%{opacity:0.2;transform:scale(1);}}
-.qr-main{position:relative;z-index:2;background:#fff;padding:14px;border-radius:18px;width:260px;height:260px;border:5px solid #ff2e2e;display:block;margin:0 auto;}
+.qr-main{
+  position:relative;
+  z-index:2;
+  background:#fff;
+  padding:14px;
+  border-radius:18px;
+  width:260px;
+  height:260px;
+  border:5px solid #ff2e2e;
+  display:block;
+  margin:0 auto;
+}
 footer{text-align:center;padding:30px;background:#111;color:#777;}
 
-/* ✅ 주문 섹션 스타일 - 페이지 맨 아래 고정, 약간 넓게 */
-#order-summary{
-  position:absolute;
-  bottom:20px;
-  right:20px;
-  width:360px;
-  z-index:999;
-  padding:20px;
-  background:#111;
-  border-radius:15px;
-  color:#fff;
-  font-size:18px;
+/* ====================== Your Order 고정 + 버튼 글자 + 메시지 ====================== */
+#order-summary {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 360px;
+  z-index: 999;
+  padding: 20px;
+  background: #111;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 18px;
 }
-#order-summary h2{
+#order-summary h2 {
   color:#ff2e2e;
   font-size:32px;
   text-align:center;
   margin-bottom:15px;
 }
-#selected-items button{
+#selected-items button {
   padding:3px 10px;
   border:none;
   border-radius:5px;
@@ -70,13 +110,13 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   background:#ff2e2e;
   transition:0.2s;
 }
-#send-order{
+#send-order {
   font-size:24px;
   font-weight:700;
   padding:12px 30px;
   margin-top:10px;
 }
-#order-message{
+#order-message {
   display:none;
   color:#0f0;
   font-weight:700;
@@ -109,7 +149,10 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 <section id="about">
   <h2 class="section-title">Our Story</h2>
-  <p class="about">HANA SUSHI Food Truck brings bold Japanese flavors to the streets. Fresh sushi, spicy sauces, and fusion rolls made for street food lovers.</p>
+  <p class="about">
+    HANA SUSHI Food Truck brings bold Japanese flavors to the streets.
+    Fresh sushi, spicy sauces, and fusion rolls made for street food lovers.
+  </p>
 </section>
 
 <section id="menu">
@@ -136,17 +179,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
         <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh sashimi, chef’s special</p>
       </div>
     </div>
-  </div>
-
-  <!-- ✅ 주문 섹션 삽입 -->
-  <div id="order-summary">
-    <h2>Your Order</h2>
-    <div id="selected-items"></div>
-    <p>Subtotal: $<span id="subtotal">0.00</span></p>
-    <p>Tax (9.5%): $<span id="tax">0.00</span></p>
-    <p style="font-weight:700;">Total: $<span id="total">0.00</span></p>
-    <button id="send-order">Send Order</button>
-    <div id="order-message">Order Sent!</div>
   </div>
 </section>
 
@@ -202,6 +234,17 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
 
+<!-- ====================== Your Order 하단 고정 ====================== -->
+<div id="order-summary">
+  <h2>Your Order</h2>
+  <div id="selected-items"></div>
+  <p>Subtotal: $<span id="subtotal">0.00</span></p>
+  <p>Tax (9.5%): $<span id="tax">0.00</span></p>
+  <p style="font-weight:700;">Total: $<span id="total">0.00</span></p>
+  <button id="send-order">Send Order</button>
+  <div id="order-message">Order Sent!</div>
+</div>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
 // 날짜 제한
@@ -224,6 +267,7 @@ const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 let foodTruckMarker = L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
 
+// 위치 안내 박스
 let geoAlertDiv = document.createElement('div');
 geoAlertDiv.style.position = 'absolute';
 geoAlertDiv.style.top = '10px';
@@ -239,6 +283,7 @@ geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
+// Current Food Truck Location 버튼
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
     document.getElementById('map').scrollIntoView({behavior: 'smooth'});
@@ -319,7 +364,7 @@ function updateOrderSummary(){
   document.getElementById('total').innerText=total.toFixed(2);
 }
 
-// Send Order 버튼 + 초록 메시지
+// Send Order 버튼
 const sendOrderBtn = document.getElementById('send-order');
 const orderMessage = document.getElementById('order-message');
 sendOrderBtn.addEventListener('click', ()=>{
@@ -346,9 +391,9 @@ sendOrderBtn.addEventListener('click', ()=>{
   messageTextarea.value = lines.join('\n');
   contactForm.submit();
 
-  // ✅ 초록 메시지 표시
+  // ✅ Order Sent! 표시
   orderMessage.style.display='block';
-  setTimeout(()=>{ orderMessage.style.display='none'; },3000);
+  setTimeout(()=>{ orderMessage.style.display='none'; }, 3000);
 
   // 주문 초기화
   for(const key in selectedItems) delete selectedItems[key];
