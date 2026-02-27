@@ -28,15 +28,18 @@ nav a:hover{color:#ff2e2e;}
 .hero p{font-size:20px;margin:20px 0 35px;}
 .hero button{padding:14px 35px;border:none;background:#ff2e2e;color:#fff;font-size:16px;border-radius:8px;cursor:pointer;}
 .hero button:hover{background:#ffb703;color:#000;}
-section{padding:100px 10%;}
+section{
+    padding:100px 10%;
+    text-align:center; /* 기본 중앙 정렬 */
+}
 .section-title{font-size:38px;color:#ff2e2e;margin-bottom:20px;}
-.about{max-width:800px;line-height:1.8;font-size:18px;}
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+.about{max-width:800px;line-height:1.8;font-size:18px;margin:0 auto;}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;justify-items:center;}
 .menu-item{background:#111;border-radius:15px;overflow:hidden;cursor:pointer;}
-.menu-item img{width:100%;height:200px;object-fit:cover;transition: transform 0.3s ease, box-shadow 0.3s ease;border-radius:12px;}
+.menu-item img{width:100%;max-width:280px;height:220px;object-fit:cover;margin:0 auto;transition: transform 0.3s ease, box-shadow 0.3s ease;border-radius:12px;}
 .menu-item img:hover{transform:scale(1.15);z-index:5;position:relative;box-shadow:0 0 20px rgba(255,46,46,0.6),0 0 40px rgba(255,193,7,0.4);}
 @media (max-width:768px){.menu-item img:active{transform:scale(1.1);box-shadow:0 0 15px rgba(255,46,46,0.5),0 0 25px rgba(255,193,7,0.3);}}
-.contact-box{max-width:500px;}
+.contact-box{max-width:500px;margin:0 auto;}
 .contact-box input,.contact-box textarea,.contact-box select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
 .contact-box button{padding:12px 28px;border:none;background:#ff2e2e;color:#fff;border-radius:8px;cursor:pointer;}
 .contact-box button:hover{background:#ffb703;color:#000;}
@@ -95,40 +98,25 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   color: #fff;
   font-size: 18px;
 }
-#order-summary h2 {
-  color:#ff2e2e;
-  font-size:32px;
-  text-align:center;
-  margin-bottom:15px;
-}
-#selected-items button {
-  padding:3px 10px;
-  border:none;
-  border-radius:5px;
-  font-weight:700;
-  color:#fff;
-  background:#ff2e2e;
-  transition:0.2s;
-}
-#send-order {
-  font-size:24px;
-  font-weight:700;
-  padding:12px 30px;
-  margin-top:10px;
-}
-#order-message {
-  display:none;
-  color:#0f0;
-  font-weight:700;
-  margin-top:10px;
-  text-align:center;
-}
+#order-summary h2 { color:#ff2e2e; font-size:32px; text-align:center; margin-bottom:15px; }
+#selected-items button { padding:3px 10px; border:none; border-radius:5px; font-weight:700; color:#fff; background:#ff2e2e; transition:0.2s; }
+#send-order { font-size:24px; font-weight:700; padding:12px 30px; margin-top:10px; }
+#order-message { display:none; color:#0f0; font-weight:700; margin-top:10px; text-align:center; }
 
 /* ====================== Special Sashimi 제목 크게 ====================== */
 .menu-item h3:contains("Special Sashimi"),
 .menu-item h3:contains("Hana Special") {
-  font-size:28px;
-  font-weight:1700;
+  font-size:28px; font-weight:700;
+}
+
+/* ====================== Sashimi 섹션 강제 표시 ====================== */
+#sashimi, #sashimi .menu-item { display: block !important; }
+
+/* ====================== 모바일 대응 ====================== */
+@media (max-width:768px){
+    section { padding:60px 5%; text-align:center; }
+    .menu-grid { grid-template-columns:1fr; gap:20px; justify-items:center; }
+    .menu-item img { height:200px; max-width:90%; }
 }
 </style>
 </head>
@@ -188,23 +176,20 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
     </div>
   </div>
 </section>
-<!-- ======================    사시미   ====================== -->
+
 <section id="sashimi">
   <h2 class="section-title">Sashimi</h2>
-
   <div class="menu-grid">
     <div class="menu-item">
       <img src="special sashimi.webp" loading="lazy">
       <div>
         <h3>🍣 Special Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients: Assorted fresh Sashimi
-        </p>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
       </div>
     </div>
   </div>
 </section>
-<!-- ======================    사시미    ====================== -->
+
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
@@ -414,11 +399,9 @@ sendOrderBtn.addEventListener('click', ()=>{
   messageTextarea.value = lines.join('\n');
   contactForm.submit();
 
-  // ✅ Order Sent! 표시
   orderMessage.style.display='block';
   setTimeout(()=>{ orderMessage.style.display='none'; }, 3000);
 
-  // 주문 초기화
   for(const key in selectedItems) delete selectedItems[key];
   updateOrderSummary();
 });
