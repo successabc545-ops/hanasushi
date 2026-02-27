@@ -110,8 +110,13 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 }
 
 /* ====================== Sashimi 섹션 강제 표시 ====================== */
-#sashimi, #sashimi .menu-item { display: block !important; }
-
+#sashimi .menu-item img {
+    width: 100%;
+    max-width: 400px;   /* PC에서는 최대 400px */
+    height: 300px;      /* 높이 300px */
+    object-fit: cover;
+    margin: 0 auto;
+}
 /* ====================== 모바일 대응 ====================== */
 @media (max-width:768px){
     #sashimi .menu-item img {
