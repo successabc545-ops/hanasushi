@@ -120,12 +120,9 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 /* ====================== 모바일 대응 ====================== */
 @media (max-width:768px){
     #sashimi .menu-item img {
-    width: 100%;
-    max-width: 400px;   /* PC에서는 최대 400px */
-    height: 300px;      /* 높이 300px */
-    object-fit: cover;
-    margin: 0 auto;
-}
+        max-width: 90%;  /* 모바일에서는 화면 거의 다 차지 */
+        height: auto;    /* 모바일에서는 비율 유지 */
+    }
 }
 </style>
 </head>
