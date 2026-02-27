@@ -114,9 +114,13 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 /* ====================== 모바일 대응 ====================== */
 @media (max-width:768px){
-    section { padding:60px 5%; text-align:center; }
-    .menu-grid { grid-template-columns:1fr; gap:20px; justify-items:center; }
-    .menu-item img { height:200px; max-width:90%; }
+    #sashimi .menu-item img {
+    width: 100%;
+    max-width: 400px;   /* PC에서는 최대 400px */
+    height: 300px;      /* 높이 300px */
+    object-fit: cover;
+    margin: 0 auto;
+}
 }
 </style>
 </head>
