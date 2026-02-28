@@ -6,6 +6,7 @@
 <title>HANA SUSHI FOOD TRUCK</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
@@ -28,18 +29,15 @@ nav a:hover{color:#ff2e2e;}
 .hero p{font-size:20px;margin:20px 0 35px;}
 .hero button{padding:14px 35px;border:none;background:#ff2e2e;color:#fff;font-size:16px;border-radius:8px;cursor:pointer;}
 .hero button:hover{background:#ffb703;color:#000;}
-section{
-    padding:100px 10%;
-    text-align:center; /* 기본 중앙 정렬 */
-}
+section{padding:100px 10%;}
 .section-title{font-size:38px;color:#ff2e2e;margin-bottom:20px;}
-.about{max-width:800px;line-height:1.8;font-size:18px;margin:0 auto;}
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;justify-items:center;}
+.about{max-width:800px;line-height:1.8;font-size:18px;}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
 .menu-item{background:#111;border-radius:15px;overflow:hidden;cursor:pointer;}
-.menu-item img{width:100%;max-width:280px;height:220px;object-fit:cover;margin:0 auto;transition: transform 0.3s ease, box-shadow 0.3s ease;border-radius:12px;}
+.menu-item img{width:100%;height:200px;object-fit:cover;transition: transform 0.3s ease, box-shadow 0.3s ease;border-radius:12px;}
 .menu-item img:hover{transform:scale(1.15);z-index:5;position:relative;box-shadow:0 0 20px rgba(255,46,46,0.6),0 0 40px rgba(255,193,7,0.4);}
 @media (max-width:768px){.menu-item img:active{transform:scale(1.1);box-shadow:0 0 15px rgba(255,46,46,0.5),0 0 25px rgba(255,193,7,0.3);}}
-.contact-box{max-width:500px;margin:0 auto;}
+.contact-box{max-width:500px;}
 .contact-box input,.contact-box textarea,.contact-box select{width:100%;padding:12px;margin:10px 0;border:none;border-radius:6px;}
 .contact-box button{padding:12px 28px;border:none;background:#ff2e2e;color:#fff;border-radius:8px;cursor:pointer;}
 .contact-box button:hover{background:#ffb703;color:#000;}
@@ -84,42 +82,33 @@ section{
   margin:0 auto;
 }
 footer{text-align:center;padding:30px;background:#111;color:#777;}
-
-/* ====================== Your Order 고정 + 버튼 글자 + 메시지 ====================== */
-#order-summary {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 360px;
-  z-index: 999;
-  padding: 20px;
-  background: #111;
-  border-radius: 15px;
-  color: #fff;
-  font-size: 18px;
+/* 주문 섹션 스타일 */
+#order-summary{
+  margin:30px 10%;
+  padding:20px;
+  background:#111;
+  border-radius:15px;
+  color:#fff;
 }
-#order-summary h2 { color:#ff2e2e; font-size:32px; text-align:center; margin-bottom:15px; }
-#selected-items button { padding:3px 10px; border:none; border-radius:5px; font-weight:700; color:#fff; background:#ff2e2e; transition:0.2s; }
-#send-order { font-size:24px; font-weight:700; padding:12px 30px; margin-top:10px; }
-#order-message { display:none; color:#0f0; font-weight:700; margin-top:10px; text-align:center; }
-
-/* ====================== Special Sashimi 제목 크게 ====================== */
-.menu-item h3:contains("Special Sashimi"),
-.menu-item h3:contains("Hana Special") {
-  font-size:28px; font-weight:700;
+#order-summary h2{
+  color:#ff2e2e;
+  font-size:48px;
+  text-align:center;
+  margin-bottom:20px;
 }
-
-/* ====================== Sashimi 섹션 강제 표시 ====================== */
-.sashimi {
-    width: 100%;
-    height: auto;
+#selected-items button{
+  padding:3px 10px;
+  border:none;
+  border-radius:5px;
+  font-weight:700;
+  color:#fff;
+  background:#ff2e2e;
+  transition:0.2s;
 }
-/* ====================== 모바일 대응 ====================== */
-@media only screen and (max-width: 768px) {
-    .sashimi {
-        transform: scale(7);
-        transform-origin: center;
-    }
+#selected-items button:hover,
+#send-order:hover{
+  background:#ffb703;
+  color:#000;
 }
 </style>
 </head>
@@ -160,36 +149,37 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <img src="1.Burito.webp" loading="lazy">
       <div>
         <h3>🌯 Burito</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Spicy imitation crab, avocado, tuna, salmon</p>
+        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Spicy imitation crab, avocado, tuna, salmon</p>
       </div>
     </div>
+
     <div class="menu-item">
       <img src="Smoked_Burito.webp" loading="lazy">
       <div>
         <h3>🌯 Smoked Burito</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Smoked salmon, cream cheese, cucumber, avocado</p>
+        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Smoked salmon, cream cheese, cucumber, avocado</p>
       </div>
     </div>
-    <div class="menu-item">
-      <img src="special sashimi.webp" loading="lazy">
-      <div>
-        <h3>🍣 Hana Speccial</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh sashimi, chef’s special</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section id="sashimi">
-  <h2 class="section-title">Sashimi</h2>
-  <div class="menu-grid">
+    <!-- ✅ Special Sashimi 추가 -->
     <div class="menu-item">
       <img src="special sashimi.webp" loading="lazy">
       <div>
         <h3>🍣 Special Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
+        <p style="font-size:14px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh sashimi, chef’s special</p>
       </div>
     </div>
+
+  </div>
+
+  <!-- ✅ 주문 섹션 삽입 -->
+  <div id="order-summary">
+    <h2>Your Order</h2>
+    <div id="selected-items"></div>
+    <p>Subtotal: $<span id="subtotal">0.00</span></p>
+    <p>Tax (7.25%): $<span id="tax">0.00</span></p>
+    <p style="font-weight:700;">Total: $<span id="total">0.00</span></p>
+    <button id="send-order">Your Order Size</button>
   </div>
 </section>
 
@@ -244,17 +234,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <footer>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
-
-<!-- ====================== Your Order 하단 고정 ====================== -->
-<div id="order-summary">
-  <h2>Your Order</h2>
-  <div id="selected-items"></div>
-  <p>Subtotal: $<span id="subtotal">0.00</span></p>
-  <p>Tax (9.5%): $<span id="tax">0.00</span></p>
-  <p style="font-weight:700;">Total: $<span id="total">0.00</span></p>
-  <button id="send-order">Send Order</button>
-  <div id="order-message">Order Sent!</div>
-</div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
@@ -314,7 +293,7 @@ scrollMapBtn.addEventListener('click', () => {
     }
 });
 
-// 메뉴 주문 + 수량 + 세금
+// ✅ 메뉴 주문 + 수량 + 세금
 const menuPrices = {
   "🌯 Burito": 50.00,
   "🌯 Smoked Burito": 100.00,
@@ -375,9 +354,8 @@ function updateOrderSummary(){
   document.getElementById('total').innerText=total.toFixed(2);
 }
 
-// Send Order 버튼
+// ✅ Your Order Size → Contact Us submit
 const sendOrderBtn = document.getElementById('send-order');
-const orderMessage = document.getElementById('order-message');
 sendOrderBtn.addEventListener('click', ()=>{
   const contactForm = document.querySelector('#contact form');
   const messageTextarea = contactForm.querySelector('textarea[name="message"]');
@@ -401,12 +379,6 @@ sendOrderBtn.addEventListener('click', ()=>{
 
   messageTextarea.value = lines.join('\n');
   contactForm.submit();
-
-  orderMessage.style.display='block';
-  setTimeout(()=>{ orderMessage.style.display='none'; }, 3000);
-
-  for(const key in selectedItems) delete selectedItems[key];
-  updateOrderSummary();
 });
 </script>
 
