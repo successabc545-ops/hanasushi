@@ -302,21 +302,52 @@ geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
-// Current Food Truck Location 버튼
-const scrollMapBtn = document.getElementById('scroll-map');
+// ====================== 현재 위치 기능 강화 (추가) ======================
+if (navigator.geolocation) {
+    // 브라우저가 위치 기능 지원하는 경우
+    navigator.permissions?.query({name:'geolocation'}).then(function(result){
+        if(result.state === 'denied'){
+            geoAlertDiv.innerText = "⚠ 위치 접근이 차단되어 있습니다. 브라우저 설정에서 위치 허용 후 다시 시도해주세요.";
+            geoAlertDiv.style.display='block';
+        }
+    });
+}
+
+// Current Food Truck Location 클릭 시 위치 갱신 강화
 scrollMapBtn.addEventListener('click', () => {
     document.getElementById('map').scrollIntoView({behavior: 'smooth'});
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(pos=>{
-            geoAlertDiv.style.display='none';
-            const latlng=[pos.coords.latitude,pos.coords.longitude];
-            foodTruckMarker.setLatLng(latlng).bindPopup("Food Truck are here").openPopup();
-            map.flyTo(latlng,16);
-        },err=>{
-            geoAlertDiv.innerText="⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
-            geoAlertDiv.style.display='block';
-        });
-    } else{
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            pos => {
+                geoAlertDiv.style.display='none';
+                const latlng = [pos.coords.latitude, pos.coords.longitude];
+                
+                // 기존 마커 제거 후 새 위치 표시
+                if (foodTruckMarker) map.removeLayer(foodTruckMarker);
+                foodTruckMarker = L.marker(latlng).addTo(map).bindPopup("🍣 Food Truck is here!").openPopup();
+                map.flyTo(latlng,16);
+            },
+            err => {
+                let msg = "";
+                switch(err.code){
+                    case err.PERMISSION_DENIED:
+                        msg = "⚠ 위치 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
+                        break;
+                    case err.POSITION_UNAVAILABLE:
+                        msg = "⚠ 위치 정보를 가져올 수 없습니다.";
+                        break;
+                    case err.TIMEOUT:
+                        msg = "⚠ 위치 요청이 시간 초과되었습니다.";
+                        break;
+                    default:
+                        msg = "⚠ 알 수 없는 위치 오류 발생.";
+                }
+                geoAlertDiv.innerText = msg;
+                geoAlertDiv.style.display='block';
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        );
+    } else {
         geoAlertDiv.innerText="⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
         geoAlertDiv.style.display='block';
     }
