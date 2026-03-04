@@ -8,12 +8,13 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
 
-/* 시작 */  
-  .big-title{
-      font-size:28px;
-      font-weight:900;
-    }
-/*끝 */  
+/* ==============  시작 ================== */  
+.big-title {
+  font-size:28px;
+  font-weight:900;
+  text-shadow: 0 0 5px #ff2e2e;
+}
+/*===================끝 ===================*/  
   *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
 nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;justify-content:space-between;align-items:center;padding:15px 40px;z-index:1000;}
@@ -199,14 +200,15 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <section id="sashimi">
   <h2 class="section-title">Sashimi</h2>
   <div class="menu-grid">  
-  <div class="menu-item">
+    <div class="menu-item">
       <img src="special sashimi.webp" loading="lazy">
       <div>
-       <h3 class="big-title">🍣 Special Sashimi</h3>
+        <h3 class="big-title">🍣 Special Sashimi</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
       </div>
     </div>
-  </section>  
+  </div> <!-- menu-grid 닫는 div -->
+</section>
 <!-- ======================    사시미    ====================== -->  
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
