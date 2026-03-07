@@ -23,11 +23,11 @@
 }
 
 @media (max-width:768px){
-  .hero div {
-    align-items: center;
-    text-align: center;
+  /* hero 전체 영역 줄이기 */
+  .hero{
+    height:50vh;     /* PC보다 낮게 */
+    padding:20px 10px;
   }
-}
 
 /* 기존 다른 CSS 계속 이어짐 */
 section{padding:100px 10%;}
@@ -222,7 +222,50 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   img, video, iframe, div {
   max-width: 100%;
 }
-<!-- ======================   셀폰에서 화면볼때 조절장치 끝  ====================== -->
+  /* hero 제목 H1 */
+  .hero h1{
+    font-size:28px;          /* 글자 줄이기 */
+    text-align:center;       /* 가운데 정렬 */
+    position:relative;       /* 안전하게 상대 위치 */
+    top:0;                   /* 위치 초기화 */
+    left:0;                  /* 위치 초기화 */
+    transform:none;           /* 초기화 */
+  }
+
+  /* hero 소제목 H2 */
+  .hero h2{
+    font-size:20px;
+    text-align:center;
+    position:relative;
+    top:0;
+    left:0;
+    transform:none;
+  }
+
+  /* hero 설명문 P */
+  .hero p{
+    font-size:16px;
+    text-align:center;
+    position:relative;
+    top:0;
+    left:0;
+    transform:none;
+  }
+
+  /* hero 안쪽 박스 정렬 */
+  .hero div{
+    align-items: center;     /* 가운데 정렬 */
+    text-align: center;      /* 글자도 가운데 */
+  }
+
+  /* 이미지/박스가 화면 넘어가지 않게 */
+  img, video, iframe, div{
+    max-width:100%;
+  }
+}
+  
+  
+  <!-- ======================   셀폰에서 화면볼때 조절장치 끝  ====================== -->
 </style>
 
 </head>
