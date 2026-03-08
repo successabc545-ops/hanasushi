@@ -57,7 +57,7 @@ nav a:hover{color:#ff2e2e;}
   background: url('hero.webp'); /* 파일 이름 정확히 맞출 것! 대소문자 구분 */
   background-size: cover;
   background-position: center center;
-  height: 20vh; /* Hero 높이 */
+  min-height: 45vh; /* Hero 높이 */
   padding: 120px 20px;
   position: relative;
   color: white;
@@ -83,17 +83,6 @@ nav a:hover{color:#ff2e2e;}
 .hero * {
   position: relative;
   z-index: 2;
-}
-
-/* Hero 텍스트 스타일 */
-.hero h1{
-font-size:42px;
-line-height:1.1;
-}
-
- .hero{
-padding-top:140px;
-padding-bottom:80px;
 } 
 
   .foodtruck{
@@ -104,8 +93,7 @@ font-size:26px;
 .story{
 margin-top:80px;
 }
-
-}  
+  
   .hero h2 {
   color: #ffb703;
   font-size: 28px;
@@ -127,10 +115,6 @@ margin-top:80px;
   cursor: pointer;
 }
 
-.hero button:hover {
-  background: #ffb703;
-  color: #000;
-}
   /* ==============  hero 끝 ================== */
 .hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
@@ -233,13 +217,12 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   margin-top:10px;
   text-align:center;
 }
-<!-- ======================   셀폰에서 화면볼때 조절장치 시작  ====================== -->
-  img, video, iframe, div {
+/* ====================== 셀폰 화면 조절 ====================== */
+ img, video, iframe {
   max-width: 100%;
 }
-<!-- ======================   셀폰에서 화면볼때 조절장치 끝  ====================== -->
-<!-- ======================   셀폰에서 화면볼때 조절장치 끝  ====================== -->
-
+/* ====================== 셀폰 화면 조절끝 ====================== */
+/* ====================== 셀폰 화면 조절 ====================== */
 @media (max-width:768px){
 
 .hero{
@@ -267,7 +250,7 @@ font-size:14px;
 
 }
 
-<!-- ======================   셀폰에서 화면볼때 조절장치 끝  ====================== -->
+/* ====================== 셀폰 화면 조절 ====================== */
 </style>
 
 </head>
@@ -284,15 +267,14 @@ font-size:14px;
     <a href="#qr">QR</a>
   </div>
 </nav>
-<!-- ======================       ====================== -->
+<!-- ====================== ====================== -->
 <section class="hero" id="home">
   <div>
     <h1>HANA SUSHI</h1>
     <h2>FOOD TRUCK(213)793-9978</h2>
     <p>🔥 Japanese Street Sushi • Bold Flavors on Wheels</p>
   </div>
-<!-- ======================       ====================== -->
-
+ <!-- ====================== ====================== -->
 </section>
 
 <section id="about">
@@ -329,7 +311,7 @@ font-size:14px;
     </div>
   </div>
 </section>
-<!-- ======================    사시미   ====================== -->
+<!-- ====================== 사지미 ====================== -->
 <section id="sashimi">
   <h2 class="section-title">Sashimi</h2>
   <div class="menu-grid">  
@@ -342,7 +324,7 @@ font-size:14px;
     </div>
   </div> <!-- menu-grid 닫는 div -->
 </section>
-<!-- ======================    사시미    ====================== -->  
+<!-- ======================사시미 끝 ====================== -->
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
@@ -395,7 +377,7 @@ font-size:14px;
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
 
-<!-- ====================== Your Order 하단 고정 ====================== -->
+/* ====================== your order 하단 교정 ====================== */
 <div id="order-summary">
   <h2>Your Order</h2>
   <div id="selected-items"></div>
