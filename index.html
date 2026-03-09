@@ -15,7 +15,7 @@
 }
 
 /* --- 여기에 붙이면 됨 --- */
-.hero div {
+.hero > div {
   display: flex;
   flex-direction: column;
   align-items: flex-end; /* 오른쪽으로 붙임 */
@@ -33,11 +33,14 @@
 section{padding:100px 10%;}
 ...
 /* ==============  hana sushi 오른쪽으로 끝 ================== */  
-.hero *{
-  position:relative;
-  z-index:2;
+.hero > div,
+.hero h1,
+.hero h2,
+.hero p,
+.hero button {
+  position: relative;
+  z-index: 2;
 }
-
   
 /* ==============  시작 ================== */  
 .big-title {
