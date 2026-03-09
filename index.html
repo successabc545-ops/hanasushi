@@ -197,7 +197,21 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   font-weight:900;
 }
 </style>
+/* ====================== Special Sashimi 확대 방지 시작 ====================== */
 
+ <style>
+    /* 기존 CSS 끝 */
+
+    /* ===== Special Sashimi만 hover 확대 제거 ===== */
+    #sashimi .menu-item img[src="special sashimi.webp"]:hover {
+      transform: none !important;
+      box-shadow: none !important;
+      cursor: pointer; /* 클릭은 가능 */
+    }
+  </style>
+
+/* ====================== Special Sashimi 확대 방지 끝 ====================== */
+  
 </head>
 <body>
 <!-- ======================    놀래키기 시작   ====================== -->
