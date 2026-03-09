@@ -213,6 +213,30 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 /* ====================== Special Sashimi 확대 방지 끝 ====================== */
   
 </head>
+
+  <style>
+    /* 기존 CSS */
+
+    /* 모든 사시미 이미지 기본 확대 */
+    #sashimi .menu-item img {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* 일반 hover 확대 */
+    #sashimi .menu-item img:hover {
+      transform: scale(1.2);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+
+    /* Special Sashimi만 hover 시 확대 제거 */
+    #sashimi .menu-item img[src="special sashimi.webp"]:hover {
+      transform: none !important;
+      box-shadow: none !important;
+      cursor: pointer; /* 클릭은 가능 */
+    }
+  </style>
+  
 <body>
 <!-- ======================    놀래키기 시작   ====================== -->
 <div id="vegas-intro">
