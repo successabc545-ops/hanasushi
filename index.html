@@ -547,7 +547,16 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 </script>
+ <script>
+    const orderMessage = document.getElementById('order-message');
+    const items = document.querySelectorAll('.menu-item');
 
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        orderMessage.style.display = 'block'; // 아이템 클릭 시 나타남
+      });
+    });
+  </script>
 
 </body>
 </html>
