@@ -376,18 +376,19 @@ document.querySelectorAll('.menu-item').forEach(item=>{
 });
 
 function updateOrderSummary(){
+
+  const orderSummary = document.getElementById('order-summary');
   const selectedDiv = document.getElementById('selected-items');
+
   selectedDiv.innerHTML='';
   let subtotal=0;
-const orderSummary = document.getElementById('order-summary');
 
-if(Object.keys(selectedItems).length === 0){
-  orderSummary.style.display = 'none';
-} else {
-  orderSummary.style.display = 'block';
-}
+  if(Object.keys(selectedItems).length === 0){
+    orderSummary.style.display = 'none';
+  } else {
+    orderSummary.style.display = 'block';
+  }
 
-  
   for(const [name,qty] of Object.entries(selectedItems)){
     const price=menuPrices[name]||0;
     subtotal+=price*qty;
