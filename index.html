@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
+/* ==============  놀래키기 시작 ================== */    
 #vegas-intro{
 position:fixed;
 top:0;
@@ -61,7 +62,7 @@ opacity:0;
 visibility:hidden;
 }
 }
-
+/* ==============  놀래키기 끝 ================== */  
 /* ==============  시작 ================== */  
 .big-title {
   font-size:28px;
@@ -199,7 +200,14 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 </head>
 <body>
-
+<!-- ======================    놀래키기 시작   ====================== -->
+<div id="vegas-intro">
+  <div class="neon-sign">
+    HANA SUSHI
+    <span>WELCOME</span>
+  </div>
+</div>
+ <!-- ======================    놀래키기 끝   ====================== --> 
 <nav>
   <div class="logo">HANA SUSHI 🚚</div>
   <div>
@@ -559,11 +567,12 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 </script>
-
+/* ==============  놀래키기 시작 ================== */  
 <script>
 setTimeout(function(){
 document.getElementById("vegas-intro").style.display="none";
 },2000);
 </script>
+  /* ==============  놀래키기 끝 ================== */  
 </body>
 </html>
