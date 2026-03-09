@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
-/* ==============  hana sushi 오른쪽으로 시작 ================== */  
+ /* hana sushi 오른쪽으로 시작 */
   /* 기존 hero 스타일 끝나는 부분 */
 .hero button:hover {
   background: #ffb703;
@@ -218,11 +218,12 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   margin-top:10px;
   text-align:center;
 }
-<!-- ======================   셀폰에서 화면볼때 조절장치 시작  ====================== -->
+/* ====================== 셀폰에서 화면볼때 조절장치 시작 ====================== */
+ 
   img, video, iframe, div {
   max-width: 100%;
 }
-<!-- ======================   셀폰에서 화면볼때 조절장치 끝  ====================== -->
+/* ====================== 셀폰에서 화면볼때 조절장치 끝 ====================== */
 @media (max-width:768px){
   .hero {
     height: auto;        /* 높이 자동 */
@@ -259,15 +260,14 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
     <a href="#qr">QR</a>
   </div>
 </nav>
-<!-- ======================       ====================== -->
+/* ======================         ====================== */
 <section class="hero" id="home">
   <div>
     <h1>HANA SUSHI</h1>
     <h2>FOOD TRUCK(213)793-9978</h2>
     <p>🔥 Japanese Street Sushi • Bold Flavors on Wheels</p>
   </div>
-<!-- ======================       ====================== -->
-
+/* ======================          ====================== */
 </section>
 
 <section id="about">
@@ -304,7 +304,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
     </div>
   </div>
 </section>
-<!-- ======================    사시미   ====================== -->
+/* ====================== 사시미  ====================== */
 <section id="sashimi">
   <h2 class="section-title">Sashimi</h2>
   <div class="menu-grid">  
@@ -317,7 +317,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
     </div>
   </div> <!-- menu-grid 닫는 div -->
 </section>
-<!-- ======================    사시미    ====================== -->  
+/* ====================== 사시미 끝 ====================== */  
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
@@ -369,8 +369,8 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <footer>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
+/* ====================== Your Order 하단 고정 ====================== */
 
-<!-- ====================== Your Order 하단 고정 ====================== -->
 <div id="order-summary">
   <h2>Your Order</h2>
   <div id="selected-items"></div>
