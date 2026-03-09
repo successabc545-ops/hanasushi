@@ -497,11 +497,7 @@ function updateOrderSummary(){
   } else {
     orderSummary.style.display = 'block'; // 아이템 있으면 보임
   }
-
-
-  
-  //=======================                ==================
-  for(const [name,qty] of Object.entries(selectedItems)){
+   for(const [name,qty] of Object.entries(selectedItems)){
     const price=menuPrices[name]||0;
     subtotal+=price*qty;
     const itemLine=document.createElement('div');
