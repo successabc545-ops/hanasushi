@@ -15,18 +15,19 @@
 }
 
 /* --- 여기에 붙이면 됨 --- */
-.hero > div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* 오른쪽으로 붙임 */
-  text-align: right;     /* 글자도 오른쪽 정렬 */
-}
+ display: flex;
 
 @media (max-width:768px){
-  .hero div {
-    align-items: center;
+  .hero {
+    align-items: center;   /* 모바일에서는 중앙 정렬 */
     text-align: center;
+    padding: 60px 15px;    /* 여백 줄임 */
+    flex-wrap: wrap;       /* 줄바꿈 가능 */
   }
+  .hero h1 { font-size: 32px; letter-spacing: 1px; }
+  .hero h2 { font-size: 16px; }
+  .hero p  { font-size: 14px; margin-bottom: 20px; }
+  .hero button { font-size: 14px; padding: 8px 20px; }
 }
 
 /* 기존 다른 CSS 계속 이어짐 */
