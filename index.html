@@ -202,8 +202,33 @@ transform: none !important;
   font-size:28px;
   font-weight:900;
 }
-</style>
+  /* =========================== Special Sashimi 그림만 마우스 올리면 확대 시작    =============================== */ 
+  
+ #sashimi .menu-item img {
+  transition: transform 0.3s ease;
+  cursor: pointer; /* 커서 바뀜 */
+}
 
+#sashimi .menu-item img:hover {
+  transform: scale(1.1); /* 마우스 올리면 확대 */
+} 
+  /* =========================== Special Sashimi 그림만 마우스 올리면 확대 끝    =============================== */ 
+ /* =========================== Special Sashimi 그림만 마우스 올리면 확대    =============================== */ 
+  <style>
+    /* 기존 CSS 코드들 */
+
+    /* ===== Sashimi 그림 확대 ===== */
+    #sashimi .menu-item img {
+      transition: transform 0.3s ease;
+      cursor: pointer; /* 커서 바뀜 */
+    }
+
+    #sashimi .menu-item img:hover {
+      transform: scale(1.1); /* 마우스 올리면 확대 */
+    }
+  </style>  
+</style>
+ /* =========================== Special Sashimi 그림만 마우스 올리면 확대 끝    =============================== */ 
 </head>
 <body>
 <!-- ======================    네온 시작   ====================== -->
@@ -280,6 +305,29 @@ transform: none !important;
       </div>
     </div>
   </div> <!-- menu-grid 닫는 div -->
+</section>
+
+  <section id="sashimi">
+  <div class="menu-grid">
+    <div class="menu-item" data-name="Special Sashimi" data-price="25">
+      <img src="sashimi1.webp" loading="lazy">
+    </div>
+    <div class="menu-item" data-name="Salmon Sashimi" data-price="22">
+      <img src="sashimi2.webp" loading="lazy">
+    </div>
+    <div class="menu-item" data-name="Tuna Sashimi" data-price="23">
+      <img src="sashimi3.webp" loading="lazy">
+    </div>
+    <div class="menu-item" data-name="Yellowtail Sashimi" data-price="24">
+      <img src="sashimi4.webp" loading="lazy">
+    </div>
+    <div class="menu-item" data-name="Octopus Sashimi" data-price="20">
+      <img src="sashimi5.webp" loading="lazy">
+    </div>
+    <div class="menu-item" data-name="Assorted Sashimi" data-price="30">
+      <img src="sashimi6.webp" loading="lazy">
+    </div>
+  </div>
 </section>
 <!-- ======================    사시미    ====================== -->  
 <section id="contact">
