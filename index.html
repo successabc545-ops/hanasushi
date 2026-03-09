@@ -21,15 +21,17 @@ nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;jus
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
 nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
 nav a:hover{color:#ff2e2e;}
-.hero {
+.hero div {
   height:60vh; /* 기존 높이 유지 */
   background: url('hero.webp');
   background-size: cover;
   background-position: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  height: 100%; /* hero 전체 높이를 사용 */
 }
 .hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
