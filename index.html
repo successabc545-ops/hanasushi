@@ -3,42 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>eatHanasushiLA</title>
+<title>eatHANASUSHIla</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
- /* hana sushi 오른쪽으로 시작 */
-  /* 기존 hero 스타일 끝나는 부분 */
-.hero button:hover {
-  background: #ffb703;
-  color: #000;
-}
 
-/* --- 여기에 붙이면 됨 --- */
-.hero div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* 오른쪽으로 붙임 */
-  text-align: right;     /* 글자도 오른쪽 정렬 */
-}
-
-@media (max-width:768px){
-  .hero div {
-    align-items: center;
-    text-align: center;
-  }
-}
-
-/* 기존 다른 CSS 계속 이어짐 */
-section{padding:100px 10%;}
-...
-/* ==============  hana sushi 오른쪽으로 끝 ================== */  
-.hero *{
-  position:relative;
-  z-index:2;
-}
-
-  
 /* ==============  시작 ================== */  
 .big-title {
   font-size:28px;
@@ -52,71 +21,16 @@ nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;jus
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
 nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
 nav a:hover{color:#ff2e2e;}
-  /* ==============  hero 시작 ================== */   
 .hero {
-  background: url('hero.webp'); /* 파일 이름 정확히 맞출 것! 대소문자 구분 */
+  height:60vh; /* 기존 높이 유지 */
+  background: url('https://images.unsplash.com/photo-1617196030734-9dfc4e0e4d97?auto=format&fit=crop&w=1200&q=80');
   background-size: cover;
-  background-position: center center;
-  height: auto;  /* Hero 높이 */
-  padding: 60px 20px;
-  position: relative;
-  color: white;
-
-  /* 색감, 대비, 선명도 조정 */
-  filter: brightness(1.05)   /* 조금 밝게 */
-          contrast(1.3)      /* 대비 살리기 */
-          saturate(1.4);     /* 채도 높여 색 튀게 */
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  /* 글자 가독성 유지 */
-  background: rgba(0, 0, 0, 0.25); /* 살짝 어둡게 */
-}
-
-.hero * {
-  position: relative;
-  z-index: 2;
-}
-
-/* Hero 텍스트 스타일 */
-.hero h1 {
-  font-size: 70px;
-  letter-spacing: 5px;
-}
-
-.hero h2 {
-  color: #ffb703;
-  font-size: 28px;
-  margin-top: 10px;
-}
-
-.hero p {
-  font-size: 20px;
-  margin: 20px 0 35px;
-}
-
-.hero button {
-  padding: 14px 35px;
-  border: none;
-  background: #ff2e2e;
-  color: #fff;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.hero button:hover {
-  background: #ffb703;
-  color: #000;
-}
-  /* ==============  hero 끝 ================== */
 .hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
 .hero p{font-size:20px;margin:20px 0 35px;}
@@ -176,9 +90,8 @@ section{padding:100px 10%;}
 }
 footer{text-align:center;padding:30px;background:#111;color:#777;}
 
-<!-- ======================   Your Order 고정 + 버튼 글자 + 메시지       ====================== -->
-  #order-summary {
-  display: none;
+/* ====================== Your Order 고정 + 버튼 글자 + 메시지 ====================== */
+#order-summary {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -218,34 +131,15 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   margin-top:10px;
   text-align:center;
 }
-/* ====================== 셀폰에서 화면볼때 조절장치 시작 ====================== */
- 
-img, video, iframe {
-  max-width: 100%;
+
+/* ====================== Special Sashimi 제목 크게 ====================== */
+.menu-item h3:contains("Special Sashimi"),
+.menu-item h3:contains("Hana Speccial") {
+  font-size:28px;
+  font-weight:900;
 }
-/* ====================== 셀폰에서 화면볼때 조절장치 끝 ====================== */
-@media (max-width:768px){
-  .hero {
-    height: auto;        /* 높이 자동 */
-    padding: 60px 20px;  /* 위아래 여유 */
-  }
-  .hero h1 {
-    font-size: 32px;     /* 글자 크기 줄임 */
-  }
-  .hero h2 {
-    font-size: 18px;
-  }
-  .hero p {
-    font-size: 14px;
-  }
-  .hero div {
-    align-items: center;  /* 중앙 정렬 */
-    text-align: center;
-  }
-}
-  
 </style>
-<!-- ======================   스타일 끝      ====================== -->
+
 </head>
 <body>
 
@@ -260,14 +154,13 @@ img, video, iframe {
     <a href="#qr">QR</a>
   </div>
 </nav>
-<!-- ======================         ====================== -->
+
 <section class="hero" id="home">
   <div>
     <h1>HANA SUSHI</h1>
     <h2>FOOD TRUCK(213)793-9978</h2>
     <p>🔥 Japanese Street Sushi • Bold Flavors on Wheels</p>
   </div>
-<!-- ======================         ====================== -->
 </section>
 
 <section id="about">
@@ -304,7 +197,7 @@ img, video, iframe {
     </div>
   </div>
 </section>
-<!-- ======================    사시미      ====================== -->
+<!-- ======================    사시미   ====================== -->
 <section id="sashimi">
   <h2 class="section-title">Sashimi</h2>
   <div class="menu-grid">  
@@ -317,7 +210,7 @@ img, video, iframe {
     </div>
   </div> <!-- menu-grid 닫는 div -->
 </section>
-<!-- ======================   사시미 끝      ====================== -->
+<!-- ======================    사시미    ====================== -->  
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
@@ -369,8 +262,8 @@ img, video, iframe {
 <footer>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
-<!-- ======================    Your Order 고정 + 버튼 글자 + 메시지       ====================== -->
 
+<!-- ====================== Your Order 하단 고정 ====================== -->
 <div id="order-summary">
   <h2>Your Order</h2>
   <div id="selected-items"></div>
@@ -485,19 +378,7 @@ function updateOrderSummary(){
   const selectedDiv = document.getElementById('selected-items');
   selectedDiv.innerHTML='';
   let subtotal=0;
-
-
-  //=======================                ==================
-
- const orderSummary = document.getElementById('order-summary');
-
-  if(Object.keys(selectedItems).length === 0){
-    orderSummary.style.display = 'none'; // 아이템 없으면 숨김
-    return;
-  } else {
-    orderSummary.style.display = 'block'; // 아이템 있으면 보임
-  }
-   for(const [name,qty] of Object.entries(selectedItems)){
+  for(const [name,qty] of Object.entries(selectedItems)){
     const price=menuPrices[name]||0;
     subtotal+=price*qty;
     const itemLine=document.createElement('div');
@@ -611,6 +492,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 </script>
+
 
 </body>
 </html>
