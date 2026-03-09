@@ -2,67 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1200">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>eatHANASUSHIla</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
-/* ==============  네온 시작 ================== */    
-#vegas-intro{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-animation:introFade 2s forwards;
-}
 
-.neon-sign{
-font-size:60px;
-color:#fff;
-text-align:center;
-font-weight:700;
-letter-spacing:6px;
-text-shadow:
-0 0 5px #0ff,
-0 0 10px #0ff,
-0 0 20px #0ff,
-0 0 40px #00ff99,
-0 0 80px #00ff99;
-animation:flicker 1.5s infinite alternate;
-}
-
-.neon-sign span{
-display:block;
-font-size:28px;
-margin-top:20px;
-color:#00ff99;
-letter-spacing:4px;
-}
-
-@keyframes flicker{
-0%,18%,22%,25%,53%,57%,100%{
-opacity:1;
-}
-20%,24%,55%{
-opacity:0.4;
-}
-}
-
-@keyframes introFade{
-0%{opacity:1;}
-85%{opacity:1;}
-100%{
-opacity:0;
-visibility:hidden;
-}
-}
-/* ==============  네온 끝 ================== */  
 /* ==============  시작 ================== */  
 .big-title {
   font-size:28px;
@@ -76,19 +21,17 @@ nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;jus
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
 nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
 nav a:hover{color:#ff2e2e;}
-.hero div {
+.hero {
   height:60vh; /* 기존 높이 유지 */
-  background: url('hero.webp');
+  background: url('https://images.unsplash.com/photo-1617196030734-9dfc4e0e4d97?auto=format&fit=crop&w=1200&q=80');
   background-size: cover;
   background-position: center;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100%; /* hero 전체 높이를 사용 */
 }
-.hero h1{font-size:70px;letter-spacing:5px;line-height: 1.1; margin: 0 auto;}
+.hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
 .hero p{font-size:20px;margin:20px 0 35px;}
 .hero button{padding:14px 35px;border:none;background:#ff2e2e;color:#fff;font-size:16px;border-radius:8px;cursor:pointer;}
@@ -192,7 +135,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 /* ====================== Special Sashimi 제목 크게 ====================== */
 .menu-item h3:contains("Special Sashimi"),
-.menu-item h3:contains("Sashimi Special") {
+.menu-item h3:contains("Hana Speccial") {
   font-size:28px;
   font-weight:900;
 }
@@ -200,21 +143,14 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 </head>
 <body>
-<!-- ======================    놀래키기 시작   ====================== -->
-<div id="vegas-intro">
-  <div class="neon-sign">
-    HANA SUSHI
-    <span>WELCOME</span>
-  </div>
-</div>
- <!-- ======================    놀래키기 끝   ====================== --> 
+
 <nav>
   <div class="logo">HANA SUSHI 🚚</div>
   <div>
     <a href="#home">Home</a>
     <a href="#about">Story</a>
     <a href="#menu">Menu</a>
-    <a href="#contact">Contact us</a>
+    <a href="#contact">Contact</a>
     <a id="scroll-map">Current Food Truck Location</a>
     <a href="#qr">QR</a>
   </div>
@@ -256,7 +192,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
     <div class="menu-item">
       <img src="special sashimi.webp" loading="lazy">
       <div>
-        <h3>🍣 Sashimi Special</h3>
+        <h3>🍣 Hana Special</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh sashimi, chef’s special</p>
       </div>
     </div>
@@ -265,50 +201,15 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <!-- ======================    사시미   ====================== -->
 <section id="sashimi">
   <h2 class="section-title">Sashimi</h2>
-
-  <div class="menu-grid">
-
+  <div class="menu-grid">  
     <div class="menu-item">
-      <img src="sashimi1.webp" loading="lazy">
+      <img src="special sashimi.webp" loading="lazy">
       <div>
-        <h3>🍣 Sashimi A</h3>
-        <p>$25</p>
+        <h3 class="big-title">🍣 Special Sashimi</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
       </div>
     </div>
-
-    <div class="menu-item">
-      <img src="sashimi2.webp" loading="lazy">
-      <div>
-        <h3>🍣 Sashimi B</h3>
-        <p>$30</p>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="sashimi3.webp" loading="lazy">
-      <div>
-        <h3>🍣 Sashimi C</h3>
-        <p>$35</p>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="sashimi4.webp" loading="lazy">
-      <div>
-        <h3>🍣 Sashimi D</h3>
-        <p>$40</p>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="sashimi5.webp" loading="lazy">
-      <div>
-        <h3>🍣 Sashimi E</h3>
-        <p>$45</p>
-      </div>
-    </div>
-
-  </div>
+  </div> <!-- menu-grid 닫는 div -->
 </section>
 <!-- ======================    사시미    ====================== -->  
 <section id="contact">
@@ -602,12 +503,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 </script>
-/* ==============  네온 시작 ================== */  
-<script>
-setTimeout(function(){
-document.getElementById("vegas-intro").style.display="none";
-},2000);
-</script>
-  /* ==============  네온 끝 ================== */  
+
+
 </body>
 </html>
