@@ -3,25 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HANA SUSHI FOOD TRUCK</title>
+<title>eatHANASUSHIla</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+
+/* ==============  시작 ================== */  
+.big-title {
+  font-size:28px;
+  font-weight:900;
+ text-shadow: 0 0 5px #ff2e2e, 0 0 10px #ff2e2e;
+}
+/*===================끝 ===================*/  
+  *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
 nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;justify-content:space-between;align-items:center;padding:15px 40px;z-index:1000;}
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
 nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
 nav a:hover{color:#ff2e2e;}
-.hero{
-  height:60vh;
-  background:linear-gradient(120deg, rgba(0,0,0,0.75), rgba(255,0,0,0.35)), url('https://images.unsplash.com/photo-1604908177522-0404c2d9d9e7?auto=format&fit=crop&w=800&q=80');
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
+.hero {
+  height:60vh; /* 기존 높이 유지 */
+  background: url('https://images.unsplash.com/photo-1617196030734-9dfc4e0e4d97?auto=format&fit=crop&w=1200&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .hero h1{font-size:70px;letter-spacing:5px;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
@@ -84,6 +92,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 
 /* ====================== Your Order 고정 + 버튼 글자 + 메시지 ====================== */
 #order-summary {
+  display:none;
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -128,9 +137,10 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 .menu-item h3:contains("Special Sashimi"),
 .menu-item h3:contains("Hana Speccial") {
   font-size:28px;
-  font-weight:1700;
+  font-weight:900;
 }
 </style>
+
 </head>
 <body>
 
@@ -157,7 +167,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <section id="about">
   <h2 class="section-title">Our Story</h2>
   <p class="about">
-    HANA SUSHI Food Truck brings bold Japanese flavors to the streets.
+    HANA SUSHi Food Truck brings bold Japanese flavors to the streets.
     Fresh sushi, spicy sauces, and fusion rolls made for street food lovers.
   </p>
 </section>
@@ -192,14 +202,15 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 <section id="sashimi">
   <h2 class="section-title">Sashimi</h2>
   <div class="menu-grid">  
-  <div class="menu-item">
+    <div class="menu-item">
       <img src="special sashimi.webp" loading="lazy">
       <div>
-        <h3>🍣 Special Sashimi</h3>
+        <h3 class="big-title">🍣 Special Sashimi</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
       </div>
     </div>
-  </section>  
+  </div> <!-- menu-grid 닫는 div -->
+</section>
 <!-- ======================    사시미    ====================== -->  
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
@@ -281,10 +292,14 @@ phoneInput.addEventListener('input', e => {
     e.target.value = v;
 });
 
-// 지도 초기화
+// ====================== 지도 초기화 + 위치 기능 통합 ======================
 const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-let foodTruckMarker = L.marker([34.0195, -118.4912]).addTo(map).bindPopup("HANA SUSHI FOOD TRUCK");
+
+// 마커 초기 생성
+let foodTruckMarker = L.marker([34.0195, -118.4912])
+    .addTo(map)
+    .bindPopup("HANA SUSHI FOOD TRUCK");
 
 // 위치 안내 박스
 let geoAlertDiv = document.createElement('div');
@@ -302,27 +317,49 @@ geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
+// --- 페이지 로드 시 자동 위치 표시 ---
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            const latlng = [pos.coords.latitude, pos.coords.longitude];
+            foodTruckMarker.setLatLng(latlng)
+                .bindPopup("Food Truck is here")
+                .openPopup();
+            map.flyTo(latlng, 16);
+        },
+        err => {
+            console.warn("위치 정보 접근 거부됨 또는 실패:", err.message);
+        }
+    );
+}
+
 // Current Food Truck Location 버튼
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
-    document.getElementById('map').scrollIntoView({behavior: 'smooth'});
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(pos=>{
-            geoAlertDiv.style.display='none';
-            const latlng=[pos.coords.latitude,pos.coords.longitude];
-            foodTruckMarker.setLatLng(latlng).bindPopup("Food Truck are here").openPopup();
-            map.flyTo(latlng,16);
-        },err=>{
-            geoAlertDiv.innerText="⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
-            geoAlertDiv.style.display='block';
-        });
-    } else{
-        geoAlertDiv.innerText="⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
-        geoAlertDiv.style.display='block';
+    document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            pos => {
+                geoAlertDiv.style.display = 'none';
+                const latlng = [pos.coords.latitude, pos.coords.longitude];
+                foodTruckMarker.setLatLng(latlng)
+                    .bindPopup("Food Truck is here")
+                    .openPopup();
+                map.flyTo(latlng, 16);
+            },
+            err => {
+                geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
+                geoAlertDiv.style.display = 'block';
+            }
+        );
+    } else {
+        geoAlertDiv.innerText = "⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
+        geoAlertDiv.style.display = 'block';
     }
 });
 
-// 메뉴 주문 + 수량 + 세금
+// ====================== 메뉴 주문 + 수량 + 세금 ======================
 const menuPrices = {
   "🌯 Burito": 50.00,
   "🌯 Smoked Burito": 100.00,
@@ -339,9 +376,19 @@ document.querySelectorAll('.menu-item').forEach(item=>{
 });
 
 function updateOrderSummary(){
+
+  const orderSummary = document.getElementById('order-summary');
   const selectedDiv = document.getElementById('selected-items');
+
   selectedDiv.innerHTML='';
   let subtotal=0;
+
+  if(Object.keys(selectedItems).length === 0){
+    orderSummary.style.display = 'none';
+  } else {
+    orderSummary.style.display = 'block';
+  }
+
   for(const [name,qty] of Object.entries(selectedItems)){
     const price=menuPrices[name]||0;
     subtotal+=price*qty;
@@ -410,18 +457,14 @@ sendOrderBtn.addEventListener('click', ()=>{
   messageTextarea.value = lines.join('\n');
   contactForm.submit();
 
-  // ✅ Order Sent! 표시
   orderMessage.style.display='block';
   setTimeout(()=>{ orderMessage.style.display='none'; }, 3000);
 
-  // 주문 초기화
   for(const key in selectedItems) delete selectedItems[key];
   updateOrderSummary();
 });
 
-<!-- ====================== PWA + 홈 화면 안내 추가 ====================== -->
-
-// 서비스 워커 등록 (PWA)
+// ====================== PWA + 홈 화면 안내 ======================
 if('serviceWorker' in navigator){
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').then(reg=>{
@@ -432,7 +475,6 @@ if('serviceWorker' in navigator){
     });
 }
 
-// 홈 화면 추가 안내
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
