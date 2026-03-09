@@ -57,8 +57,8 @@ nav a:hover{color:#ff2e2e;}
   background: url('hero.webp'); /* 파일 이름 정확히 맞출 것! 대소문자 구분 */
   background-size: cover;
   background-position: center center;
-  height: 20vh; /* Hero 높이 */
-  padding: 120px 20px;
+  height: auto;  /* Hero 높이 */
+  padding: 60px 20px;
   position: relative;
   color: white;
 
@@ -223,6 +223,26 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   max-width: 100%;
 }
 <!-- ======================   셀폰에서 화면볼때 조절장치 끝  ====================== -->
+@media (max-width:768px){
+  .hero {
+    height: auto;        /* 높이 자동 */
+    padding: 60px 20px;  /* 위아래 여유 */
+  }
+  .hero h1 {
+    font-size: 32px;     /* 글자 크기 줄임 */
+  }
+  .hero h2 {
+    font-size: 18px;
+  }
+  .hero p {
+    font-size: 14px;
+  }
+  .hero div {
+    align-items: center;  /* 중앙 정렬 */
+    text-align: center;
+  }
+}
+  
 </style>
 
 </head>
@@ -595,13 +615,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 </script>
-<script>
-@media (max-width: 768px) {
-  .hero h1 { font-size: 35px; }
-  .hero h2 { font-size: 18px; }
-  .hero p  { font-size: 14px; }
-  .hero { padding: 80px 20px; }
-}
-</script>
+
 </body>
 </html>
