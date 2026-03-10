@@ -717,5 +717,57 @@ document.getElementById("vegas-intro").style.display="none";
 },2000);
 </script>
 
+  <script>
+const orderSummary = document.getElementById('order-summary');
+let isDragging = false;
+let offsetX, offsetY;
+
+orderSummary.addEventListener('mousedown', (e)=>{
+    isDragging = true;
+    offsetX = e.clientX - orderSummary.getBoundingClientRect().left;
+    offsetY = e.clientY - orderSummary.getBoundingClientRect().top;
+    orderSummary.style.cursor = 'grabbing';
+});
+
+document.addEventListener('mousemove', (e)=>{
+    if(isDragging){
+        orderSummary.style.left = (e.clientX - offsetX) + 'px';
+        orderSummary.style.top = (e.clientY - offsetY) + 'px';
+        orderSummary.style.bottom = 'auto';
+        orderSummary.style.right = 'auto';
+    }
+});
+
+document.addEventListener('mouseup', ()=>{
+    isDragging = false;
+    orderSummary.style.cursor = 'grab';
+});
+</script>
+<script>
+const toggleBtn = document.createElement('button');
+toggleBtn.innerText = 'Move Your Order';
+toggleBtn.style.position = 'fixed';
+toggleBtn.style.bottom = '70px';
+toggleBtn.style.right = '20px';
+toggleBtn.style.zIndex = 9999;
+toggleBtn.style.padding = '8px 12px';
+toggleBtn.style.background = '#ff2e2e';
+toggleBtn.style.color = '#fff';
+toggleBtn.style.border = 'none';
+toggleBtn.style.borderRadius = '6px';
+document.body.appendChild(toggleBtn);
+
+let isRight = true;
+toggleBtn.addEventListener('click', ()=>{
+    if(isRight){
+        orderSummary.style.left = '20px';
+        orderSummary.style.right = 'auto';
+    } else {
+        orderSummary.style.left = 'auto';
+        orderSummary.style.right = '20px';
+    }
+    isRight = !isRight;
+});  
+</script>
 </body>
 </html>
