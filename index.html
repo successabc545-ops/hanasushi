@@ -558,38 +558,6 @@ function updateOrderSummary(){
 }
 
 // Send Order 버튼
-const sendOrderBtn = document.getElementById('send-order');
-const orderMessage = document.getElementById('order-message');
-sendOrderBtn.addEventListener('click', ()=>{
-  const contactForm = document.querySelector('#contact form');
-  const messageTextarea = contactForm.querySelector('textarea[name="message"]');
-
-  if(Object.keys(selectedItems).length === 0){
-    alert("Please select at least one menu item before sending the order.");
-    return;
-  }
-
-  let lines = [];
-  for(const [name,qty] of Object.entries(selectedItems)){
-    const price = menuPrices[name] || 0;
-    lines.push(`${name} x${qty} - $${(price*qty).toFixed(2)}`);
-  }
-  const subtotal = Object.entries(selectedItems).reduce((acc,[name,qty])=>acc + (menuPrices[name]||0)*qty,0);
-  const tax = subtotal*0.095;
-  const total = subtotal + tax;
-  lines.push(`Subtotal: $${subtotal.toFixed(2)}`);
-  lines.push(`Tax (9.5%): $${tax.toFixed(2)}`);
-  lines.push(`Total: $${total.toFixed(2)}`);
-
-  messageTextarea.value = lines.join('\n');
-  contactForm.submit();
-
-  orderMessage.style.display='block';
-  setTimeout(()=>{ orderMessage.style.display='none'; }, 3000);
-
-  for(const key in selectedItems) delete selectedItems[key];
-  updateOrderSummary();
-});
 
 // ====================== PWA + 홈 화면 안내 ======================
 if('serviceWorker' in navigator){
