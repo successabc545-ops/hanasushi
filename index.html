@@ -642,7 +642,9 @@ document.getElementById('send-order').addEventListener('click', ()=>{
     // 메시지 표시
     const msgDiv = document.getElementById('order-message');
     msgDiv.style.display='block';
-    
+    setTimeout(()=>{
+    window.location.href='https://eathanasushila.com/';
+}, 3000);
     // 3초 뒤 리다이렉트
     setTimeout(()=>{
         window.location.href='https://eathanasushila.com/';
