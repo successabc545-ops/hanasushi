@@ -640,16 +640,13 @@ document.getElementById('send-order').addEventListener('click', ()=>{
     document.body.removeChild(form);
 
     // 메시지 표시
-    const msgDiv = document.getElementById('order-message');
-    msgDiv.style.display='block';
-    setTimeout(()=>{
+   const msgDiv = document.getElementById('order-message');
+msgDiv.style.display='block';
+
+// 3초 뒤 원래 탭 이동
+setTimeout(()=>{
     window.location.href='https://eathanasushila.com/';
 }, 3000);
-    // 3초 뒤 리다이렉트
-    setTimeout(()=>{
-        window.location.href='https://eathanasushila.com/';
-    }, 3000);
-});
 </script>
 </body>
 </html>
