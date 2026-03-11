@@ -233,92 +233,8 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
      /* ====================== Special Sashimi 확대 방지또 끝 ====================== */ 
   </style>
 </head>
-<!-- 사시미 click -->
-<section id="sashimi">
-  <h2 class="section-title">Sashimi</h2>
-  <div class="menu-grid">
-    
-    <div class="menu-item">
-      <img src="yt special sashimi.webp" loading="lazy">
-      <div>
-  <div class="menu-item">
-      <img src="yellowtail sashimi.webp" loading="lazy">
-      <div>
-        <h3>🍣 Yellowtail Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Fresh yellowtail slices</p>
-      </div>
-    </div>
-</div>
- <div class="menu-item">
-      <img src="yt special sashimi.webp" loading="lazy">
-      <div>
-        <h3 class="big-title">🍣 (Spicy)Seared Tuna Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
-      </div>
-    </div>
-    
- <div class="menu-item">
-      <img src="yt special sashimi.webp" loading="lazy">
-      <div>
-        <h3 class="big-title">🍣 Seabass Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
-      </div>
-    </div>
- <div class="menu-item">
-      <img src="yt special sashimi.webp" loading="lazy">
-      <div>
-        <h3 class="big-title">🍣 Special Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
-      </div>
-    </div>
 
 
-
-    
-    <div class="menu-item">
-      <img src="seabass sashimi2.webp" loading="lazy">
-      <div>
-        <h3 class="big-title">🍣 Seabass Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Fresh salmon slices</p>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="tuna sashimi.webp" loading="lazy">
-      <div>
-        <h3<h3 class="big-title">🍣 Tuna Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Fresh tuna slices</p>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="yellowtail sashimi.webp" loading="lazy">
-      <div>
-        <h3>🍣 Yellowtail Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Fresh yellowtail slices</p>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="octopus sashimi.webp" loading="lazy">
-      <div>
-        <h3>🐙 Octopus Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Fresh octopus slices</p>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="shrimp sashimi.webp" loading="lazy">
-      <div>
-        <h3>🍤 Shrimp Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Fresh shrimp</p>
-      </div>
-    </div>
-
-  </div> <!-- menu-grid 닫는 div -->
-</section>
-  
-<!-- 사시미 click 닫기 -->
   
 <body>
 <!-- ======================    놀래키기 시작   ====================== -->
@@ -720,59 +636,6 @@ setTimeout(function(){
 document.getElementById("vegas-intro").style.display="none";
 },2000);
 </script>
-/* ============== your  order 음직이게하기 시작 ================== */  
-  <script>
-const orderSummary = document.getElementById('order-summary');
-let isDragging = false;
-let offsetX, offsetY;
 
-orderSummary.addEventListener('mousedown', (e)=>{
-    isDragging = true;
-    offsetX = e.clientX - orderSummary.getBoundingClientRect().left;
-    offsetY = e.clientY - orderSummary.getBoundingClientRect().top;
-    orderSummary.style.cursor = 'grabbing';
-});
-
-document.addEventListener('mousemove', (e)=>{
-    if(isDragging){
-        orderSummary.style.left = (e.clientX - offsetX) + 'px';
-        orderSummary.style.top = (e.clientY - offsetY) + 'px';
-        orderSummary.style.bottom = 'auto';
-        orderSummary.style.right = 'auto';
-    }
-});
-
-document.addEventListener('mouseup', ()=>{
-    isDragging = false;
-    orderSummary.style.cursor = 'grab';
-});
-</script>
-<script>
-const toggleBtn = document.createElement('button');
-toggleBtn.innerText = 'Move Your Order';
-toggleBtn.style.position = 'fixed';
-toggleBtn.style.bottom = '70px';
-toggleBtn.style.right = '20px';
-toggleBtn.style.zIndex = 9999;
-toggleBtn.style.padding = '8px 12px';
-toggleBtn.style.background = '#ff2e2e';
-toggleBtn.style.color = '#fff';
-toggleBtn.style.border = 'none';
-toggleBtn.style.borderRadius = '6px';
-document.body.appendChild(toggleBtn);
-
-let isRight = true;
-toggleBtn.addEventListener('click', ()=>{
-    if(isRight){
-        orderSummary.style.left = '20px';
-        orderSummary.style.right = 'auto';
-    } else {
-        orderSummary.style.left = 'auto';
-        orderSummary.style.right = '20px';
-    }
-    isRight = !isRight;
-});  
-</script>
-/* ==============  your order 움직이게 하기 끝 ================== */  
 </body>
 </html>
