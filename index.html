@@ -604,6 +604,44 @@ setTimeout(function(){
 document.getElementById("vegas-intro").style.display="none";
 },2000);
 </script>
+document.getElementById('send-order').addEventListener('click', ()=>{
+    const items = Object.entries(selectedItems).map(([name, qty])=> `${name} x${qty}`).join(', ');
+    const total = document.getElementById('total').innerText;
 
+    // 임시 form 생성
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://formsubmit.co/koseouk@gmail.com';
+    form.target = '_blank'; // 새창으로 열거나 삭제 가능
+
+    const inputSubject = document.createElement('input');
+    inputSubject.type='hidden';
+    inputSubject.name='_subject';
+    inputSubject.value='New HANA SUSHI Order';
+    form.appendChild(inputSubject);
+
+    const inputMessage = document.createElement('input');
+    inputMessage.type='hidden';
+    inputMessage.name='message';
+    inputMessage.value=`Items: ${items}\nTotal: $${total}`;
+    form.appendChild(inputMessage);
+
+    const inputCaptcha = document.createElement('input');
+    inputCaptcha.type='hidden';
+    inputCaptcha.name='_captcha';
+    inputCaptcha.value='false';
+    form.appendChild(inputCaptcha);
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    // 메시지 표시
+    const msgDiv = document.getElementById('order-message');
+    msgDiv.style.display='block';
+    
+    // 3초 뒤 리다이렉트
+    setTimeout(()=>{ window.location.href='https://eathanasushila.com/'; }, 3000);
+});
 </body>
 </html>
