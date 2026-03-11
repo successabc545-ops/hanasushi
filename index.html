@@ -374,20 +374,12 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       <input type="hidden" name="_captcha" value="false">
       <button type="submit">Send Message</button>
     </form>
-   <!-- ======================    오더 받고 되 메인싸이트로  되돌아오는 코드 시작    ====================== -->
-<form action="https://formsubmit.co/koseouk@gmail.com" method="POST" data-success="https://eathanasushila.com/">
-  <!-- 입력 필드 -->
-  <input type="text" name="name" required>
-  <input type="email" name="email" required>
-  <textarea name="message" required></textarea>
-  
-  <!-- 숨김 필드: 스팸 방지 -->
-  <input type="hidden" name="_captcha" value="false">
-  
-  <button type="submit">Send</button>
-</form>
+   <!-- ======================    빈 공간으로 시작    ====================== -->
 
-     <!-- ======================    오더 받고 되 메인싸이트로  되돌아오는 코드끝    ====================== -->  
+  
+    
+    
+    <!-- ======================    빈공간으로 끝    ====================== -->  
     
     <div id="map"></div>
   </div>
@@ -575,37 +567,49 @@ function updateOrderSummary(){
 // Send Order 버튼
 const sendOrderBtn = document.getElementById('send-order');
 const orderMessage = document.getElementById('order-message');
-sendOrderBtn.addEventListener('click', ()=>{
-  const contactForm = document.querySelector('#contact form');
-  const messageTextarea = contactForm.querySelector('textarea[name="message"]');
 
-  if(Object.keys(selectedItems).length === 0){
-    alert("Please select at least one menu item before sending the order.");
-    return;
-  }
+sendOrderBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // 기존 submit 막기
 
-  let lines = [];
-  for(const [name,qty] of Object.entries(selectedItems)){
-    const price = menuPrices[name] || 0;
-    lines.push(`${name} x${qty} - $${(price*qty).toFixed(2)}`);
-  }
-  const subtotal = Object.entries(selectedItems).reduce((acc,[name,qty])=>acc + (menuPrices[name]||0)*qty,0);
-  const tax = subtotal*0.095;
-  const total = subtotal + tax;
-  lines.push(`Subtotal: $${subtotal.toFixed(2)}`);
-  lines.push(`Tax (9.5%): $${tax.toFixed(2)}`);
-  lines.push(`Total: $${total.toFixed(2)}`);
+    const contactForm = document.querySelector('#contact form');
+    const messageTextarea = contactForm.querySelector('textarea[name="message"]');
 
-  messageTextarea.value = lines.join('\n');
-  contactForm.submit();
+    if (Object.keys(selectedItems).length === 0) {
+        alert("Please select at least one menu item before sending the order.");
+        return;
+    }
 
-  orderMessage.style.display='block';
-  setTimeout(()=>{ orderMessage.style.display='none'; }, 3000);
+    // 주문 내용 작성
+    let lines = [];
+    for (const [name, qty] of Object.entries(selectedItems)) {
+        const price = menuPrices[name] || 0;
+        lines.push(`${name} x${qty} - $${(price*qty).toFixed(2)}`);
+    }
+    const subtotal = Object.entries(selectedItems).reduce((acc, [name, qty]) => acc + (menuPrices[name]||0)*qty,0);
+    const tax = subtotal * 0.095;
+    const total = subtotal + tax;
+    lines.push(`Subtotal: $${subtotal.toFixed(2)}`);
+    lines.push(`Tax (9.5%): $${tax.toFixed(2)}`);
+    lines.push(`Total: $${total.toFixed(2)}`);
 
-  for(const key in selectedItems) delete selectedItems[key];
-  updateOrderSummary();
+    messageTextarea.value = lines.join('\n');
+
+    // 1️⃣ formsubmit으로 폼 전송
+    contactForm.submit();
+
+    // 2️⃣ Order 메시지 표시
+    orderMessage.style.display = 'block';
+    setTimeout(() => { orderMessage.style.display = 'none'; }, 3000);
+
+    // 3️⃣ 3초 후 홈페이지로 이동
+    setTimeout(() => {
+        window.location.href = "https://eathanasushila.com/";
+    }, 3000);
+
+    // 선택 초기화
+    for (const key in selectedItems) delete selectedItems[key];
+    updateOrderSummary();
 });
-
 // ====================== PWA + 홈 화면 안내 ======================
 if('serviceWorker' in navigator){
     window.addEventListener('load', () => {
