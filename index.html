@@ -604,15 +604,18 @@ setTimeout(function(){
 document.getElementById("vegas-intro").style.display="none";
 },2000);
 </script>
+<script>
 document.getElementById('send-order').addEventListener('click', ()=>{
-    const items = Object.entries(selectedItems).map(([name, qty])=> `${name} x${qty}`).join(', ');
+    const items = Object.entries(selectedItems)
+        .map(([name, qty])=> `${name} x${qty}`)
+        .join(', ');
     const total = document.getElementById('total').innerText;
 
     // 임시 form 생성
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = 'https://formsubmit.co/koseouk@gmail.com';
-    form.target = '_blank'; // 새창으로 열거나 삭제 가능
+    form.target = '_blank';
 
     const inputSubject = document.createElement('input');
     inputSubject.type='hidden';
@@ -641,7 +644,10 @@ document.getElementById('send-order').addEventListener('click', ()=>{
     msgDiv.style.display='block';
     
     // 3초 뒤 리다이렉트
-    setTimeout(()=>{ window.location.href='https://eathanasushila.com/'; }, 3000);
+    setTimeout(()=>{
+        window.location.href='https://eathanasushila.com/';
+    }, 3000);
 });
+</script>
 </body>
 </html>
