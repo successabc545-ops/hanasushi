@@ -610,27 +610,28 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
 
     const items = Object.entries(selectedItems)
         .map(([name, qty])=> `${name} x${qty}`)
-        .join(', ');
+        .join('\n');
     const total = document.getElementById('total').innerText;
 
     // 임시 form 생성
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = 'https://formsubmit.co/koseouk@gmail.com';
-    // form.target = '_blank'; // ← 여기 제거
 
+    // 제목
     const inputSubject = document.createElement('input');
     inputSubject.type='hidden';
     inputSubject.name='_subject';
     inputSubject.value='New HANA SUSHI Order';
     form.appendChild(inputSubject);
 
-    const inputMessage = document.createElement('input');
-    inputMessage.type='hidden';
-    inputMessage.name='message';
-    inputMessage.value=`Items: ${items}\nTotal: $${total}`;
-    form.appendChild(inputMessage);
+    // 주문 내용
+    const orderMessage = document.createElement('textarea');
+    orderMessage.name = 'message'; // 반드시 message
+    orderMessage.value = `Your Order:\n${items}\nTotal: $${total}`;
+    form.appendChild(orderMessage);
 
+    // captcha
     const inputCaptcha = document.createElement('input');
     inputCaptcha.type='hidden';
     inputCaptcha.name='_captcha';
