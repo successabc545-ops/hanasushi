@@ -230,7 +230,37 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
       box-shadow: none !important;
       cursor: pointer; /* 클릭은 가능 */
     }
-     /* ====================== Special Sashimi 확대 방지또 끝 ====================== */ 
+     /* ====================== Special Sashimi 확대 방지또 끝, 시작 ====================== */ 
+ /* 기존 CSS 코드들 */
+
+.menu-item img:hover{
+transform:scale(1.1);
+}
+
+/* 🔽 여기 밑에 붙이기 */
+
+.sashimi-special{
+position:relative;
+width:500px;
+}
+
+.sashimi-img{
+width:100%;
+}
+
+.hotspot{
+position:absolute;
+cursor:pointer;
+}
+
+.h1{top:20%; left:10%; width:30%; height:20%;}
+.h2{top:20%; left:60%; width:30%; height:20%;}
+.h3{top:45%; left:10%; width:30%; height:20%;}
+.h4{top:45%; left:60%; width:30%; height:20%;}
+.h5{top:70%; left:10%; width:30%; height:20%;}
+.h6{top:70%; left:60%; width:30%; height:20%;}
+    
+    
   </style>
 </head>
 
@@ -326,18 +356,18 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   </div>        
   </section>
 <!-- ======================    사시미   ====================== -->
-<section id="sashimi">
-  <h2 class="section-title">Sashimi</h2>
-  <div class="menu-grid">  
-    <div class="menu-item">
-      <img src="special sashimi.webp" loading="lazy">
-      <div>
-        <h3 class="big-title">🍣 Special Sashimi</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
-      </div>
-    </div>
-  </div> <!-- menu-grid 닫는 div -->
-</section>
+<div class="sashimi-special">
+
+<img src="special-sashimi.webp" class="sashimi-img">
+
+<div class="hotspot h1" onclick="addOrder('Salmon Sashimi',18)"></div>
+<div class="hotspot h2" onclick="addOrder('Tuna Sashimi',20)"></div>
+<div class="hotspot h3" onclick="addOrder('Yellowtail Sashimi',22)"></div>
+<div class="hotspot h4" onclick="addOrder('Octopus Sashimi',17)"></div>
+<div class="hotspot h5" onclick="addOrder('Scallop Sashimi',24)"></div>
+<div class="hotspot h6" onclick="addOrder('Chef Special Sashimi',28)"></div>
+
+</div>
 <!-- ======================    사시미    ====================== -->  
 <section id="contact">
   <h2 class="section-title">Contact Us</h2>
