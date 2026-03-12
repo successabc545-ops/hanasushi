@@ -159,6 +159,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   border-radius: 15px;
   color: #fff;
   font-size: 18px;
+  cursor: move;
 }
 #order-summary h2 {
   color:#ff2e2e;
@@ -649,5 +650,33 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     }, 3000);
 });
 </script>
+<script>
+// ====================== Your Order Drag ======================
+const orderBox = document.getElementById("order-summary");
+
+let isDragging = false;
+let offsetX = 0;
+let offsetY = 0;
+
+orderBox.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  offsetX = e.clientX - orderBox.offsetLeft;
+  offsetY = e.clientY - orderBox.offsetTop;
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+
+  orderBox.style.left = (e.clientX - offsetX) + "px";
+  orderBox.style.top = (e.clientY - offsetY) + "px";
+  orderBox.style.right = "auto";
+  orderBox.style.bottom = "auto";
+});
+
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+});
+</script>
+  
 </body>
 </html>
