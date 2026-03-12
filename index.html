@@ -622,7 +622,7 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = 'https://formsubmit.co/koseouk@gmail.com';
-    form.target = '_blank'; // 새 창에서 보내기 → 기존 창 안전하게 이동
+    form.target = '_blank';
 
     const inputSubject = document.createElement('input');
     inputSubject.type='hidden';
@@ -630,11 +630,11 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     inputSubject.value='New HANA SUSHI Order';
     form.appendChild(inputSubject);
 
-const inputNext = document.createElement('input');
-inputNext.type = 'hidden';
-inputNext.name = '_next';
-inputNext.value = 'https://eathanasushila.com/';
-form.appendChild(inputNext);  
+    const inputNext = document.createElement('input');
+    inputNext.type = 'hidden';
+    inputNext.name = '_next';
+    inputNext.value = 'https://eathanasushila.com/';
+    form.appendChild(inputNext);  
 
     const orderMessage = document.createElement('textarea');
     orderMessage.name = 'message';
@@ -655,10 +655,7 @@ form.appendChild(inputNext);
     const msgDiv = document.getElementById('order-message');
     msgDiv.style.display='block';
 
-    // 3초 뒤 홈페이지 이동
-    setTimeout(()=>{
-        window.location.href='https://eathanasushila.com/';
-    }, 3000);
+    // ✅ setTimeout으로 강제 이동 부분 삭제 완료
 });
 </script>
 <script>
