@@ -629,6 +629,12 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     inputSubject.value='New HANA SUSHI Order';
     form.appendChild(inputSubject);
 
+const inputNext = document.createElement('input');
+inputNext.type = 'hidden';
+inputNext.name = '_next';
+inputNext.value = 'https://eathanasushila.com/';
+form.appendChild(inputNext);  
+
     const orderMessage = document.createElement('textarea');
     orderMessage.name = 'message';
     orderMessage.value = `Your Order:\n${items}\nTotal: $${total}`;
