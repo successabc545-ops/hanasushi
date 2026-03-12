@@ -653,6 +653,7 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
 
     // 메시지 표시
     const msgDiv = document.getElementById('order-message');
+  msgDiv.innerText = "Thank you!";  // 메시지 내용 변경
     msgDiv.style.display='block';
 
     // ✅ setTimeout으로 강제 이동 부분 삭제 완료
