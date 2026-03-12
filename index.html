@@ -225,23 +225,8 @@ cursor:pointer;
 .h6{top:70%; left:60%; width:30%; height:20%;}
 
      /* ====================== Special Sashimi 확대 방지또 끝 ====================== */ 
-#yourOrderBox{
-  position: fixed;
-  right: 20px;
-  top: 120px;
-  width: 260px;
-  background: black;
-  color: red;
-  border: 2px solid #444;
-  padding: 15px;
-  z-index: 9999;
-  cursor: move;
-}
-  #yourOrderBox h3,
-#yourOrderBox p,
-#yourOrderBox li{
-  color: White;
-</style>
+  
+    </style>
 </head>
 
 
@@ -402,7 +387,7 @@ cursor:pointer;
 </footer>
 
 <!-- ====================== Your Order 하단 고정 ====================== -->
-<div class="yourorder" id="yourOrderBox">
+<div id="order-summary">
   <h2>Your Order</h2>
   <div id="selected-items"></div>
   <p>Subtotal: $<span id="subtotal">0.00</span></p>
@@ -662,31 +647,5 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     }, 3000);
 });
 </script>
-<script>
-const box = document.getElementById("yourOrderBox");
-
-let isDragging = false;
-let offsetX, offsetY;
-
-box.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  offsetX = e.clientX - box.offsetLeft;
-  offsetY = e.clientY - box.offsetTop;
-});
-
-document.addEventListener("mousemove", (e) => {
-  if (!isDragging) return;
-
-  box.style.left = (e.clientX - offsetX) + "px";
-  box.style.top = (e.clientY - offsetY) + "px";
-});
-
-document.addEventListener("mouseup", () => {
-  isDragging = false;
-});
-</script>
-
-
-  
 </body>
 </html>
