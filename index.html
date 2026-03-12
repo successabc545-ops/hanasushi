@@ -195,38 +195,43 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   font-size:28px;
   font-weight:900;
 }
+</style>
+
+ <style>
+    /* 기존 CSS 끝 */
+/* ===== Special Sashimi만 hover 확대 제거 ===== */
+    #sashimi .menu-item img[src="special sashimi.webp"]:hover {
+      transform: none !important;
+      box-shadow: none !important;
+      cursor: pointer; /* 클릭은 가능 */
+    }
+  </style>
 
 
 
-  
-/* 기존 CSS 코드들 */
+    <style>
+    /* 기존 CSS */
 
-/* 여기 맨 아래에 붙이면 됩니다 */
+    /* 모든 사시미 이미지 기본 확대 */
+    #sashimi .menu-item img {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.sashimi-special{
-position:relative;
-width:500px;
-}
+    /* 일반 hover 확대 */
+    #sashimi .menu-item img:hover {
+      transform: scale(1.2);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
 
-.sashimi-img{
-width:100%;
-}
-
-.hotspot{
-position:absolute;
-cursor:pointer;
-}
-
-.h1{top:20%; left:10%; width:30%; height:20%;}
-.h2{top:20%; left:60%; width:30%; height:20%;}
-.h3{top:45%; left:10%; width:30%; height:20%;}
-.h4{top:45%; left:60%; width:30%; height:20%;}
-.h5{top:70%; left:10%; width:30%; height:20%;}
-.h6{top:70%; left:60%; width:30%; height:20%;}
-
+    /* Special Sashimi만 hover 시 확대 제거 */
+    #sashimi .menu-item img[src="special sashimi.webp"]:hover {
+      transform: none !important;
+      box-shadow: none !important;
+      cursor: pointer; /* 클릭은 가능 */
+    }
      /* ====================== Special Sashimi 확대 방지또 끝 ====================== */ 
-  
-    </style>
+  </style>
 </head>
 
 
@@ -485,9 +490,6 @@ scrollMapBtn.addEventListener('click', () => {
 const menuPrices = {
   "🌯 Burito": 50.00,
   "🌯 Smoked Burito": 100.00,
-  "🍣 Special Sashimi": 150.00
-  "🌯 Spicy Tuna ROll": 50.00,
-  "🌯 Tempura Roll": 100.00,
   "🍣 Special Sashimi": 150.00
 };
 const selectedItems = {};
