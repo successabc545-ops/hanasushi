@@ -728,6 +728,7 @@ let isDragging = false;
 let offsetX = 0;
 let offsetY = 0;
 
+// PC
 orderBox.addEventListener("mousedown", (e) => {
   isDragging = true;
   offsetX = e.clientX - orderBox.offsetLeft;
@@ -736,16 +737,37 @@ orderBox.addEventListener("mousedown", (e) => {
 
 document.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
-
-  orderBox.style.left = (e.clientX - offsetX) + "px";
-  orderBox.style.top = (e.clientY - offsetY) + "px";
-  orderBox.style.right = "auto";
-  orderBox.style.bottom = "auto";
+  moveBox(e.clientX, e.clientY);
 });
 
 document.addEventListener("mouseup", () => {
   isDragging = false;
 });
+
+// Mobile
+orderBox.addEventListener("touchstart", (e) => {
+  const touch = e.touches[0];
+  isDragging = true;
+  offsetX = touch.clientX - orderBox.offsetLeft;
+  offsetY = touch.clientY - orderBox.offsetTop;
+});
+
+document.addEventListener("touchmove", (e) => {
+  if (!isDragging) return;
+  const touch = e.touches[0];
+  moveBox(touch.clientX, touch.clientY);
+});
+
+document.addEventListener("touchend", () => {
+  isDragging = false;
+});
+
+function moveBox(x, y){
+  orderBox.style.left = (x - offsetX) + "px";
+  orderBox.style.top = (y - offsetY) + "px";
+  orderBox.style.right = "auto";
+  orderBox.style.bottom = "auto";
+}
 </script>
   
 </body>
