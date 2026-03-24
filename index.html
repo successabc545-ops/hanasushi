@@ -298,37 +298,40 @@ hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드
       
       /* ====================== Rice cracker 이 라인이 없으면 완됨 크기 틀려짐....메뉴 이미지 통일 + Rice Cracker 강조 ====================== */
 
-/* 1. 모든 메뉴 이미지 높이 통일, 비율 유지 */ 
+/* ====================== 메뉴 이미지 통일 ====================== */
 .menu-item img {
   width: 100%;
-  height: auto;
+  aspect-ratio: 4/3;    /* 모든 메뉴 4:3 비율로 통일 */
+  object-fit: cover;     /* 프레임 꽉 채우면서 잘림 방지 */
   border-radius: 10px;
-  transition: transform 0.3s ease;
-}
-.menu-item img:hover {
-  transform: scale(1.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 2. Rice Cracker만 별도 배경 + padding */
-.rice-card {
-  background: radial-gradient(circle at center, #ffffff 0%, #f2f2f2 60%, #e5e5e5 100%);
-  padding: 14px;
-  border-radius: 14px;
-}
-
-/* 3. Rice Cracker 이미지 밝게 강조 */
-.rice-card img {
-  filter: brightness(1.2) contrast(1.2);
-}
-
-/* 4. Hover 확대 효과 유지 */
+/* Hover 확대 효과 */
 .menu-item img:hover {
   transform: scale(1.15);
   z-index: 5;
   position: relative;
   box-shadow: 0 0 20px rgba(255,46,46,0.6), 0 0 40px rgba(255,193,7,0.4);
 }
-    
+
+/* ====================== Special Sashimi hover 확대 제거 ====================== */
+#sashimi .menu-item img[src="special sashimi.webp"]:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+/* ====================== Rice Cracker 강조 ====================== */
+.rice-card {
+  background: radial-gradient(circle at center, #ffffff 0%, #f2f2f2 60%, #e5e5e5 100%);
+  padding: 14px;
+  border-radius: 14px;
+}
+
+.rice-card img {
+  filter: brightness(1.2) contrast(1.2); /* 조금 밝게 강조 */
+}
     
     /* ====================== Rice cracker 이 라인이 없으면 완됨 크기 틀려짐....메뉴 이미지 통일 + Rice Cracker 강조 끝 ====================== */
    
