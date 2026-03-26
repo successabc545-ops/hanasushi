@@ -660,66 +660,46 @@ geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
 // --- 페이지 로드 시 자동 위치 표시 ---
-  // 전역 변수로 선언
-  window.foodTruckMarker = window.foodTruckMarker || null;
-  window.map = window.map || null;
+// 페이지 로드 후 지도 준비되면 실행
+document.addEventListener('DOMContentLoaded', () => {
+    if (!navigator.geolocation) {
+        alert("⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.");
+        return;
+    }
 
-  if (navigator.geolocation && window.map) {
-      navigator.geolocation.watchPosition(
-          pos => {
-              const latlng = [pos.coords.latitude, pos.coords.longitude];
+    if (!window.map) {
+        console.error("지도(map)가 준비되지 않았습니다.");
+        return;
+    }
 
-              // 마커가 없으면 새로 생성
-              if (!window.foodTruckMarker) {
-                  window.foodTruckMarker = L.marker(latlng)
-                      .addTo(window.map)
-                      .bindPopup("Food Truck is here")
-                      .openPopup();
-              } else {
-                  window.foodTruckMarker.setLatLng(latlng)
-                      .bindPopup("Food Truck is here")
-                      .openPopup();
-              }
+    // 마커 초기 생성 (이미 마커가 있으면 재사용)
+    window.foodTruckMarker = window.foodTruckMarker || L.marker([34.0195, -118.4912])
+        .addTo(window.map)
+        .bindPopup("Food Truck 위치")
+        .openPopup();
 
-              // 지도 중심 이동
-              window.map.flyTo(latlng, 16);
-          },
-          err => {
-              console.warn("위치 정보 접근 거부됨 또는 실패:", err.message);
-          },
-          {
-              enableHighAccuracy: true,
-              maximumAge: 0,
-              timeout: 5000
-          }
-      );
-  } else {
-      console.warn("이 브라우저에서는 위치 기능을 지원하지 않거나, 지도(map)가 아직 로드되지 않았습니다.");
-  }
-// Current Food Truck Location 버튼
-const scrollMapBtn = document.getElementById('scroll-map');
-scrollMapBtn.addEventListener('click', () => {
-    document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
-
- if (navigator.geolocation) {
+    // 실시간 위치 추적
     navigator.geolocation.watchPosition(
         pos => {
             const latlng = [pos.coords.latitude, pos.coords.longitude];
-            foodTruckMarker.setLatLng(latlng)
+
+            window.foodTruckMarker.setLatLng(latlng)
                 .bindPopup("Food Truck is here")
                 .openPopup();
-            map.flyTo(latlng, 16); // 지도 중심 이동
+
+            window.map.setView(latlng, 16);
         },
         err => {
-            geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 위치를 허용해주세요.";
-            geoAlertDiv.style.display = 'block';
+            console.warn("위치 정보 접근 거부 또는 실패:", err.message);
+            alert("⚠ 위치 정보를 허용해야 실시간 위치를 볼 수 있습니다.");
         },
         {
-            enableHighAccuracy: true, // GPS 정확도 높임
+            enableHighAccuracy: true,
             maximumAge: 0,
             timeout: 5000
         }
     );
+});
 } else {
     geoAlertDiv.innerText = "⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
     geoAlertDiv.style.display = 'block';
