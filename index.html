@@ -653,18 +653,25 @@ geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
-// --- 페이지 로드 시 자동 위치 표시 ---
+// ====================== 실시간 위치 감시 적용 ======================
 if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
         pos => {
             const latlng = [pos.coords.latitude, pos.coords.longitude];
             foodTruckMarker.setLatLng(latlng)
                 .bindPopup("Food Truck is here")
                 .openPopup();
-            map.flyTo(latlng, 16);
+            map.flyTo(latlng, 16); // 화면 따라가게 원하지 않으면 제거 가능
         },
         err => {
+            geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
+            geoAlertDiv.style.display = 'block';
             console.warn("위치 정보 접근 거부됨 또는 실패:", err.message);
+        },
+        {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 5000
         }
     );
 }
