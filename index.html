@@ -632,11 +632,13 @@ phoneInput.addEventListener('input', e => {
 const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-// 마커 초기 생성
+// 고정: 푸드트럭 위치 (절대 안 움직임)
 let foodTruckMarker = L.marker([34.0195, -118.4912])
     .addTo(map)
     .bindPopup("HANA SUSHI FOOD TRUCK");
 
+// 이동: 사용자 위치 (실시간)
+let userMarker;
 // 위치 안내 박스
 let geoAlertDiv = document.createElement('div');
 geoAlertDiv.style.position = 'absolute';
@@ -655,7 +657,14 @@ document.body.appendChild(geoAlertDiv);
 
 // ====================== 실시간 위치 감시 적용 ======================
 if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(
+  if (!window.userMarker) {
+    window.userMarker = L.marker(latlng)
+        .addTo(map)
+        .bindPopup("You are here")
+        .openPopup();
+} else {
+    window.userMarker.setLatLng(latlng);
+}
         pos => {
             const latlng = [pos.coords.latitude, pos.coords.longitude];
             foodTruckMarker.setLatLng(latlng)
