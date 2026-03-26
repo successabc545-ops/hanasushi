@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>현재 위치 지도</title>
+<title>My Current Location</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
-  html, body { height:100%; margin:0; padding:0; }
+  body, html { margin:0; padding:0; height:100%; }
   #map { width:100%; height:100%; }
 </style>
 </head>
@@ -16,30 +16,49 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-const map = L.map('map').fitWorld();
+  // 지도 초기화
+  const map = L.map('map').setView([0,0], 13);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
+  // OpenStreetMap 타일
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(pos => {
-    const lat = pos.coords.latitude;
-    const lng = pos.coords.longitude;
+  // 마커
+  let userMarker = null;
 
-    // 현재 위치 마커
-    L.marker([lat, lng]).addTo(map)
-      .bindPopup("현재 위치")
-      .openPopup();
+  // 위치 업데이트 함수
+  function updateLocation(pos) {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
 
-    // 지도 화면 위치 설정
-    map.setView([lat, lng], 16);
-  }, err => {
-    alert("⚠ 위치 정보 접근이 거부되었거나 사용할 수 없습니다.");
-  }, { enableHighAccuracy: true });
-} else {
-  alert("⚠ 브라우저가 위치 정보를 지원하지 않습니다.");
-}
+      if (!userMarker) {
+          userMarker = L.marker([lat, lng]).addTo(map)
+              .bindPopup("You are here")
+              .openPopup();
+      } else {
+          userMarker.setLatLng([lat, lng]);
+      }
+
+      // 지도 중심 이동
+      map.setView([lat, lng], 16);
+  }
+
+  // 위치 오류 처리
+  function handleError(err) {
+      alert("⚠ 위치 정보 접근이 거부되었거나 오류가 발생했습니다.\n브라우저에서 위치 허용 후 새로고침 해주세요.");
+      console.error(err);
+  }
+
+  // 실시간 위치 감지
+  if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(updateLocation, handleError, {
+          enableHighAccuracy: true,
+          maximumAge: 1000
+      });
+  } else {
+      alert("위치 정보를 지원하지 않는 브라우저입니다.");
+  }
 </script>
 
 </body>
