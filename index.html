@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Current Location</title>
+<title>Hana Sushi Location</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
   body, html { margin:0; padding:0; height:100%; }
@@ -16,49 +16,23 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
+  // Hana Sushi 좌표 (예시)
+  const hanaLat = 34.0183; // 실제 위치로 바꿔도 됨
+  const hanaLng = -118.4853;
+
   // 지도 초기화
-  const map = L.map('map').setView([0,0], 13);
+  const map = L.map('map').setView([hanaLat, hanaLng], 16);
 
   // OpenStreetMap 타일
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // 마커
-  let userMarker = null;
-
-  // 위치 업데이트 함수
-  function updateLocation(pos) {
-      const lat = pos.coords.latitude;
-      const lng = pos.coords.longitude;
-
-      if (!userMarker) {
-          userMarker = L.marker([lat, lng]).addTo(map)
-              .bindPopup("You are here")
-              .openPopup();
-      } else {
-          userMarker.setLatLng([lat, lng]);
-      }
-
-      // 지도 중심 이동
-      map.setView([lat, lng], 16);
-  }
-
-  // 위치 오류 처리
-  function handleError(err) {
-      alert("⚠ 위치 정보 접근이 거부되었거나 오류가 발생했습니다.\n브라우저에서 위치 허용 후 새로고침 해주세요.");
-      console.error(err);
-  }
-
-  // 실시간 위치 감지
-  if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(updateLocation, handleError, {
-          enableHighAccuracy: true,
-          maximumAge: 1000
-      });
-  } else {
-      alert("위치 정보를 지원하지 않는 브라우저입니다.");
-  }
+  // Hana Sushi 마커
+  L.marker([hanaLat, hanaLng])
+      .addTo(map)
+      .bindPopup("🍣 Hana Sushi")
+      .openPopup();
 </script>
 
 </body>
