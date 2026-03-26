@@ -635,24 +635,39 @@ phoneInput.addEventListener('input', e => {
 const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-// ====================== 트럭 마커 (항상 고정) ======================
-const foodTruckLatLng = [34.0195, -118.4912]; // 트럭 초기 위치
+// 트럭 마커 (고정)
+const foodTruckLatLng = [34.0195, -118.4912];
 const foodTruckMarker = L.marker(foodTruckLatLng)
     .addTo(map)
     .bindPopup("HANA SUSHI FOOD TRUCK");
 
-// ====================== 사용자 마커 ======================
+// 사용자 위치 마커
 let userMarker = null;
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(pos => {
     const latlng = [pos.coords.latitude, pos.coords.longitude];
-    userMarker = L.marker(latlng)
-      .addTo(map)
-      .bindPopup("You are here")
-      .openPopup();
-    map.flyTo(latlng, 16);
+    userMarker = L.marker(latlng).addTo(map).bindPopup("You are here").openPopup();
   });
 }
+
+// 버튼 클릭
+const scrollMapBtn = document.getElementById('scroll-map');
+scrollMapBtn.addEventListener('click', () => {
+  document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+  map.flyTo(foodTruckLatLng, 16);
+  foodTruckMarker.openPopup();
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      const latlng = [pos.coords.latitude, pos.coords.longitude];
+      if (!userMarker) {
+        userMarker = L.marker(latlng).addTo(map).bindPopup("You are here").openPopup();
+      } else {
+        userMarker.setLatLng(latlng).bindPopup("You are here").openPopup();
+      }
+    });
+  }
+});
 
 // ====================== Current Food Truck Location 버튼 ======================
 const scrollMapBtn = document.getElementById('scroll-map');
