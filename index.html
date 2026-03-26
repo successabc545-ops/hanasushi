@@ -661,16 +661,28 @@ document.body.appendChild(geoAlertDiv);
 
 // --- 페이지 로드 시 자동 위치 표시 ---
 if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
         pos => {
             const latlng = [pos.coords.latitude, pos.coords.longitude];
-            foodTruckMarker.setLatLng(latlng)
-                .bindPopup("Food Truck is here")
-                .openPopup();
-            map.flyTo(latlng, 16);
+
+            // 기존 마커가 있다면 위치 업데이트
+            if (window.foodTruckMarker) {
+                window.foodTruckMarker
+                    .setLatLng(latlng)
+                    .bindPopup("Food Truck is here")
+                    .openPopup();
+            }
+
+            // 지도 중심 이동
+            if (window.map) map.flyTo(latlng, 16);
         },
         err => {
             console.warn("위치 정보 접근 거부됨 또는 실패:", err.message);
+        },
+        {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 5000
         }
     );
 }
