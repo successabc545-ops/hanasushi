@@ -34,8 +34,7 @@
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
         const userMarker = L.marker([lat, lng]).addTo(map)
-          .bindPopup("hana sushi
-                    ")
+          .bindPopup("hana sushi")
           .openPopup();
         map.setView([lat, lng], 16); // 현재 위치로 화면 이동
       },
