@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Real-time Location Map</title>
+<title>HANA SUSHI Live Map</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
-  body { margin: 0; padding: 0; }
   #map { width: 100%; height: 100vh; }
 </style>
 </head>
@@ -16,49 +15,52 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-  // 1️⃣ 지도 초기화
-  const map = L.map('map').setView([0, 0], 2); // 기본 위치: 전세계
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// -------------------- 지도 초기화 --------------------
+const foodTruckLatLng = [34.0195, -118.4912]; // 예제: Santa Monica
+const map = L.map('map').setView(foodTruckLatLng, 14);
+
+// OpenStreetMap 타일
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
+}).addTo(map);
 
-  // 2️⃣ 사용자 위치 마커
-  let userMarker = null;
-  let accuracyCircle = null;
+// Food Truck 마커
+const truckMarker = L.marker(foodTruckLatLng)
+    .addTo(map)
+    .bindPopup("<b>HANA SUSHI FOOD TRUCK</b><br>Here!")
+    .openPopup();
 
-  // 3️⃣ 위치 업데이트 함수
-  function updateLocation(position) {
+// -------------------- 실시간 현재 위치 --------------------
+let userMarker = null;
+function updateUserLocation(position) {
     const lat = position.coords.latitude;
     const lng = position.coords.longitude;
-    const accuracy = position.coords.accuracy;
 
-    // 마커 없으면 생성, 있으면 이동
-    if(!userMarker){
-      userMarker = L.marker([lat, lng]).addTo(map).bindPopup("You are here").openPopup();
-      accuracyCircle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
-      map.setView([lat, lng], 16);
+    if (!userMarker) {
+        userMarker = L.marker([lat, lng], {icon: L.icon({
+            iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32]
+        })}).addTo(map).bindPopup("You are here").openPopup();
     } else {
-      userMarker.setLatLng([lat, lng]);
-      accuracyCircle.setLatLng([lat, lng]).setRadius(accuracy);
+        userMarker.setLatLng([lat, lng]);
     }
-  }
 
-  function handleError(err) {
-    alert("⚠ 위치 정보를 가져올 수 없습니다. 브라우저에서 위치 허용 필요");
-    console.error(err);
-  }
+    // 지도 중심 이동
+    map.setView([lat, lng], 16);
+}
 
-  // 4️⃣ 실시간 위치 추적
-  if(navigator.geolocation){
-    navigator.geolocation.watchPosition(updateLocation, handleError, {
-      enableHighAccuracy: true,
-      maximumAge: 1000,
-      timeout: 5000
-    });
-  } else {
-    alert("⚠ 브라우저가 위치 정보를 지원하지 않습니다.");
-  }
+// 위치 접근
+if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(updateUserLocation, err => {
+        alert("⚠ 위치 접근 실패: 브라우저에서 위치 허용 후 다시 시도하세요.");
+        console.error(err);
+    }, { enableHighAccuracy: true });
+} else {
+    alert("이 브라우저에서는 위치 정보가 지원되지 않습니다.");
+}
 </script>
 
 </body>
 </html>
+
