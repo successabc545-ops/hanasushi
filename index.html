@@ -664,7 +664,7 @@ scrollMapBtn.addEventListener('click', () => {
   foodTruckMarker.openPopup();
 
   // 사용자 위치 갱신
-  if (navigator.geolocation) {
+  if (navigator.geolocation) { 
     navigator.geolocation.getCurrentPosition(
       pos => {
         const latlng = [pos.coords.latitude, pos.coords.longitude];
