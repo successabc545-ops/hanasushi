@@ -629,6 +629,7 @@ phoneInput.addEventListener('input', e => {
 });
 
 // ====================== 지도 초기화 + 위치 기능 통합 ======================
+  console.log("map start");
 const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
