@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Location Map</title>
+<title>현재 위치 지도</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
   html, body { height:100%; margin:0; padding:0; }
@@ -22,31 +22,23 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-// 마커 초기화
-let userMarker = null;
-
 if (navigator.geolocation) {
-  navigator.geolocation.watchPosition(pos => {
+  navigator.geolocation.getCurrentPosition(pos => {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
 
-    // 위치가 처음이면 마커 생성
-    if (!userMarker) {
-      userMarker = L.marker([lat, lng]).addTo(map)
-        .bindPopup("You are here")
-        .openPopup();
-    } else {
-      // 이미 있으면 위치 갱신
-      userMarker.setLatLng([lat, lng]);
-    }
+    // 현재 위치 마커
+    L.marker([lat, lng]).addTo(map)
+      .bindPopup("현재 위치")
+      .openPopup();
 
-    // 지도 이동
+    // 지도 화면 위치 설정
     map.setView([lat, lng], 16);
   }, err => {
-    alert("⚠ 위치 정보 접근 거부됨 또는 사용 불가");
-  }, { enableHighAccuracy: true, maximumAge: 1000 });
+    alert("⚠ 위치 정보 접근이 거부되었거나 사용할 수 없습니다.");
+  }, { enableHighAccuracy: true });
 } else {
-  alert("⚠ 브라우저가 위치 정보를 지원하지 않음");
+  alert("⚠ 브라우저가 위치 정보를 지원하지 않습니다.");
 }
 </script>
 
