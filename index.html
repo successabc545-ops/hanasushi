@@ -660,33 +660,42 @@ geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
 // --- 페이지 로드 시 자동 위치 표시 ---
-if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(
-        pos => {
-            const latlng = [pos.coords.latitude, pos.coords.longitude];
+  // 전역 변수로 선언
+  window.foodTruckMarker = window.foodTruckMarker || null;
+  window.map = window.map || null;
 
-            // 기존 마커가 있다면 위치 업데이트
-            if (window.foodTruckMarker) {
-                window.foodTruckMarker
-                    .setLatLng(latlng)
-                    .bindPopup("Food Truck is here")
-                    .openPopup();
-            }
+  if (navigator.geolocation && window.map) {
+      navigator.geolocation.watchPosition(
+          pos => {
+              const latlng = [pos.coords.latitude, pos.coords.longitude];
 
-            // 지도 중심 이동
-            if (window.map) map.flyTo(latlng, 16);
-        },
-        err => {
-            console.warn("위치 정보 접근 거부됨 또는 실패:", err.message);
-        },
-        {
-            enableHighAccuracy: true,
-            maximumAge: 0,
-            timeout: 5000
-        }
-    );
-}
+              // 마커가 없으면 새로 생성
+              if (!window.foodTruckMarker) {
+                  window.foodTruckMarker = L.marker(latlng)
+                      .addTo(window.map)
+                      .bindPopup("Food Truck is here")
+                      .openPopup();
+              } else {
+                  window.foodTruckMarker.setLatLng(latlng)
+                      .bindPopup("Food Truck is here")
+                      .openPopup();
+              }
 
+              // 지도 중심 이동
+              window.map.flyTo(latlng, 16);
+          },
+          err => {
+              console.warn("위치 정보 접근 거부됨 또는 실패:", err.message);
+          },
+          {
+              enableHighAccuracy: true,
+              maximumAge: 0,
+              timeout: 5000
+          }
+      );
+  } else {
+      console.warn("이 브라우저에서는 위치 기능을 지원하지 않거나, 지도(map)가 아직 로드되지 않았습니다.");
+  }
 // Current Food Truck Location 버튼
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
