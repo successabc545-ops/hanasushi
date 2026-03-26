@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Map</title>
+<title>Live Location Map</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
-  #map { width: 100%; height: 100vh; margin:0; padding:0; }
-  body { margin:0; padding:0; }
+  html, body { height:100%; margin:0; padding:0; }
+  #map { width:100%; height:100%; }
 </style>
 </head>
 <body>
@@ -19,15 +19,34 @@
 const map = L.map('map').fitWorld();
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
+  attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
+// 마커 초기화
+let userMarker = null;
+
 if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(pos => {
-        const lat = pos.coords.latitude;
-        const lng = pos.coords.longitude;
-        map.setView([lat, lng], 16);
-    });
+  navigator.geolocation.watchPosition(pos => {
+    const lat = pos.coords.latitude;
+    const lng = pos.coords.longitude;
+
+    // 위치가 처음이면 마커 생성
+    if (!userMarker) {
+      userMarker = L.marker([lat, lng]).addTo(map)
+        .bindPopup("You are here")
+        .openPopup();
+    } else {
+      // 이미 있으면 위치 갱신
+      userMarker.setLatLng([lat, lng]);
+    }
+
+    // 지도 이동
+    map.setView([lat, lng], 16);
+  }, err => {
+    alert("⚠ 위치 정보 접근 거부됨 또는 사용 불가");
+  }, { enableHighAccuracy: true, maximumAge: 1000 });
+} else {
+  alert("⚠ 브라우저가 위치 정보를 지원하지 않음");
 }
 </script>
 
