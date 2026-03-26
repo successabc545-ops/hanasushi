@@ -16,23 +16,35 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-  // Hana Sushi 좌표 (예시)
-  const hanaLat = 34.0183; // 실제 위치로 바꿔도 됨
-  const hanaLng = -118.4853;
+ <div id="map" style="width:100%;height:400px;"></div>
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
   // 지도 초기화
-  const map = L.map('map').setView([hanaLat, hanaLng], 16);
+  const map = L.map('map').setView([34.0195, -118.4912], 14); // 임시 기본 좌표
 
-  // OpenStreetMap 타일
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
+      maxZoom: 19,
   }).addTo(map);
 
-  // Hana Sushi 마커
-  L.marker([hanaLat, hanaLng])
-      .addTo(map)
-      .bindPopup("🍣 Hana Sushi")
-      .openPopup();
+  // 현재 위치 가져오기
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        const userMarker = L.marker([lat, lng]).addTo(map)
+          .bindPopup("You are here")
+          .openPopup();
+        map.setView([lat, lng], 16); // 현재 위치로 화면 이동
+      },
+      err => {
+        alert("위치 접근 거부됨 또는 사용 불가: " + err.message);
+      }
+    );
+  } else {
+    alert("브라우저에서 위치 정보가 지원되지 않습니다.");
+  }
 </script>
 
 </body>
