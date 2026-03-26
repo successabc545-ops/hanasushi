@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HANA SUSHI Live Map</title>
+<title>Live Map</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
-  #map { width: 100%; height: 100vh; }
+  #map { width: 100%; height: 100vh; margin:0; padding:0; }
+  body { margin:0; padding:0; }
 </style>
 </head>
 <body>
@@ -15,52 +16,20 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-// -------------------- 지도 초기화 --------------------
-const foodTruckLatLng = [34.0195, -118.4912]; // 예제: Santa Monica
-const map = L.map('map').setView(foodTruckLatLng, 14);
+const map = L.map('map').fitWorld();
 
-// OpenStreetMap 타일
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-// Food Truck 마커
-const truckMarker = L.marker(foodTruckLatLng)
-    .addTo(map)
-    .bindPopup("<b>HANA SUSHI FOOD TRUCK</b><br>Here!")
-    .openPopup();
-
-// -------------------- 실시간 현재 위치 --------------------
-let userMarker = null;
-function updateUserLocation(position) {
-    const lat = position.coords.latitude;
-    const lng = position.coords.longitude;
-
-    if (!userMarker) {
-        userMarker = L.marker([lat, lng], {icon: L.icon({
-            iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
-            iconSize: [32, 32],
-            iconAnchor: [16, 32]
-        })}).addTo(map).bindPopup("You are here").openPopup();
-    } else {
-        userMarker.setLatLng([lat, lng]);
-    }
-
-    // 지도 중심 이동
-    map.setView([lat, lng], 16);
-}
-
-// 위치 접근
 if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(updateUserLocation, err => {
-        alert("⚠ 위치 접근 실패: 브라우저에서 위치 허용 후 다시 시도하세요.");
-        console.error(err);
-    }, { enableHighAccuracy: true });
-} else {
-    alert("이 브라우저에서는 위치 정보가 지원되지 않습니다.");
+    navigator.geolocation.watchPosition(pos => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        map.setView([lat, lng], 16);
+    });
 }
 </script>
 
 </body>
 </html>
-
