@@ -635,16 +635,15 @@ phoneInput.addEventListener('input', e => {
 });
 
 // ====================== 지도 초기화 + 위치 기능 통합 ======================
-// ====================== 지도 초기화 ======================
-const map = L.map('map').setView([34.0195, -118.4912], 12); // 초기 지도 위치
+const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-// ====================== 트럭 마커 ======================
+// 마커 초기 생성
 let foodTruckMarker = L.marker([34.0195, -118.4912])
     .addTo(map)
     .bindPopup("HANA SUSHI FOOD TRUCK");
 
-// ====================== 안내 박스 ======================
+// 위치 안내 박스
 let geoAlertDiv = document.createElement('div');
 geoAlertDiv.style.position = 'absolute';
 geoAlertDiv.style.top = '10px';
@@ -660,18 +659,37 @@ geoAlertDiv.style.fontWeight = '700';
 geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
-// ====================== Current Food Truck Location 버튼 ======================
+// --- 페이지 로드 시 자동 위치 표시 ---
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            const latlng = [pos.coords.latitude, pos.coords.longitude];
+            foodTruckMarker.setLatLng(latlng)
+                .bindPopup("Food Truck is here")
+                .openPopup();
+            map.flyTo(latlng, 16);
+        },
+        err => {
+            console.warn("위치 정보 접근 거부됨 또는 실패:", err.message);
+        }
+    );
+}
+
+// Current Food Truck Location 버튼
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
     document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
 
-    // 여기 최신 트럭 위치 넣기
-    const truckLatLng = [34.0195, -118.4912]; // 예: LA 좌표, 필요하면 실제 트럭 좌표로 변경
-    foodTruckMarker.setLatLng(truckLatLng)
-        .bindPopup("Food Truck is here")
-        .openPopup();
-    map.flyTo(truckLatLng, 16);
-});
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            pos => {
+                geoAlertDiv.style.display = 'none';
+                const latlng = [pos.coords.latitude, pos.coords.longitude];
+                foodTruckMarker.setLatLng(latlng)
+                    .bindPopup("Food Truck is here")
+                    .openPopup();
+                map.flyTo(latlng, 16);
+            },
             err => {
                 geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
                 geoAlertDiv.style.display = 'block';
