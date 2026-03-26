@@ -636,6 +636,20 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 let foodTruckMarker = L.marker([34.0195, -118.4912])
     .addTo(map)
     .bindPopup("HANA SUSHI FOOD TRUCK");
+ let userMarker;
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(pos => {
+    const latlng = [pos.coords.latitude, pos.coords.longitude];
+
+    userMarker = L.marker(latlng)
+      .addTo(map)
+      .bindPopup("You are here")
+      .openPopup();
+
+    map.flyTo(latlng, 16);
+  });
+} 
 
 // 위치 안내 박스
 let geoAlertDiv = document.createElement('div');
