@@ -340,6 +340,13 @@ hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드
   box-shadow: 0 0 20px rgba(255,46,46,0.6), 0 0 40px rgba(255,193,7,0.4);
 }
 
+/* 모바일 & 잘림 방지 */
+.menu-item p {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow: visible !important;
+}
+      
 /* ====================== Special Sashimi hover 확대 제거 ====================== */
 #sashimi .menu-item img[src="special sashimi.webp"]:hover {
   transform: none !important;
