@@ -119,6 +119,13 @@ section{padding:100px 10%;}
     height: auto;
   }
 
+  /* Ingredients 텍스트 자동 줄바꿈 + 잘림 방지 */
+.menu-item p {
+  white-space: normal;    /* 자동 줄바꿈 허용 */
+  word-wrap: break-word;  /* 긴 단어도 줄바꿈 */
+  overflow: visible;      /* 잘림 방지 */
+}
+
   /* Rice Cracker 모바일 강조 */
   .rice-card img {
     aspect-ratio: 4/3;
