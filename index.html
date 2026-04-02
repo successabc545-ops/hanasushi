@@ -1236,7 +1236,59 @@ setInterval(() => {
   document.addEventListener(event, resetIdle);
 });
 </script>
+<!-- ================== IDLE VIDEO AD ================== -->
+<style>
+#idleAd {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 9999;
+  overflow: hidden;
+}
 
+#idleAd video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;        /* 영상 비율 유지, 잘리지 않음 */
+  background: black;          /* 여백 생기면 검은색 */
+  display: block;
+  margin: auto;
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+}
+</style>
+
+<div id="idleAd">
+  <video id="adVideo" autoplay muted loop playsinline>
+    <source src="yang.mp4" type="video/mp4">
+  </video>
+</div>
+
+<script>
+let idleTime = 0;
+const idleLimit = 10; // 10초 후 광고
+
+function resetIdle() {
+  idleTime = 0;
+  document.getElementById("idleAd").style.display = "none";
+}
+
+setInterval(() => {
+  idleTime++;
+  if (idleTime >= idleLimit) {
+    document.getElementById("idleAd").style.display = "block";
+  }
+}, 1000);
+
+// 사용자 행동 감지
+["mousemove", "click", "touchstart", "keydown"].forEach(event => {
+  document.addEventListener(event, resetIdle);
+});
+</script>
 
   
   
