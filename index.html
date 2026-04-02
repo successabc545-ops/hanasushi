@@ -779,19 +779,6 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 
 
 
- .video-section iframe {
-    height: 250px;
-  }
-}
-</style>
-
-<section class="video-section">
-  <iframe
-    src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-  </iframe>
-</section>
 
 
 
@@ -1160,6 +1147,55 @@ function moveBox(x, y){
   orderBox.style.bottom = "auto";
 }
 </script>
+
+
+
+
+
+
+
+
+<div id="idleAd" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999;">
+  <video id="adVideo" autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
+    <source src="ad.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+
+
+
+
+<script>
+let idleTime = 0;
+const idleLimit = 10; // 🔥 10초 후 광고 (원하면 바꿔)
+
+function resetIdle() {
+  idleTime = 0;
+  document.getElementById("idleAd").style.display = "none";
+}
+
+setInterval(() => {
+  idleTime++;
+  if (idleTime >= idleLimit) {
+    document.getElementById("idleAd").style.display = "block";
+  }
+}, 1000);
+
+// 사용자 행동 감지
+["mousemove", "click", "touchstart", "keydown"].forEach(event => {
+  document.addEventListener(event, resetIdle);
+});
+</script>
+
+
+
+
+
+
+
+
+  
   
 </body>
 </html>
