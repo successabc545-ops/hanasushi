@@ -1161,29 +1161,44 @@ function moveBox(x, y){
 </div>
 
 <script>
-#idleAd {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 0; /* 네비게이션보다 뒤에 배치 */
-  background: black;
-}
+  // ====================== 자동 광고 / 인트로 재생 ======================
+  const intro = document.getElementById('vegas-intro');
+  let idleTime = 0;
+  let adShown = false;
 
-#idleAd video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* 화면에 잘 맞게 영상 전체가 보임 */
-}
+  function showAd() {
+    if (!adShown) {
+      intro.style.display = 'flex';
+      intro.style.opacity = 1;
+      adShown = true;
 
-/* 데스크탑에서는 꽉 채움 */
-@media (min-width: 1024px) {
-  #idleAd video {
-    object-fit: cover; /* 화면 꽉 채움, 일부 잘릴 수 있음 */
+      // 3~4초 후 서서히 사라지도록
+      setTimeout(() => {
+        intro.style.transition = 'opacity 2s';
+        intro.style.opacity = 0;
+        setTimeout(() => {
+          intro.style.display = 'none';
+          adShown = false; // 다시 반복 가능
+        }, 2000);
+      }, 3500); // 광고 노출 시간
+    }
   }
-}
+
+  // 1초마다 idleTime 체크
+  setInterval(() => {
+    idleTime++;
+    if (idleTime >= 10) { // 10초 동안 아무 행동 없으면 광고
+      showAd();
+      idleTime = 0; // 광고 보여주고 초기화
+    }
+  }, 1000);
+
+  // 사용자가 행동하면 idleTime 초기화
+  ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
+    window.addEventListener(evt, () => {
+      idleTime = 0;
+    });
+  });
 </script>
 
 
