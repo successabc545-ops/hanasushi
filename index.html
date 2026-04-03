@@ -1153,6 +1153,27 @@ function moveBox(x, y){
 
 
 
+<style>
+  /* ================= Idle 광고 전체 화면 ================= */
+  #idleAd {
+    display: none; /* 처음엔 숨김 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #idleAd video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 화면 꽉 채우기 */
+  }
+</style>
 
 <div id="idleAd">
   <video autoplay muted loop playsinline>
@@ -1161,42 +1182,37 @@ function moveBox(x, y){
 </div>
 
 <script>
-  // ====================== 자동 광고 / 인트로 재생 ======================
-  const intro = document.getElementById('vegas-intro');
+  const idleAd = document.getElementById('idleAd');
   let idleTime = 0;
-  let adShown = false;
+  let adVisible = false;
 
-  function showAd() {
-    if (!adShown) {
-      intro.style.display = 'flex';
-      intro.style.opacity = 1;
-      adShown = true;
-
-      // 3~4초 후 서서히 사라지도록
-      setTimeout(() => {
-        intro.style.transition = 'opacity 2s';
-        intro.style.opacity = 0;
-        setTimeout(() => {
-          intro.style.display = 'none';
-          adShown = false; // 다시 반복 가능
-        }, 2000);
-      }, 3500); // 광고 노출 시간
+  function showIdleAd() {
+    if (!adVisible) {
+      idleAd.style.display = 'flex';
+      adVisible = true;
     }
   }
 
-  // 1초마다 idleTime 체크
+  function hideIdleAd() {
+    if (adVisible) {
+      idleAd.style.display = 'none';
+      adVisible = false;
+    }
+  }
+
+  // 1초마다 idle 체크
   setInterval(() => {
     idleTime++;
-    if (idleTime >= 10) { // 10초 동안 아무 행동 없으면 광고
-      showAd();
-      idleTime = 0; // 광고 보여주고 초기화
+    if (idleTime >= 10) { // 10초 idle이면 광고 재생
+      showIdleAd();
     }
   }, 1000);
 
-  // 사용자가 행동하면 idleTime 초기화
+  // 사용자 행동 감지 시 광고 숨기고 idle 초기화
   ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
     window.addEventListener(evt, () => {
       idleTime = 0;
+      hideIdleAd();
     });
   });
 </script>
