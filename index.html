@@ -1154,37 +1154,25 @@ function moveBox(x, y){
 
 
 
-
-<div id="idleAd" style="display:none;">
-  <video id="adVideo" muted playsinline>
+<div id="idleAd">
+  <video id="adVideo" muted autoplay playsinline loop>
     <source src="yang.mp4" type="video/mp4">
   </video>
 </div>
 
-
-
-
 <script>
 let idleTime = 0;
-const idleLimit = 10;
+const idleLimit = 10; // 초
 
 const idleAd = document.getElementById("idleAd");
 const video = document.getElementById("adVideo");
 
-video.muted = true;
-
-// 영상 끝나면 광고 숨기기
-video.addEventListener('ended', () => {
-  hideAd();
-  // 영상 끝나면 다시 초기화
-  video.currentTime = 0;
-});
+// 처음에는 숨김
+idleAd.style.display = "none";
 
 function showAd() {
   idleAd.style.display = "block";
-  video.play().catch(() => {
-    console.log("Autoplay blocked");
-  });
+  video.play().catch(() => console.log("Autoplay blocked"));
 }
 
 function hideAd() {
@@ -1193,7 +1181,7 @@ function hideAd() {
   video.pause();
 }
 
-// 1초마다 유휴 시간 체크
+// 1초마다 idle 체크
 setInterval(() => {
   idleTime++;
   if (idleTime >= idleLimit) {
@@ -1205,7 +1193,6 @@ setInterval(() => {
 ["mousemove", "click", "touchstart", "keydown"].forEach(event => {
   document.addEventListener(event, hideAd);
 });
-
 </script>
 
 
