@@ -723,30 +723,41 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 
 </div>
 </section>
-<div id="map" style="width:100%;height:400px;"></div>
+<div id="map" style="width:100%; max-width:600px; height:400px; margin:0 auto; border:3px solid red; border-radius:10px;"></div>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
 <script>
-  navigator.geolocation.getCurrentPosition(function(position) {
-    const lat = position.coords.latitude;
-    const lng = position.coords.longitude;
-
-    const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: lat, lng: lng },
+  // 지도 초기화
+  function initMap() {
+    // 지도 옵션
+    const mapOptions = {
       zoom: 12,
-    });
+      center: { lat: 34.2851348, lng: -118.9138953 },
+    };
+    
+    const map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-    new google.maps.Marker({
-      position: { lat: lat, lng: lng },
+    // 내 위치 마커
+    const marker = new google.maps.Marker({
+      position: { lat: 34.2851348, lng: -118.9138953 },
       map: map,
+      title: "내 위치",
       icon: {
         path: google.maps.SymbolPath.CIRCLE,
-        scale: 12,       // 점 크기
+        scale: 12, // 점 크기
         fillColor: "red",
         fillOpacity: 1,
-        strokeWeight: 0,
+        strokeWeight: 2,
+        strokeColor: "white"
       }
     });
-  });
+
+    // 원하는 경우, 지도를 마커에 맞춰 중앙으로 이동
+    map.setCenter(marker.getPosition());
+  }
+
+  // 지도 초기화 함수 실행
+  window.onload = initMap;
 </script>
   
   
