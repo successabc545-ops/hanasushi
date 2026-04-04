@@ -1268,22 +1268,33 @@ function moveBox(x, y){
 </script>
 <!-- ================== IDLE VIDEO AD ================== -->
  
- <div style="
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:99999;
-  background:black;
-">
-  <video autoplay muted loop playsinline style="
-    width:100%;
-    height:100%;
-    object-fit:cover;
-  ">
-    <source src="https://eathanasushila.com/fish.mp4" type="video/mp4">
-  </video>
-</div> 
+<script>
+const idleAd = document.getElementById('idleAd');
+let idleTimer;
+const idleDelay = 5000; // 5초 동안 가만히 있으면 영상 다시 등장
+
+// 영상을 보이게 / 숨기게
+function showIdleAd() {
+  idleAd.style.display = 'flex';
+}
+function hideIdleAd() {
+  idleAd.style.display = 'none';
+}
+
+// Idle 타이머 초기화
+function resetIdleTimer() {
+  hideIdleAd(); // 사용자가 움직이면 영상 숨기기
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(showIdleAd, idleDelay); // 일정 시간 후 다시 영상 보이기
+}
+
+// 이벤트 등록
+document.addEventListener('mousemove', resetIdleTimer);
+document.addEventListener('click', resetIdleTimer);
+document.addEventListener('touchstart', resetIdleTimer);
+
+// 페이지 로딩 시 초기 타이머 시작
+idleTimer = setTimeout(showIdleAd, idleDelay);
+</script>
 </body>
 </html>
