@@ -400,6 +400,26 @@ hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드
     
     
     </style>
+  <style>
+#idleAd {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: none; /* 처음엔 안보이게 */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#idleAd video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
 </head>
 
 
@@ -1265,6 +1285,112 @@ function moveBox(x, y){
 </script>
 <!-- ================== IDLE VIDEO AD ================== -->
  
+  <!-- ====================== Idle Video ====================== -->
+<div id="idleAd">
+  <video autoplay muted loop playsinline>
+    <source src="fish.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+<script>
+const idleAd = document.getElementById('idleAd');
+let idleTimer;
+const idleDelay = 5000; // 5초 후 영상 표시
+
+function showIdleAd() {
+  idleAd.style.display = 'flex';
+}
+
+function hideIdleAd() {
+  idleAd.style.display = 'none';
+}
+
+function resetIdleTimer() {
+  hideIdleAd();
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(showIdleAd, idleDelay);
+}
+
+// 마우스, 클릭, 터치 모두 감지
+document.addEventListener('mousemove', resetIdleTimer);
+document.addEventListener('click', resetIdleTimer);
+document.addEventListener('touchstart', resetIdleTimer);
+
+// 처음 타이머 시작
+idleTimer = setTimeout(showIdleAd, idleDelay);
+</script>
+
+이대로 넣으면:
+
+5초 동안 가만히 있으면 fish.mp4 영상이 화면 전체로 나옴
+마우스 이동/클릭/터치 하면 바로 사라짐
+모바일 터치 지원
+
+Jake, 원하면 내가 네 전체 Hana Sushi HTML 코드에 이 Idle Video 완전히 통합해서 바로 복사 가능한 상태로 만들어서 줄 수도 있음.
+그렇게 해줄까?
+
+style 끝에 추가 라면 </style>을 말하는거야
+
+맞아, Jake 😎
+
+여기서 말한 **“style 끝에 추가”**는 </style> 바로 위에 넣으라는 뜻이야.
+
+즉:
+
+<style>
+  /* 기존 CSS ... 끝 */
+  
+  /* Idle Video CSS */
+  #idleAd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: none; /* 처음엔 안보이게 */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  #idleAd video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+<style>
+  /* 기존 CSS ... 끝 */
+  
+  /* Idle Video CSS */
+  #idleAd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: none; /* 처음엔 안보이게 */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  #idleAd video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
+
+</style>
+
+
+
+
   
 </body>
 </html>
