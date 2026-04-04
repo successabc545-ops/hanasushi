@@ -1222,11 +1222,13 @@ function moveBox(x, y){
   }
 </style>
 
+<!--
 <div id="idleAd">
-  <video autoplay muted loop playsinline style="width:100%; height:auto;">
+  <video autoplay muted loop playsinline>
     <source src="fish.mp4" type="video/mp4">
   </video>
 </div>
+-->
 
   
 <script>
@@ -1266,6 +1268,22 @@ function moveBox(x, y){
 </script>
 <!-- ================== IDLE VIDEO AD ================== -->
  
-  
+ <div style="
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:99999;
+  background:black;
+">
+  <video autoplay muted loop playsinline style="
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  ">
+    <source src="https://eathanasushila.com/fish.mp4" type="video/mp4">
+  </video>
+</div> 
 </body>
 </html>
