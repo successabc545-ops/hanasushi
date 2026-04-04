@@ -395,43 +395,11 @@ hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드
 }
     
     /* ====================== Rice cracker 이 라인이 없으면 완됨 크기 틀려짐....메뉴 이미지 통일 + Rice Cracker 강조 끝 ====================== */
-
+   
     
     
-
-
-
- left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  display: none; /* 처음엔 안보이게 */
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-#idleAd video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-</style>
-
-
-
-
-
-
-
-
-
-
-
-      
     
     </style>
-  
 </head>
 
 
@@ -1187,7 +1155,11 @@ function moveBox(x, y){
   }
 </style>
 
-
+<div id="idleAd">
+  <video autoplay muted loop playsinline>
+    <source src="yang.mp4" type="video/mp4">
+  </video>
+</div>
 
 <script>
   const idleAd = document.getElementById('idleAd');
@@ -1249,88 +1221,50 @@ function moveBox(x, y){
     border-radius: 10px; /* 선택 사항: 모서리 살짝 둥글게 */
   }
 </style>
-<style>
-  #idleAd {
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    display: none;  /* 처음엔 숨김 */
-    justify-content: center;
-    align-items: center;
-    background:black;
-    z-index:9999;
-  }
-  #idleAd video {
-    width:100%;
-    height:100%;
-    object-fit:cover;
-  }
-</style>
-
-
-
-<script>
-  const idleAd = document.getElementById('idleAd');
-  let idleTimer;
-  const idleDelay = 5000; // 5초
-
-  function showIdleAd() {
-    idleAd.style.display = 'flex';
-  }
-  function hideIdleAd() {
-    idleAd.style.display = 'none';
-  }
-
-  function resetIdleTimer() {
-    hideIdleAd();               // 움직이면 영상 숨김
-    clearTimeout(idleTimer);    // 기존 타이머 제거
-    idleTimer = setTimeout(showIdleAd, idleDelay); // 5초 후 다시 영상 표시
-  }
-
-  // 움직임, 클릭, 터치 감지
-  document.addEventListener('mousemove', resetIdleTimer);
-  document.addEventListener('click', resetIdleTimer);
-  document.addEventListener('touchstart', resetIdleTimer);
-
-  // 페이지 로딩 시 초기 타이머
-  idleTimer = setTimeout(showIdleAd, idleDelay);
-</script>
 
 <div id="idleAd">
   <video autoplay muted loop playsinline>
-    <source src="fish.mp4" type="video/mp4">
+    <source src="yang.mp4" type="video/mp4">
   </video>
 </div>
 
 <script>
-const idleAd = document.getElementById('idleAd');
-let idleTimer;
-const idleDelay = 5000; // 5초 후 영상 표시
+  const idleAd = document.getElementById('idleAd');
+  let idleTime = 0;
+  let adVisible = false;
 
-function showIdleAd() {
-  idleAd.style.display = 'flex';
-}
+  function showIdleAd() {
+    if (!adVisible) {
+      idleAd.style.display = 'flex';
+      adVisible = true;
+    }
+  }
 
-function hideIdleAd() {
-  idleAd.style.display = 'none';
-}
+  function hideIdleAd() {
+    if (adVisible) {
+      idleAd.style.display = 'none';
+      adVisible = false;
+    }
+  }
 
-function resetIdleTimer() {
-  hideIdleAd();
-  clearTimeout(idleTimer);
-  idleTimer = setTimeout(showIdleAd, idleDelay);
-}
+  // 1초마다 idle 체크
+  setInterval(() => {
+    idleTime++;
+    if (idleTime >= 10) { // 10초 idle이면 광고 재생
+      showIdleAd();
+    }
+  }, 1000);
 
-// 마우스, 클릭, 터치 모두 감지
-document.addEventListener('mousemove', resetIdleTimer);
-document.addEventListener('click', resetIdleTimer);
-document.addEventListener('touchstart', resetIdleTimer);
-
-// 처음 타이머 시작
-idleTimer = setTimeout(showIdleAd, idleDelay);
+  // 사용자 행동 감지 시 광고 숨기고 idle 초기화
+  ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
+    window.addEventListener(evt, () => {
+      idleTime = 0;
+      hideIdleAd();
+    });
+  });
 </script>
-
+<!-- ================== IDLE VIDEO AD ================== -->
+ 
+  
 </body>
 </html>
