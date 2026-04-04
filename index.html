@@ -1222,12 +1222,13 @@ function moveBox(x, y){
   }
 </style>
 
-<div id="idleAd">
-  <video autoplay muted loop playsinline>
-    <source src="fish.mp4" type="video/mp4">
-  </video>
-</div>
+<video autoplay muted loop playsinline>
+  <source src="fish.mp4" type="video/mp4">
+  <source src="fish.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
 
+  
 <script>
   const idleAd = document.getElementById('idleAd');
   let idleTime = 0;
