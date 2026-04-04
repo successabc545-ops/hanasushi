@@ -395,11 +395,43 @@ hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드
 }
     
     /* ====================== Rice cracker 이 라인이 없으면 완됨 크기 틀려짐....메뉴 이미지 통일 + Rice Cracker 강조 끝 ====================== */
-   
+
     
     
+
+
+
+ left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: none; /* 처음엔 안보이게 */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#idleAd video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+      
     
     </style>
+  
 </head>
 
 
@@ -1155,11 +1187,7 @@ function moveBox(x, y){
   }
 </style>
 
-<div id="idleAd">
-  <video autoplay muted loop playsinline>
-    <source src="고양이 호랑이 완성작 이것보고 공부하기.mp4" type="video/mp4">
-  </video>
-</div>
+
 
 <script>
   const idleAd = document.getElementById('idleAd');
@@ -1241,11 +1269,7 @@ function moveBox(x, y){
   }
 </style>
 
-<div id="idleAd">
-  <video autoplay muted loop playsinline>
-    <source src="fish.mp4" type="video/mp4">
-  </video>
-</div>
+
 
 <script>
   const idleAd = document.getElementById('idleAd');
@@ -1273,5 +1297,40 @@ function moveBox(x, y){
   // 페이지 로딩 시 초기 타이머
   idleTimer = setTimeout(showIdleAd, idleDelay);
 </script>
+
+<div id="idleAd">
+  <video autoplay muted loop playsinline>
+    <source src="fish.mp4" type="video/mp4">
+  </video>
+</div>
+
+<script>
+const idleAd = document.getElementById('idleAd');
+let idleTimer;
+const idleDelay = 5000; // 5초 후 영상 표시
+
+function showIdleAd() {
+  idleAd.style.display = 'flex';
+}
+
+function hideIdleAd() {
+  idleAd.style.display = 'none';
+}
+
+function resetIdleTimer() {
+  hideIdleAd();
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(showIdleAd, idleDelay);
+}
+
+// 마우스, 클릭, 터치 모두 감지
+document.addEventListener('mousemove', resetIdleTimer);
+document.addEventListener('click', resetIdleTimer);
+document.addEventListener('touchstart', resetIdleTimer);
+
+// 처음 타이머 시작
+idleTimer = setTimeout(showIdleAd, idleDelay);
+</script>
+
 </body>
 </html>
