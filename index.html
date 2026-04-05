@@ -8,19 +8,19 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
 /* ==============  네온 시작 ================== */    
-. vegas-intro { 
-    position: fixed ; 
-    top: 0 ; 
-    left: 0 ; 
-    width: 100 % ; 
-    height: 100 % ; 
-    background: black ; 
-    display: flex ; 
-    flex-direction: colu; 
-    justify-content: flex-end ;   /* 콘텐츠 를 하단으로 이동 */ 
-    align-items: center ; 
-    padding-bottom: 100px ;       /* 하단에서 여백 추가 */     z-index: 9999 ;     animation: introFade 2 초 앞으로 ; }
-
+#vegas-intro{
+position:fixed;
+top:0;
+left:0; 
+width:100%;
+height:100%;
+background:black; 
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+animation:introFade 2s forwards;
+}
 
 .neon-sign{
 font-size:60px;
@@ -90,7 +90,7 @@ nav a {
 
 
 
-
+  
 /*===================끝 ===================*/  
   *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
@@ -98,9 +98,18 @@ nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);display:flex;jus
 nav .logo{font-size:20px;font-weight:700;letter-spacing:2px;}
 nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:500;cursor:pointer;}
 nav a:hover{color:#ff2e2e;}
-.hero div {   height: 100 % ; /* hero 전체 높이 사용 */   background: url ( 'sushi.webp' );   background-size: cover ;   background-position: center ; display   : flex ;   flex-direction: column ;   justify-content: center ;   align-items: center ;   text-align: center ; } 
-
-
+.hero div {
+  height:60vh; /* 기존 높이 유지 */
+  background: url('sushi.webp');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%; /* hero 전체 높이를 사용 */
+}
 .hero h1{font-size:70px;letter-spacing:5px;line-height: 1.1; margin: 0 auto;}
 .hero h2{color:#ffb703;font-size:28px;margin-top:10px;}
 .hero p{font-size:20px;margin:20px 0 35px;}
@@ -391,26 +400,6 @@ hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드
     
     
     </style>
-  <style>
-#idleAd {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  display: none; /* 처음엔 안보이게 */
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-#idleAd video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-</style>
 </head>
 
 
@@ -473,7 +462,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
           Ingredients: Miso broth, chashu, egg, Green onions, bean sprouts.
         </p>
-        <p class="price" data-price="11.00">$11.00</p>  
+        <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
 
@@ -484,7 +473,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
           Ingredients: Rich pork bone broth, chashu, egg, Green onions, bean sprouts.
         </p>
-        <p class="price" data-price="11.00">$11.00</p>  
+        <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
 
@@ -495,7 +484,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
           Ingredients: Spicy broth, chashu, chili oil, Green onions, bean sprouts. 
         </p>
-       <p class="price" data-price="11.00">$11.00</p>   
+       <p class="price" data-price="12.95">$12.95</p>   
       </div>
     </div>
 
@@ -518,7 +507,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
           Ingredients:Tuna, Salmon, Whitefish & Cucumber with Cilantro, served with a Special Sauce.
         </p>
-       <p class="price" data-price="11.00">$11.00</p>    
+       <p class="price" data-price="12.95">$12.95</p>    
       </div>
     </div>  
   
@@ -529,7 +518,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
           Ingredients:Spicy Tuna, Spicy Crab, and Shrimp Tempura, wrapped with tuna and topped with a crunchy finish
         </p>
-         <p class="price" data-price="11.00">$11.00</p>  
+         <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
 
@@ -540,7 +529,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
           Ingredients:Spicy Crab and Avocado, wrapped with Salmon
         </p>
-      <p class="price" data-price="11.00">$11.00</p>  
+      <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
 
@@ -551,7 +540,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
           Ingredients:Spicy Tuna and Imitation Crab, wrapped in Tuna
         </p>
-     <p class="price" data-price="11.00">$11.00</p>  
+     <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
 
@@ -562,7 +551,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
           Ingredients:Tuna, Salmon, White Fish, Albacore, Radish & Avocado, wrapped in Cucumber
         </p>
-     <p class="price" data-price="11.00">$11.00</p>  
+     <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
 
@@ -574,7 +563,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
           Ingredients:Spicy Crab, Cucumber, Bell Pepper & Shrimp, wrapped in Pickled Radish
         </p>
-      <p class="price" data-price="$11.00">$$11.00</p>  
+      <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
     
@@ -610,7 +599,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Spicy tuna, Spicy crab, Smoked Sea trout, Silantro, avocado</p>
      <p class="price" data-price="12.95">$12.95</p>  
       </div>
-    </div> 
+    </div>
     
  
     <div class="menu-item">
@@ -1276,112 +1265,6 @@ function moveBox(x, y){
 </script>
 <!-- ================== IDLE VIDEO AD ================== -->
  
-  <!-- ====================== Idle Video ====================== -->
-<div id="idleAd">
-  <video autoplay muted loop playsinline>
-    <source src="fish.mp4" type="video/mp4">
-  </video>
-</div>
-
-
-<script>
-const idleAd = document.getElementById('idleAd');
-let idleTimer;
-const idleDelay = 5000; // 5초 후 영상 표시
-
-function showIdleAd() {
-  idleAd.style.display = 'flex';
-}
-
-function hideIdleAd() {
-  idleAd.style.display = 'none';
-}
-
-function resetIdleTimer() {
-  hideIdleAd();
-  clearTimeout(idleTimer);
-  idleTimer = setTimeout(showIdleAd, idleDelay);
-}
-
-// 마우스, 클릭, 터치 모두 감지
-document.addEventListener('mousemove', resetIdleTimer);
-document.addEventListener('click', resetIdleTimer);
-document.addEventListener('touchstart', resetIdleTimer);
-
-// 처음 타이머 시작
-idleTimer = setTimeout(showIdleAd, idleDelay);
-</script>
-
-이대로 넣으면:
-
-5초 동안 가만히 있으면 fish.mp4 영상이 화면 전체로 나옴
-마우스 이동/클릭/터치 하면 바로 사라짐
-모바일 터치 지원
-
-Jake, 원하면 내가 네 전체 Hana Sushi HTML 코드에 이 Idle Video 완전히 통합해서 바로 복사 가능한 상태로 만들어서 줄 수도 있음.
-그렇게 해줄까?
-
-style 끝에 추가 라면 </style>을 말하는거야
-
-맞아, Jake 😎
-
-여기서 말한 **“style 끝에 추가”**는 </style> 바로 위에 넣으라는 뜻이야.
-
-즉:
-
-<style>
-  /* 기존 CSS ... 끝 */
-  
-  /* Idle Video CSS */
-  #idleAd {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: none; /* 처음엔 안보이게 */
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
-
-  #idleAd video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-
-<style>
-  /* 기존 CSS ... 끝 */
-  
-  /* Idle Video CSS */
-  #idleAd {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: none; /* 처음엔 안보이게 */
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
-
-  #idleAd video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-</style>
-
-</style>
-
-
-
-
   
 </body>
 </html>
