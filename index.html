@@ -725,7 +725,29 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
     <form action="https://formsubmit.co/koseouk@gmail.com" method="POST" style="flex:1; min-width:300px;">
- 
+
+      
+      
+      <!-- 🍣 CUSTOMER MANAGEMENT FIELDS START -->
+
+<label>Customer Type</label>
+<select name="customer_type" required>
+  <option value="guest">Guest</option>
+  <option value="regular">Regular</option>
+  <option value="vip">VIP</option>
+</select>
+
+<label>Total Visits</label>
+<input type="number" name="visit_count" min="0" placeholder="How many times have you ordered?">
+
+<label>Birthday (for rewards)</label>
+<input type="date" name="birthday">
+
+<!-- 🍣 CUSTOMER MANAGEMENT FIELDS END -->
+
+      
+      
+      
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
       <input type="email" name="email" placeholder="Your Email" required>
