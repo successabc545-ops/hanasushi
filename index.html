@@ -1278,7 +1278,32 @@ function moveBox(x, y){
   });
 </script>
 <!-- ================== IDLE VIDEO AD ================== -->
- 
+<script>
+// ================= CUSTOMER DB (localStorage) =================
+
+// 고객 데이터 불러오기
+function getCustomers(){
+  return JSON.parse(localStorage.getItem("customers") || "{}");
+}
+
+// 고객 저장
+function saveCustomers(data){
+  localStorage.setItem("customers", JSON.stringify(data));
+}
+
+// 방문 기록 추가
+function addVisit(phone){
+  let customers = getCustomers();
+
+  if(!customers[phone]){
+    customers[phone] = { visits: 0 };
+  }
+
+  customers[phone].visits += 1;
+
+  saveCustomers(customers);
+}
+</script> 
   
 </body>
 </html>
