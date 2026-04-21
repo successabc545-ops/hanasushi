@@ -1167,7 +1167,34 @@ function moveBox(x, y){
   }
 </style>
 
+<script>
+let idleTime = 0;
+const idleLimit = 10; // 10초 (원하면 30, 60으로 변경)
 
+function resetIdle() {
+  idleTime = 0;
+  document.getElementById("idleAd").style.display = "none";
+}
+
+function checkIdle() {
+  idleTime++;
+
+  if (idleTime >= idleLimit) {
+    document.getElementById("idleAd").style.display = "flex";
+  }
+}
+
+// 사용자 행동 감지
+["mousemove", "keydown", "scroll", "touchstart"].forEach(evt => {
+  document.addEventListener(evt, resetIdle);
+});
+
+// 1초마다 체크
+setInterval(checkIdle, 1000);
+</script>
+
+
+  
 <div id="idleAd">
   <video autoplay muted loop playsinline>
     <source src="hello.mp4" type="video/mp4">
