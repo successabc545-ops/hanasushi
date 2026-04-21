@@ -8,20 +8,10 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
 /* ==============  네온 시작 ================== */    
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-body {
-  padding-top: 100px;
-}
-    
 #vegas-intro{
 position:fixed;
 top:0;
-left:0; 
+left:0;
 width:100%;
 height:100%;
 background:black; 
@@ -78,29 +68,6 @@ visibility:hidden;
   font-weight:900;
  text-shadow: 0 0 5px #ff2e2e, 0 0 10px #ff2e2e;
 }
-
-
-  
-  
-  
-  /* eathanasushila.com 메뉴 전용 – 글자 더 크게 */
-nav a {
-    font-size: 32px;       /* 데스크탑에서 크게 */
-    padding: 14px 20px;    /* 메뉴 간격도 넉넉하게 */
-}
-
-/* 모바일 화면 대응 */
-@media (max-width: 768px) {
-    nav a {
-        font-size: 24px;   /* 모바일용 글자 크기 */
-        padding: 10px 15px;
-    }
-}
-
-
-
-
-  
 /*===================끝 ===================*/  
   *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
@@ -515,7 +482,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       <div>
         <h3>🥄 Hana Special</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Tuna, Salmon, Whitefish & Cucumber with Cilantro, served with a Special Sauce.
+          Ingredients: Crispy fried shrimp, dipping sauce.
         </p>
        <p class="price" data-price="12.95">$12.95</p>    
       </div>
@@ -526,7 +493,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       <div>
         <h3>🍣 BE bob</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Spicy Tuna, Spicy Crab, and Shrimp Tempura, wrapped with tuna and topped with a crunchy finish
+          Ingredients: Fresh tuna slices, wasabi, soy sauce.
         </p>
          <p class="price" data-price="12.95">$12.95</p>  
       </div>
@@ -537,7 +504,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       <div>
         <h3>🍣 Orange Roll</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Spicy Crab and Avocado, wrapped with Salmon
+          Ingredients: Fresh salmon slices, lemon, soy sauce.
         </p>
       <p class="price" data-price="12.95">$12.95</p>  
       </div>
@@ -548,7 +515,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       <div>
         <h3>❤️ Oh honey</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Spicy Tuna and Imitation Crab, wrapped in Tuna
+          Ingredients: Crispy fried shrimp, dipping sauce.
         </p>
      <p class="price" data-price="12.95">$12.95</p>  
       </div>
@@ -559,7 +526,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       <div>
         <h3>🥑 Paul Roll</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Tuna, Salmon, White Fish, Albacore, Radish & Avocado, wrapped in Cucumber
+          Ingredients: Avocado, cucumber, nori sheets.
         </p>
      <p class="price" data-price="12.95">$12.95</p>  
       </div>
@@ -571,7 +538,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       <div>
         <h3>🥒 Perfect Storm</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Spicy Crab, Cucumber, Bell Pepper & Shrimp, wrapped in Pickled Radish
+          Ingredients: Fresh tuna slices, wasabi, soy sauce.
         </p>
       <p class="price" data-price="12.95">$12.95</p>  
       </div>
@@ -597,7 +564,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       <div>
         <h3>🌯 Burito</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Spicy crab, chunk tuna, chunk salmon, avocado </p>
-      <p class="price" data-price="10.00">$10.00</p>  
+      <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
    
@@ -664,14 +631,28 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
         <div class="menu-item">
       <img src="rain.webp" loading="lazy">
       <div>
-      
         <h3>🌈 Rainbow roll</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:imitation crab,avocado,cucumber,tuna,salmon,seabass,albarcore,shrimp </p>
     <p class="price" data-price="12.95">$12.95</p>  
       </div>
      </div>
-  
-
+    <div class="menu-item">
+      <img src="Smoked_Burito.webp" loading="lazy">
+      <div>
+        <h3>🌯 Smoked Burito</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Spicy tuna, Spicy crab, Smoked Sea trout, Silantro, avocado</p>
+     <p class="price" data-price="12.95">$12.95</p>  
+      </div>
+    </div>
+   
+    <div class="menu-item">
+      <img src="fire roll.webp" loading="lazy">
+      <div>
+        <h3>🔥 Fire Roll</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Spicy crab, chunk tuna, chunk salmon, avocado </p>
+     <p class="price" data-price="12.95">$12.95</p>  
+      </div> 
+     </div>
     
 <div class="menu-item">
       <img src="chirashi.webp" loading="lazy">
@@ -792,9 +773,6 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
     <p class="qr-text">Visit our website & order now!</p>
   </div>
 </section>
-
-
-
 
 <footer>
   © 2026 HANA SUSHI FOOD TRUCK
@@ -1137,259 +1115,6 @@ function moveBox(x, y){
   orderBox.style.bottom = "auto";
 }
 </script>
-
-
-
-
-
-
-<style>
-  /* ================= Idle 광고 전체 화면 ================= */
-  #idleAd {
-    display: none; /* 처음엔 숨김 */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #idleAd video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* 화면 꽉 채우기 */
-  }
-</style>
-
-
   
-
-<script>
-  const idleAd = document.getElementById('idleAd');
-  let idleTime = 0;
-  let adVisible = false;
-
-  function showIdleAd() {
-    if (!adVisible) {
-      idleAd.style.display = 'flex';
-      adVisible = true;
-    }
-  }
-
-  function hideIdleAd() {
-    if (adVisible) {
-      idleAd.style.display = 'none';
-      adVisible = false;
-    }
-  }
-
-  // 1초마다 idle 체크
-  setInterval(() => {
-    idleTime++;
-    if (idleTime >= 10) { // 10초 idle이면 광고 재생
-      showIdleAd();
-    }
-  }, 1000);
-
-  // 사용자 행동 감지 시 광고 숨기고 idle 초기화
-  ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
-    window.addEventListener(evt, () => {
-      idleTime = 0;
-      hideIdleAd();
-    });
-  });
-</script>
-
-
-
-<style>
-  /* ================= Idle 광고 화면 ================= */
-  #idleAd {
-    display: none; /* 처음엔 숨김 */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #idleAd video {
-    max-width: 90%;   /* 화면 가로 90% */
-    max-height: 90%;  /* 화면 세로 90% */
-    object-fit: contain; /* 영상 비율 유지, 잘리지 않음 */
-    border-radius: 10px; /* 선택 사항: 모서리 살짝 둥글게 */
-  }
-</style>
-
-
-
-
-
-
-
-
-
-        <justify-content: center ; 
-        align-items: center ; 
-        z-index: 1000 ; " > <video autoplay muted loop playsinline style = "               width: 80 % ;               height: auto ;               object-fit: cover ; " > <source src = "hello.mp4" type = "video/mp4" > </video> </div> <script> letdleTime = 0 ; constdleAd = document .getElementById ( 'idleAd' ); // 1초마다 유휴 시간 증가 setInterval ( () => { 유휴 시간 ++ ; if ( 유휴 시간 > = 5 ) {   // 5초 동안 활동 외부 광고 표시 idleAd . style . display = 'flex' ;         }     }, 1000 ); // 사용자 활동 감지 function resetIdle () { idleTime = 0 ; idleAd . style . display = 'none' ; // 광고 숨기기     } document . addEventListener( 'mousemove' , resetIdle ); document . addEventListener( 'keydown' , resetIdle ); document . addEventListener( 'scroll' , resetIdle ) ;
-     
-
-<script>
-  const idleAd = document.getElementById('idleAd');
-  let idleTime = 0;
-  let adVisible = false;
-
-  function showIdleAd() {
-    if (!adVisible) {
-      idleAd.style.display = 'flex';
-      adVisible = true;
-    }
-  }
-
-  function hideIdleAd() {
-    if (adVisible) {
-      idleAd.style.display = 'none';
-      adVisible = false;
-    }
-  }
-
-  // 1초마다 idle 체크
-  setInterval(() => {
-    idleTime++;
-    if (idleTime >= 10) { // 10초 idle이면 광고 재생
-      showIdleAd();
-    }
-  }, 1000);
-
-  // 사용자 행동 감지 시 광고 숨기고 idle 초기화
-  ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
-    window.addEventListener(evt, () => {
-      idleTime = 0;
-      hideIdleAd();
-    });
-  });
-</script>
-<!-- ================== IDLE VIDEO AD ================== -->
- 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-
-<script>
-<!-- ==================회원가입시작 ================== -->
- <title>Hana Sushi</title>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      max-width: 400px;
-      margin: 80px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      margin-bottom: 5px;
-    }
-
-    p {
-      color: gray;
-      margin-bottom: 20px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 14px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    .signup {
-      background: #ff4d4d;
-      color: white;
-    }
-
-    .login {
-      background: #333;
-      color: white;
-    }
-
-    .points {
-      background: #4CAF50;
-      color: white;
-    }
-
-    footer {
-      margin-top: 20px;
-      font-size: 12px;
-      color: gray;
-    }
-  </style>
-</head>
-
-
-
-  <div class="container">
-    <h1>Hana Sushi</h1>
-    <p>Welcome to our food truck</p>
-
-    <h3>회원 시스템</h3>
-
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-
-    <button class="signup" onclick="signUp()">회원가입</button>
-    <button class="login" onclick="login()">로그인</button>
-    <button class="points" onclick="addPoints()">포인트 +10</button>
-
-    <footer>© Hana Sushi</footer>
-  </div>
-
-      </style>
-
-  <h3>회원 시스템</h3>
-
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
-
-<br><br>
-
-<button onclick="signUp()">회원가입</button>
-<button onclick="login()">로그인</button>
-<button onclick="addPoints()">포인트 +10</button>
-
-    
-  </style>
-<!-- ================== 회원가입끝 ================== -->          
 </body>
 </html>
