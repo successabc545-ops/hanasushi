@@ -1078,7 +1078,8 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     document.body.appendChild(form);
     form.submit();
     document.body.removeChild(form);
-
+const phone = document.getElementById("phoneFull").value;
+addVisit(phone);
     // 메시지 표시
     const msgDiv = document.getElementById('order-message');
   msgDiv.innerText = "Thank you!";  // 메시지 내용 변경
