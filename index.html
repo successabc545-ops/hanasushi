@@ -1160,34 +1160,6 @@ function moveBox(x, y){
   }
 
   #idleAd video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* 화면 꽉 채우기 */
-  }
-</style>
-
-
-  
-
-
-
-
-<style>
-  /* ================= Idle 광고 화면 ================= */
-  #idleAd {
-    display: none; /* 처음엔 숨김 */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #idleAd video {
     max-width: 90%;   /* 화면 가로 90% */
     max-height: 90%;  /* 화면 세로 90% */
     object-fit: contain; /* 영상 비율 유지, 잘리지 않음 */
