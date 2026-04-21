@@ -730,6 +730,13 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       
       <!-- 🍣 CUSTOMER MANAGEMENT FIELDS START -->
 
+<label>Membership Status</label>
+<select name="membership_status" required>
+  <option value="guest">Guest (New Customer)</option>
+  <option value="member">Member</option>
+  <option value="vip">VIP</option>
+</select>
+
 <label>Customer Type</label>
 <select name="customer_type" required>
   <option value="guest">Guest</option>
@@ -737,11 +744,22 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
   <option value="vip">VIP</option>
 </select>
 
+<label>Customer ID (Phone or Unique ID)</label>
+<input type="text" name="customer_id" placeholder="e.g. 2137939978">
+
 <label>Total Visits</label>
 <input type="number" name="visit_count" min="0" placeholder="How many times have you ordered?">
 
 <label>Birthday (for rewards)</label>
 <input type="date" name="birthday">
+
+<label>Visit Purpose</label>
+<select name="visit_purpose">
+  <option value="order">Food Order</option>
+  <option value="catering">Catering Inquiry</option>
+  <option value="reservation">Event / Reservation</option>
+  <option value="walkin">Walk-in</option>
+</select>
 
 <!-- 🍣 CUSTOMER MANAGEMENT FIELDS END -->
 
