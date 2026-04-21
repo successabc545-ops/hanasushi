@@ -1305,6 +1305,21 @@ function addVisit(phone){
   saveCustomers(customers);
 }
 </script> 
-  
+<script>
+function showCustomers(){
+  let data = getCustomers();
+  let html = "";
+
+  for(let phone in data){
+    html += `
+      <div style="margin:10px 0;">
+        📞 ${phone} → 방문: ${data[phone].visits}회
+      </div>
+    `;
+  }
+
+  document.getElementById("customerList").innerHTML = html;
+}
+</script>  
 </body>
 </html>
