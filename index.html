@@ -1279,6 +1279,78 @@ function moveBox(x, y){
 </script>
 <!-- ================== IDLE VIDEO AD ================== -->
  
-  
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
+<script>
+  // 🔥 네 Firebase 설정 (여기 너걸로 바꿔야됨)
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "hanasushi-54d82.firebaseapp.com",
+    projectId: "hanasushi-54d82",
+  };
+
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  // 회원가입
+  function signUp() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        // Firestore에 저장
+        db.collection("users").doc(user.uid).set({
+          email: email,
+          points: 0,
+          visits: 0,
+          createdAt: new Date()
+        });
+
+        alert("회원가입 완료!");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }
+
+  // 로그인
+  function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    auth.signInWithEmailAndPassword(email, password)
+      .then(() => {
+        alert("로그인 성공!");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }
+
+  // 포인트 추가 (관리용)
+  function addPoints() {
+    const user = auth.currentUser;
+    if (!user) return alert("로그인 먼저");
+
+    const ref = db.collection("users").doc(user.uid);
+
+    ref.get().then(doc => {
+      let current = doc.data().points || 0;
+
+      ref.update({
+        points: current + 10
+      });
+
+      alert("포인트 +10");
+    });
+  }
+</script>  
 </body>
 </html>
