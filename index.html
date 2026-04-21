@@ -1169,41 +1169,6 @@ function moveBox(x, y){
 
   
 
-<script>
-  const idleAd = document.getElementById('idleAd');
-  let idleTime = 0;
-  let adVisible = false;
-
-  function showIdleAd() {
-    if (!adVisible) {
-      idleAd.style.display = 'flex';
-      adVisible = true;
-    }
-  }
-
-  function hideIdleAd() {
-    if (adVisible) {
-      idleAd.style.display = 'none';
-      adVisible = false;
-    }
-  }
-
-  // 1초마다 idle 체크
-  setInterval(() => {
-    idleTime++;
-    if (idleTime >= 10) { // 10초 idle이면 광고 재생
-      showIdleAd();
-    }
-  }, 1000);
-
-  // 사용자 행동 감지 시 광고 숨기고 idle 초기화
-  ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
-    window.addEventListener(evt, () => {
-      idleTime = 0;
-      hideIdleAd();
-    });
-  });
-</script>
 
 
 
