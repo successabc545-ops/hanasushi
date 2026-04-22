@@ -736,6 +736,16 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 
   
 
+
+
+
+
+
+
+
+
+
+  
   
   
   
@@ -811,6 +821,115 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
   <div id="order-message">Order Sent!</div>
 </div>
 
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "여기",
+  authDomain: "여기",
+  databaseURL: "여기",
+  projectId: "여기",
+  storageBucket: "여기",
+  messagingSenderId: "여기",
+  appId: "여기"
+};
+
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+</script>
+
+
+<script>
+function addVisit(phone) {
+  if (!phone) return;
+
+  const ref = db.ref("customers/" + phone);
+
+  ref.once("value").then(snapshot => {
+    let data = snapshot.val();
+
+    if (data) {
+      let visits = data.visits + 1;
+      let coupon = data.coupon;
+
+      if (visits >= 5) {
+        coupon = true;
+      }
+
+      ref.set({
+        visits: visits,
+        coupon: coupon
+      });
+
+    } else {
+      ref.set({
+        visits: 1,
+        coupon: false
+      });
+    }
+  });
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
 // 날짜 제한
