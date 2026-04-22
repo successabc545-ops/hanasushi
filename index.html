@@ -826,6 +826,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 
 
 
+<!-- 🔥 Firebase 먼저 -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
 
@@ -840,43 +841,14 @@ const firebaseConfig = {
   appId: "여기"
 };
 
-const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 </script>
 
-
+<!-- ⬇️ 여기부터 기존 너 코드들 -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-function addVisit(phone) {
-  if (!phone) return;
-
-  const ref = db.ref("customers/" + phone);
-
-  ref.once("value").then(snapshot => {
-    let data = snapshot.val();
-
-    if (data) {
-      let visits = data.visits + 1;
-      let coupon = data.coupon;
-
-      if (visits >= 5) {
-        coupon = true;
-      }
-
-      ref.set({
-        visits: visits,
-        coupon: coupon
-      });
-
-    } else {
-      ref.set({
-        visits: 1,
-        coupon: false
-      });
-    }
-  });
-}
-</script>
-
+...
 
 
 
