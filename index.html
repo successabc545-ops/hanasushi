@@ -750,7 +750,9 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
   
   
   <!-- ======================    사시미    ====================== -->  
-<section id="contact">
+
+  
+  <section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
     <form action="https://formsubmit.co/koseouk@gmail.com" method="POST" style="flex:1; min-width:300px;">
@@ -801,15 +803,65 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
          alt="eat HANA SUSHI LA QR Code with logo">
     <p class="qr-text">Visit our website & order now!</p>
   </div>
+
+<div style="flex:1; min-width:300px; background:#111; padding:20px; border-radius:10px;">
+  <h3 style="color:#ff2e2e;">Check Your Points 🎁</h3>
+
+  <input type="tel" id="checkPhone" placeholder="Enter your phone number"
+    style="width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none;">
+
+  <button onclick="checkPoints()"
+    style="margin-top:10px; padding:10px 20px; background:#ff2e2e; color:#fff; border:none; border-radius:6px;">
+    Check Points
+  </button>
+
+  <p id="pointResult" style="margin-top:15px; font-size:18px;"></p>
+</div>
+
+
+
+  
 </section>
 
+  
 
-
+<!-- ====================== contact us  끝 ====================== -->
 
 <footer>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
+<script>
+function checkPoints() {
+  const phone = document.getElementById("checkPhone").value;
 
+  if (!phone) {
+    alert("전화번호 입력해주세요");
+    return;
+  }
+
+  const ref = db.ref("customers/" + phone);
+
+  ref.once("value").then(snapshot => {
+    const data = snapshot.val();
+
+    if (data) {
+      let message = `Visits: ${data.visits}`;
+
+      if (data.coupon) {
+        message += " 🎉 FREE ITEM AVAILABLE!";
+      } else {
+        message += ` (Need ${5 - data.visits} more for reward)`;
+      }
+
+      document.getElementById("pointResult").innerText = message;
+
+    } else {
+      document.getElementById("pointResult").innerText =
+        "No record found";
+    }
+  });
+}
+</script>
 <!-- ====================== Your Order 하단 고정 ====================== -->
 <div id="order-summary">
   <h2>Your Order</h2>
