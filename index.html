@@ -831,7 +831,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
 <script>
-function checkPoints() {
+async function checkPoints() {
   const phone = document.getElementById("checkPhone").value;
 
   if (!phone) {
@@ -839,27 +839,24 @@ function checkPoints() {
     return;
   }
 
-  const ref = db.ref("customers/" + phone);
+  const snapshot = await get(ref(db, "customers/" + phone));
 
-  ref.once("value").then(snapshot => {
+  if (snapshot.exists()) {
     const data = snapshot.val();
 
-    if (data) {
-      let message = `Visits: ${data.visits}`;
+    let message = `Visits: ${data.visits}`;
 
-      if (data.coupon) {
-        message += " 🎉 FREE ITEM AVAILABLE!";
-      } else {
-        message += ` (Need ${5 - data.visits} more for reward)`;
-      }
-
-      document.getElementById("pointResult").innerText = message;
-
+    if (data.coupon) {
+      message += " 🎉 FREE ITEM AVAILABLE!";
     } else {
-      document.getElementById("pointResult").innerText =
-        "No record found";
+      message += ` (Need ${5 - data.visits} more for reward)`;
     }
-  });
+
+    document.getElementById("pointResult").innerText = message;
+
+  } else {
+    document.getElementById("pointResult").innerText = "No record found";
+  }
 }
 </script>
 <!-- ====================== Your Order 하단 고정 ====================== -->
@@ -879,10 +876,10 @@ function checkPoints() {
 
 
 <!-- 🔥 Firebase 먼저 -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-<script>
 const firebaseConfig = {
   apiKey: "여기",
   authDomain: "여기",
@@ -893,14 +890,14 @@ const firebaseConfig = {
   appId: "여기"
 };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-</script>
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-<!-- ⬇️ 여기부터 기존 너 코드들 -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-...
+// ✅ 이걸 전역으로 써야 checkPoints에서 사용 가능
+window.db = db;
+window.ref = ref;
+window.get = get;
+</script>
 
 
 
