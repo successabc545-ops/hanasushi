@@ -878,7 +878,28 @@ const db = getFirestore(app);
 
 
 
+// ================= 방문 + 포인트 저장 =================
+async function addVisit(phone) {
+  const ref = doc(db, "customers", phone);
+  const snap = await getDoc(ref);
 
+  if (snap.exists()) {
+    const data = snap.data();
+    const newVisits = (data.visits || 0) + 1;
+
+    await updateDoc(ref, {
+      visits: newVisits
+    });
+
+  } else {
+    await setDoc(ref, {
+      visits: 1,
+      coupon: false
+    });
+  }
+
+  console.log("방문 저장 완료");
+}
 
 
 
