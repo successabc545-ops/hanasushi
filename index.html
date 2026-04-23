@@ -831,33 +831,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
   © 2026 HANA SUSHI FOOD TRUCK
 </footer>
 <script>
-async function checkPoints() {
-const phoneRaw = document.getElementById("phoneFull").value;
-const phone = phoneRaw.replace(/\D/g,'');
-
-if (!phone || phone.length < 10) {
-  alert("올바른 전화번호 입력해주세요");
-  return;
-}
-
-const snapshot = await get(ref(db, "customers/" + phone));
-
-if (snapshot.exists()) {
-  const data = snapshot.val();
-
-  let message = `Visits: ${data.visits}`;
-
-  if (data.coupon) {
-    message += " 🎉 FREE ITEM AVAILABLE!";
-  } else {
-    message += ` (Need ${5 - data.visits} more for reward)`;
-  }
-
-  document.getElementById("pointResult").innerText = message;
-
 } else {
-  document.getElementById("pointResult").innerText = "No record found";
-}
 </script>
 <!-- ====================== Your Order 하단 고정 ====================== -->
 <div id="order-summary">
