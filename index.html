@@ -867,14 +867,11 @@ const firebaseConfig = {
   appId: "여기"
 };
 
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
-
-// ================= 포인트 조회 =================
-async function checkPoints() {
+// ✅ 포인트 조회
+window.checkPoints = async function() {
   const phone = document.getElementById("checkPhone").value.replace(/\D/g,'');
 
   if (!phone) {
@@ -893,14 +890,10 @@ async function checkPoints() {
     document.getElementById("pointResult").innerText =
       "No record found 😢";
   }
-}
+};
 
-
-
-
-
-// ================= 방문 + 포인트 저장 =================
-async function addVisit(phone) {
+// ✅ 방문 저장
+window.addVisit = async function(phone) {
   const ref = doc(db, "customers", phone);
   const snap = await getDoc(ref);
 
@@ -920,57 +913,8 @@ async function addVisit(phone) {
   }
 
   console.log("방문 저장 완료");
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+};
+</script>
 <script>
 // 날짜 제한
 const eventDate = document.getElementById('eventDate');
