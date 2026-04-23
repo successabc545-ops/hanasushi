@@ -879,13 +879,26 @@ window.checkPoints = async function () {
 
   const ref = doc(db, "customers", phone);
   const snap = await getDoc(ref);
-
+  const cashbackRate = 0.05; // 5%
+  const cashback = amount * cashbackRate;
   if (snap.exists()) {
+     await updateDoc(ref, {
+      visits: increment(1),
+      totalSpent: increment(amount),
+      cashback: increment(cashback),
+      lastVisit: serverTimestamp()
+    });
     document.getElementById("pointResult").innerText =
       `You have ${snap.data().visits || 0} visits 🎉`;
   } else {
+     await setDoc(ref, {
+      visits: 1,
+      totalSpent: amount,
+      cashback: cashback,
+      lastVisit: serverTimestamp()
     document.getElementById("pointResult").innerText =
       "No record found";
+  });
   }
 };
 
