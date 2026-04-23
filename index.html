@@ -852,59 +852,28 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 <!-- 🔥 Firebase 먼저 -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, get, set, update } 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { 
+  getFirestore, 
+  doc, 
+  getDoc, 
+  setDoc, 
+  updateDoc 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "여기",
   authDomain: "여기",
-  databaseURL: "여기",
   projectId: "여기",
   storageBucket: "여기",
   messagingSenderId: "여기",
   appId: "여기"
 };
 
+
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const db = getFirestore(app);
 
-// ✅ 이걸 전역으로 써야 checkPoints에서 사용 가능
-window.db = db;
-  window.set = set;
-window.update = update;
 
-window.addVisit = async function(phone) {
-
-  if (!phone) return;
-
-  const customerRef = ref(db, "customers/" + phone);
-  const snapshot = await get(customerRef);
-
-  if (snapshot.exists()) {
-    const data = snapshot.val();
-
-    let newVisits = (data.visits || 0) + 1;
-
-    let coupon = false;
-
-    if (newVisits >= 5) {
-      coupon = true;
-      newVisits = 0;
-    }
-
-    await update(customerRef, {
-      visits: newVisits,
-      coupon: coupon
-    });
-
-  } else {
-    await set(customerRef, {
-      visits: 1,
-      coupon: false
-    });
-  }
-}
-window.ref = ref;
-window.get = get;
 </script>
 
 
