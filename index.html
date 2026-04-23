@@ -1746,7 +1746,10 @@ const db = getFirestore(app);
 
 // ✅ 포인트 조회
 window.checkPoints = async function() {
-  const phone = document.getElementById("checkPhone").value.replace(/\D/g,'');
+ const phone = document.getElementById("phoneFull").value.replace(/\D/g,'');
+const total = parseFloat(document.getElementById('total').innerText);
+
+await addTransaction(phone, total);
 
   if (!phone) {
     alert("전화번호 입력하세요");
