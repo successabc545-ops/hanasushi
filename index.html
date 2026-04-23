@@ -878,8 +878,8 @@ async function checkPoints() {
 <!-- 🔥 Firebase 먼저 -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
+import { getDatabase, ref, get, set, update } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 const firebaseConfig = {
   apiKey: "여기",
   authDomain: "여기",
@@ -895,6 +895,40 @@ const db = getDatabase(app);
 
 // ✅ 이걸 전역으로 써야 checkPoints에서 사용 가능
 window.db = db;
+  window.set = set;
+window.update = update;
+
+window.addVisit = async function(phone) {
+
+  if (!phone) return;
+
+  const customerRef = ref(db, "customers/" + phone);
+  const snapshot = await get(customerRef);
+
+  if (snapshot.exists()) {
+    const data = snapshot.val();
+
+    let newVisits = (data.visits || 0) + 1;
+
+    let coupon = false;
+
+    if (newVisits >= 5) {
+      coupon = true;
+      newVisits = 0;
+    }
+
+    await update(customerRef, {
+      visits: newVisits,
+      coupon: coupon
+    });
+
+  } else {
+    await set(customerRef, {
+      visits: 1,
+      coupon: false
+    });
+  }
+}
 window.ref = ref;
 window.get = get;
 </script>
@@ -1219,6 +1253,10 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     form.submit();
     document.body.removeChild(form);
 const phone = document.getElementById("phoneFull").value;
+ if (!phone) {
+  alert("전화번호 입력해주세요");
+  return;
+} 
 addVisit(phone);
     // 메시지 표시
     const msgDiv = document.getElementById('order-message');
