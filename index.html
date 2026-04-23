@@ -835,29 +835,28 @@ async function checkPoints() {
 const phoneRaw = document.getElementById("phoneFull").value;
 const phone = phoneRaw.replace(/\D/g,'');
 
-  if (!phone) {
-    alert("전화번호 입력해주세요");
-    return;
-  }
+if (!phone) {
+  alert("전화번호 입력해주세요");
+  return;
+}
 
-  const snapshot = await get(ref(db, "customers/" + phone));
+const snapshot = await get(ref(db, "customers/" + phone));
 
-  if (snapshot.exists()) {
-    const data = snapshot.val();
+if (snapshot.exists()) {
+  const data = snapshot.val();
 
-    let message = `Visits: ${data.visits}`;
+  let message = `Visits: ${data.visits}`;
 
-    if (data.coupon) {
-      message += " 🎉 FREE ITEM AVAILABLE!";
-    } else {
-      message += ` (Need ${5 - data.visits} more for reward)`;
-    }
-
-    document.getElementById("pointResult").innerText = message;
-
+  if (data.coupon) {
+    message += " 🎉 FREE ITEM AVAILABLE!";
   } else {
-    document.getElementById("pointResult").innerText = "No record found";
+    message += ` (Need ${5 - data.visits} more for reward)`;
   }
+
+  document.getElementById("pointResult").innerText = message;
+
+} else {
+  document.getElementById("pointResult").innerText = "No record found";
 }
 </script>
 <!-- ====================== Your Order 하단 고정 ====================== -->
