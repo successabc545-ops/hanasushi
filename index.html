@@ -835,8 +835,8 @@ async function checkPoints() {
 const phoneRaw = document.getElementById("phoneFull").value;
 const phone = phoneRaw.replace(/\D/g,'');
 
-if (!phone) {
-  alert("전화번호 입력해주세요");
+if (!phone || phone.length < 10) {
+  alert("올바른 전화번호 입력해주세요");
   return;
 }
 
