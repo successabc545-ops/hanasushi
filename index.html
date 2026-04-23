@@ -874,6 +874,30 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
+
+// ================= 포인트 조회 =================
+async function checkPoints() {
+  const phone = document.getElementById("checkPhone").value.replace(/\D/g,'');
+
+  if (!phone) {
+    alert("전화번호 입력하세요");
+    return;
+  }
+
+  const ref = doc(db, "customers", phone);
+  const snap = await getDoc(ref);
+
+  if (snap.exists()) {
+    const data = snap.data();
+    document.getElementById("pointResult").innerText =
+      `You have ${data.visits || 0} visits 🎉`;
+  } else {
+    document.getElementById("pointResult").innerText =
+      "No record found 😢";
+  }
+}
+
+
 </script>
 
 
