@@ -832,7 +832,8 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 </footer>
 <script>
 async function checkPoints() {
-  const phone = document.getElementById("checkPhone").value;
+const phoneRaw = document.getElementById("phoneFull").value;
+const phone = phoneRaw.replace(/\D/g,'');
 
   if (!phone) {
     alert("전화번호 입력해주세요");
@@ -1252,7 +1253,7 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     document.body.appendChild(form);
     form.submit();
     document.body.removeChild(form);
-const phone = document.getElementById("phoneFull").value;
+const phone = document.getElementById("phoneFull").value.replace(/\D/g,'');
  if (!phone) {
   alert("전화번호 입력해주세요");
   return;
