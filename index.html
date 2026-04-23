@@ -835,31 +835,7 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 
 
 
-<!-- 🔥 Firebase 먼저 -->
 
-<script type="module">
-import { initstorageBucket: "...",
-  messagingSenderId: "...",
-  appId: "...",
-  measurementId: "..."
-};
-
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
-
-// 여기 아래부터 함수들 전부 넣어야 함
-window.checkPoints = async function() { ... }
-
-window.addVisit = async function(phone) { ... }
-
-
-
-
-
-  
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
