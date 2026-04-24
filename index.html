@@ -852,8 +852,14 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 <!-- 🔥 Firebase 먼저 -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, get, set, update } 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { 
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  const db = getFirestore(app);
 const firebaseConfig = {
   apiKey: "여기",
   authDomain: "여기",
@@ -1034,7 +1040,7 @@ scrollMapBtn.addEventListener('click', () => {
             .addTo(map)
             .bindPopup("You are here")
             .openPopup();
-        } else {
+      
           userMarker.setLatLng(userLatLng)
             .bindPopup("You are here")
             .openPopup();
