@@ -859,29 +859,20 @@ import {
   setDoc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-  const db = getFirestore(app);
+
 const firebaseConfig = {
-  apiKey: "여기",
-  authDomain: "여기",
-  databaseURL: "여기",
-  projectId: "여기",
-  storageBucket: "여기",
-  messagingSenderId: "여기",
-  appId: "여기"
+  apiKey: "...",
+  authDomain: "...",
+  projectId: "...",
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const db = getFirestore(app);
+
 
 // ✅ 이걸 전역으로 써야 checkPoints에서 사용 가능
 window.db = db;
-  window.set = set;
-window.update = update;
-
-window.addVisit = async function(phone) {
-
   if (!phone) return;
-
   const customerRef = ref(db, "customers/" + phone);
   const snapshot = await get(customerRef);
 
@@ -909,8 +900,7 @@ window.addVisit = async function(phone) {
     });
   }
 }
-window.ref = ref;
-window.get = get;
+
 </script>
 
 
