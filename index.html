@@ -852,12 +852,15 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 <!-- 🔥 Firebase 먼저 -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 import { 
   getFirestore,
   doc,
   getDoc,
   setDoc,
-  updateDoc
+  updateDoc,
+  collection,
+  addDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -869,40 +872,53 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// 🔥 적립
+async function addTransaction(phone, amount) {
+  const refDoc = doc(db, "customers", phone);
+  const snap = await getDoc(refDoc);
 
-// ✅ 이걸 전역으로 써야 checkPoints에서 사용 가능
-window.db = db;
-  if (!phone) return;
-  const customerRef = ref(db, "customers/" + phone);
-  const snapshot = await get(customerRef);
+  const points = Math.floor(amount * 0.1);
 
-  if (snapshot.exists()) {
-    const data = snapshot.val();
-
-    let newVisits = (data.visits || 0) + 1;
-
-    let coupon = false;
-
-    if (newVisits >= 5) {
-      coupon = true;
-      newVisits = 0;
-    }
-
-    await update(customerRef, {
-      visits: newVisits,
-      coupon: coupon
+  if (!snap.exists()) {
+    await setDoc(refDoc, {
+      totalSpent: amount,
+      points: points
     });
-
   } else {
-    await set(customerRef, {
-      visits: 1,
-      coupon: false
+    const data = snap.data();
+
+    await updateDoc(refDoc, {
+      totalSpent: data.totalSpent + amount,
+      points: data.points + points
     });
   }
+
+  await addDoc(collection(refDoc, "transactions"), {
+    amount: amount,
+    pointsEarned: points,
+    date: new Date()
+  });
 }
 
-</script>
+// 🔥 조회
+window.checkPoints = async function () {
+  const phone = document.getElementById("checkPhone").value;
+  if (!phone) return alert("전화번호 입력");
 
+  const refDoc = doc(db, "customers", phone);
+  const snap = await getDoc(refDoc);
+
+  if (!snap.exists()) {
+    document.getElementById("pointResult").innerText = "No data";
+  } else {
+    const data = snap.data();
+    document.getElementById("pointResult").innerText =
+      `Points: ${data.points}`;
+  }
+};
+
+window.addTransaction = addTransaction;
+</script>
 
 
 
@@ -1227,7 +1243,6 @@ const phone = document.getElementById("phoneFull").value.replace(/\D/g,'');
   alert("전화번호 입력해주세요");
   return;
 } 
-addVisit(phone);
     // 메시지 표시
     const msgDiv = document.getElementById('order-message');
   msgDiv.innerText = "Thank you!";  // 메시지 내용 변경
