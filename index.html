@@ -1371,7 +1371,57 @@ setInterval(checkIdle, 1000);
 
 
 
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyBEXXXXX",
+  authDomain: "hanasushi-54d82.firebaseapp.com",
+  projectId: "hanasushi-54d82"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// 로그인
+document.getElementById("loginBtn").onclick = async () => {
+  await signInWithPopup(auth, provider);
+};
+
+// 로그아웃
+document.getElementById("logoutBtn").onclick = async () => {
+  await signOut(auth);
+};
+
+
+  
+  
+  
+  
+  // 상태 감지
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("userInfo").innerText = user.email;
+
+    document.getElementById("loginBtn").style.display = "none";
+    document.getElementById("logoutBtn").style.display = "inline-block";
+  } else {
+    document.getElementById("userInfo").innerText = "Not logged in";
+
+    document.getElementById("loginBtn").style.display = "inline-block";
+    document.getElementById("logoutBtn").style.display = "none";
+  }
+});
+</script>
+🧠 쉽게 설명
 
 
 
