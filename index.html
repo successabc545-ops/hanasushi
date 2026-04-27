@@ -914,11 +914,11 @@ window.checkPoints = async function () {
   const snap = await getDoc(refDoc);
 
   if (!snap.exists()) {
-    document.getElementById("pointResult").innerText = "No data";
+const data = snap.data();
+document.getElementById("pointResult").innerText =
+  `Points: ${data.points ?? 0}`;
   } else {
-    const data = snap.data();
-    document.getElementById("pointResult").innerText =
-      `Points: ${data.points}`;
+  
   }
 };
 
