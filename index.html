@@ -847,9 +847,18 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 
 
 
-
-<script>
 // 1️⃣ Firebase 시작 (가장 먼저)
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore, doc, getDoc, setDoc, updateDoc, collection, addDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+  getAuth, GoogleAuthProvider
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+/* 🔥 여기 바로 아래에 붙이면 됨 */
 
 const firebaseConfig = {
   apiKey: "AIzaSyBE8X8LaWv3YPSmFjbu-Vc65w6yaM7uMLI",
