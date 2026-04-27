@@ -1367,7 +1367,7 @@ async function addTransaction(phone, amount) {
 }
 // 🔥 조회
 window.checkPoints = async function () {
-  const phone = document.getElementById("checkPhone").value;
+  const phone = document.getElementById("checkPhone").value; 
   if (!phone) return alert("전화번호 입력");
 
   const refDoc = doc(db, "customers", phone);
