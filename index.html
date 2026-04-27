@@ -884,13 +884,14 @@ async function addTransaction(phone, amount) {
 
 
   
-  if (!snap.exists()) {
-    await setDoc(refDoc, {
-      totalSpent: amount,
-      points: points
-    });
-  } else {
-    const data = snap.data();
+if (!snap.exists()) {
+  document.getElementById("pointResult").innerText = "No data";
+  return;
+}
+
+const data = snap.data();
+document.getElementById("pointResult").innerText =
+  `Points: ${data.points ?? 0}`;
 
     await updateDoc(refDoc, {
       totalSpent: data.totalSpent + amount,
