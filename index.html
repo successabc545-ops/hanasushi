@@ -1336,9 +1336,7 @@ const auth = getAuth(app);
 
 // 4️⃣ 로그인 제공자
 const provider = new GoogleAuthProvider();
-
-
-  
+  window.addTransaction = async function (phone, amount) { 
 
 // 🔥 적립
 async function addTransaction(phone, amount) {
