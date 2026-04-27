@@ -1384,7 +1384,47 @@ window.checkPoints = async function () {
     `Points: ${data.points ?? 0}`;
 };
 </script>
+<div id="adminPanel" style="padding:20px; color:white;"></div>
 
+<script type="module">
+import {
+  getFirestore,
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const db = getFirestore();
+
+// 고객 전체 불러오기
+async function loadCustomers() {
+  const container = document.getElementById("adminPanel");
+  container.innerHTML = "<h2>Customer CRM</h2>";
+
+  const snap = await getDocs(collection(db, "customers"));
+
+  snap.forEach(doc => {
+    const data = doc.data();
+
+    const card = document.createElement("div");
+    card.style.background = "#111";
+    card.style.padding = "15px";
+    card.style.margin = "10px 0";
+    card.style.borderRadius = "10px";
+
+    card.innerHTML = `
+      <h3>${doc.id}</h3>
+      <p>💰 Total Spent: $${data.totalSpent?.toFixed(2) || 0}</p>
+      <p>🎁 Points: ${data.points || 0}</p>
+      <p>🛒 Visits: ${data.visitCount || 0}</p>
+      <p>🕒 Last Visit: ${data.lastVisit ? new Date(data.lastVisit.seconds * 1000).toLocaleDateString() : "N/A"}</p>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+loadCustomers();
+</script>
 
 
 </body>
