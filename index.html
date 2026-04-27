@@ -1306,29 +1306,16 @@ import {
   getFirestore, doc, getDoc, setDoc, updateDoc, collection, addDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-import {
-  getAuth, GoogleAuthProvider
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-/* 🔥 여기 바로 아래에 붙이면 됨 */
-
 const firebaseConfig = {
-  apiKey: "AIzaSyBE8X8LaWv3YPSmFjbu-Vc65w6yaM7uMLI",
+  apiKey: "...",
   authDomain: "hanasushi-54d82.firebaseapp.com",
   projectId: "hanasushi-54d82",
   storageBucket: "hanasushi-54d82.firebasestorage.app",
   messagingSenderId: "889998560596",
-  appId: "1:889998560596:web:54797fa6f6e9ffee914cc1",
-  measurementId: "G-PF6WXRL67Y"
+  appId: "1:889998560596:web:54797fa6f6e9ffee914cc1"
 };
 
-
-
-
-  
 const app = initializeApp(firebaseConfig);
-
-// 2️⃣ DB 연결
 const db = getFirestore(app);
 
 // 3️⃣ 로그인 연결
@@ -1336,7 +1323,7 @@ const auth = getAuth(app);
 
 // 4️⃣ 로그인 제공자
 const provider = new GoogleAuthProvider();
-  window.addTransaction = async function (phone, amount) { 
+
 
 // 🔥 적립
 async function addTransaction(phone, amount) {
