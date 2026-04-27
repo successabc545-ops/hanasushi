@@ -1126,14 +1126,27 @@ document.getElementById("vegas-intro").style.display="none";
 },2000);
 </script>
 <script>
-document.getElementById('send-order').addEventListener('click', (e)=>{
+document.getElementById('send-order').addEventListener('click', async (e)=>{
     e.preventDefault();
 
     const items = Object.entries(selectedItems)
         .map(([name, qty])=> `${name} x${qty}`)
         .join('\n');
+
     const total = document.getElementById('total').innerText;
 
+    const phone = document.getElementById("phoneFull").value.replace(/\D/g,'');
+    if (!phone) {
+        alert("전화번호 입력해주세요");
+        return;
+    }
+
+    const amount = parseFloat(total);
+
+    // ✅ 1. Firebase 먼저 저장 (중요)
+    await addTransaction(phone, amount);
+
+    // ✅ 2. 이메일 폼 만들기
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = 'https://formsubmit.co/koseouk@gmail.com';
@@ -1149,7 +1162,7 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     inputNext.type = 'hidden';
     inputNext.name = '_next';
     inputNext.value = 'https://eathanasushila.com/';
-    form.appendChild(inputNext);  
+    form.appendChild(inputNext);
 
     const orderMessage = document.createElement('textarea');
     orderMessage.name = 'message';
@@ -1165,20 +1178,11 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     document.body.appendChild(form);
     form.submit();
     document.body.removeChild(form);
-const phone = document.getElementById("phoneFull").value.replace(/\D/g,'');
- if (!phone) {
-  alert("전화번호 입력해주세요");
-  return;
-} 
-  const amount = parseFloat(total);
-addTransaction(phone, amount);
-    // 메시지 표시
-    const msgDiv = document.getElementById('order-message');
-  msgDiv.innerText = "Thank you!";  // 메시지 내용 변경
-    msgDiv.style.display='block';
 
-    // ✅ setTimeout으로 강제 이동 부분 삭제 완료
-   
+    // ✅ 성공 메시지
+    const msgDiv = document.getElementById('order-message');
+    msgDiv.innerText = "Thank you!";
+    msgDiv.style.display='block';
 });
 </script>
 <script>
