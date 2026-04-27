@@ -879,36 +879,35 @@ const provider = new GoogleAuthProvider();
 
 // 🔥 적립
 async function addTransaction(phone, amount) {
-  const refDoc = doc(db, "customers", phone);
-  const snap = await getDoc(refDoc);
+  const userRef = doc(db, "customers", phone);
 
-  const points = Math.floor(amount * 0.1);
+  const snap = await getDoc(userRef);
 
-
-
-  
-if (!snap.exists()) {
-  document.getElementById("pointResult").innerText = "No data";
-  return;
-}
-
-const data = snap.data();
-document.getElementById("pointResult").innerText =
-  `Points: ${data.points ?? 0}`;
-
-    await updateDoc(refDoc, {
-      totalSpent: data.totalSpent + amount,
-      points: data.points + points
+  // 👇 여기 바로 넣는 게 정답
+  if (!snap.exists()) {
+    await setDoc(userRef, {
+      totalSpent: 0,
+      points: 0
     });
   }
 
-  await addDoc(collection(refDoc, "transactions"), {
+  const data = (await getDoc(userRef)).data();
+
+  const points = Math.floor(amount * 0.1);
+
+  await updateDoc(userRef, {
+    totalSpent: data.totalSpent + amount,
+    points: data.points + points
+  });
+
+  const txRef = collection(db, "customers", phone, "transactions");
+
+  await addDoc(txRef, {
     amount: amount,
     pointsEarned: points,
     date: new Date()
   });
 }
-
 // 🔥 조회
 window.checkPoints = async function () {
   const phone = document.getElementById("checkPhone").value;
@@ -917,8 +916,7 @@ window.checkPoints = async function () {
   const refDoc = doc(db, "customers", phone);
   const snap = await getDoc(refDoc);
 
-  if (!snap.exists()) {
-const data = snap.data();
+
 document.getElementById("pointResult").innerText =
   `Points: ${data.points ?? 0}`;
   } else {
