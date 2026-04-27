@@ -916,15 +916,16 @@ window.checkPoints = async function () {
   const refDoc = doc(db, "customers", phone);
   const snap = await getDoc(refDoc);
 
-
-document.getElementById("pointResult").innerText =
-  `Points: ${data.points ?? 0}`;
-  } else {
-  
+  if (!snap.exists()) {
+    document.getElementById("pointResult").innerText = "No data";
+    return;
   }
-};
 
-window.addTransaction = addTransaction;
+  const data = snap.data();
+
+  document.getElementById("pointResult").innerText =
+    `Points: ${data.points ?? 0}`;
+};
 </script>
 
 
