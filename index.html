@@ -871,8 +871,8 @@ const firebaseConfig = {
   measurementId: "G-PF6WXRL67Y"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+
+  
 
 // 🔥 적립
 async function addTransaction(phone, amount) {
@@ -1386,7 +1386,7 @@ import {
 
 
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig); const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
