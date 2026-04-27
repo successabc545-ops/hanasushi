@@ -1350,10 +1350,10 @@ async function addTransaction(phone, amount) {
 
   const points = Math.floor(amount * 0.1);
 
-  await updateDoc(userRef, {
-    totalSpent: data.totalSpent + amount,
-    points: data.points + points
-  });
+await updateDoc(userRef, {
+  totalSpent: (data.totalSpent || 0) + amount,
+  points: (data.points || 0) + points
+});
 
   const txRef = collection(db, "customers", phone, "transactions");
 
