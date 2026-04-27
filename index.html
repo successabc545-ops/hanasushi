@@ -1089,6 +1089,14 @@ const menuPrices = {
   "🍣 Tuna tadaki Sashimi": 21.95,
 };
 const selectedItems = {};
+document.querySelectorAll('.menu-item').forEach(item=>{
+  const name = item.querySelector('h3').innerText;
+  item.addEventListener('click', ()=>{
+    if(selectedItems[name]) selectedItems[name]++;
+    else selectedItems[name]=1;
+    updateOrderSummary();
+  });
+});
 
 function updateOrderSummary(){
 
@@ -1104,24 +1112,8 @@ function updateOrderSummary(){
     orderSummary.style.display = 'block';
   }
 
-document.querySelectorAll('.menu-item').forEach(item=>{
-  const name = item.querySelector('h3').innerText;
-
-  item.addEventListener('click', ()=>{
-const price = parseFloat(
-  item.querySelector('.price').dataset.price
-);
-
-
-    price: price   // ⭐ 여기 추가
-  };
-}
-
-    updateOrderSummary();
-  });
-});
- 
-    const price = data.price;
+  for(const [name,qty] of Object.entries(selectedItems)){
+    const price=menuPrices[name]||0;
     subtotal+=price*qty;
     const itemLine=document.createElement('div');
     itemLine.style.display='flex';
