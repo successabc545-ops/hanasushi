@@ -1091,7 +1091,18 @@ const menuPrices = {
 const selectedItems = {};
 document.querySelectorAll('.menu-item').forEach(item=>{
   const name = item.querySelector('h3').innerText;
-  item.addEventListener('click', ()=>{
+const price = parseFloat(
+  item.querySelector('.price').dataset.price
+);
+
+if(selectedItems[name]){
+  selectedItems[name].qty++;
+} else {
+  selectedItems[name] = {
+    qty: 1,
+    price: price   // ⭐ 여기 추가
+  };
+}
     if(selectedItems[name]) selectedItems[name]++;
     else selectedItems[name]=1;
     updateOrderSummary();
@@ -1112,8 +1123,28 @@ function updateOrderSummary(){
     orderSummary.style.display = 'block';
   }
 
-  for(const [name,qty] of Object.entries(selectedItems)){
-    const price=menuPrices[name]||0;
+document.querySelectorAll('.menu-item').forEach(item=>{
+  const name = item.querySelector('h3').innerText;
+
+  item.addEventListener('click', ()=>{
+const price = parseFloat(
+  item.querySelector('.price').dataset.price
+);
+
+if(selectedItems[name]){
+  selectedItems[name].qty++;
+} else {
+  selectedItems[name] = {
+    qty: 1,
+    price: price   // ⭐ 여기 추가
+  };
+}
+
+    updateOrderSummary();
+  });
+});
+ 
+    const price = data.price;
     subtotal+=price*qty;
     const itemLine=document.createElement('div');
     itemLine.style.display='flex';
