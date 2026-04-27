@@ -1378,53 +1378,73 @@ setInterval(checkIdle, 1000);
 
 
 <script type="module">
+<script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore } from "firebase-firestore";
-import { getAuth } from "firebase-auth";
+import { 
+  getFirestore, doc, getDoc, setDoc, updateDoc, collection, addDoc 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+import { 
+  getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// 로그인
-const loginBtn = document.getElementById("loginBtn");
-if (loginBtn) {
-  loginBtn.onclick = async () => {
-    await signInWithPopup(auth, provider);
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBE8X8LaV3YPSmFjbu-Vc65w6yaM7uMLI",
+  authDomain: "hanasushi-54d82.firebaseapp.com",
+  projectId: "hanasushi-54d82",
+  storageBucket: "hanasushi-54d82.firebasestorage.app",
+  messagingSenderId: "889998560596",
+  appId: "1:889998560596:web:54797fa6f6e9ffee914cc1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+/* ===== POINT SYSTEM ===== */
+async function addTransaction(phone, amount) {
+  const userRef = doc(db, "customers", phone);
+  const snap = await getDoc(userRef);
+
+  if (!snap.exists()) {
+    await setDoc(userRef, { totalSpent: 0, points: 0 });
+  }
+
+  const data = (await getDoc(userRef)).data();
+  const points = Math.floor(amount * 0.1);
+
+  await updateDoc(userRef, {
+    totalSpent: data.totalSpent + amount,
+    points: data.points + points
+  });
+
+  const txRef = collection(db, "customers", phone, "transactions");
+
+  await addDoc(txRef, {
+    amount,
+    pointsEarned: points,
+    date: new Date()
+  });
 }
 
-const logoutBtn = document.getElementById("logoutBtn");
-if (logoutBtn) {
-  logoutBtn.onclick = async () => {
-    await signOut(auth);
-  };
-}
+/* ===== CHECK POINTS ===== */
+window.checkPoints = async function () {
+  const phone = document.getElementById("checkPhone").value;
+  if (!phone) return alert("전화번호 입력");
 
+  const ref = doc(db, "customers", phone);
+  const snap = await getDoc(ref);
 
-  
-  
-  
-  
-  // 상태 감지
-onAuthStateChanged(auth, (user) => {
-  const userInfo = document.getElementById("userInfo");
-
-  if (userInfo) {
-    userInfo.innerText = user ? user.email : "Not logged in";
+  if (!snap.exists()) {
+    document.getElementById("pointResult").innerText = "No data";
+    return;
   }
 
-  if (user) {
-    if (loginBtn) loginBtn.style.display = "none";
-    if (logoutBtn) logoutBtn.style.display = "inline-block";
-  } else {
-    if (loginBtn) loginBtn.style.display = "inline-block";
-    if (logoutBtn) logoutBtn.style.display = "none";
-  }
-});
-
-
-    document.getElementById("loginBtn").style.display = "inline-block";
-    document.getElementById("logoutBtn").style.display = "none";
-  }
-});
+  document.getElementById("pointResult").innerText =
+    `Points: ${snap.data().points ?? 0}`;
+};
+</script>
 </script>
 🧠 쉽게 설명
 
