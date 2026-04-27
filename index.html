@@ -873,6 +873,17 @@ async function addTransaction(phone, amount) {
 
   const points = Math.floor(amount * 0.1);
 
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBE8X8LaWv3YPSmFjbu-Vc65w6yaM7uMLI",
+  authDomain: "hanasushi-54d82.firebaseapp.com",
+  projectId: "hanasushi-54d82",
+  storageBucket: "hanasushi-54d82.firebasestorage.app",
+  messagingSenderId: "889998560596",
+  appId: "1:889998560596:web:54797fa6f6e9ffee914cc1",
+  measurementId: "G-PF6WXRL67Y"
+};
+  
   if (!snap.exists()) {
     await setDoc(refDoc, {
       totalSpent: amount,
@@ -1373,15 +1384,7 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBE8X8LaWv3YPSmFjbu-Vc65w6yaM7uMLI",
-  authDomain: "hanasushi-54d82.firebaseapp.com",
-  projectId: "hanasushi-54d82",
-  storageBucket: "hanasushi-54d82.firebasestorage.app",
-  messagingSenderId: "889998560596",
-  appId: "1:889998560596:web:54797fa6f6e9ffee914cc1",
-  measurementId: "G-PF6WXRL67Y"
-};
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
