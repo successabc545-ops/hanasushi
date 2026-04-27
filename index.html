@@ -854,16 +854,7 @@ import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, addDoc } from
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 // 1️⃣ Firebase 시작 (가장 먼저)
-const app = initializeApp(firebaseConfig);
 
-// 2️⃣ DB 연결
-const db = getFirestore(app);
-
-// 3️⃣ 로그인 연결
-const auth = getAuth(app);
-
-// 4️⃣ 로그인 제공자
-const provider = new GoogleAuthProvider();
 const firebaseConfig = {
   apiKey: "AIzaSyBE8X8LaWv3YPSmFjbu-Vc65w6yaM7uMLI",
   authDomain: "hanasushi-54d82.firebaseapp.com",
@@ -874,7 +865,16 @@ const firebaseConfig = {
   measurementId: "G-PF6WXRL67Y"
 };
 
+const app = initializeApp(firebaseConfig);
 
+// 2️⃣ DB 연결
+const db = getFirestore(app);
+
+// 3️⃣ 로그인 연결
+const auth = getAuth(app);
+
+// 4️⃣ 로그인 제공자
+const provider = new GoogleAuthProvider();
   
 
 // 🔥 적립
@@ -1383,10 +1383,6 @@ import { initializeApp } from "firebase-app";
 import { getFirestore } from "firebase-firestore";
 import { getAuth } from "firebase-auth";
 
-const app = initializeApp(firebaseConfig); 
-const db = getFirestore(app);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
 
 // 로그인
 const loginBtn = document.getElementById("loginBtn");
