@@ -1393,10 +1393,6 @@ const firebaseConfig = {
   appId: "1:889998560596:web:54797fa6f6e9ffee914cc1"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
 
 /* ===== POINT SYSTEM ===== */
 async function addTransaction(phone, amount) {
@@ -1440,7 +1436,7 @@ window.checkPoints = async function () {
   document.getElementById("pointResult").innerText =
     `Points: ${snap.data().points ?? 0}`;
 };
-</script>
+
 </script>
 🧠 쉽게 설명
 
