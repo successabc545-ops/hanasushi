@@ -1089,25 +1089,6 @@ const menuPrices = {
   "🍣 Tuna tadaki Sashimi": 21.95,
 };
 const selectedItems = {};
-document.querySelectorAll('.menu-item').forEach(item=>{
-  const name = item.querySelector('h3').innerText;
-const price = parseFloat(
-  item.querySelector('.price').dataset.price
-);
-
-if(selectedItems[name]){
-  selectedItems[name].qty++;
-} else {
-  selectedItems[name] = {
-    qty: 1,
-    price: price   // ⭐ 여기 추가
-  };
-}
-    if(selectedItems[name]) selectedItems[name]++;
-    else selectedItems[name]=1;
-    updateOrderSummary();
-  });
-});
 
 function updateOrderSummary(){
 
