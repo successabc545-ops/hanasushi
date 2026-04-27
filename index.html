@@ -1392,14 +1392,19 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 // 로그인
-document.getElementById("loginBtn").onclick = async () => {
-  await signInWithPopup(auth, provider);
-};
+const loginBtn = document.getElementById("loginBtn");
+if (loginBtn) {
+  loginBtn.onclick = async () => {
+    await signInWithPopup(auth, provider);
+  };
+}
 
-// 로그아웃
-document.getElementById("logoutBtn").onclick = async () => {
-  await signOut(auth);
-};
+const logoutBtn = document.getElementById("logoutBtn");
+if (logoutBtn) {
+  logoutBtn.onclick = async () => {
+    await signOut(auth);
+  };
+}
 
 
   
@@ -1408,8 +1413,20 @@ document.getElementById("logoutBtn").onclick = async () => {
   
   // 상태 감지
 onAuthStateChanged(auth, (user) => {
+  const userInfo = document.getElementById("userInfo");
+
+  if (userInfo) {
+    userInfo.innerText = user ? user.email : "Not logged in";
+  }
+
   if (user) {
-    document.getElementById("userInfo").innerText = user.email;
+    if (loginBtn) loginBtn.style.display = "none";
+    if (logoutBtn) logoutBtn.style.display = "inline-block";
+  } else {
+    if (loginBtn) loginBtn.style.display = "inline-block";
+    if (logoutBtn) logoutBtn.style.display = "none";
+  }
+});
 
     document.getElementById("loginBtn").style.display = "none";
     document.getElementById("logoutBtn").style.display = "inline-block";
