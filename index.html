@@ -1,33 +1,24 @@
+
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1200"> 
+<meta name="viewport" content="width=1200">
 <title>eatHANASUSHIla</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
 /* ==============  네온 시작 ================== */    
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-body {
-  padding-top: 100px;
-}
-    
 #vegas-intro{
 position:fixed;
 top:0;
-left:0; 
+left:0;
 width:100%;
 height:100%;
-background:black; 
+background:black;
 display:flex;
 align-items:center;
-justify-content:center; 
+justify-content:center;
 z-index:9999;
 animation:introFade 2s forwards;
 }
@@ -78,29 +69,6 @@ visibility:hidden;
   font-weight:900;
  text-shadow: 0 0 5px #ff2e2e, 0 0 10px #ff2e2e;
 }
-
-
-  
-  
-  
-  /* eathanasushila.com 메뉴 전용 – 글자 더 크게 */
-nav a {
-    font-size: 32px;       /* 데스크탑에서 크게 */
-    padding: 14px 20px;    /* 메뉴 간격도 넉넉하게 */
-}
-
-/* 모바일 화면 대응 */
-@media (max-width: 768px) {
-    nav a {
-        font-size: 24px;   /* 모바일용 글자 크기 */
-        padding: 10px 15px;
-    }
-}
-
-
-
-
-  
 /*===================끝 ===================*/  
   *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:#000;color:#fff;}
@@ -138,33 +106,8 @@ section{padding:100px 10%;}
 .contact-box button{padding:12px 28px;border:none;background:#ff2e2e;color:#fff;border-radius:8px;cursor:pointer;}
 .contact-box button:hover{background:#ffb703;color:#000;}
 #map{width:100%;height:400px;border-radius:10px;margin-top:20px;}
-@media (max-width: 768px) {
-  /* 지도 높이 */
-  #map {
-    height: 350px;
-  }
+@media (max-width:768px){#map{height:350px;}}
 
-  /* 메뉴 이미지 모바일 대응 */
-  .menu-item img {
-    aspect-ratio: 4/3;   /* 모바일에서도 4:3 유지 */
-    width: 100%;
-    height: auto;
-  }
-
-  /* Ingredients 텍스트 자동 줄바꿈 + 잘림 방지 */
-.menu-item p {
-  white-space: normal;    /* 자동 줄바꿈 허용 */
-  word-wrap: break-word;  /* 긴 단어도 줄바꿈 */
-  overflow: visible;      /* 잘림 방지 */
-}
-
-  /* Rice Cracker 모바일 강조 */
-  .rice-card img {
-    aspect-ratio: 4/3;
-    width: 100%;
-    height: auto;
-  }
-}
 /* 섹션 전체 */
 .qr-section{
   text-align:center;
@@ -311,18 +254,11 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   font-size:28px;
   font-weight:900;
 }
-
-.price {
-  font-size:20px;
-  font-weight:700;
-  color:#ffb703;
-  margin-top:5px;
-}
 </style>
 
  <style>
     /* 기존 CSS 끝 */
-/* hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드는 유지 가능 */
+/* ===== Special Sashimi만 hover 확대 제거 ===== */
     #sashimi .menu-item img[src="special sashimi.webp"]:hover {
       transform: none !important;
       box-shadow: none !important;
@@ -344,7 +280,7 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
 hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드는 유지 가능:
 
 #sashimi .menu-item img:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     cursor: pointer;
 }
@@ -362,47 +298,35 @@ hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드
       
       /* ====================== Rice cracker 이 라인이 없으면 완됨 크기 틀려짐....메뉴 이미지 통일 + Rice Cracker 강조 ====================== */
 
-/* ====================== 메뉴 이미지 통일 ====================== */
+/* 1. 모든 메뉴 이미지 높이 통일, 비율 유지 */
 .menu-item img {
   width: 100%;
-  aspect-ratio: 4/3;    /* 모든 메뉴 4:3 비율로 통일 */
-  object-fit: cover;     /* 프레임 꽉 채우면서 잘림 방지 */
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 200px;        /* 필요 시 높이 조절 */
+  object-fit: cover;    /* 이미지 비율 유지하며 프레임 꽉 채우기 */
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
 
-/* Hover 확대 효과 */
-.menu-item img:hover {
-  transform: scale(1.15);
-  z-index: 5;
-  position: relative;
-  box-shadow: 0 0 20px rgba(255,46,46,0.6), 0 0 40px rgba(255,193,7,0.4);
-}
-
-/* 모바일 & 잘림 방지 */
-.menu-item p {
-  white-space: normal !important;
-  word-wrap: break-word !important;
-  overflow: visible !important;
-}
-      
-/* ====================== Special Sashimi hover 확대 제거 ====================== */
-#sashimi .menu-item img[src="special sashimi.webp"]:hover {
-  transform: none !important;
-  box-shadow: none !important;
-  cursor: pointer;
-}
-
-/* ====================== Rice Cracker 강조 ====================== */
+/* 2. Rice Cracker만 별도 배경 + padding */
 .rice-card {
   background: radial-gradient(circle at center, #ffffff 0%, #f2f2f2 60%, #e5e5e5 100%);
   padding: 14px;
   border-radius: 14px;
 }
 
+/* 3. Rice Cracker 이미지 밝게 강조 */
 .rice-card img {
-  filter: brightness(1.2) contrast(1.2); /* 조금 밝게 강조 */
+  filter: brightness(1.2) contrast(1.2);
 }
+
+/* 4. Hover 확대 효과 유지 */
+.menu-item img:hover {
+  transform: scale(1.15);
+  z-index: 5;
+  position: relative;
+  box-shadow: 0 0 20px rgba(255,46,46,0.6), 0 0 40px rgba(255,193,7,0.4);
+}
+    
     
     /* ====================== Rice cracker 이 라인이 없으면 완됨 크기 틀려짐....메뉴 이미지 통일 + Rice Cracker 강조 끝 ====================== */
    
@@ -420,7 +344,7 @@ hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드
   <div class="neon-sign">
     HANA SUSHI
     <span>Thank You for your order!</span>
- 
+  </div>
 </div>
  <!-- ======================    놀래키기 끝   ====================== --> 
 <nav>
@@ -431,7 +355,7 @@ hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드
     <a href="#menu">Menu</a>
     <a href="#contact">Contact us</a>
     <a id="scroll-map">Current Food Truck Location</a>
-    <a href="#qr">QR</a> 
+    <a href="#qr">QR</a>
   </div>
 </nav>
 
@@ -442,9 +366,7 @@ hover 관련 코드는 그대로 두고, Special Sashimi만 확대 제거 코드
     <p>🔥 Japanese Street Sushi • Bold Flavors on Wheels</p>
   </div>
 </section>
-  
- 
-  
+
 <section id="about">
   <h2 class="section-title">Our website is currently under reconstruction.
 We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
@@ -454,140 +376,6 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
   </p>
 </section>
 
-
-  <a href="kiosky.html">
-    <button>Kiosk Mode</button>
-  </a>
-
-<!-- ===== Ramen 메뉴 추가 ===== -->
-<section id="ramen">
-  <h2 class="section-title">Ramen 🍜</h2>
-
-  <div class="menu-grid">
-
-    <div class="menu-item">
-      <img src="miso ramen.webp" loading="lazy">
-      <div>
-        <h3>🍜 Miso Ramen</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients: Miso broth, chashu, egg, Green onions, bean sprouts.
-        </p>
-        <p class="price" data-price="12.95">$12.95</p>  
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="tonkotsu ramen.webp" loading="lazy">
-      <div>
-        <h3>🍜 Tonkotsu Ramen</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients: Rich pork bone broth, chashu, egg, Green onions, bean sprouts.
-        </p>
-        <p class="price" data-price="12.95">$12.95</p>  
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="spicy misoramen.webp" loading="lazy">
-      <div>
-        <h3>🍜 Spicy miso Ramen</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients: Spicy broth, chashu, chili oil, Green onions, bean sprouts. 
-        </p>
-       <p class="price" data-price="12.95">$12.95</p>   
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
-
-  
-  <!-- ====================== NO Rice 메뉴 섹션 ====================== -->
-<section id="no-rice">
-  <h2 class="section-title">NO Rice </h2>
-  <div class="menu-grid">
-
-     <div class="menu-item">
-      <img src="hana special.webp" loading="lazy">
-      <div>
-        <h3>🥄 Hana Special</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Tuna, Salmon, Whitefish & Cucumber with Cilantro, served with a Special Sauce.
-        </p>
-       <p class="price" data-price="12.95">$12.95</p>    
-      </div>
-    </div>  
-  
-    <div class="menu-item">
-      <img src="bebob.webp" loading="lazy"> 
-      <div>
-        <h3>🍣 BE bob</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Spicy Tuna, Spicy Crab, and Shrimp Tempura, wrapped with tuna and topped with a crunchy finish
-        </p>
-         <p class="price" data-price="12.95">$12.95</p>  
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="orange.webp" loading="lazy">
-      <div>
-        <h3>🍣 Orange Roll</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Spicy Crab and Avocado, wrapped with Salmon
-        </p>
-      <p class="price" data-price="12.95">$12.95</p>  
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="oh honey.webp" loading="lazy">
-      <div>
-        <h3>❤️ Oh honey</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Spicy Tuna and Imitation Crab, wrapped in Tuna
-        </p>
-     <p class="price" data-price="12.95">$12.95</p>  
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="paul roll.webp" loading="lazy">
-      <div>
-        <h3>🥑 Paul Roll</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Tuna, Salmon, White Fish, Albacore, Radish & Avocado, wrapped in Cucumber
-        </p>
-     <p class="price" data-price="12.95">$12.95</p>  
-      </div>
-    </div>
-
-  
-    <div class="menu-item">
-      <img src="perfect storm.webp" loading="lazy">
-      <div>
-        <h3>🥒 Perfect Storm</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">
-          Ingredients:Spicy Crab, Cucumber, Bell Pepper & Shrimp, wrapped in Pickled Radish
-        </p>
-      <p class="price" data-price="12.95">$12.95</p>  
-      </div>
-    </div>
-    
-  </div>
-</section>
-
-
-
-
-
-
-
-
-  
 <section id="menu">
   <h2 class="section-title">Popular Food</h2>
   <div class="menu-grid">
@@ -597,7 +385,6 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       <div>
         <h3>🌯 Burito</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Spicy crab, chunk tuna, chunk salmon, avocado </p>
-      <p class="price" data-price="10.00">$10.00</p>  
       </div>
     </div>
    
@@ -607,17 +394,26 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       <div>
         <h3>🌯 Smoked Burito</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Spicy tuna, Spicy crab, Smoked Sea trout, Silantro, avocado</p>
-     <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
     
  
+   
+    <div class="menu-item">
+      <img src="hana.webp" loading="lazy">
+      <div>
+        <h3>🥄 Hana Special</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh sashimi, marinate the fresh fish with clilantro and a delicious sauce. </p>
+      </div>
+    </div>
+   
+  
+    
     <div class="menu-item">
       <img src="fire roll.webp" loading="lazy">
       <div>
-        <h3>🔥 Fire Roll</h3>
+        <h3>🌶️ Fire Roll</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Spicy tuna,Shrimp tempura, Cucumber and Seared albarcore top and Red onion tempura </p>
-     <p class="price" data-price="12.95">$12.95</p>  
       </div> 
      </div>
 
@@ -625,9 +421,8 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
        <div class="menu-item">
       <img src="rice cracker.webp" loading="lazy">
       <div>
-        <h3>🍘 Rice cracker</h3>
+        <h3>🍤 Rice cracker</h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Deep fried rice, Spicy tuna, avocado </p>
-    <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
   
@@ -637,129 +432,92 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
       <div>
         <h3>🍤 Chunky Monkey </h3>
         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Spicy tuna, Spicy crab, Red onion tempura, Shrimp tempura, Seared albarcore</p>
-     <p class="price" data-price="12.95">$12.95</p>  
       </div>
     </div>
     
  
    
     <div class="menu-item">
-      <img src="Cali.webp" loading="lazy">
+      <img src="hana.webp" loading="lazy">
       <div>
-        <h3>🍣 California roll</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Imitation crab, Avocado, Cucumber. </p>
-    <p class="price" data-price="12.95">$12.95</p>  
+        <h3>🥄 Hana Special</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh sashimi, marinate the fresh fish with clilantro and a delicious sauce. </p>
       </div>
     </div>
    
     <div class="menu-item">
-      <img src="spicy tuna.webp" loading="lazy">
+      <img src="fire roll.webp" loading="lazy">
       <div>
-        <h3>🍣 Spicy tuna roll</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Spicy tuna, Cucumber.</p>
-    <p class="price" data-price="12.95">$12.95</p>  
+        <h3>🌶️ Fire Roll</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Spicy crab, chunk tuna, chunk salmon, avocado </p>
       </div> 
      </div>
 
         <div class="menu-item">
-      <img src="rain.webp" loading="lazy">
+      <img src="1.Burito.webp" loading="lazy">
       <div>
-      
-        <h3>🌈 Rainbow roll</h3>
-        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:imitation crab,avocado,cucumber,tuna,salmon,seabass,albarcore,shrimp </p>
-    <p class="price" data-price="12.95">$12.95</p>  
+        <h3>🌯 Burito</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Spicy crab, chunk tuna, chunk salmon, avocado </p>
       </div>
+    </div>
+    <div class="menu-item">
+      <img src="Smoked_Burito.webp" loading="lazy">
+      <div>
+        <h3>🌯 Smoked Burito</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Spicy tuna, Spicy crab, Smoked Sea trout, Silantro, avocado</p>
+      </div>
+    </div>
+    
+ 
+   
+    <div class="menu-item">
+      <img src="hana.webp" loading="lazy">
+      <div>
+        <h3>🥄 Hana Special</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh sashimi, marinate the fresh fish with clilantro and a delicious sauce. </p>
+      </div>
+    </div>
+   
+    <div class="menu-item">
+      <img src="fire roll.webp" loading="lazy">
+      <div>
+        <h3>🌶️ Fire Roll</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Spicy crab, chunk tuna, chunk salmon, avocado </p>
+      </div> 
      </div>
-  
-
     
 <div class="menu-item">
       <img src="chirashi.webp" loading="lazy">
       <div>
         <h3>🍱 Chirashi</h3>
-         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Assorted sashimi (tuna, salmon, white fish, tamago, shrimp, gobo, spicy crab, fish eggs) served on a bed of rice</p>
-    <p class="price" data-price="12.95">$12.95</p>  
-      </div> 
-     </div>
+         <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients:Tuna,Salmon,White fish,Tamago,Shrimp,Tamago,Gobo,Spicy crab, Rice on bed</p>
+      </div> e top and Red onion tempura </
+     </div>>
 
    
 
   </div>        
   </section>
-<!-- ======================    사시미   ====================== --> 
+<!-- ======================    사시미   ====================== -->
 <section id="sashimi">
   <h2 class="section-title">Sashimi</h2>
-<div class="menu-grid">  
-
-  <div class="menu-item">
-    <img src="seabass sashimi.webp" loading="lazy">
-    <div>
-      <h3>🍣 Seabass Sashimi</h3>
-      <p class="price">$19.95</p>
-       </div>
-  </div>
-
-  <div class="menu-item">
-    <img src="special yellowtail sashimi.webp" loading="lazy">
-    <div>
-      <h3>🍣 Special yellowtail Sashimi</h3>
-      <p class="price">$19.95</p>
-     </div>
-  </div>
-
-  <div class="menu-item">
-    <img src="Popeye Sashimi.webp" loading="lazy">
-    <div>
-      <h3>🍣 Popeyes Sashimi</h3>
-      <p class="price">$19.95</p>
-     </div>
-  </div>
-
-  <div class="menu-item">
-    <img src="screaming sashimi.webp" loading="lazy">
-    <div>
-      <h3>🍣 Screaming Sashimi</h3>
-      <p class="price">$19.95</p>
+  <div class="menu-grid">  
+    <div class="menu-item">
+      <img src="special sashimi.webp" loading="lazy">
+      <div>
+        <h3 class="big-title">🍣 Special Sashimi</h3>
+        <p style="font-size:20px;color:#fff;opacity:0.8;">Ingredients: Assorted fresh Sashimi</p>
+      </div>
     </div>
-  </div>
-
-  <div class="menu-item">
-    <img src="Tuna tadaki sashimi.webp" loading="lazy">
-    <div>
-      <h3>🍣 Tuna tadaki Sashimi</h3>
-      <p class="price">$21.95</p>
-    </div>
-  </div>
-
-</div>
+  </div> <!-- menu-grid 닫는 div -->
 </section>
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  <!-- ======================    사시미    ====================== -->  
-
-  
-  <section id="contact">
+<!-- ======================    사시미    ====================== -->  
+<section id="contact">
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
     <form action="https://formsubmit.co/koseouk@gmail.com" method="POST" style="flex:1; min-width:300px;">
  
- <input type="text" id="checkName" placeholder="Enter your name"
-style="width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none;">
-      <input type="tel" id="checkPhone">
+      <input type="text" name="name" placeholder="Your Name" required>
       <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <label for="eventDate">Date of Event (required)</label>
@@ -792,7 +550,6 @@ style="width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none
       <button type="submit">Send Message</button>
     </form>
     <div id="map"></div>
-    <div id="recaptcha-container"></div>
   </div>
 </section>
 
@@ -806,29 +563,7 @@ style="width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none
          alt="eat HANA SUSHI LA QR Code with logo">
     <p class="qr-text">Visit our website & order now!</p>
   </div>
-
-<div style="flex:1; min-width:300px; background:#111; padding:20px; border-radius:10px;">
-  <h3 style="color:#ff2e2e;">Check Your Points 🎁</h3>
-
-  <input type="tel" id="checkPhone" placeholder="Enter your phone number"
-    style="width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none;">
-
-  <button onclick="checkPoints()"
-    style="margin-top:10px; padding:10px 20px; background:#ff2e2e; color:#fff; border:none; border-radius:6px;">
-    Check Points
-  </button>
-
-  <p id="pointResult" style="margin-top:15px; font-size:18px;"></p>
-</div>
-
-
-
-  
 </section>
-
-  
-
-<!-- ====================== contact us  끝 ====================== -->
 
 <footer>
   © 2026 HANA SUSHI FOOD TRUCK
@@ -845,64 +580,6 @@ style="width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none
   <div id="order-message">Order Sent!</div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
 // 날짜 제한
@@ -921,14 +598,14 @@ phoneInput.addEventListener('input', e => {
 });
 
 // ====================== 지도 초기화 + 위치 기능 통합 ======================
-const foodTruckLatLng = [34.0195, -118.4912]; // 트럭 위치 (Santa Monica)
-const map = L.map('map').setView(foodTruckLatLng, 14);
+const map = L.map('map').setView([34.0195, -118.4912], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
 // 마커 초기 생성
-const foodTruckMarker = L.marker(foodTruckLatLng)
-  .addTo(map)
-  .bindPopup("<b>HANA SUSHI FOOD TRUCK</b><br>Food Truck is here")
-  .openPopup();
+let foodTruckMarker = L.marker([34.0195, -118.4912])
+    .addTo(map)
+    .bindPopup("HANA SUSHI FOOD TRUCK");
+
 // 위치 안내 박스
 let geoAlertDiv = document.createElement('div');
 geoAlertDiv.style.position = 'absolute';
@@ -946,49 +623,45 @@ geoAlertDiv.innerText = '';
 document.body.appendChild(geoAlertDiv);
 
 // --- 페이지 로드 시 자동 위치 표시 ---
-let userMarker = null;
 if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(
-    pos => {
-      const userLatLng = [pos.coords.latitude, pos.coords.longitude];
-      userMarker = L.marker(userLatLng)
-        .addTo(map)
-        .bindPopup("You are here")
-        .openPopup();
-    },
-    err => {
-      console.warn("위치 접근 실패:", err.message);
-    }
-  );
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            const latlng = [pos.coords.latitude, pos.coords.longitude];
+            foodTruckMarker.setLatLng(latlng)
+                .bindPopup("Food Truck is here")
+                .openPopup();
+            map.flyTo(latlng, 16);
+        },
+        err => {
+            console.warn("위치 정보 접근 거부됨 또는 실패:", err.message);
+        }
+    );
 }
+
 // Current Food Truck Location 버튼
 const scrollMapBtn = document.getElementById('scroll-map');
 scrollMapBtn.addEventListener('click', () => {
-  document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
-  map.flyTo(foodTruckLatLng, 16);
-  foodTruckMarker.openPopup();
+    document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
 
-  // 사용자 위치 갱신
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      pos => {
-        const userLatLng = [pos.coords.latitude, pos.coords.longitude];
-        if (!userMarker) {
-          userMarker = L.marker(userLatLng)
-            .addTo(map)
-            .bindPopup("You are here")
-            .openPopup();
-      
-          userMarker.setLatLng(userLatLng)
-            .bindPopup("You are here")
-            .openPopup();
-        }
-      },
-      err => {
-        alert("⚠ 위치 정보 접근이 거부되었습니다. 브라우저에서 위치 허용 후 다시 시도하세요.");
-      }
-    );
-  }
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            pos => {
+                geoAlertDiv.style.display = 'none';
+                const latlng = [pos.coords.latitude, pos.coords.longitude];
+                foodTruckMarker.setLatLng(latlng)
+                    .bindPopup("Food Truck is here")
+                    .openPopup();
+                map.flyTo(latlng, 16);
+            },
+            err => {
+                geoAlertDiv.innerText = "⚠ 위치 정보 접근이 거부되었습니다. 브라우저 주소창 왼쪽 자물쇠 클릭 → 위치 허용 후 다시 시도해주세요.";
+                geoAlertDiv.style.display = 'block';
+            }
+        );
+    } else {
+        geoAlertDiv.innerText = "⚠ 이 브라우저에서는 위치 기능을 지원하지 않습니다.";
+        geoAlertDiv.style.display = 'block';
+    }
 });
 
 // ====================== 메뉴 주문 + 수량 + 세금 ======================
@@ -996,27 +669,11 @@ const menuPrices = {
   "🌯 Burito": 10.00,
   "🌯 Smoked Burito": 10.00,
   "🍣 Special Sashimi": 10.00, 
-  "🥄 Hana Special": 12.95,
-  "🍣 Orange Roll": 12.95,
-  "❤️ Oh honey": 12.95,
-  "🥑 Paul Roll": 12.95,
-  "🥒 Perfect Storm": 12.95,
-  "🔥 Fire Roll": 10.00,
-  "🍘 Rice cracker": 10.00,
+  "🥄 Hana Special": 10.00,
+  "🌶️ Fire Roll": 10.00,
+  "🍤 Rice cracker": 10.00,
   "🍤 Chunky Monkey": 10.00,
   "🍱 Chirashi": 17.00,
-  "🍣 Spicy tuna roll": 6.00,
-  "🍣 California roll": 5.00,
-  "🌈 Rainbow roll": 12.00,
-  "🍜 Miso Ramen": 8.00,
-  "🍜 Tonkotsu Ramen": 8.00,
-  "🍜 Spicy miso Ramen": 8.00,
-  "🍣 BE bob":12.95,
-  "🍣 Seabass Sashimi": 19.95,
-  "🍣 Special yellowtail Sashimi": 19.95,
-  "🍣 Popeyes Sashimi": 19.95,
-  "🍣 Screaming Sashimi": 19.95,
-  "🍣 Tuna tadaki Sashimi": 21.95,
 };
 const selectedItems = {};
 document.querySelectorAll('.menu-item').forEach(item=>{
@@ -1170,13 +827,7 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
     document.body.appendChild(form);
     form.submit();
     document.body.removeChild(form);
-const phone = document.getElementById("phoneFull").value.replace(/\D/g,'');
- if (!phone) {
-  alert("전화번호 입력해주세요");
-  return;
-} 
-  const amount = parseFloat(total);
-addTransaction(phone, amount);
+
     // 메시지 표시
     const msgDiv = document.getElementById('order-message');
   msgDiv.innerText = "Thank you!";  // 메시지 내용 변경
@@ -1235,155 +886,6 @@ function moveBox(x, y){
   orderBox.style.bottom = "auto";
 }
 </script>
-
-
-
-
-
-
-<style>
-  /* ================= Idle 광고 전체 화면 ================= */
-  #idleAd {
-    display: none; /* 처음엔 숨김 */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #idleAd video {
-    max-width: 90%;   /* 화면 가로 90% */
-    max-height: 90%;  /* 화면 세로 90% */
-    object-fit: contain; /* 영상 비율 유지, 잘리지 않음 */
-    border-radius: 10px; /* 선택 사항: 모서리 살짝 둥글게 */
-  }
-</style>
-
-<script>
-let idleTime = 0;
-const idleLimit = 10; // 10초 (원하면 30, 60으로 변경)
-
-function resetIdle() {
-  idleTime = 0;
-  document.getElementById("idleAd").style.display = "none";
-}
-
-function checkIdle() {
-  idleTime++;
-
-  if (idleTime >= idleLimit) {
-    document.getElementById("idleAd").style.display = "flex";
-  }
-}
-
-// 사용자 행동 감지
-["mousemove", "keydown", "scroll", "touchstart"].forEach(evt => {
-  document.addEventListener(evt, resetIdle);
-});
-
-// 1초마다 체크
-setInterval(checkIdle, 1000);
-</script>
-
-
   
-<div id="idleAd">
-  <video autoplay muted loop playsinline>
-    <source src="hello.mp4" type="video/mp4">
-  </video>
-</div>
-
-
-
-
-
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { 
-  getFirestore, doc, getDoc, setDoc, updateDoc 
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-// Firebase 설정
-const firebaseConfig = {
-  apiKey: "...",
-  authDomain: "hanasushi-54d82.firebaseapp.com",
-  projectId: "hanasushi-54d82",
-  storageBucket: "hanasushi-54d82.firebasestorage.app",
-  messagingSenderId: "889998560596",
-  appId: "1:889998560596:web:54797fa6f6e9ffee914cc1"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// 🔥 적립
-async function addTransaction(phone, amount, name) {
-
-  const userRef = doc(db, "customers", phone);
-  const snap = await getDoc(userRef);
-
-  if (!snap.exists()) {
-    await setDoc(userRef, {
-      name: name,
-      totalSpent: 0,
-      points: 0,
-      visitCount: 0
-    });
-  }
-
-  const data = (await getDoc(userRef)).data();
-  const points = Math.floor(amount * 0.1);
-
-  await updateDoc(userRef, {
-    totalSpent: data.totalSpent + amount,
-    points: data.points + points,
-    visitCount: (data.visitCount || 0) + 1,
-    lastVisit: new Date()
-  });
-}
-
-// 🔥 조회
-window.checkPoints = async function () {
-
-  const phone = document.getElementById("checkPhone").value.trim();
-const name = document.getElementById("checkName").value;
-addTransaction(phone, amount, name);
-  if (!phone || !name) {
-    alert("전화번호 + 이름 입력하세요");
-    return;
-  }
-
-  const refDoc = doc(db, "customers", phone);
-  const snap = await getDoc(refDoc);
-
-  if (!snap.exists()) {
-    document.getElementById("pointResult").innerText = "No data";
-    return;
-  }
-
-  const data = snap.data();
-
-  if (data.name !== name) {
-    document.getElementById("pointResult").innerText =
-      "정보가 일치하지 않습니다";
-    return;
-  }
-
-  document.getElementById("pointResult").innerHTML =
-    `<div style="line-height:1.6;">
-      🎉 <b>Welcome back, ${data.name}!</b><br>
-      🎁 Points: <span style="color:#ffb703;">${data.points || 0}</span><br>
-      💰 Total: $${data.totalSpent || 0}<br>
-      🛒 Visits: ${data.visitCount || 0}
-    </div>`;
-};
-</script>
-
 </body>
 </html>
