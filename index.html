@@ -1304,9 +1304,11 @@ setInterval(checkIdle, 1000);
 // 1️⃣ Firebase 시작 (가장 먼저)
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getFirestore, doc, getDoc, setDoc, updateDoc, collection, addDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { 
+  getAuth, 
+  signInWithPhoneNumber, 
+  RecaptchaVerifier 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "...",
