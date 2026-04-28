@@ -1352,8 +1352,8 @@ async function addTransaction(phone, amount, name) {
 window.checkPoints = async function () {
 
   const phone = document.getElementById("checkPhone").value.trim();
-  const name = document.getElementById("checkName").value.trim();
-
+const name = document.getElementById("checkName").value;
+addTransaction(phone, amount, name);
   if (!phone || !name) {
     alert("전화번호 + 이름 입력하세요");
     return;
