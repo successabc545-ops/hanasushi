@@ -757,8 +757,9 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
     <form action="https://formsubmit.co/koseouk@gmail.com" method="POST" style="flex:1; min-width:300px;">
  
-   <input type="text" id="checkName" placeholder="Enter your name"
- style="width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none;">
+ <input type="text" id="checkName" placeholder="Enter your name"
+style="width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none;">
+      <input type="tel" id="checkPhone">
       <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <label for="eventDate">Date of Event (required)</label>
@@ -1328,6 +1329,7 @@ const provider = new GoogleAuthProvider();
 
 // 🔥 적립
 async function addTransaction(phone, amount, name) {
+
   const userRef = doc(db, "customers", phone);
   const snap = await getDoc(userRef);
 
@@ -1351,13 +1353,27 @@ async function addTransaction(phone, amount, name) {
     lastVisit: new Date()
   });
 }
+
+  const data = (await getDoc(userRef)).data();
+
+  const points = Math.floor(amount * 0.1);
+
+  await updateDoc(userRef, {
+    totalSpent: data.totalSpent + amount,
+    points: data.points + points,
+    visitCount: (data.visitCount || 0) + 1,
+    lastVisit: new Date()
+  });
+}
 // 🔥 조회
 window.checkPoints = async function () {
+
   const phone = document.getElementById("checkPhone").value.trim();
   const name = document.getElementById("checkName").value.trim();
 
   if (!phone || !name) {
-    return alert("전화번호와 이름 입력하세요");
+    alert("전화번호 + 이름 입력하세요");
+    return;
   }
 
   const refDoc = doc(db, "customers", phone);
@@ -1370,21 +1386,22 @@ window.checkPoints = async function () {
 
   const data = snap.data();
 
-  // 🔥 이름 검증
+  // ✅ 이름 확인
   if (data.name !== name) {
     document.getElementById("pointResult").innerText =
       "정보가 일치하지 않습니다";
     return;
   }
 
-  // ✅ 정상 조회
-  document.getElementById("pointResult").innerText =
-    `👤 ${data.name}
-🎁 Points: ${data.points || 0}
-💰 Total Spent: $${data.totalSpent || 0}
-🛒 Visits: ${data.visitCount || 0}`;
+  // ✅ 성공 시 출력
+  document.getElementById("pointResult").innerHTML =
+    `<div style="line-height:1.6;">
+      🎉 <b>Welcome back, ${data.name}!</b><br>
+      🎁 Points: <span style="color:#ffb703;">${data.points || 0}</span><br>
+      💰 Total: $${data.totalSpent || 0}<br>
+      🛒 Visits: ${data.visitCount || 0}
+    </div>`;
 };
-
 loadCustomers();
 </script>
 
