@@ -1304,14 +1304,12 @@ setInterval(checkIdle, 1000);
 
 
 <script type="module">
-import { getFirestore, doc, getDoc, setDoc, updateDoc } 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { 
-  getAuth, 
-  signInWithPhoneNumber, 
-  RecaptchaVerifier 
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  getFirestore, doc, getDoc, setDoc, updateDoc 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+// Firebase 설정
 const firebaseConfig = {
   apiKey: "...",
   authDomain: "hanasushi-54d82.firebaseapp.com",
@@ -1324,13 +1322,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 3️⃣ 로그인 연결
-const auth = getAuth(app);
-
-// 4️⃣ 로그인 제공자
-const provider = new GoogleAuthProvider();
-
-
 // 🔥 적립
 async function addTransaction(phone, amount, name) {
 
@@ -1339,7 +1330,7 @@ async function addTransaction(phone, amount, name) {
 
   if (!snap.exists()) {
     await setDoc(userRef, {
-      name: name,   // ✅ 이름 저장
+      name: name,
       totalSpent: 0,
       points: 0,
       visitCount: 0
@@ -1347,7 +1338,6 @@ async function addTransaction(phone, amount, name) {
   }
 
   const data = (await getDoc(userRef)).data();
-
   const points = Math.floor(amount * 0.1);
 
   await updateDoc(userRef, {
@@ -1357,7 +1347,6 @@ async function addTransaction(phone, amount, name) {
     lastVisit: new Date()
   });
 }
-
 
 // 🔥 조회
 window.checkPoints = async function () {
@@ -1380,14 +1369,12 @@ window.checkPoints = async function () {
 
   const data = snap.data();
 
-  // ✅ 이름 확인
   if (data.name !== name) {
     document.getElementById("pointResult").innerText =
       "정보가 일치하지 않습니다";
     return;
   }
 
-  // ✅ 성공 시 출력
   document.getElementById("pointResult").innerHTML =
     `<div style="line-height:1.6;">
       🎉 <b>Welcome back, ${data.name}!</b><br>
@@ -1396,9 +1383,7 @@ window.checkPoints = async function () {
       🛒 Visits: ${data.visitCount || 0}
     </div>`;
 };
-loadCustomers();
 </script>
-
 
 </body>
 </html>
