@@ -1304,7 +1304,8 @@ setInterval(checkIdle, 1000);
 
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { 
   getAuth, 
   signInWithPhoneNumber, 
@@ -1357,17 +1358,7 @@ async function addTransaction(phone, amount, name) {
   });
 }
 
-  const data = (await getDoc(userRef)).data();
 
-  const points = Math.floor(amount * 0.1);
-
-  await updateDoc(userRef, {
-    totalSpent: data.totalSpent + amount,
-    points: data.points + points,
-    visitCount: (data.visitCount || 0) + 1,
-    lastVisit: new Date()
-  });
-}
 // 🔥 조회
 window.checkPoints = async function () {
 
