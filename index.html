@@ -757,7 +757,8 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
     <form action="https://formsubmit.co/koseouk@gmail.com" method="POST" style="flex:1; min-width:300px;">
  
-      <input type="text" name="name" placeholder="Your Name" required>
+   <input type="text" id="checkName" placeholder="Enter your name"
+ style="width:100%; padding:10px; margin-top:10px; border-radius:6px; border:none;">
       <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <label for="eventDate">Date of Event (required)</label>
@@ -1326,16 +1327,16 @@ const provider = new GoogleAuthProvider();
 
 
 // 🔥 적립
-async function addTransaction(phone, amount) {
+async function addTransaction(phone, amount, name) {
   const userRef = doc(db, "customers", phone);
-
   const snap = await getDoc(userRef);
 
-  // 👇 여기 바로 넣는 게 정답
   if (!snap.exists()) {
     await setDoc(userRef, {
+      name: name,   // ✅ 이름 저장
       totalSpent: 0,
-      points: 0
+      points: 0,
+      visitCount: 0
     });
   }
 
@@ -1345,21 +1346,19 @@ async function addTransaction(phone, amount) {
 
   await updateDoc(userRef, {
     totalSpent: data.totalSpent + amount,
-    points: data.points + points
-  });
-
-  const txRef = collection(db, "customers", phone, "transactions");
-
-  await addDoc(txRef, {
-    amount: amount,
-    pointsEarned: points,
-    date: new Date()
+    points: data.points + points,
+    visitCount: (data.visitCount || 0) + 1,
+    lastVisit: new Date()
   });
 }
 // 🔥 조회
 window.checkPoints = async function () {
-  const phone = document.getElementById("checkPhone").value; 
-  if (!phone) return alert("전화번호 입력");
+  const phone = document.getElementById("checkPhone").value.trim();
+  const name = document.getElementById("checkName").value.trim();
+
+  if (!phone || !name) {
+    return alert("전화번호와 이름 입력하세요");
+  }
 
   const refDoc = doc(db, "customers", phone);
   const snap = await getDoc(refDoc);
@@ -1371,48 +1370,20 @@ window.checkPoints = async function () {
 
   const data = snap.data();
 
+  // 🔥 이름 검증
+  if (data.name !== name) {
+    document.getElementById("pointResult").innerText =
+      "정보가 일치하지 않습니다";
+    return;
+  }
+
+  // ✅ 정상 조회
   document.getElementById("pointResult").innerText =
-    `Points: ${data.points ?? 0}`;
+    `👤 ${data.name}
+🎁 Points: ${data.points || 0}
+💰 Total Spent: $${data.totalSpent || 0}
+🛒 Visits: ${data.visitCount || 0}`;
 };
-</script>
-<div id="adminPanel" style="padding:20px; color:white;"></div>
-
-<script type="module">
-import {
-  getFirestore,
-  collection,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const db = getFirestore();
-
-// 고객 전체 불러오기
-async function loadCustomers() {
-  const container = document.getElementById("adminPanel");
-  container.innerHTML = "<h2>Customer CRM</h2>";
-
-  const snap = await getDocs(collection(db, "customers"));
-
-  snap.forEach(doc => {
-    const data = doc.data();
-
-    const card = document.createElement("div");
-    card.style.background = "#111";
-    card.style.padding = "15px";
-    card.style.margin = "10px 0";
-    card.style.borderRadius = "10px";
-
-    card.innerHTML = `
-      <h3>${doc.id}</h3>
-      <p>💰 Total Spent: $${data.totalSpent?.toFixed(2) || 0}</p>
-      <p>🎁 Points: ${data.points || 0}</p>
-      <p>🛒 Visits: ${data.visitCount || 0}</p>
-      <p>🕒 Last Visit: ${data.lastVisit ? new Date(data.lastVisit.seconds * 1000).toLocaleDateString() : "N/A"}</p>
-    `;
-
-    container.appendChild(card);
-  });
-}
 
 loadCustomers();
 </script>
