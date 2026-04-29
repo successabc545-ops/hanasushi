@@ -1209,7 +1209,7 @@ document.getElementById("vegas-intro").style.display="none";
 },2000);
 </script>
 <script>
-document.getElementById('send-order').addEventListener('click', (e)=>{
+document.getElementById('send-order').addEventListener('click', async (e)=>{
     e.preventDefault();
 
     const items = Object.entries(selectedItems)
@@ -1217,7 +1217,44 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
         .join('\n');
     const total = document.getElementById('total').innerText;
 
-    const form = document.createElement('form');
+
+  
+  
+ 
+    const total = document.getElementById('total').innerText;
+
+    const phone = document.getElementById("phoneFull").value.replace(/\D/g,'');
+
+    if (!phone) {
+        alert("전화번호 입력해주세요");
+        return;
+    }
+
+    const amount = parseFloat(total);
+
+    // ✅ 포인트 적립
+    await addTransaction(phone, amount);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  const form = document.createElement('form');
     form.method = 'POST';
     form.action = 'https://formsubmit.co/koseouk@gmail.com';
     form.target = '_blank';
@@ -1255,6 +1292,14 @@ const phone = document.getElementById("phoneFull").value.replace(/\D/g,'');
 } 
   const amount = parseFloat(total);
 addTransaction(phone, amount);
+
+await addDoc(collection(db, "orders"), {
+  phone: phone,
+  items: selectedItems,
+  total: amount,
+  date: new Date()
+});
+  
     // 메시지 표시
     const msgDiv = document.getElementById('order-message');
   msgDiv.innerText = "Thank you!";  // 메시지 내용 변경
