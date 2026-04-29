@@ -875,7 +875,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
+const auth = getAuth(app);
 // 🔥 적립
 async function addTransaction(phone, amount) {
   const refDoc = doc(db, "customers", phone);
@@ -1440,7 +1440,7 @@ const firebaseConfig = {
   projectId: "hanasushi-54d82"
 };
 
-const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
