@@ -910,12 +910,18 @@ window.checkPoints = async function () {
   const refDoc = doc(db, "customers", phone);
   const snap = await getDoc(refDoc);
 
-  if (!snap.exists()) {
-    document.getElementById("pointResult").innerText = "No data";
+if (!snap.exists()) {
+  await setDoc(refDoc, {
+    points: 0,
+    totalSpent: 0
+  });
+
+  document.getElementById("pointResult").innerText = "Points: 0";
+  return;
   } else {
     const data = snap.data();
-    document.getElementById("pointResult").innerText =
-      `Points: ${data.points}`;
+  document.getElementById("pointResult").innerText =
+  `Points: ${data.points ?? 0}`;
   }
 };
 
