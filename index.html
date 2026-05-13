@@ -1347,26 +1347,7 @@ async function addTransaction(phone, amount) {
     });
   }
 
-  const data = (await getDoc(userRef)).data();
 
-  // ⭐ 포인트 계산 (핵심)
-  const pointsEarned = Math.floor(amount);
-
-  // 고객 업데이트
-  await updateDoc(userRef, {
-    totalSpent: (data.totalSpent || 0) + amount,
-    points: (data.points || 0) + pointsEarned
-  });
-
-  // 거래 기록 (선택이지만 안전하게 유지)
-  const txRef = collection(db, "customers", phone, "transactions");
-
-  await addDoc(txRef, {
-    amount: amount,
-    pointsEarned: pointsEarned,
-    date: new Date()
-  });
-}
 
   const data = (await getDoc(userRef)).data();
 
