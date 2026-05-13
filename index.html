@@ -1128,7 +1128,7 @@ document.getElementById("vegas-intro").style.display="none";
 },2000);
 </script>
 <script>
-document.getElementById('send-order').addEventListener('click', (e)=>{
+document.getElementById('send-order').addEventListener('click', async (e)=>{
     e.preventDefault();
 
     const items = Object.entries(selectedItems)
