@@ -1351,8 +1351,7 @@ async function addTransaction(phone, amount) {
 
   const data = (await getDoc(userRef)).data();
 
-  const points = Math.floor(amount * 0.1);
-
+ const points = Math.floor(amount * 10);
   await updateDoc(userRef, {
     totalSpent: data.totalSpent + amount,
     points: data.points + points
