@@ -304,7 +304,12 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   margin-top:10px;
   text-align:center;
 }
-
+#order-summary
+  <input
+  type="tel"
+  id="orderPhone"
+  placeholder="Phone Number"
+  style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px;">
 /* ====================== Special Sashimi 제목 크게 ====================== */
 .menu-item h3:contains("Special Sashimi"),
 .menu-item h3:contains("Sashimi Special") {
@@ -1333,7 +1338,15 @@ const auth = getAuth(app);
 // 4️⃣ 로그인 제공자
 const provider = new GoogleAuthProvider();
   
+async function saveOrder(phone, items, total) {
+  const orderRef = collection(db, "customers", phone, "orders");
 
+  await addDoc(orderRef, {
+    items,
+    total,
+    date: new Date()
+  });
+}
 // 🔥 적립
 async function addTransaction(phone, amount) {
   const userRef = doc(db, "customers", phone);
