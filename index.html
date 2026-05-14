@@ -756,9 +756,11 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
   <h2 class="section-title">Contact Us</h2>
   <div class="contact-box" style="display:flex; flex-wrap:wrap; gap:20px;">
     <form action="https://formsubmit.co/koseouk@gmail.com" method="POST" style="flex:1; min-width:300px;">
- 
-      <input type="text" name="name" placeholder="Your Name" required>
+
       <input type="tel" id="phoneFull" name="phone" placeholder="Your Phone Number" required>
+
+      <input type="text" name="name" placeholder="Your Name" required>
+    
       <input type="email" name="email" placeholder="Your Email" required>
       <label for="eventDate">Date of Event (required)</label>
       <input type="date" id="eventDate" name="event_date" required>
@@ -847,7 +849,86 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 
 
 
+<!-- 🔥 Firebase 먼저 -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
+import { 
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  collection,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBE8X8LaWv3YPSmFjbu-Vc65w6yaM7uMLI",
+  authDomain: "hanasushi-54d82.firebaseapp.com",
+  projectId: "hanasushi-54d82",
+  storageBucket: "hanasushi-54d82.firebasestorage.app",
+  messagingSenderId: "889998560596",
+  appId: "1:889998560596:web:54797fa6f6e9ffee914cc1",
+  measurementId: "G-PF6WXRL67Y"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+// 🔥 적립
+async function addTransaction(phone, amount) {
+  const refDoc = doc(db, "customers", phone);
+  const snap = await getDoc(refDoc);
+
+  const points = Math.floor(amount * 0.1);
+
+  if (!snap.exists()) {
+    await setDoc(refDoc, {
+      totalSpent: amount,
+      points: points
+    });
+  } else {
+    const data = snap.data();
+
+    await updateDoc(refDoc, {
+      totalSpent: data.totalSpent + amount,
+      points: data.points + points
+    });
+  }
+
+  await addDoc(collection(refDoc, "transactions"), {
+    amount: amount,
+    pointsEarned: points,
+    date: new Date()
+  });
+}
+
+// 🔥 조회
+window.checkPoints = async function () {
+  const phone = document.getElementById("checkPhone").value;
+  if (!phone) return alert("전화번호 입력");
+
+  const refDoc = doc(db, "customers", phone);
+  const snap = await getDoc(refDoc);
+
+if (!snap.exists()) {
+  await setDoc(refDoc, {
+    points: 0,
+    totalSpent: 0
+  });
+
+  document.getElementById("pointResult").innerText = "Points: 0";
+  return;
+  } else {
+    const data = snap.data();
+  document.getElementById("pointResult").innerText =
+  `Points: ${data.points ?? 0}`;
+  }
+};
+
+window.addTransaction = addTransaction;
+</script>
 
 
 
@@ -1128,7 +1209,7 @@ document.getElementById("vegas-intro").style.display="none";
 },2000);
 </script>
 <script>
-document.getElementById('send-order').addEventListener('click', (e)=>{
+document.getElementById('send-order').addEventListener('click', async (e)=>{
     e.preventDefault();
 
     const items = Object.entries(selectedItems)
@@ -1136,7 +1217,44 @@ document.getElementById('send-order').addEventListener('click', (e)=>{
         .join('\n');
     const total = document.getElementById('total').innerText;
 
-    const form = document.createElement('form');
+
+  
+  
+ 
+
+
+ 
+
+    if (!phone) {
+        alert("전화번호 입력해주세요");
+        return;
+    }
+
+    const amount = parseFloat(total);
+
+    // ✅ 포인트 적립
+    await addTransaction(phone, amount);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  const form = document.createElement('form');
     form.method = 'POST';
     form.action = 'https://formsubmit.co/koseouk@gmail.com';
     form.target = '_blank';
@@ -1174,6 +1292,14 @@ const phone = document.getElementById("phoneFull").value.replace(/\D/g,'');
 } 
   const amount = parseFloat(total);
 addTransaction(phone, amount);
+
+await addDoc(collection(db, "orders"), {
+  phone: phone,
+  items: selectedItems,
+  total: amount,
+  date: new Date()
+});
+  
     // 메시지 표시
     const msgDiv = document.getElementById('order-message');
   msgDiv.innerText = "Thank you!";  // 메시지 내용 변경
@@ -1298,94 +1424,138 @@ setInterval(checkIdle, 1000);
 
 
 
-
-// 1️⃣ Firebase 시작 (가장 먼저)
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-  getFirestore, doc, getDoc, setDoc, updateDoc, collection, addDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-import {
-  getAuth, GoogleAuthProvider
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-/* 🔥 여기 바로 아래에 붙이면 됨 */
-
 const firebaseConfig = {
-  apiKey: "AIzaSyBE8X8LaWv3YPSmFjbu-Vc65w6yaM7uMLI",
+  apiKey: "AIzaSyBEXXXXX",
   authDomain: "hanasushi-54d82.firebaseapp.com",
-  projectId: "hanasushi-54d82",
-  storageBucket: "hanasushi-54d82.firebasestorage.app",
-  messagingSenderId: "889998560596",
-  appId: "1:889998560596:web:54797fa6f6e9ffee914cc1",
-  measurementId: "G-PF6WXRL67Y"
+  projectId: "hanasushi-54d82"
 };
 
 const app = initializeApp(firebaseConfig);
-
-// 2️⃣ DB 연결
-const db = getFirestore(app);
-
-// 3️⃣ 로그인 연결
 const auth = getAuth(app);
-
-// 4️⃣ 로그인 제공자
 const provider = new GoogleAuthProvider();
+
+// 로그인
+document.getElementById("loginBtn").onclick = async () => {
+  await signInWithPopup(auth, provider);
+};
+
+// 로그아웃
+document.getElementById("logoutBtn").onclick = async () => {
+  await signOut(auth);
+};
+
+
   
+  
+  
+  
+  // 상태 감지
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("userInfo").innerText = user.email;
 
-// 🔥 적립
-async function addTransaction(phone, amount) {
-  const userRef = doc(db, "customers", phone);
+    document.getElementById("loginBtn").style.display = "none";
+    document.getElementById("logoutBtn").style.display = "inline-block";
+  } else {
+    document.getElementById("userInfo").innerText = "Not logged in";
 
-  const snap = await getDoc(userRef);
-
-  // 👇 여기 바로 넣는 게 정답
-  if (!snap.exists()) {
-    await setDoc(userRef, {
-      totalSpent: 0,
-      points: 0
-    });
+    document.getElementById("loginBtn").style.display = "inline-block";
+    document.getElementById("logoutBtn").style.display = "none";
   }
+});
+</script>
+🧠 쉽게 설명
 
-  const data = (await getDoc(userRef)).data();
 
-  const points = Math.floor(amount * 0.1);
 
-  await updateDoc(userRef, {
-    totalSpent: data.totalSpent + amount,
-    points: data.points + points
-  });
+<script>
+document.getElementById('send-order').addEventListener('click', async (e) => {
+  e.preventDefault();
 
-  const txRef = collection(db, "customers", phone, "transactions");
-
-  await addDoc(txRef, {
-    amount: amount,
-    pointsEarned: points,
-    date: new Date()
-  });
-}
-// 🔥 조회
-window.checkPoints = async function () {
-  const phone = document.getElementById("checkPhone").value;
-  if (!phone) return alert("전화번호 입력");
-
-  const refDoc = doc(db, "customers", phone);
-  const snap = await getDoc(refDoc);
-
-  if (!snap.exists()) {
-    document.getElementById("pointResult").innerText = "No data";
+  const phone = document.getElementById("phoneFull").value.replace(/\D/g, '');
+  if (!phone) {
+    alert("전화번호 입력해주세요");
     return;
   }
 
-  const data = snap.data();
+  const items = Object.entries(selectedItems)
+    .map(([name, qty]) => `${name} x${qty}`)
+    .join('\n');
 
-  document.getElementById("pointResult").innerText =
-    `Points: ${data.points ?? 0}`;
-};
+  const subtotal = parseFloat(document.getElementById('subtotal').innerText);
+  const tax = parseFloat(document.getElementById('tax').innerText);
+  const total = subtotal + tax;
+
+  const pointsEarned = Math.floor(total * 0.1);
+
+  const customerRef = doc(db, "customers", phone);
+  const customerSnap = await getDoc(customerRef);
+
+  if (!customerSnap.exists()) {
+    await setDoc(customerRef, {
+      points: pointsEarned,
+      totalSpent: total
+    });
+  } else {
+    const data = customerSnap.data();
+
+    await updateDoc(customerRef, {
+      points: (data.points || 0) + pointsEarned,
+      totalSpent: (data.totalSpent || 0) + total
+    });
+  }
+
+  await addDoc(collection(customerRef, "transactions"), {
+    items,
+    total,
+    pointsEarned,
+    date: new Date()
+  });
+
+  await addDoc(collection(db, "orders"), {
+    phone,
+    items: selectedItems,
+    total,
+    pointsEarned,
+    date: new Date()
+  });
+
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://formsubmit.co/koseouk@gmail.com';
+
+  const msg = document.createElement('textarea');
+  msg.name = 'message';
+  msg.value = `Order:\n${items}\nTotal: $${total}\nPoints Earned: ${pointsEarned}`;
+  form.appendChild(msg);
+
+  const captcha = document.createElement('input');
+  captcha.type = 'hidden';
+  captcha.name = '_captcha';
+  captcha.value = 'false';
+  form.appendChild(captcha);
+
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
+
+  document.getElementById('order-message').innerText =
+    `Thank you! You earned ${pointsEarned} points 🎉`;
+  document.getElementById('order-message').style.display = 'block';
+
+  Object.keys(selectedItems).forEach(k => delete selectedItems[k]);
+  updateOrderSummary();
+});
 </script>
-
-
-
 </body>
 </html>
