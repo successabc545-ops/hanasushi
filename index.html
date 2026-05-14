@@ -839,6 +839,23 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 <!-- ====================== Your Order 하단 고정 ====================== -->
 <div id="order-summary">
   <h2>Your Order</h2>
+ <input
+    type="tel"
+    id="orderPhone"
+    placeholder="Phone Number"
+    style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px;"
+  >
+
+  <div id="selected-items"></div>
+  <p>Subtotal: $<span id="subtotal">0.00</span></p>
+  <p>Tax (9.5%): $<span id="tax">0.00</span></p>
+  <p style="font-weight:700;">Total: $<span id="total">0.00</span></p>
+
+  <button id="send-order">Send Order</button>
+  <div id="order-message">Order Sent!</div>
+</div>
+
+  
   <div id="selected-items"></div>
   <p>Subtotal: $<span id="subtotal">0.00</span></p>
   <p>Tax (9.5%): $<span id="tax">0.00</span></p>
