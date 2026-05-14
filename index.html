@@ -305,8 +305,6 @@ footer{text-align:center;padding:30px;background:#111;color:#777;}
   text-align:center;
 }
 
-  
-  style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px;">
 /* ====================== Special Sashimi 제목 크게 ====================== */
 .menu-item h3:contains("Special Sashimi"),
 .menu-item h3:contains("Sashimi Special") {
@@ -836,24 +834,14 @@ We will be back soon, freshly renewed and ready to serve you.Our Story</h2>
 <!-- ====================== Your Order 하단 고정 ====================== -->
 <div id="order-summary">
   <h2>Your Order</h2>
- <input
-    type="tel"
-    id="orderPhone"
-    placeholder="Phone Number"
-    style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px;"
-  >
-
   <div id="selected-items"></div>
   <p>Subtotal: $<span id="subtotal">0.00</span></p>
   <p>Tax (9.5%): $<span id="tax">0.00</span></p>
   <p style="font-weight:700;">Total: $<span id="total">0.00</span></p>
-
   <button id="send-order">Send Order</button>
   <div id="order-message">Order Sent!</div>
 </div>
 
-  
- 
 
 
 
@@ -1140,7 +1128,7 @@ document.getElementById("vegas-intro").style.display="none";
 },2000);
 </script>
 <script>
-document.getElementById('send-order').addEventListener('click', async (e)=>{
+document.getElementById('send-order').addEventListener('click', (e)=>{
     e.preventDefault();
 
     const items = Object.entries(selectedItems)
@@ -1345,21 +1333,14 @@ const auth = getAuth(app);
 // 4️⃣ 로그인 제공자
 const provider = new GoogleAuthProvider();
   
-async function saveOrder(phone, items, total) {
-  const orderRef = collection(db, "customers", phone, "orders");
 
-  await addDoc(orderRef, {
-    items,
-    total,
-    date: new Date()
-  });
-}
 // 🔥 적립
 async function addTransaction(phone, amount) {
   const userRef = doc(db, "customers", phone);
+
   const snap = await getDoc(userRef);
 
-  // 고객 없으면 생성
+  // 👇 여기 바로 넣는 게 정답
   if (!snap.exists()) {
     await setDoc(userRef, {
       totalSpent: 0,
@@ -1367,11 +1348,10 @@ async function addTransaction(phone, amount) {
     });
   }
 
-
-
   const data = (await getDoc(userRef)).data();
 
- const points = Math.floor(amount * 10);
+  const points = Math.floor(amount * 0.1);
+
   await updateDoc(userRef, {
     totalSpent: data.totalSpent + amount,
     points: data.points + points
